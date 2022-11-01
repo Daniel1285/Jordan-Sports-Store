@@ -3,7 +3,7 @@
     partial class Program
     {
         static void Main(string[] args)
-        {     
+        {      
             welcome1749();
             welcome9255();
             Console.ReadKey();
