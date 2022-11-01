@@ -1,6 +1,6 @@
 ﻿namespace Stage0
 {
-    partial class Program9255
+    partial class Program
     {
         static void Main(string[] args)
         {
