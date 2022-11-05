@@ -34,12 +34,12 @@ public struct Order
     /// <summary>
     /// delivery date
     /// </summary>
-    private DateTime ShipDate { get; set; }
+    public DateTime ShipDate { get; set; }
 
     /// <summary>
     /// Date of delivery
     /// </summary>
-    pu DateTime DeliveryrDate { get; set; }
+    public DateTime DeliveryrDate { get; set; }
 
     /// <summary>
     /// The object print function
