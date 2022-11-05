@@ -9,7 +9,7 @@
 
             Console.ReadKey();
         }
-
+          
         static partial void welcome9255();
         private static void welcome1749()
         {
