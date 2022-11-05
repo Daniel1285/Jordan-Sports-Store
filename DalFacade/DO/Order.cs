@@ -1,7 +1,9 @@
 ﻿
 namespace DO;
 
-
+/// <summary>
+/// Order details
+/// </summary>
 public struct Order
 {
     private int ID { get; set; }
@@ -11,9 +13,6 @@ public struct Order
     private DateTime OrderDate  { get; set; }
     private DateTime ShipDate { get; set; } 
     private DateTime DeliveryrDate { get; set; }
-
-
-
 
 }
 
