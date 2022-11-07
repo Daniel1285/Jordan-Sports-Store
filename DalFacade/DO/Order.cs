@@ -2,47 +2,47 @@
 namespace DO;
 
 /// <summary>
-/// Structure for Customer details
+/// Structure for Customer details.
 /// </summary>
 public struct Order
 {
     /// <summary>
-    /// Identification number
+    /// Identification number.
     /// </summary>
     public int ID { get; set; }
 
     /// <summary>
-    /// The name of the ordering customer
+    /// The name of the ordering customer.
     /// </summary>
     public string CustomerName { get; set; }
 
     /// <summary>
-    /// Customer's email address
+    /// Customer's email address.
     /// </summary>
     public string CustomerEmail { get; set; }
 
     /// <summary>
-    /// Customer's address
+    /// Customer's address.
     /// </summary>
     public string CustomerAdress { get; set; }
 
     /// <summary>
-    /// Order creation date
+    /// Order creation date.
     /// </summary>
     public DateTime OrderDate  { get; set; }
 
     /// <summary>
-    /// delivery date
+    /// delivery date.
     /// </summary>
-    private DateTime ShipDate { get; set; }
+    public DateTime ShipDate { get; set; }
 
     /// <summary>
-    /// Date of delivery
+    /// Date of delivery.
     /// </summary>
-    pu DateTime DeliveryrDate { get; set; }
+    public DateTime DeliveryrDate { get; set; }
 
     /// <summary>
-    /// The object print function
+    /// The object print function.
     /// </summary>
     /// <returns></returns>
     public override string ToString() => $@"
