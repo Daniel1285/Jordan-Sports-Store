@@ -1,5 +1,4 @@
 ﻿
-
 using DO;
 
 namespace Dal;
@@ -7,12 +6,19 @@ namespace Dal;
 public class DalProduct
 {
     /// <summary>
-    /// Add a product to array "MyProducts" in DataSource and increases the size of the array "SizeOfProducts" by one.
+    /// Add a product to array "MyProducts" in DataSource and increases the size of the array "SizeOfProducts" by one, and check if ID product alrady exsistn. 
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>
     public int AddNewProduct(Product p)
     {
+        foreach (Product s  in DataSource.MyProducts)
+        {
+            if (p.ID == s.ID )
+            {
+                throw new Exception("the product alrady exist!");
+            }
+        }
         DataSource.MyProducts[DataSource.Config.SizeOfProducts++] = p;
         return p.ID;
     }
@@ -23,13 +29,20 @@ public class DalProduct
     /// <param name="ID"></param>
     public void DeleteProduct(int ID)
     {
+        bool flag = false;
         for (int i = 0; i < DataSource.Config.SizeOfProducts; i++)
         {
             if (ID == DataSource.MyProducts[i].ID)
             {
-                DataSource.MyProducts[i].ID = 0;
+                DataSource.MyProducts[i] = DataSource.MyProducts[DataSource.Config.SizeOfProducts];
+                DataSource.Config.SizeOfProducts--;
+                flag = true;
+                break;
             }
         }
+        if (flag == false)
+            throw new Exception("Not found Product to delete");
+
     }
 
 
@@ -38,19 +51,22 @@ public class DalProduct
     /// </summary>
     /// <param name="p"></param>
     /// <exception cref="Exception"></exception>
-    public void UpdateProduct(Product p)
+    public void UpdateProduct(ref Product p)
     {
+        
         for (int i = 0; i < DataSource.Config.SizeOfProducts; i++)
         {
             if (p.ID == DataSource.MyProducts[i].ID)
             {
                 DataSource.MyProducts[i] = p;
+
                 return;
             }
         }
 
         throw new Exception("Not found Product to Update");
     }
+
 
 
     /// <summary>
@@ -65,11 +81,28 @@ public class DalProduct
         {
             if (ID == p.ID)
             {
-                p.ToString();
+                return p;
             }
-            return p;
+            
         }
         throw new Exception("Product not found");
+    }
+
+    /// <summary>
+    /// Returns All products in the array.
+    /// </summary>
+    /// <returns></returns>
+    public Product[] GetAllProducts()
+    {
+        Product[] newProducts = new Product[DataSource.Config.SizeOfProducts];
+
+        for (int i = 0; i < DataSource.Config.SizeOfProducts; i++)
+        {
+            Product p = DataSource.MyProducts[i];
+            newProducts[i] = p;
+        }
+
+        return newProducts;
     }
 
 }

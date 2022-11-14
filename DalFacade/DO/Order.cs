@@ -29,17 +29,17 @@ public struct Order
     /// <summary>
     /// Order creation date.
     /// </summary>
-    public DateTime OrderDate  { get; set; }
+    public DateTime? OrderDate  { get; set; }
 
     /// <summary>
     /// delivery date.
     /// </summary>
-    public DateTime ShipDate { get; set; }
+    public DateTime? ShipDate { get; set; }
 
     /// <summary>
     /// Date of delivery.
     /// </summary>
-    public DateTime DeliveryrDate { get; set; }
+    public DateTime? DeliveryrDate { get; set; }
 
     /// <summary>
     /// The object print function.
@@ -52,10 +52,7 @@ public struct Order
         Customer Adress:{CustomerAdress}
         Order Date:{OrderDate}
         Ship Date:{ShipDate}
-        DeliveryrDate:{DeliveryrDate}
+        Deliveryr Date:{DeliveryrDate}
                                            ";
-   
-    
-
 }
 

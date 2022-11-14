@@ -7,6 +7,10 @@ namespace DO;
 public struct OrderItem
 {
     /// <summary>
+    /// ID run.
+    /// </summary>
+    public int ID { get; set; } 
+    /// <summary>
     /// Product ID number
     /// </summary>
     public int ProductID { get; set; }
