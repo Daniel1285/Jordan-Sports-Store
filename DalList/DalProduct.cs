@@ -94,11 +94,11 @@ public class DalProduct
     /// <returns></returns>
     public Product[] GetAllProducts()
     {
-        Product[] newProducts = new Product[DataSource.Config.SizeOfProducts];
-
+        Product[] newProducts = new Product[DataSource.MyProducts.Length];
         for (int i = 0; i < DataSource.Config.SizeOfProducts; i++)
         {
-            Product p = DataSource.MyProducts[i];
+            Product p = new Product();
+            p = DataSource.MyProducts[i];
             newProducts[i] = p;
         }
 

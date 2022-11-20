@@ -1,10 +1,15 @@
-﻿
+﻿using DO;
 
 namespace DalApi
 {
-    internal class ICrud<T>
+    internal interface ICrud<T> where T : struct
     {
-        public T t;
-        int Add(T NNN);
+        int Add(T a);
+        void Update(T a);    
+        void Delete(T id);
+        T GetByID(int id);
+
+        IEnumerable<T>? GetAll();    
     }
+   
 }

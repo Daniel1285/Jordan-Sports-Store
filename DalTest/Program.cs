@@ -5,17 +5,19 @@ namespace DalTest
     internal class Program
     {
         private static DalProduct testProduct = new DalProduct();
-        private static DalOrderItem testOrderItem = new DalOrderItem();  
         private static DalOrder testOrder = new DalOrder();
+        private static DalOrderItem testOrderItem = new DalOrderItem();  
+        
 
         
         static void Main(string[] args)
         {
+
             
             int choice;
             do
             {
-                Console.WriteLine("Enter your choice:\n 0. Exit. \n 1. Product. \n 2. OrderItem. \n 3. Order");
+                Console.WriteLine("\nEnter your choice:\n 0. Exit. \n 1. Product. \n 2. OrderItem. \n 3. Order");
                 choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
@@ -60,7 +62,7 @@ namespace DalTest
                     Console.WriteLine("Please enter a product ID number.");
                     p.ID = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Please enter Product Name Product ID.");
+                    Console.WriteLine("Please enter Product Name:.");
                     p.Name = Console.ReadLine();
 
                     Console.WriteLine("Please enter a product price.");
@@ -95,11 +97,17 @@ namespace DalTest
                     break;
 
                 case "c":
-                    Product[] products = testProduct.GetAllProducts();
-                    for (int i = 0; i < products.Length; i++)
+                    try
                     {
-                        Console.WriteLine(testProduct.GetProduct(products[i].ID));
+                        Product[] products = testProduct.GetAllProducts();
+                        for (int i = 0; i < products.Length; i++)
+                        {
+                            Console.WriteLine(testProduct.GetProduct(products[i].ID));
+                        }
                     }
+
+                    catch (Exception str) { Console.WriteLine(str); }
+
                     
                     break;
 
@@ -334,6 +342,7 @@ namespace DalTest
                     catch (Exception str) { Console.WriteLine(str); }   
 
                     break;
+
                 case "b":
 
                     Console.WriteLine("Enter the oredr ID:");

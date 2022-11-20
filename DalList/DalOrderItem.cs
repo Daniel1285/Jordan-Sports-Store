@@ -61,7 +61,7 @@ public class DalOrderItem
     {
         foreach (OrderItem o in DataSource.MyOrderItem)
         {
-            if (prodctId == o.ProductID && orderId == o.ProductID)
+            if (prodctId == o.ProductID && orderId == o.OrderID)
             {
                 return o;
             }
@@ -76,8 +76,7 @@ public class DalOrderItem
     /// <returns></returns>
     public  OrderItem[] GetAllOrdersItem()
     {
-        OrderItem[] newOrdersItem = new OrderItem[DataSource.Config.SizeOfOrderItem];
-
+        OrderItem[] newOrdersItem = new OrderItem[DataSource.MyOrderItem.Length];
         for (int i = 0; i < DataSource.Config.SizeOfOrderItem; i++)
         {
             OrderItem o = new OrderItem();

@@ -28,6 +28,7 @@ public class DalOrder
             if (id == DataSource.MyOrder[i].ID)
             {
                 DataSource.MyOrder[i] = DataSource.MyOrder[DataSource.Config.SizeOfOrder--];
+                Console.WriteLine("sucsses");
             }
         }
     }
@@ -80,7 +81,7 @@ public class DalOrder
             Order o = new Order();
             o = DataSource.MyOrder[i];
             GetOrders[i] = o;
-            //GetOrders[i] = DataSource.MyOrder[i];
+            
         }
         return GetOrders;   
     }
