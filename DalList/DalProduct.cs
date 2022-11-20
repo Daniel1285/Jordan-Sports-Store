@@ -19,7 +19,7 @@ internal class DalProduct : IProduct
                 throw new Exception("the product alrady exist!");
             }
         }
-        DataSource.MyProducts[DataSource.Config.SizeOfProducts++] = p;
+        DataSource.MyProducts[DataSource.MyProducts.Count] = p;
         return p.ID;
     }
 
@@ -30,12 +30,12 @@ internal class DalProduct : IProduct
     public void DeleteProduct(int ID)
     {
         bool flag = false;
-        for (int i = 0; i < DataSource.Config.SizeOfProducts; i++)
+        for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
             if (ID == DataSource.MyProducts[i].ID)
             {
-                DataSource.MyProducts[i] = DataSource.MyProducts[DataSource.Config.SizeOfProducts];
-                DataSource.Config.SizeOfProducts--;
+                DataSource.MyProducts[i] = DataSource.MyProducts[DataSource.MyProducts.Count];
+                DataSource.MyProducts.Remove(DataSource.MyProducts.Last());
                 flag = true;
                 break;
             }
@@ -54,7 +54,7 @@ internal class DalProduct : IProduct
     public void UpdateProduct(ref Product p)
     {
         
-        for (int i = 0; i < DataSource.Config.SizeOfProducts; i++)
+        for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
             if (p.ID == DataSource.MyProducts[i].ID)
             {
@@ -94,8 +94,8 @@ internal class DalProduct : IProduct
     /// <returns></returns>
     public Product[] GetAllProducts()
     {
-        Product[] newProducts = new Product[DataSource.MyProducts.Length];
-        for (int i = 0; i < DataSource.Config.SizeOfProducts; i++)
+        Product[] newProducts = new Product[DataSource.MyProducts.Count];
+        for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
             Product p = new Product();
             p = DataSource.MyProducts[i];
