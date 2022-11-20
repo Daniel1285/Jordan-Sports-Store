@@ -13,7 +13,7 @@ internal class DalOrderItem : IOrderItem
     /// <returns></returns>
     public int AddNewOrderItem(OrderItem o)
     {
-        DataSource.MyOrderItem[DataSource.Config.SizeOfOrderItem++] = o;
+        DataSource.MyOrderItem.Add(o);
         return o.ProductID;
     }
 
@@ -23,11 +23,11 @@ internal class DalOrderItem : IOrderItem
     /// <param name="id"></param>
     public void DeleteOrderItem(int id)
     {
-        for (int i = 0; i < DataSource.Config.SizeOfOrderItem; i++)
+        for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
             if (id == DataSource.MyOrderItem[i].OrderID)
             {
-                DataSource.MyOrderItem[i] = DataSource.MyOrderItem[DataSource.Config.SizeOfOrderItem--];
+                DataSource.MyOrderItem[i] = DataSource.MyOrderItem[DataSource.MyOrderItem.Count];
             }
         }
     }
@@ -40,7 +40,7 @@ internal class DalOrderItem : IOrderItem
     public void UpdateOrderItem(ref OrderItem o)
     {
 
-        for (int i = 0; i < DataSource.Config.SizeOfOrderItem; i++)
+        for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
             if (o.ProductID == DataSource.MyOrderItem[i].ProductID)
             {
@@ -75,10 +75,10 @@ internal class DalOrderItem : IOrderItem
     /// Returns All Order Item in the array.
     /// </summary>
     /// <returns></returns>
-    public  OrderItem[] GetAllOrdersItem()
+    public  List<OrderItem> GetAllOrdersItem()
     {
-        OrderItem[] newOrdersItem = new OrderItem[DataSource.MyOrderItem.Length];
-        for (int i = 0; i < DataSource.Config.SizeOfOrderItem; i++)
+        List<OrderItem> newOrdersItem = new List<OrderItem>();
+        for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
             OrderItem o = new OrderItem();
             o = DataSource.MyOrderItem[i];
@@ -95,8 +95,8 @@ internal class DalOrderItem : IOrderItem
     /// <returns></returns>
     public OrderItem[] GetOrdersItem(int orderID)
     {
-        OrderItem[] ArrOrders = new OrderItem[DataSource.Config.SizeOfOrderItem];
-        for (int i = 0; i < DataSource.Config.SizeOfOrderItem; i++)
+        OrderItem[] ArrOrders = new OrderItem[DataSource.MyOrderItem.Count];
+        for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
             if (orderID == DataSource.MyOrderItem[i].OrderID)
             {

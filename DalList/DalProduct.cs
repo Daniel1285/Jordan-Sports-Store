@@ -1,9 +1,9 @@
 ﻿
+using DalApi;
 using DO;
 
 namespace Dal;
-
-public class DalProduct
+internal class DalProduct : IProduct
 {
     /// <summary>
     /// Add a product to array "MyProducts" in DataSource and increases the size of the array "SizeOfProducts" by one, and check if ID product alrady exsistn. 
