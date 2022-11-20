@@ -17,9 +17,9 @@ internal static class DataSource
     internal static class Config
     {
         // Size arrays in real time
-        internal static int SizeOfProducts = 0;
-        internal static int SizeOfOrder = 0;
-        internal static int SizeOfOrderItem = 0;
+        //internal static int SizeOfProducts = 0;
+        //internal static int SizeOfOrder = 0;
+       // internal static int SizeOfOrderItem = 0;
 
 
         internal static int MinOrder = 100000;
@@ -39,9 +39,9 @@ internal static class DataSource
 
     private static readonly Random R = new Random(); // Random number generation
 
-    internal static Product[] MyProducts = new Product[50];
-    internal static Order[] MyOrder = new Order[100];
-    internal static OrderItem[] MyOrderItem = new OrderItem[200];
+    internal static List<Product>  MyProducts = new List<Product>();
+    internal static List<Order> MyOrder = new List<Order>();
+    internal static List<OrderItem> MyOrderItem = new List<OrderItem>();
 
 
 
@@ -60,8 +60,8 @@ internal static class DataSource
                                          "socks - Nike Everyday Plus Cushioned", "shirt - Nike Pro Dri-FIT", "shirt - Nike Dri-FIT Legend"};
         Double[] priceOfProduct = { 550, 400, 250, 332.5, 210, 129.99, 49, 63, 122.5, 140 };
         Enums.Category[] categories = { Category.SHOES, Category.SHOES, Category.SHORTS, Category.SHOES, Category.HOODIES, Category.HOODIES, Category.SOCKS, Category.SOCKS, Category.SHIRTS, Category.SHIRTS };
-        int[] AmountInSoke = {0,7,5,4,2,9,5,6,3,10 };
-        for (int i = 0; i < SIZE; i++)
+        int[] AmountInSoke = { 0, 7, 5, 4, 2, 9, 5, 6, 3, 10 };
+        for (int i = 0; i < size; i++)
         {
             Product p = new Product
             {
@@ -74,12 +74,40 @@ internal static class DataSource
             };
             if (CheckID(p.ID))
             {
-         
-                MyProducts[Config.SizeOfProducts++] = p;
+                MyProducts.Add(p);
             }      
+        }
+
+        
+    }
+
+    /// <summary>
+    /// A method that adds an object to an array
+    /// </summary>
+    /// <param name="O_i"></param>
+    private static void Add_OrderItem()
+    {
+        
+        for (int i = 0; i < 40; i++)
+        {
+            OrderItem NewOrderItem = new OrderItem
+            {
+                ID = Config.GetIdForOrderItem,
+                OrderID = Config.GetIdForOrder,
+                ProductID = R.Next(100000),
+                Price = R.Next(200, 300),
+                Amount = Math.Min(R.Next(1, 5), MyProducts.Find().InStock,
+                // Amount = Math.Min( R.Next(1, 5), MyProducts[Config.SizeOfOrderItem].InStock)
+            };
+
+            MyProducts[Config.SizeOfOrderItem].InStock -= NewOrderItem.Amount;
+            MyOrderItem.Add(NewOrderItem);
+           
         }
         
     }
+
+
 
     /// <summary>
     /// A method that adds an object to an array
@@ -114,7 +142,7 @@ internal static class DataSource
             if (i <  10)
                 newOrder.DeliveryrDate = newOrder.ShipDate + new TimeSpan(R.Next(1, 3), 0, 0, 0);
 
-            MyOrder[Config.SizeOfOrder++] = newOrder;
+            MyOrder.Add(newOrder); 
         }
 
     }
