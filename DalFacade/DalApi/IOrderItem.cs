@@ -2,7 +2,7 @@
 
 namespace DalApi
 {
-    internal interface IOrderItem : ICrud<OrderItem>
+    public interface IOrderItem : ICrud<OrderItem>
     {
     }
 }

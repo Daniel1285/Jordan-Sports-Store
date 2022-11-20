@@ -1,9 +1,9 @@
 ﻿
 using DO;
-using DalApi;
 namespace Dal;
+using DalApi;
 
-internal class DalOrder
+internal class DalOrder: IOrder
 {
     /// <summary>
     /// Add a Order to array "MyOrder" in DataSource and increases the size of the array "SizeOfOrder" by one.
@@ -12,7 +12,7 @@ internal class DalOrder
     /// <returns></returns>
     public int  AddNewOrder (Order o)
     {
-        DataSource.MyOrder[DataSource.Config.SizeOfOrder++] = o;
+        DataSource.MyOrder.Add(o);
         return o.ID;
 
     }
@@ -23,11 +23,11 @@ internal class DalOrder
     /// <param name="id"></param>
     public void DeleteOrder(int id)
     {
-        for (int i = 0; i < DataSource.Config.SizeOfOrder; i++)
+        for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
             if (id == DataSource.MyOrder[i].ID)
             {
-                DataSource.MyOrder[i] = DataSource.MyOrder[DataSource.Config.SizeOfOrder--];
+                DataSource.MyOrder[i] = DataSource.MyOrder[DataSource.MyOrder.Count];
                 Console.WriteLine("sucsses");
             }
         }
@@ -40,7 +40,7 @@ internal class DalOrder
     /// <exception cref="Exception"></exception>
     public void UpdateOrder(ref Order o)
     {
-        for (int i = 0; i < DataSource.Config.SizeOfOrder; i++)
+        for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
             if (o.ID == DataSource.MyOrder[i].ID)
             {
@@ -73,10 +73,10 @@ internal class DalOrder
     /// Returns All Orders in the array.
     /// </summary>
     /// <returns></returns>
-    public Order[] GetAllOrders()
+    public List<Order> GetAllOrders()
     {
-        Order[] GetOrders = new Order[DataSource.MyOrder.Length];
-        for (int i = 0; i < DataSource.Config.SizeOfOrder; i++)
+        List<Order> GetOrders = new List<Order>();
+        for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
             Order o = new Order();
             o = DataSource.MyOrder[i];

@@ -2,7 +2,7 @@
 
 namespace DalApi
 {
-    internal interface ICrud<T> where T : struct
+    public interface ICrud<T> where T : struct
     {
         int Add(T a);
         void Update(T a);    

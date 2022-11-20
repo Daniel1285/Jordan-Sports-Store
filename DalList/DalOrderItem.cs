@@ -1,9 +1,10 @@
 ﻿
+using DalApi;
 using DO;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem : IOrderItem
 {
     /// <summary>
     /// Add a OrderItem to array "MyOrderItem" in DataSource and increases the size of the array "SizeOfOrderItem" by one.
