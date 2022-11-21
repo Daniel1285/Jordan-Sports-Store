@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{F20665CD-C538-498C-82C1-17788D9CA091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITTest", "BITTest\BITTest.csproj", "{B337B579-27E8-4A60-B617-2A1E9E0BC427}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITest", "BITTest\BITest.csproj", "{B337B579-27E8-4A60-B617-2A1E9E0BC427}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
