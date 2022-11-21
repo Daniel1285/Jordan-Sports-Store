@@ -10,7 +10,7 @@ internal class DalOrder: IOrder
     /// </summary>
     /// <param name="o"></param>
     /// <returns></returns>
-    public int  AddNewOrder (Order o)
+    public int Add(Order o)
     {
         DataSource.MyOrder.Add(o);
         return o.ID;
@@ -21,13 +21,13 @@ internal class DalOrder: IOrder
     /// Deleteing a Order from the array "MyOrder".
     /// </summary>
     /// <param name="id"></param>
-    public void DeleteOrder(int id)
+    public void Delete(int id)
     {
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
             if (id == DataSource.MyOrder[i].ID)
             {
-                DataSource.MyOrder[i] = DataSource.MyOrder[DataSource.MyOrder.Count];
+                DataSource.MyOrder.Remove(DataSource.MyOrder[i]);  
                 Console.WriteLine("sucsses");
             }
         }
@@ -38,7 +38,7 @@ internal class DalOrder: IOrder
     /// </summary>
     /// <param name="o"></param>
     /// <exception cref="Exception"></exception>
-    public void UpdateOrder(ref Order o)
+    public void Update(Order o)
     {
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
@@ -57,7 +57,7 @@ internal class DalOrder: IOrder
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Order GetOrder(int id)
+    public Order GetByID(int id)
     {
         foreach (Order o  in DataSource.MyOrder)
         {
@@ -73,7 +73,7 @@ internal class DalOrder: IOrder
     /// Returns All Orders in the array.
     /// </summary>
     /// <returns></returns>
-    public List<Order> GetAllOrders()
+    public IEnumerable<Order> GetAll()
     {
         List<Order> GetOrders = new List<Order>();
         for (int i = 0; i < DataSource.MyOrder.Count; i++)

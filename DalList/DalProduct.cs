@@ -1,8 +1,8 @@
 ﻿
-using DalApi;
 using DO;
-
+using DalApi;
 namespace Dal;
+
 internal class DalProduct : IProduct
 {
     /// <summary>
@@ -10,7 +10,7 @@ internal class DalProduct : IProduct
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>
-    public int AddNewProduct(Product p)
+    public int Add(Product p)
     {
         foreach (Product s  in DataSource.MyProducts)
         {
@@ -27,7 +27,7 @@ internal class DalProduct : IProduct
     /// Deleteing a product from the array "MyProducts".
     /// </summary>
     /// <param name="ID"></param>
-    public void DeleteProduct(int ID)
+    public void Delete(int ID)
     {
         bool flag = false;
         for (int i = 0; i < DataSource.MyProducts.Count; i++)
@@ -51,7 +51,7 @@ internal class DalProduct : IProduct
     /// </summary>
     /// <param name="p"></param>
     /// <exception cref="Exception"></exception>
-    public void UpdateProduct(ref Product p)
+    public void Update(Product p)
     {
         
         for (int i = 0; i < DataSource.MyProducts.Count; i++)
@@ -75,7 +75,7 @@ internal class DalProduct : IProduct
     /// <param name="ID"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Product GetProduct(int ID)
+    public Product GetByID(int ID)
     {
         foreach (Product p in DataSource.MyProducts)
         {
@@ -92,7 +92,7 @@ internal class DalProduct : IProduct
     /// Returns All products in the array.
     /// </summary>
     /// <returns></returns>
-    public Product[] GetAllProducts()
+    public IEnumerable<Product> GetAll()
     {
         Product[] newProducts = new Product[DataSource.MyProducts.Count];
         for (int i = 0; i < DataSource.MyProducts.Count; i++)

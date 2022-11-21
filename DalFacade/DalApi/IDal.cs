@@ -3,12 +3,12 @@ using DO;
 
 namespace DalApi
 {
-    internal interface IDal
+    public interface IDal
     {
-        public Product Product { get; }
+        public IProduct Product { get; }
 
-        public OrderItem OrderItem { get; }
-        public Order Order { get; } 
+        public IOrderItem OrderItem { get; }
+        public IOrder Order { get; } 
         
     }
 }

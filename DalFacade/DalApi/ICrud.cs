@@ -6,7 +6,7 @@ namespace DalApi
     {
         int Add(T a);
         void Update(T a);    
-        void Delete(T id);
+        void Delete(int id);
         T GetByID(int id);
 
         IEnumerable<T>? GetAll();    

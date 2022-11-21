@@ -61,7 +61,7 @@ internal static class DataSource
         Double[] priceOfProduct = { 550, 400, 250, 332.5, 210, 129.99, 49, 63, 122.5, 140 };
         Enums.Category[] categories = { Category.SHOES, Category.SHOES, Category.SHORTS, Category.SHOES, Category.HOODIES, Category.HOODIES, Category.SOCKS, Category.SOCKS, Category.SHIRTS, Category.SHIRTS };
         int[] AmountInSoke = { 0, 7, 5, 4, 2, 9, 5, 6, 3, 10 };
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < SIZE; i++)
         {
             Product p = new Product
             {
@@ -96,11 +96,11 @@ internal static class DataSource
                 OrderID = Config.GetIdForOrder,
                 ProductID = R.Next(100000),
                 Price = R.Next(200, 300),
-                Amount = Math.Min(R.Next(1, 5), MyProducts.Find().InStock,
+                Amount = Math.Min(R.Next(1, 5), MyProducts[i].InStock)
                 // Amount = Math.Min( R.Next(1, 5), MyProducts[Config.SizeOfOrderItem].InStock)
             };
 
-            MyProducts[Config.SizeOfOrderItem].InStock -= NewOrderItem.Amount;
+            //MyProducts[Config.SizeOfOrderItem].InStock -= NewOrderItem.Amount;
             MyOrderItem.Add(NewOrderItem);
            
         }
@@ -148,29 +148,6 @@ internal static class DataSource
     }
 
 
-    /// <summary>
-    /// A method that adds an object to an array
-    /// </summary>
-    /// <param name="O_i"></param>
-    private static void Add_OrderItem()
-    {
-        const int SIZE = 40;
-        for (int i = 0; i < SIZE; i++)
-        {
-            OrderItem NewOrderItem = new OrderItem
-            {
-                ID = Config.GetIdForOrder,
-                OrderID = Config.GetIdForOrder,
-                ProductID = MyProducts[i].ID,
-                Price = MyProducts[i].Price,
-                Amount = Math.Min(R.Next(1, 5), MyProducts[Config.SizeOfOrderItem].InStock)
-            };
-
-            MyProducts[Config.SizeOfOrderItem].InStock -= NewOrderItem.Amount;
-            MyOrderItem[Config.SizeOfOrderItem++] = NewOrderItem;
-        }
-        
-    }
 
 
 
