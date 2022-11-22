@@ -84,7 +84,7 @@ namespace DalTest
                     {
                         testMain.Product.Add(p);    
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (AlreadyExistException str) { Console.WriteLine(str); }
                     
                     break;
 
@@ -96,7 +96,7 @@ namespace DalTest
                     {
                         testMain.Product.GetByID(ID);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
                     
                     Console.WriteLine(testMain.Product.GetByID(ID));
                     break;
@@ -113,7 +113,7 @@ namespace DalTest
                         
                     }
 
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
 
                     break;
 
@@ -126,7 +126,7 @@ namespace DalTest
                     {
                         Console.WriteLine(testMain.Product.GetByID(ID2));
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
 
                     
                     Console.WriteLine("Please enter the product to update:");
@@ -150,7 +150,7 @@ namespace DalTest
                     {
                         testMain.Product.Update(p);
                     }
-                    catch (Exception str) { Console.WriteLine(str);}
+                    catch (NotExistException str) { Console.WriteLine(str);}
       
                     break;
 
@@ -163,7 +163,7 @@ namespace DalTest
                     {
                         testMain.Product.Delete(IDd);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
 
                     break;
 
@@ -220,9 +220,8 @@ namespace DalTest
                     {
                         testMain.OrderItem.GetByID(IDo);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
      
-                    
                     Console.WriteLine(testMain.OrderItem.GetByID(IDo)); 
 
                     break;
@@ -237,7 +236,7 @@ namespace DalTest
                             Console.WriteLine(testMain.OrderItem.GetByID(itemOfOrderItem.OrderID));
                         }    
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
   
                     
                     break;
@@ -254,7 +253,7 @@ namespace DalTest
                     {
                         Console.WriteLine(testMain.OrderItem.GetByTwoID(ID, ProductID));
                     }
-                    catch (Exception str) { Console.WriteLine(str); }   
+                    catch (NotExistException str) { Console.WriteLine(str); }   
        
                     
                     Console.WriteLine("Please enter the details of the Order item you want to update:");
@@ -277,7 +276,7 @@ namespace DalTest
                     {
                         testMain.OrderItem.Update(item);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }   
+                    catch (NotExistException str) { Console.WriteLine(str); }   
 
                     break;
 
@@ -289,7 +288,7 @@ namespace DalTest
                     {
                         testMain.OrderItem.Delete(IDd);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }   
+                    catch (NotExistException str) { Console.WriteLine(str); }   
         
                     break;
 
@@ -300,7 +299,7 @@ namespace DalTest
                     {
                         testMain.OrderItem.GetByID(ID);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
     
                     
                     Console.WriteLine(testMain.OrderItem.GetByID(ID));
@@ -354,7 +353,7 @@ namespace DalTest
                     {
                         testMain.Order.GetByID(IDo);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }   
+                    catch (NotExistException str) { Console.WriteLine(str); }   
  
                     
                     Console.WriteLine(testMain.Order.GetByID(IDo));
@@ -370,7 +369,7 @@ namespace DalTest
                             Console.WriteLine(testMain.Order.GetByID(order.ID));
                         }
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
               
                     break;
                 case "d":
@@ -383,7 +382,7 @@ namespace DalTest
                     {
                         Console.WriteLine(testMain.Order.GetByID(ID));
                     }
-                    catch (Exception str) { Console.WriteLine(str); }   
+                    catch (NotExistException str) { Console.WriteLine(str); }   
       
                     
                     Console.WriteLine("Please enter the details of the Order  you want to update:");
@@ -404,7 +403,7 @@ namespace DalTest
                     {
                         testMain.Order.Update(o);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }   
+                    catch (NotExistException str) { Console.WriteLine(str); }   
           
                     break;
                 case "e":
@@ -415,7 +414,7 @@ namespace DalTest
                     {
                         testMain.Order.Delete(IDd);
                     }
-                    catch (Exception str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str); }
 
                     break;
 

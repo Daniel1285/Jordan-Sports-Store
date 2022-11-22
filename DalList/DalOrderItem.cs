@@ -17,6 +17,7 @@ internal class DalOrderItem : IOrderItem
         return o.ProductID;
     }
 
+
     /// <summary>
     /// Deleteing an Order Item from the array "MyOrderItem".
     /// </summary>
@@ -28,9 +29,13 @@ internal class DalOrderItem : IOrderItem
             if (id == DataSource.MyOrderItem[i].OrderID)
             {
                 DataSource.MyOrderItem[i] = DataSource.MyOrderItem[DataSource.MyOrderItem.Count];
+                Console.WriteLine("sucssce");
+                return;
             }
         }
+        throw new NotExistException("Not found order item to delete");
     }
+
 
     /// <summary>
     /// Updates a Order Item by overwriting an existing Order Item.
@@ -49,7 +54,7 @@ internal class DalOrderItem : IOrderItem
             }
         }
 
-        throw new Exception("Not found Order item to Update");
+        throw new NotExistException("Not found Order item to Update");
     }
 
     /// <summary>
@@ -68,7 +73,7 @@ internal class DalOrderItem : IOrderItem
             }
 
         }
-        throw new Exception("Order item not found");
+        throw new NotExistException("Order item not found");
     }
 
 
@@ -86,9 +91,8 @@ internal class DalOrderItem : IOrderItem
             {
                 return o;
             }
-
         }
-        throw new Exception("Order item not found");
+        throw new NotExistException("Order item not found");
     }
 
 

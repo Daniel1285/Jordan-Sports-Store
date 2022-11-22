@@ -14,7 +14,6 @@ internal class DalOrder: IOrder
     {
         DataSource.MyOrder.Add(o);
         return o.ID;
-
     }
 
     /// <summary>
@@ -23,14 +22,17 @@ internal class DalOrder: IOrder
     /// <param name="id"></param>
     public void Delete(int id)
     {
+
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
             if (id == DataSource.MyOrder[i].ID)
             {
                 DataSource.MyOrder.Remove(DataSource.MyOrder[i]);  
                 Console.WriteLine("sucsses");
+                return;
             }
         }
+        throw new NotExistException("Not found order to delete");
     }
 
     /// <summary>
@@ -48,7 +50,7 @@ internal class DalOrder: IOrder
                 return;
             }
         }
-        throw new Exception("Not found order to Update! ");
+        throw new NotExistException("Not found order to Update! ");
     }
 
     /// <summary>
@@ -66,7 +68,7 @@ internal class DalOrder: IOrder
                 return o;
             }
         }
-        throw new Exception("Order are not found!");
+        throw new NotExistException("Order are not found!");
     }
 
     /// <summary>
