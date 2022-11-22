@@ -80,7 +80,7 @@ internal class DalOrder: IOrder
         {
             Order o = new Order();
             o = DataSource.MyOrder[i];
-            GetOrders[i] = o;
+            GetOrders.Add(o);
             
         }
         return GetOrders;   

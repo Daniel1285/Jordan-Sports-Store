@@ -104,7 +104,7 @@ internal class DalOrderItem : IOrderItem
         {
             OrderItem o = new OrderItem();
             o = DataSource.MyOrderItem[i];
-            newOrdersItem[i] = o;
+            newOrdersItem.Add(o);
         }
 
         return newOrdersItem;

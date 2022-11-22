@@ -19,7 +19,7 @@ internal class DalProduct : IProduct
                 throw new Exception("the product alrady exist!");
             }
         }
-        DataSource.MyProducts[DataSource.MyProducts.Count] = p;
+        DataSource.MyProducts.Add(p);
         return p.ID;
     }
 

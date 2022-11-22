@@ -140,7 +140,7 @@ namespace DalTest
                     Console.WriteLine("Please enter a product price:");
                     p.Price = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Please select a product category \n 0. Shose. 1. Shirts. \n 2. Shorts. \n 3. Hoodies. \n 4. Socks.");
+                    Console.WriteLine("Please select a product category \n 0. Shose.\n 1. Shirts. \n 2. Shorts. \n 3. Hoodies. \n 4. Socks.");
                     int choise3 = int.Parse(Console.ReadLine());
                     p.Category = (Enums.Category)choise3;
 
@@ -234,7 +234,7 @@ namespace DalTest
                         IEnumerable<OrderItem>?items = testMain.OrderItem.GetAll();
                         foreach (var itemOfOrderItem in items)
                         {
-                            Console.WriteLine(testMain.OrderItem.GetByID(itemOfOrderItem.ID));
+                            Console.WriteLine(testMain.OrderItem.GetByID(itemOfOrderItem.OrderID));
                         }    
                     }
                     catch (Exception str) { Console.WriteLine(str); }
@@ -340,7 +340,7 @@ namespace DalTest
                     o.CustomerAdress = Console.ReadLine();
 
                 
-                    testMain.Order.Add(o);
+                     testMain.Order.Add(o);
                    
 
                     break;
