@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace BO
 {
     public class Enums
     {
+        public enum Category { SHOES = 0, SHIRTS, SHORTS, HOODIES, SOCKS }
+        public enum OrderStatus {Order_Confirmed, Order_Sent,Order_Provided}
     }
 }
