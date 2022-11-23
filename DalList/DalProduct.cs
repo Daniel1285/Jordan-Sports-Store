@@ -16,10 +16,10 @@ internal class DalProduct : IProduct
         {
             if (p.ID == s.ID )
             {
-                throw new Exception("the product alrady exist!");
+                throw new AlreadyExistException("the product alrady exist!");
             }
         }
-        DataSource.MyProducts[DataSource.MyProducts.Count] = p;
+        DataSource.MyProducts.Add(p);
         return p.ID;
     }
 
@@ -41,7 +41,7 @@ internal class DalProduct : IProduct
             }
         }
         if (flag == false)
-            throw new Exception("Not found Product to delete");
+            throw new NotExistException("Not found Product to delete");
 
     }
 
@@ -64,7 +64,7 @@ internal class DalProduct : IProduct
             }
         }
 
-        throw new Exception("Not found Product to Update");
+        throw new NotExistException("Not found Product to Update");
     }
 
 
@@ -85,7 +85,7 @@ internal class DalProduct : IProduct
             }
             
         }
-        throw new Exception("Product not found");
+        throw new NotExistException("Product not found");
     }
 
     /// <summary>

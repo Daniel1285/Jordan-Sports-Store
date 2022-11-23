@@ -96,8 +96,8 @@ internal static class DataSource
                 OrderID = Config.GetIdForOrder,
                 ProductID = R.Next(100000),
                 Price = R.Next(200, 300),
-                Amount = Math.Min(R.Next(1, 5), MyProducts[i].InStock)
-                // Amount = Math.Min( R.Next(1, 5), MyProducts[Config.SizeOfOrderItem].InStock)
+                //Amount = Math.Min(R.Next(1, 5), MyProducts[i].InStock)
+                //Amount = Math.Min( R.Next(1, 5), MyProducts[].InStock)
             };
 
             //MyProducts[Config.SizeOfOrderItem].InStock -= NewOrderItem.Amount;
