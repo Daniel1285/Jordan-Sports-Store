@@ -1,8 +1,8 @@
 ﻿
 
-namespace BO
+namespace BO;
+
+public class Exceptions
 {
-    public class Exceptions
-    {
-    }
+
 }

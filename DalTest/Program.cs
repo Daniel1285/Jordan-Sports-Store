@@ -94,11 +94,11 @@ namespace DalTest
                     int ID = int.Parse(Console.ReadLine());
                     try
                     {
-                        testMain.Product.GetByID(ID);
+                        Console.WriteLine(testMain.Product.GetByID(ID));  
                     }
-                    catch (NotExistException str) { Console.WriteLine(str); }
+                    catch (NotExistException str) { Console.WriteLine(str);}
                     
-                    Console.WriteLine(testMain.Product.GetByID(ID));
+                    
                     break;
 
                 case "c":
