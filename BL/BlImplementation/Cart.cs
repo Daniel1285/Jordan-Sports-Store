@@ -1,22 +1,21 @@
 ﻿using BlApi;
 
-
 namespace BlImplementation
 {
-    internal class Cart: ICart
+    internal class Cart : ICart
     {
 
-        public Cart AddProdctToCatrt(Cart cart, int id)
+        public BO.Cart AddProdctToCatrt(BO.Cart cart, int id)
         {
             return cart;
         }
 
-        public Cart UpdateAmountOfProduct(Cart c, int id, int amount)
+        public BO.Cart UpdateAmountOfProduct(BO.Cart c, int id, int amount)
         {
             return c;
         }
 
-        public void ConfirmOrder(Cart c)
+        public void ConfirmOrder(BO.Cart c)
         {
 
         }
