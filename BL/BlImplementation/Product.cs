@@ -61,10 +61,15 @@ namespace BlImplementation
                 catch (Exception) { throw; }
                
             }
+
+            throw new Exception("sss"); // need to fix it
         }
         public BO.Product GetProduct(BO.Cart c, int id)
         {
+            if (id > 0)
+            {
 
+            }
         }
         public void AddProduct(BO.Product p)
         {

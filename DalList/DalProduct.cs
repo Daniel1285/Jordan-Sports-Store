@@ -102,7 +102,7 @@ internal class DalProduct : IProduct
             products.Add(p);
         }
 
-        return newProducts;
+        return products;
     }
 
 }
