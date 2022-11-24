@@ -1,17 +1,20 @@
 ﻿using BlApi;
+using BO;
 
 namespace BlImplementation
 {
     internal class Order: IOrder
     {
-        public IEnumerable<BO.OrderForList> GetOrderLists()
-        {
-            
-        }
+       
 
         public BO.Order GetOrder(int orderId)
         {
             
+        }
+
+        public IEnumerable<OrderForList> GetOrderLists()
+        {
+           
         }
 
         public BO.Order ShippingUpdate(int orderid)
