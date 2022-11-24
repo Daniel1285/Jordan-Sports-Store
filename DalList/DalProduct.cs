@@ -94,12 +94,12 @@ internal class DalProduct : IProduct
     /// <returns></returns>
     public IEnumerable<Product> GetAll()
     {
-        Product[] newProducts = new Product[DataSource.MyProducts.Count];
+        List<Product> products = new List<Product>();
         for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
             Product p = new Product();
             p = DataSource.MyProducts[i];
-            newProducts[i] = p;
+            products.Add(p);
         }
 
         return newProducts;
