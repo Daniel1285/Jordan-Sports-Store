@@ -2,6 +2,8 @@
 using DalApi;
 using Dal;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using BO;
 
 namespace BlImplementation
 {
@@ -40,7 +42,7 @@ namespace BlImplementation
         }
         public BO.Product GetProduct(int id)
         {
-            
+            BO.Product p1 = null;
             if (id > 0)
             {
                 try
@@ -48,40 +50,123 @@ namespace BlImplementation
                     DO.Product p = new DO.Product();
                     p = Dal.Product.GetByID(id);
 
-                    BO.Product p1 = new BO.Product
+                    p1 = new BO.Product
                     {
                         ID = p.ID,
-                        Name= p.Name,
-                        Price= p.Price,
-                        Category= (BO.Enums.Category)p.Category,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Category = (BO.Enums.Category)p.Category,
                         InStock = p.InStock,
                     };
-                    return p1;
+                   
                 }
-                catch (Exception) { throw; }
-               
+                catch (BO.NotExistException ex) { Console.WriteLine(ex); }
+                return p1;
             }
 
-            throw new Exception("sss"); // need to fix it
+            else
+                throw new BO.IdSmallThanZeroException("ID small than zero");
+
         }
-        public BO.Product GetProduct(BO.Cart c, int id)
+        public BO.ProductItem GetProduct(BO.Cart c, int id)
         {
+            BO.ProductItem pi = null;
             if (id > 0)
             {
-
+                try
+                {
+                    DO.Product p = new DO.Product();
+                    p = Dal.Product.GetByID(id);
+                    pi = new BO.ProductItem
+                    {
+                        ID = p.ID,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Category = (BO.Enums.Category)p.Category,
+                        InStock = (p.InStock > 0 ? true : false),
+                        Amount = c.Items.Find(x => x.ID == id).Amount,
+                    };
+                }
+                catch (BO.NotExistException ex) { Console.WriteLine(ex); }
+                return pi;
             }
+            else
+                throw new BO.IdSmallThanZeroException("ID small than zero");
         }
         public void AddProduct(BO.Product p)
         {
+            if (p.ID < 0)
+                throw new BO.NotExistException("ID small than zero");
+            if (p.Name == null)
+                throw new BO.NameIsEmptyException("############################");
+            if (p.Price < 0)
+                throw new BO.PriceSmallThanZeroException("############################");
 
+            if (p.InStock < 0)
+                throw new BO.InStokeSmallThanZeroException("############################");
+
+            DO.Product p1 = new DO.Product
+            {
+                ID = p.ID,
+                Name = p.Name,
+                Price = p.Price,
+                Category = (DO.Enums.Category)p.Category,
+                InStock = p.InStock, 
+
+            };
+            try
+            {
+                Dal.Product.GetByID(p.ID);
+            }
+            catch (DO.AlreadyExistException ex) { Console.WriteLine(ex);}
+            Dal.Product.Add(p1);
         }
         public void DeleteProduct(int id)
         {
+            if (id < 0)
+                throw new BO.NotExistException("ID small than zero");
+            try
+            {
+                Dal.Product.GetByID(id);
+            }
+            catch (DO.AlreadyExistException ex) { Console.WriteLine(ex);}
 
+            foreach (var p in Dal.OrderItem.GetAll())
+            {
+                if (p.ProductID == id)
+                {
+                    throw new BO.CanNotDeleteProductException("############");
+                }   
+            }
+            Dal.Product.Delete(id);
+   
         }
         public void UpdateProduct(BO.Product p)
         {
+            if (p.ID < 0)
+                throw new BO.NotExistException("ID small than zero");
+            if (p.Name == null)
+                throw new BO.NameIsEmptyException("############################");
+            if (p.Price < 0)
+                throw new BO.PriceSmallThanZeroException("############################");
 
+            if (p.InStock < 0)
+                throw new BO.InStokeSmallThanZeroException("############################");
+
+            DO.Product p1 = new DO.Product
+            {
+                ID = p.ID,
+                Name = p.Name,
+                Price = p.Price,
+                Category = (DO.Enums.Category)p.Category,
+                InStock = p.InStock,
+
+            };
+            try
+            {
+                Dal.Product.Update(p1);
+            }
+            catch (DO.NotExistException ex) { Console.WriteLine(ex); }
         }
 
     }

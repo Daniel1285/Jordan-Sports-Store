@@ -22,7 +22,7 @@ namespace BlApi
         /// <param name="c"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Product GetProduct(Cart c, int id);
+        public ProductItem GetProduct(Cart c, int id);
 
         /// <summary>
         ///  Adding a product (for admin screen).
