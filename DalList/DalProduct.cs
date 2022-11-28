@@ -92,7 +92,7 @@ internal class DalProduct : IProduct
     /// Returns All products in the array.
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Product> GetAll()
+    public IEnumerable<Product>? GetAll()
     {
         List<Product> products = new List<Product>();
         for (int i = 0; i < DataSource.MyProducts.Count; i++)

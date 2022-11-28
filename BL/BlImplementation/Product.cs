@@ -1,9 +1,7 @@
 ﻿using BlApi;
 using DalApi;
 using Dal;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using BO;
+
 
 namespace BlImplementation
 {
@@ -19,11 +17,8 @@ namespace BlImplementation
             {
                 products = Dal.Product.GetAll().ToList();
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            catch (Exception) { }
+      
             foreach (var item in products)
             {
                 productsForList.Add(new BO.ProductForList()
@@ -95,15 +90,14 @@ namespace BlImplementation
         }
         public void AddProduct(BO.Product p)
         {
-            if (p.ID < 0)
-                throw new BO.NotExistException("ID small than zero");
-            if (p.Name == null)
-                throw new BO.NameIsEmptyException("############################");
-            if (p.Price < 0)
-                throw new BO.PriceSmallThanZeroException("############################");
-
-            if (p.InStock < 0)
-                throw new BO.InStokeSmallThanZeroException("############################");
+            if (p.ID < 0) throw new BO.NotExistException("ID small than zero");
+               
+            if (p.Name == null) throw new BO.NameIsEmptyException("############################");
+               
+            if (p.Price < 0) throw new BO.PriceSmallThanZeroException("############################");
+               
+            if (p.InStock < 0)throw new BO.InStokeSmallThanZeroException("############################");
+                
 
             DO.Product p1 = new DO.Product
             {
@@ -123,35 +117,32 @@ namespace BlImplementation
         }
         public void DeleteProduct(int id)
         {
-            if (id < 0)
-                throw new BO.NotExistException("ID small than zero");
+            if (id < 0) throw new BO.NotExistException("ID small than zero");
+                
             try
             {
                 Dal.Product.GetByID(id);
             }
-            catch (DO.AlreadyExistException ex) { Console.WriteLine(ex);}
+            catch (DO.NotExistException ex) { Console.WriteLine(ex);}
 
             foreach (var p in Dal.OrderItem.GetAll())
             {
-                if (p.ProductID == id)
-                {
-                    throw new BO.CanNotDeleteProductException("############");
-                }   
+                if (p.ProductID == id) throw new BO.CanNotDeleteProductException("############");
+        
             }
             Dal.Product.Delete(id);
    
         }
         public void UpdateProduct(BO.Product p)
         {
-            if (p.ID < 0)
-                throw new BO.NotExistException("ID small than zero");
-            if (p.Name == null)
-                throw new BO.NameIsEmptyException("############################");
-            if (p.Price < 0)
-                throw new BO.PriceSmallThanZeroException("############################");
+            if (p.ID < 0) throw new BO.NotExistException("ID small than zero");
 
-            if (p.InStock < 0)
-                throw new BO.InStokeSmallThanZeroException("############################");
+            if (p.Name == null) throw new BO.NameIsEmptyException("############################");
+                
+            if (p.Price < 0) throw new BO.PriceSmallThanZeroException("############################");
+                
+            if (p.InStock < 0) throw new BO.InStokeSmallThanZeroException("############################");
+                
 
             DO.Product p1 = new DO.Product
             {

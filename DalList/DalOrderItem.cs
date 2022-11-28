@@ -101,7 +101,7 @@ internal class DalOrderItem : IOrderItem
     /// Returns All Order Item in the list.
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem> GetAll()
+    public IEnumerable<OrderItem>? GetAll()
     {
         List<OrderItem> newOrdersItem = new List<OrderItem>();
         for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
