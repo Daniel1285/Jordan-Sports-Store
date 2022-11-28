@@ -24,7 +24,7 @@ namespace BlImplementation
                 {
                     ID = item.ID,
                     CustomerName= item.CustomerName,
-                    //Status = Enums.OrderStatus.Order_Confirmed,
+                    Status = getStatus(item),
                     //AmountOfItems = 
                     //TotalPrice =
 
@@ -58,11 +58,11 @@ namespace BlImplementation
                 CustomerEmail = OrderFromDo.CustomerEmail,
                 CustomerAddress = OrderFromDo.CustomerAdress,
                 OrderDate = OrderFromDo.OrderDate,
-                //Status = BO.Enums.OrderStatus,
-                //PaymentDate = NOT IN DAL,
+                Status = getStatus(OrderFromDo),
+                PaymentDate = DateTime.Now,
                 ShipDate = OrderFromDo.ShipDate,
                 DeliveryDate = OrderFromDo.DeliveryrDate,
-                //Items = (Dal.OrderItem).GetAll().ToList(),
+                Items = (Dal.OrderItem).GetAll().ToList(),
                 TotalPrice =  ,
 
                 
@@ -84,7 +84,15 @@ namespace BlImplementation
         {
 
         }
-
+         
+        private BO.Enums.OrderStatus getStatus(DO.Order order)
+        {
+            if (order.DeliveryrDate != DateTime.MinValue)
+                return BO.Enums.OrderStatus.Order_Provided;
+            if (order.ShipDate != DateTime.MinValue)
+                return BO.Enums.OrderStatus.Order_Sent;
+            return BO.Enums.OrderStatus.Order_Confirmed;
+        }
 
 
     }

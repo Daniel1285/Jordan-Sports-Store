@@ -55,4 +55,3 @@ public struct Order
         Deliveryr Date:{DeliveryrDate}
                                            ";
 }
-
