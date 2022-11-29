@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using Dal;
 using DalApi;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlImplementation
 {
@@ -12,8 +13,8 @@ namespace BlImplementation
         {
             List<DO.Order> orders = new List<DO.Order>();
             List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
-            IEnumerable<DO.OrderItem> orderItem = Dal.OrderItem.GetAll();
             
+
             try
             {
                 orders = Dal.Order.GetAll().ToList();
@@ -28,6 +29,7 @@ namespace BlImplementation
                     CustomerName= item.CustomerName,
                     Status = getStatus(item),
                 };
+                List<DO.OrderItem> orderItem = Dal.OrderItem.GetOrdersItem(item.ID);
                 foreach (var i in orderItem)
                 {
                     order.AmountOfItems += i.Amount;
@@ -39,9 +41,9 @@ namespace BlImplementation
             return ordersForList;
         }
 
-        public Order GetOrder(int orderId)
+        public BO.Order GetOrder(int orderId)
         {
-            DO.OrderItem OrderItemFromDo = new DO.OrderItem();
+            List<DO.OrderItem> OrderItemFromDo = new List<DO.OrderItem>();
             DO.Order OrderFromDo = new DO.Order();
             
             if (orderId < 0) throw new BO.IdSmallThanZeroException("#############");
@@ -51,11 +53,9 @@ namespace BlImplementation
 
             }
             catch (BO.NotExistException) { Console.WriteLine("#########"); }
-            try
-            {
-                OrderItemFromDo = Dal.OrderItem.GetByID(orderId); 
-            }
-            catch (BO.NotExistException) { Console.WriteLine("##########"); }
+       
+            OrderItemFromDo = Dal.OrderItem.GetAll().ToList();
+
             BO.Order o = new BO.Order
             {
                 ID = OrderFromDo.ID,
@@ -67,28 +67,73 @@ namespace BlImplementation
                 //PaymentDate = DateTime.Now,
                 ShipDate = OrderFromDo.ShipDate,
                 DeliveryDate = OrderFromDo.DeliveryrDate,
-                //Items = (Dal.OrderItem).GetAll().ToList(),
-                TotalPrice = ,
+                Items = FromDotToBoOrderItem(OrderFromDo.ID, OrderItemFromDo).Item1,
+                TotalPrice = FromDotToBoOrderItem(OrderFromDo.ID, OrderItemFromDo).Item2,
 
+            };
+            return o;
+        }
+
+        public BO.Order ShippingUpdate(int orderId)
+        {
+            if (orderId < 0) throw new BO.IdSmallThanZeroException("#############");
+            DO.Order order = new DO.Order();
+            BO.Order order1 = new BO.Order();
+            try
+            {
+                order = Dal.Order.GetByID(orderId);
+                order1 = GetOrder(orderId);
+            }
+            catch (BO.NotExistException) { Console.WriteLine("#########"); }
+
+            if (order.ShipDate == DateTime.MinValue)
+            {
+                order.ShipDate = DateTime.Now; 
+                order1.ShipDate = DateTime.Now;    
+                
             }
 
-        }
+            return order1;
 
-        public BO.Order ShippingUpdate(int orderid)
+    }
+
+        public BO.Order SupplyUpdateOrder(int orderId)
         {
+            if (orderId < 0) throw new BO.IdSmallThanZeroException("#############");
+            DO.Order order = new DO.Order();
+            BO.Order order1 = new BO.Order();
+            try
+            {
+                order = Dal.Order.GetByID(orderId);
+                order1 = GetOrder(orderId);
+            }
+            catch (BO.NotExistException) { Console.WriteLine("#########"); }
 
+            if (order.DeliveryrDate == DateTime.MinValue)
+            {
+                order.DeliveryrDate = DateTime.Now;
+                order1.DeliveryDate = DateTime.Now;
+            }
+
+            return order1;
         }
 
-        public BO.Order SupplyUpdateOrder(int orderid)
+        public BO.OrderTracking TrackingOtder(int orderId)
         {
+            if (orderId < 0) throw new BO.IdSmallThanZeroException("#############");
+            DO.Order order = new DO.Order();
+            BO.OrderTracking order1 = new BO.OrderTracking();
+            try
+            {
+                order = Dal.Order.GetByID(orderId);
+            }
+            catch (BO.NotExistException) { Console.WriteLine("#########"); }
 
+            order1.ID= orderId; 
+            order1.Status = GetOrder(orderId).Status;
+            order1.Pair
         }
 
-        public BO.OrderTracking TrackingOtder(int orderid)
-        {
-
-        }
-         
         private BO.Enums.OrderStatus getStatus(DO.Order order)
         {
             if (order.DeliveryrDate != DateTime.MinValue)
@@ -99,10 +144,31 @@ namespace BlImplementation
         }
 
         
-        private List<BO.OrderItem> FromDotToBoOrderItem(List<DO.OrderItem> items)   
+        private (List<BO.OrderItem> , double) FromDotToBoOrderItem(int id, List<DO.OrderItem>? items)
 
+        {
+            items = (List<DO.OrderItem>?)Dal.OrderItem.GetAll();
+            List<BO.OrderItem>? orderItems = new List<BO.OrderItem>();
+            double sum = 0;
+            foreach (var i in items)
+            {
+                if (id == i.OrderID)
+                {
+                    BO.OrderItem orderItem = new BO.OrderItem()
+                    {
+                        ID = i.ID,
+                        Amount = i.Amount,
+                        ProductID = i.ProductID,
+                        Price = i.Price,
+                        Name = Dal.Product.GetByID(i.ProductID).Name,
+                    };
+                    sum += i.Price;
+                    orderItems.Add(orderItem);
+                }
 
-
+            }
+            return (orderItems, sum);
+        }
 
     }
 }
