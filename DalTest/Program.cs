@@ -5,20 +5,10 @@ namespace DalTest
 {
     internal class Program
     {
-        /*
-        private static DalProduct testProduct = new DalProduct();
-        private static DalOrder testOrder = new DalOrder();
-        private static DalOrderItem testOrderItem = new DalOrderItem();
-        */
-
-
+      
         private static IDal testMain = new DalList();
-
-
         static void Main(string[] args)
         {
-
-            
             int choice;
             do
             {

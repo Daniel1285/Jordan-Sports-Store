@@ -9,7 +9,7 @@ namespace Dal;
 /// <summary>
 /// 
 /// </summary>
-internal static class DataSource
+internal static class DataSource 
 {
     /// <summary>
     /// data about the entity

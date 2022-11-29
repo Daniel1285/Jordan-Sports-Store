@@ -64,7 +64,6 @@ namespace BlImplementation
                 CustomerAddress = OrderFromDo.CustomerAdress,
                 OrderDate = OrderFromDo.OrderDate,
                 Status = getStatus(OrderFromDo),
-                //PaymentDate = DateTime.Now,
                 ShipDate = OrderFromDo.ShipDate,
                 DeliveryDate = OrderFromDo.DeliveryrDate,
                 Items = FromDotToBoOrderItem(OrderFromDo.ID, OrderItemFromDo).Item1,
@@ -123,6 +122,7 @@ namespace BlImplementation
             if (orderId < 0) throw new BO.IdSmallThanZeroException("#############");
             DO.Order order = new DO.Order();
             BO.OrderTracking order1 = new BO.OrderTracking();
+            Tuple<DateTime, BO.Enums.OrderStatus>? p;
             try
             {
                 order = Dal.Order.GetByID(orderId);
@@ -131,7 +131,13 @@ namespace BlImplementation
 
             order1.ID= orderId; 
             order1.Status = GetOrder(orderId).Status;
-            order1.Pair
+            p = new Tuple<DateTime, BO.Enums.OrderStatus>(
+                (DateTime)order.OrderDate,
+                (BO.Enums.OrderStatus)order1.Status);
+            order1.Pair.Add(p);
+            return order1;  
+            
+            
         }
 
         private BO.Enums.OrderStatus getStatus(DO.Order order)

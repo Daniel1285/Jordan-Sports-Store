@@ -10,7 +10,6 @@ public class Order
     public string? CustomerAddress { get; set; }    
     public DateTime? OrderDate { get; set; } 
     public Enums.OrderStatus Status { get; set; }   
-    public DateTime? PaymentDate { get; set; }   
     public DateTime? ShipDate    { get; set; }
     public DateTime? DeliveryDate { get; set; }  
     public List<OrderItem> Items { get; set; }    
@@ -22,7 +21,6 @@ public class Order
              Address of custumer:{CustomerAddress}
              Order date :{OrderDate}
              Status: {Status}
-             Payment date:{PaymentDate}
              Ship date: {ShipDate}
              Delivery date:{DeliveryDate}
              Items :{Items}
