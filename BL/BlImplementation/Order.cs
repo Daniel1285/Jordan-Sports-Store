@@ -12,6 +12,8 @@ namespace BlImplementation
         {
             List<DO.Order> orders = new List<DO.Order>();
             List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
+            IEnumerable<DO.OrderItem> orderItem = Dal.OrderItem.GetAll();
+            
             try
             {
                 orders = Dal.Order.GetAll().ToList();
@@ -20,15 +22,18 @@ namespace BlImplementation
      
             foreach (var item in orders)
             {
-                ordersForList.Add(new BO.OrderForList()
+                BO.OrderForList order = new BO.OrderForList()
                 {
                     ID = item.ID,
                     CustomerName= item.CustomerName,
                     Status = getStatus(item),
-                    //AmountOfItems = 
-                    //TotalPrice =
-
-                });
+                };
+                foreach (var i in orderItem)
+                {
+                    order.AmountOfItems += i.Amount;
+                    order.TotalPrice += i.Price * i.Amount;
+                }
+                ordersForList.Add(order);
             }
 
             return ordersForList;
@@ -59,13 +64,12 @@ namespace BlImplementation
                 CustomerAddress = OrderFromDo.CustomerAdress,
                 OrderDate = OrderFromDo.OrderDate,
                 Status = getStatus(OrderFromDo),
-                PaymentDate = DateTime.Now,
+                //PaymentDate = DateTime.Now,
                 ShipDate = OrderFromDo.ShipDate,
                 DeliveryDate = OrderFromDo.DeliveryrDate,
-                Items = (Dal.OrderItem).GetAll().ToList(),
-                TotalPrice =  ,
+                //Items = (Dal.OrderItem).GetAll().ToList(),
+                TotalPrice = ,
 
-                
             }
 
         }
@@ -93,6 +97,11 @@ namespace BlImplementation
                 return BO.Enums.OrderStatus.Order_Sent;
             return BO.Enums.OrderStatus.Order_Confirmed;
         }
+
+        
+        private List<BO.OrderItem> FromDotToBoOrderItem(List<DO.OrderItem> items)   
+
+
 
 
     }

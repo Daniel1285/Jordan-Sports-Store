@@ -22,7 +22,7 @@ internal class DalOrder: IOrder
     /// <param name="id"></param>
     public void Delete(int id)
     {
-
+        
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
             if (id == DataSource.MyOrder[i].ID)
