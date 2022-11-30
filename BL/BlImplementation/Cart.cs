@@ -20,18 +20,21 @@ namespace BlImplementation
             {
                 Console.WriteLine(ex);
             }
-            foreach(var item in cart.Items)
+            if (cart.Items != null)
             {
-                if(id == item.ProductID)
+                foreach (var item in cart.Items)
                 {
-                    if(product1.InStock > item.Amount)
+                    if (id == item.ProductID)
                     {
-                        item.Amount++;
-                        item.Totalprice += item.Price;
-                        cart.TotalPrice += item.Price;
-                        return cart;
-                    }
+                        if (product1.InStock > item.Amount)
+                        {
+                            item.Amount++;
+                            item.Totalprice += item.Price;
+                            cart.TotalPrice += item.Price;
+                            return cart;
+                        }
 
+                    }
                 }
             }
             if(product1.InStock > 0)
