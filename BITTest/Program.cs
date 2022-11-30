@@ -2,6 +2,7 @@
 using Dal;
 using DalApi;
 using BO;
+using System.Threading.Channels;
 
 namespace BITTest
 {
@@ -44,50 +45,65 @@ namespace BITTest
 
         public static void choiceCart()
         {
-            Console.WriteLine("Please enter your choice: \n a. add product to the cart. \n b. Updat the quantity of a product in the shopping cart. \n c. Confrim Order.");
+            Console.WriteLine("Please enter your choice:\n" +
+                              " a. add product to the cart.\n" +
+                              " b. Updat the quantity of a product in the shopping cart.\n" +
+                              " c. Confrim Order.");
+
             string? choise = Console.ReadLine();
             Cart c = new Cart();
+            Console.Write("Please enter a your name: ");
+            c.CustomerName = Console.ReadLine();
+            Console.Write("Please enter tour Email: ");
+            c.CustomerEmail = Console.ReadLine();
+            Console.Write("Please enter a your addres home: ");
+            c.CustomerAddress = Console.ReadLine();
 
             switch (choise)
             {
                 case "a":
 
-                    Console.WriteLine("Please enter a your name");
-                    c.CustomerName= Console.ReadLine();
-                    Console.WriteLine("Please enter tour Email.");
-                    c.CustomerEmail= Console.ReadLine();    
-                    Console.WriteLine("Please enter a your addres home.");
-                    c.CustomerAddress= Console.ReadLine();  
+                    Console.Write("Enter the id of product you want to add to the cart: ");
+                    int idProduct = int.Parse(Console.ReadLine());
+                    try
+                    {
+                        testMain.Cart.AddProdctToCatrt(c, idProduct); // ######################## ERROR ###############################
+
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex.Message); }
 
                     break;
 
                 case "b":
                     
-                    int id , newAmount;
+                    int idProduct1 , newAmount;
                     BO.OrderItem o = new BO.OrderItem();
-                    Console.WriteLine("for wpdate please enter the following details:");
+                   // o = c.Items.Find(x => BO.OrderItem.ProductID == idProduct);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ----------------------------------------------
+                    Console.WriteLine("For update please enter the following details:");
                     Console.Write("ID product: ");
-                    id = int.Parse(Console.ReadLine());
+                    idProduct1 = int.Parse(Console.ReadLine());
                     try
                     {
-                        
+                        Console.WriteLine(o); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----------------------------------------------
                     }
                     catch (NotExistException str) { Console.WriteLine(str); }
 
                     Console.Write("Amount of product to update: ");
                     newAmount = int.Parse(Console.ReadLine());    
-                    testMain.Cart.UpdateAmountOfProduct(c, id, newAmount);
+                    testMain.Cart.UpdateAmountOfProduct(c, idProduct1, newAmount);
 
                     
                     break;
 
                 case "c":
-                    Console.WriteLine();
+         
+                    testMain.Cart.ConfirmOrder(c);
 
                     break;
 
 
                 default:
+                    Console.WriteLine("Error Tayping");
                     break;
 
             }
@@ -97,7 +113,76 @@ namespace BITTest
 
         public static void choiceProduct()
         {
+            Console.WriteLine("Please enter your choice:\n" +
+                              " a. Get product list.\n" +
+                              " b. Get product for the admin.\n" +
+                              " c. Get product for the claint.\n" +
+                              " d. Add product (for the admin).\n" +
+                              " e. Delete product.\n" +
+                              " f. Update product.");
 
+            string? choise = Console.ReadLine();
+            Cart c = new Cart();
+
+            switch (choise)
+            {
+                case "a":
+                    List<BO.ProductForList> products = new List<BO.ProductForList>();
+                    products = testMain.Product.GetProductList().ToList();
+                    products.ForEach(product => Console.WriteLine(product)); 
+
+                    break;
+
+                case "b":
+                    Console.Write("Please enter id :");
+                    int id = int.Parse(Console.ReadLine());
+                    try
+                    {
+                        Console.WriteLine(testMain.Product.GetProduct(id));
+
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex.Message); } 
+
+                    break;
+
+                case "c":
+                    Console.Write("Please enter id :");
+                    int idc = int.Parse(Console.ReadLine());
+                    Console.WriteLine(testMain.Product.GetProduct(c,idc)); // ######################## ERROR ###############################
+                    break;
+
+                case "d":
+                    Product p = new Product();
+
+                    Console.WriteLine("Please enter a product ID number.");
+                    p.ID = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Please enter Product Name:.");
+                    p.Name = Console.ReadLine();
+
+                    Console.WriteLine("Please enter a product price.");
+                    p.Price = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Please select a product category \n 0. Shose.\n 1. Shirts. \n 2. Shorts. \n 3. Hoodies. \n 4. Socks.");
+                    int choise2 = int.Parse(Console.ReadLine());
+                    p.Category = (Enums.Category)choise2;
+
+                    Console.WriteLine("Please enter the quantity of the product in stock.");
+                    p.InStock = int.Parse(Console.ReadLine());
+
+                    try
+                    {
+                        testMain.Product.AddProduct(p);
+                    }
+                    catch (AlreadyExistException str) { Console.WriteLine(str); }
+                    break;
+
+
+                default:
+                    Console.WriteLine("Error Tayping");
+                    break;
+
+            }
         }
 
         //------------------------------------------------->>>>> End of start with Product <<<<<--------------------------------------------------
