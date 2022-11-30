@@ -37,6 +37,7 @@ namespace BlImplementation
                     }
                 }
             }
+            
             if(product1.InStock > 0)
             {
                 foreach (var item in orderItem1)

@@ -15,7 +15,7 @@ public class ProductItem
                  Price:{Price}
                  Category:{Category}
                  Amount:{Amount}
-                 In Stock:
+                 In Stock:{InStock}
 
                                              ";
 

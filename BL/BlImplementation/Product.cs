@@ -84,7 +84,8 @@ namespace BlImplementation
         /// <exception cref="BO.IdSmallThanZeroException"></exception>
         public BO.ProductItem GetProduct(BO.Cart c, int id)
         {
-            BO.ProductItem pi = null;
+            
+            BO.ProductItem pi = new BO.ProductItem();
             if (id > 0)
             {
                 try
@@ -98,8 +99,15 @@ namespace BlImplementation
                         Price = p.Price,
                         Category = (BO.Enums.Category)p.Category,
                         InStock = (p.InStock > 0 ? true : false),
-                        Amount = c.Items.Find(x => x.ID == id).Amount,
+                        
                     };
+                    //if (c.Items != null)
+                    //{
+                    //    BO.OrderItem item = c.Items.Find(x => x.ProductID == id);
+
+                   // }
+
+                    
                 }
                 catch (BO.NotExistException ex) { Console.WriteLine(ex); }
                 return pi;

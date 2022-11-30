@@ -50,18 +50,19 @@ namespace BITTest
                               " b. Updat the quantity of a product in the shopping cart.\n" +
                               " c. Confrim Order.");
 
+
             string? choise = Console.ReadLine();
             Cart c = new Cart();
-            Console.Write("Please enter a your name: ");
-            c.CustomerName = Console.ReadLine();
-            Console.Write("Please enter tour Email: ");
-            c.CustomerEmail = Console.ReadLine();
-            Console.Write("Please enter a your addres home: ");
-            c.CustomerAddress = Console.ReadLine();
-
             switch (choise)
             {
                 case "a":
+
+                    Console.Write("Please enter a your name: ");
+                    c.CustomerName = Console.ReadLine();
+                    Console.Write("Please enter tour Email: ");
+                    c.CustomerEmail = Console.ReadLine();
+                    Console.Write("Please enter a your addres home: ");
+                    c.CustomerAddress = Console.ReadLine();
 
                     Console.Write("Enter the id of product you want to add to the cart: ");
                     int idProduct = int.Parse(Console.ReadLine());
@@ -75,10 +76,10 @@ namespace BITTest
                     break;
 
                 case "b":
-                    
-                    int idProduct1 , newAmount;
+
+                    int idProduct1, newAmount;
                     BO.OrderItem o = new BO.OrderItem();
-                   // o = c.Items.Find(x => BO.OrderItem.ProductID == idProduct);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ----------------------------------------------
+                    // o = c.Items.Find(x => BO.OrderItem.ProductID == idProduct);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ----------------------------------------------
                     Console.WriteLine("For update please enter the following details:");
                     Console.Write("ID product: ");
                     idProduct1 = int.Parse(Console.ReadLine());
@@ -89,14 +90,19 @@ namespace BITTest
                     catch (NotExistException str) { Console.WriteLine(str); }
 
                     Console.Write("Amount of product to update: ");
-                    newAmount = int.Parse(Console.ReadLine());    
+                    newAmount = int.Parse(Console.ReadLine());
                     testMain.Cart.UpdateAmountOfProduct(c, idProduct1, newAmount);
 
-                    
+
                     break;
 
                 case "c":
-         
+                    Console.Write("Please enter a your name: ");
+                    c.CustomerName = Console.ReadLine();
+                    Console.Write("Please enter tour Email: ");
+                    c.CustomerEmail = Console.ReadLine();
+                    Console.Write("Please enter a your addres home: ");
+                    c.CustomerAddress = Console.ReadLine();
                     testMain.Cart.ConfirmOrder(c);
 
                     break;
@@ -107,7 +113,7 @@ namespace BITTest
                     break;
 
             }
-        }    
+        }
 
         //------------------------------------------------->>>>> End of start with Cart <<<<<--------------------------------------------------
 
@@ -127,9 +133,10 @@ namespace BITTest
             switch (choise)
             {
                 case "a":
+
                     List<BO.ProductForList> products = new List<BO.ProductForList>();
                     products = testMain.Product.GetProductList().ToList();
-                    products.ForEach(product => Console.WriteLine(product)); 
+                    products.ForEach(product => Console.WriteLine(product));
 
                     break;
 
@@ -141,14 +148,14 @@ namespace BITTest
                         Console.WriteLine(testMain.Product.GetProduct(id));
 
                     }
-                    catch (NotExistException ex) { Console.WriteLine(ex.Message); } 
+                    catch (NotExistException ex) { Console.WriteLine(ex.Message); }
 
                     break;
 
                 case "c":
                     Console.Write("Please enter ID :");
                     int idc = int.Parse(Console.ReadLine());
-                    Console.WriteLine(testMain.Product.GetProduct(c,idc)); // ######################## ERROR ###############################
+                    Console.WriteLine(testMain.Product.GetProduct(c, idc)); // ######################## ERROR becaouse Amount ###############################
                     break;
 
                 case "d":
@@ -172,7 +179,7 @@ namespace BITTest
 
                     try
                     {
-                        testMain.Product.AddProduct(p); 
+                        testMain.Product.AddProduct(p);
                     }
                     catch (AlreadyExistException str) { Console.WriteLine(str); }
                     break;
@@ -235,12 +242,63 @@ namespace BITTest
 
         public static void choiceOrder()
         {
+            Console.WriteLine(" a.Get order list.\n" +
+                              " b. Get order.\n" +
+                              " c. Shipping update.\n" +
+                              " d. Supply Update Order.\n" +
+                              " e. TrackingOtder.\n");
+
+
+            string? choise = Console.ReadLine();
+            Cart c = new Cart();
+            int orderID;
+            switch (choise)
+            {
+                case "a":
+                    List<OrderForList> orders = testMain.Order.GetOrderLists().ToList();
+                    orders.ForEach(order => Console.WriteLine(order));
+                    break;
+
+                case "b":
+                    Console.Write("Please enter order id: ");
+                    orderID = int.Parse(Console.ReadLine());
+                    try
+                    {
+                        Console.WriteLine(testMain.Order.GetOrder(orderID));
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+                    
+                    break;
+
+                case "c":
+                    Console.Write("Please enter order id: ");
+                    orderID = int.Parse(Console.ReadLine());
+                    Console.WriteLine(testMain.Order.ShippingUpdate(orderID));
+
+                    break;
+
+                case "d":
+                    Console.Write("Please enter order id: ");
+                    orderID = int.Parse(Console.ReadLine());
+                    Console.WriteLine(testMain.Order.SupplyUpdateOrder(orderID));
+                    break;
+
+                case "e":
+                    Console.Write("Please enter order id: ");
+                    orderID = int.Parse(Console.ReadLine());
+                    Console.WriteLine(testMain.Order.TrackingOtder(orderID));
+                    break;
+
+                default:
+                    Console.WriteLine("Error Tayping");
+                    break;
+
+            }
+
+            //------------------------------------------------->>>>> End of start with Order <<<<<--------------------------------------------------
 
         }
 
-        //------------------------------------------------->>>>> End of start with Order <<<<<--------------------------------------------------
-
     }
-
 }
 
