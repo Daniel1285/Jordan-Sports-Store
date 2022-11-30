@@ -70,7 +70,7 @@ namespace BITTest
                         testMain.Cart.AddProdctToCatrt(c, idProduct); // ######################## ERROR ###############################
 
                     }
-                    catch (NotExistException ex) { Console.WriteLine(ex.Message); }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
 
                     break;
 
@@ -172,7 +172,7 @@ namespace BITTest
 
                     try
                     {
-                        testMain.Product.AddProduct(p);
+                        testMain.Product.AddProduct(p); 
                     }
                     catch (AlreadyExistException str) { Console.WriteLine(str); }
                     break;
