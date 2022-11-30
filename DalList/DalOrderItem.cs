@@ -13,6 +13,7 @@ internal class DalOrderItem : IOrderItem
     /// <returns></returns>
     public int Add(OrderItem o)
     {
+        o.ID = DataSource.Config.GetIdForOrderItem;
         DataSource.MyOrderItem.Add(o);
         return o.ProductID;
     }
