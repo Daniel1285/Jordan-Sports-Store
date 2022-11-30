@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using Dal;
 using DalApi;
+using System.Linq;
 
 namespace BlImplementation
 {
@@ -10,16 +11,14 @@ namespace BlImplementation
         public BO.Cart AddProdctToCatrt(BO.Cart cart, int id)
         {
             DO.Product product1 = new DO.Product();
-            DO.OrderItem orderItem1 = new DO.OrderItem(); 
+            List<DO.OrderItem> orderItem1 = Dal.OrderItem.GetAll().ToList();
             try
             {
                 product1 = Dal.Product.GetByID(id);
-                orderItem1 = Dal.OrderItem.GetByID(id);
             }
-            catch (Exception)
+            catch (BO.NotExistException ex)
             {
-
-                throw;
+                Console.WriteLine(ex);
             }
             foreach(var item in cart.Items)
             {
@@ -37,16 +36,24 @@ namespace BlImplementation
             }
             if(product1.InStock > 0)
             {
-                BO.OrderItem orderItemBo = new BO.OrderItem
+                foreach (var item in orderItem1)
                 {
-                    ID = orderItem1.OrderID,
-                    Name = product1.Name,
-                    ProductID = orderItem1.ProductID,
-                    Price = orderItem1.Price,
-                    Amount = 1,
-                    Totalprice = orderItem1.Price
-                };
-                cart.Items.Add(orderItemBo);      
+                    if(id == item.ProductID)
+                    {
+                        BO.OrderItem orderItemBo = new BO.OrderItem
+                        {
+                            ID = item.ID,
+                            Name = product1.Name,
+                            ProductID = item.ProductID,
+                            Price = item.Price,
+                            Amount = 1,
+                            Totalprice = item.Price
+                        };
+                        cart.Items.Add(orderItemBo);
+                        break;
+                    }
+                }
+                     
             }
             return cart;
         }
