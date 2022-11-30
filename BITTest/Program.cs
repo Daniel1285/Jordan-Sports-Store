@@ -146,7 +146,7 @@ namespace BITTest
                     break;
 
                 case "c":
-                    Console.Write("Please enter id :");
+                    Console.Write("Please enter ID :");
                     int idc = int.Parse(Console.ReadLine());
                     Console.WriteLine(testMain.Product.GetProduct(c,idc)); // ######################## ERROR ###############################
                     break;
@@ -154,20 +154,20 @@ namespace BITTest
                 case "d":
                     Product p = new Product();
 
-                    Console.WriteLine("Please enter a product ID number.");
+                    Console.Write("Please enter a product ID number: ");
                     p.ID = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Please enter Product Name:.");
+                    Console.Write("Please enter Product Name:");
                     p.Name = Console.ReadLine();
 
-                    Console.WriteLine("Please enter a product price.");
+                    Console.Write("Please enter a product price: ");
                     p.Price = int.Parse(Console.ReadLine());
 
                     Console.WriteLine("Please select a product category \n 0. Shose.\n 1. Shirts. \n 2. Shorts. \n 3. Hoodies. \n 4. Socks.");
                     int choise2 = int.Parse(Console.ReadLine());
                     p.Category = (Enums.Category)choise2;
 
-                    Console.WriteLine("Please enter the quantity of the product in stock.");
+                    Console.Write("Please enter the quantity of the product in stock: ");
                     p.InStock = int.Parse(Console.ReadLine());
 
                     try
@@ -177,6 +177,52 @@ namespace BITTest
                     catch (AlreadyExistException str) { Console.WriteLine(str); }
                     break;
 
+                case "e":
+                    Console.Write("Enter Prodcut ID to delete: ");
+                    int IdToDelete = int.Parse(Console.ReadLine());
+                    try
+                    {
+                        testMain.Product.DeleteProduct(IdToDelete);
+                        Console.WriteLine("sucsses");
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+                    break;
+
+                case "f":
+                    p = new Product();
+                    Console.Write("Enter the ID number of the product you want to update: ");
+                    int ID2 = int.Parse(Console.ReadLine());
+                    try
+                    {
+                        Console.WriteLine(testMain.Product.GetProduct(ID2));
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+
+
+                    Console.WriteLine("Please enter the detials product to update:");
+
+                    Console.Write("Please enter a product ID number: ");
+                    p.ID = int.Parse(Console.ReadLine());
+
+                    Console.Write("Please enter Product Name Product ID: ");
+                    p.Name = Console.ReadLine();
+
+                    Console.Write("Please enter a product price: ");
+                    p.Price = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Please select a product category \n 0. Shose.\n 1. Shirts. \n 2. Shorts. \n 3. Hoodies. \n 4. Socks.");
+                    int choise3 = int.Parse(Console.ReadLine());
+                    p.Category = (Enums.Category)choise3;
+
+                    Console.Write("Please enter the quantity of the product in stock: ");
+                    p.InStock = int.Parse(Console.ReadLine());
+                    try
+                    {
+                        testMain.Product.UpdateProduct(p);
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+
+                    break;
 
                 default:
                     Console.WriteLine("Error Tayping");

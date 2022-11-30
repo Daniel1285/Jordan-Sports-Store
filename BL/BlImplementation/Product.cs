@@ -98,7 +98,7 @@ namespace BlImplementation
                         Price = p.Price,
                         Category = (BO.Enums.Category)p.Category,
                         InStock = (p.InStock > 0 ? true : false),
-                        //Amount = c.Items.Find(x => x.ID == id).Amount,
+                        Amount = c.Items.Find(x => x.ID == id).Amount,
                     };
                 }
                 catch (BO.NotExistException ex) { Console.WriteLine(ex); }
@@ -137,10 +137,9 @@ namespace BlImplementation
             };
             try
             {
-                Dal.Product.GetByID(p.ID);
+                Dal.Product.Add(p1);
             }
             catch (DO.AlreadyExistException ex) { Console.WriteLine(ex);}
-            Dal.Product.Add(p1);
         }
         /// <summary>
         /// The function verifies that the product does not appear in any order and then deletes the product

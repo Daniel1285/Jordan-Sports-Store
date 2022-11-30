@@ -34,8 +34,7 @@ internal class DalProduct : IProduct
         {
             if (ID == DataSource.MyProducts[i].ID)
             {
-                DataSource.MyProducts[i] = DataSource.MyProducts[DataSource.MyProducts.Count];
-                DataSource.MyProducts.Remove(DataSource.MyProducts.Last());
+                DataSource.MyProducts.RemoveAt(i);  
                 flag = true;
                 break;
             }
