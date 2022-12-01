@@ -9,9 +9,9 @@ public class Cart
     public double TotalPrice { get; set; }
     public override string ToString()
     {
-        Console.WriteLine($"Name of customer: {CustomerName}" +
-        $"Email of customer: {CustomerEmail}" +
-        $"Address of custumer: {CustomerAddress}");
+        Console.WriteLine($"Name of customer: {CustomerName}\n" +
+        $"Email of customer: {CustomerEmail}\n" +
+        $"Address of custumer: {CustomerAddress} \n ");
         
 
         foreach (var item in Items)

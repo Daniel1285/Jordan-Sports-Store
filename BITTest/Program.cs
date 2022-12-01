@@ -57,13 +57,6 @@ namespace BITTest
             {
                 case "a":
 
-                    Console.Write("Please enter a your name: ");
-                    c.CustomerName = Console.ReadLine();
-                    Console.Write("Please enter tour Email: ");
-                    c.CustomerEmail = Console.ReadLine();
-                    Console.Write("Please enter a your addres home: ");
-                    c.CustomerAddress = Console.ReadLine();
-
                     Console.Write("Enter the id of product you want to add to the cart: ");
                     int idProduct = int.Parse(Console.ReadLine());
                     try
@@ -148,7 +141,7 @@ namespace BITTest
                         Console.WriteLine(testMain.Product.GetProduct(id));
 
                     }
-                    catch (NotExistException ex) { Console.WriteLine(ex.Message); }
+                    catch (DO.NotExistException ex) { Console.WriteLine(ex); }
 
                     break;
 

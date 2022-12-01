@@ -5,7 +5,7 @@ namespace BO;
 [Serializable]
 public class NotExistException : Exception
 {
-    public NotExistException(string ex) : base() { }
+    public NotExistException(string ex) : base(ex) { }
 
 }
 

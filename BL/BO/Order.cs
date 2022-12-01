@@ -17,20 +17,20 @@ public class Order
     public override string ToString()
     {
 
-        Console.WriteLine($"Order ID = {ID}" +
-             $"Name of customer:{CustomerName}" +
-             $"Email of customer:{CustomerEmail}" +
-             $"Address of custumer:{CustomerAddress}" +
-             $"Order date :{OrderDate}" +
-             $"Status: {Status}" +
-             $"Ship date: {ShipDate}" +
-             $"Delivery date:{DeliveryDate}");
+        Console.WriteLine($"              Order ID = {ID} \n" +
+             $"              Name of customer:{CustomerName}\n" +
+             $"              Email of customer:{CustomerEmail}\n" +
+             $"              Address of custumer:{CustomerAddress} \n" +
+             $"              Order date :{OrderDate}  \n" +
+             $"              Status: {Status}\n" +
+             $"              Ship date: {ShipDate}  \n" +
+             $"              Delivery date:{DeliveryDate}  \n");
 
         foreach (var item in Items)
         {
             Console.WriteLine($"{item}" + item);
         }
-
+        Console.Write("     Total price: ");
         return TotalPrice.ToString();
     }
 
