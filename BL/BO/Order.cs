@@ -28,7 +28,7 @@ public class Order
 
         foreach (var item in Items)
         {
-            Console.WriteLine($"{item}" + item);
+            Console.WriteLine(item);
         }
         Console.Write("     Total price: ");
         return TotalPrice.ToString();
