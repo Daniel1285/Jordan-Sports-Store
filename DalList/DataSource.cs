@@ -96,8 +96,7 @@ internal static class DataSource
                 NewOrderItem.ID = Config.GetIdForOrderItem;
                 NewOrderItem.OrderID = MyOrder[i].ID;
                 Product product = MyProducts[R.Next(0,MyProducts.Count)];
-                NewOrderItem.ProductID = product.ID;
-                
+                NewOrderItem.ProductID = product.ID;   
                 NewOrderItem.Amount = R.Next(1,4);
                 NewOrderItem.Price = product.Price * NewOrderItem.Amount;
                 MyOrderItem.Add(NewOrderItem);
