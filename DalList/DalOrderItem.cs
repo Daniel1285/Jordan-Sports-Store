@@ -128,13 +128,14 @@ internal class DalOrderItem : IOrderItem
     public List<OrderItem> GetOrdersItem(int orderID)
     {
         List<OrderItem> ArrOrders = new List<OrderItem>();
-        for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
+        foreach (var item in DataSource.MyOrderItem)
         {
-            if (orderID == DataSource.MyOrderItem[i].OrderID)
+            if (item.OrderID == orderID)
             {
-                ArrOrders[i] = DataSource.MyOrderItem[i];
+                ArrOrders.Add(item);
             }
         }
+        
         return ArrOrders;   
 
     }

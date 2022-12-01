@@ -60,12 +60,12 @@ internal static class DataSource
                                          "socks - Nike Everyday Plus Cushioned", "shirt - Nike Pro Dri-FIT", "shirt - Nike Dri-FIT Legend"};
         Double[] priceOfProduct = { 550, 400, 250, 332.5, 210, 129.99, 49, 63, 122.5, 140 };
         Enums.Category[] categories = { Category.SHOES, Category.SHOES, Category.SHORTS, Category.SHOES, Category.HOODIES, Category.HOODIES, Category.SOCKS, Category.SOCKS, Category.SHIRTS, Category.SHIRTS };
-        int[] AmountInSoke = { 0, 7, 5, 4, 2, 9, 5, 6, 3, 10 };
+        int[] AmountInSoke = { 0, 7, 25, 15, 20, 19, 10, 16, 3, 10 };
         for (int i = 0; i < SIZE; i++)
         {
             Product p = new Product
             {
-                ID = R.Next(100000),
+                ID = R.Next(100000,900000),
                 Name = namePprodcut[i],
                 Price = priceOfProduct[i],
                 Category = categories[i],
@@ -87,21 +87,21 @@ internal static class DataSource
     /// <param name="O_i"></param>
     private static void Add_OrderItem()
     {
-        
-        for (int i = 0; i < 40; i++)
+        OrderItem NewOrderItem = new OrderItem();
+        for (int i = 0; i < MyOrder.Count; i++)
         {
-            OrderItem NewOrderItem = new OrderItem
+            for(int j =0; j < R.Next(1,5); j++)
             {
-                ID = Config.GetIdForOrderItem,
-                OrderID = Config.GetIdForOrder,
-                ProductID = R.Next(100000),
-                Price = R.Next(200, 300),
-                //Amount = Math.Min(R.Next(1, 5), MyProducts[i].InStock)
-                //Amount = Math.Min( R.Next(1, 5), MyProducts[].InStock)
+                NewOrderItem.ID = Config.GetIdForOrderItem;
+                NewOrderItem.OrderID = MyOrder[i].ID;
+                Product product = MyProducts[R.Next(0, MyProducts.Count)];
+                NewOrderItem.ProductID = product.ID;
+                NewOrderItem.Price = R.Next(200, 300);
+                NewOrderItem.Amount = R.Next(1,4);
+                MyOrderItem.Add(NewOrderItem);
             };
 
-            //MyProducts[Config.SizeOfOrderItem].InStock -= NewOrderItem.Amount;
-            MyOrderItem.Add(NewOrderItem);
+
            
         }
         

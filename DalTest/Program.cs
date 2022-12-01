@@ -170,7 +170,7 @@ namespace DalTest
         /// </summary>
         public static void choiceOrderItem()
         {
-            Console.WriteLine("Please enter your choice: \n a. add Order Item. \n b. Order Item display option by ID. \n c. Product list view option. \n d. Update Order item data. \n e. Delete order item. \n f. return order item in the order. ");
+            Console.WriteLine("Please enter your choice: \n a. add Order Item. \n b. Order Item display option by ID. \n c. Product list view option. \n d. Update Order item data. \n e. Delete order item. \n f. show orderItem ");
             string choise = Console.ReadLine();
             OrderItem item = new OrderItem();
             switch (choise)
@@ -277,6 +277,7 @@ namespace DalTest
                     try
                     {
                         testMain.OrderItem.Delete(IDd);
+                        Console.WriteLine("succees");
                     }
                     catch (NotExistException str) { Console.WriteLine(str); }   
         
@@ -285,14 +286,16 @@ namespace DalTest
                 case "f":
                     Console.WriteLine("Enter ID of order:");
                     ID = int.Parse(Console.ReadLine());
+                    List<OrderItem> ArrOrders = testMain.OrderItem.GetOrdersItem(ID);
+
                     try
                     {
-                        testMain.OrderItem.GetByID(ID);
+                        foreach (var i in ArrOrders)
+                        {
+                            Console.WriteLine(testMain.OrderItem.GetByID(i.OrderID));
+                        }
                     }
                     catch (NotExistException str) { Console.WriteLine(str); }
-    
-                    
-                    Console.WriteLine(testMain.OrderItem.GetByID(ID));
                     break;
 
                 default:
