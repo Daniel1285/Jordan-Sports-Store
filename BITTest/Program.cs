@@ -65,7 +65,7 @@ namespace BITTest
                     int idProduct = int.Parse(Console.ReadLine());
                     try
                     {
-                        testMain.Cart.AddProdctToCatrt(c, idProduct); // ######################## ERROR ###############################
+                        testMain.Cart.AddProdctToCatrt(c, idProduct); 
 
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
@@ -75,22 +75,15 @@ namespace BITTest
                 case "b":
 
                     int idProduct1, newAmount;
-                    BO.OrderItem o = new BO.OrderItem();
-                    // o = c.Items.Find(x => BO.OrderItem.ProductID == idProduct);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ----------------------------------------------
-                    Console.WriteLine("For update please enter the following details:");
                     Console.Write("ID product: ");
-                    idProduct1 = int.Parse(Console.ReadLine());
-                    try
-                    {
-                        Console.WriteLine(o); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----------------------------------------------
-                    }
-                    catch (NotExistException str) { Console.WriteLine(str); }
-
+                    int.TryParse(Console.ReadLine(), out idProduct1);
+                    OrderItem o = new OrderItem();
+                    o = c.Items.Find(x => x.ProductID == idProduct1);
+                    Console.WriteLine(o);
+                    Console.WriteLine("For update please enter the following details:");
                     Console.Write("Amount of product to update: ");
                     newAmount = int.Parse(Console.ReadLine());
                     testMain.Cart.UpdateAmountOfProduct(c, idProduct1, newAmount);
-
-
                     break;
 
                 case "c":
