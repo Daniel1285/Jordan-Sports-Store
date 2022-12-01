@@ -138,10 +138,12 @@ internal static class DataSource
 
             if (i < 16)
                 newOrder.ShipDate = newOrder.OrderDate + new TimeSpan(R.Next(2, 4), 0, 0, 0);
-
+            if (i > 16)
+                newOrder.ShipDate = DateTime.MinValue;
             if (i <  10)
                 newOrder.DeliveryrDate = newOrder.ShipDate + new TimeSpan(R.Next(1, 3), 0, 0, 0);
-
+            if (i > 10)
+                newOrder.DeliveryrDate = DateTime.MinValue;
             MyOrder.Add(newOrder); 
         }
 

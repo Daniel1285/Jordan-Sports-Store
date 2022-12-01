@@ -5,7 +5,7 @@ public class OrderTracking
 {
     public int ID { get; set; }
     public Enums.OrderStatus Status { get; set; }
-    public List<Tuple<DateTime,Enums.OrderStatus>>? Pair { get; set; }   
+    public List<Tuple<DateTime, Enums.OrderStatus>>? Pair { get; set; } = new List<Tuple<DateTime, Enums.OrderStatus>>();  
     
     public override string ToString() => $@"
                 ID:{ID}
