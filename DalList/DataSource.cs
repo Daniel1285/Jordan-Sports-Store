@@ -87,7 +87,7 @@ internal static class DataSource
     /// <param name="O_i"></param>
     private static void Add_OrderItem()
     {
-        int z = 0;
+        
         OrderItem NewOrderItem = new OrderItem();
         for (int i = 0; i < MyOrder.Count; i++)
         {
@@ -97,17 +97,12 @@ internal static class DataSource
                 NewOrderItem.OrderID = MyOrder[i].ID;
                 Product product = MyProducts[R.Next(0,MyProducts.Count)];
                 NewOrderItem.ProductID = product.ID;
-                NewOrderItem.Price = product.Price;
+                
                 NewOrderItem.Amount = R.Next(1,4);
+                NewOrderItem.Price = product.Price * NewOrderItem.Amount;
                 MyOrderItem.Add(NewOrderItem);
-                z++;
-                if (z == MyProducts.Count) { z = 0; }
-
             };
-            
-
-
-           
+  
         }
         
     }
