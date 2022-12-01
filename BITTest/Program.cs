@@ -9,8 +9,12 @@ namespace BITTest
     internal class Program
     {
         private static IBl testMain = new BlImplementation.Bl();
+        static Cart c = new Cart();
+
         static void Main(string[] args)
         {
+        c.Items = new List<OrderItem>();
+
             int? choice;
             do
             {
@@ -52,7 +56,7 @@ namespace BITTest
 
 
             string? choise = Console.ReadLine();
-            Cart c = new Cart();
+            
             switch (choise)
             {
                 case "a":
@@ -121,7 +125,7 @@ namespace BITTest
                               " f. Update product.");
 
             string? choise = Console.ReadLine();
-            Cart c = new Cart();
+            
 
             switch (choise)
             {
@@ -243,7 +247,7 @@ namespace BITTest
 
 
             string? choise = Console.ReadLine();
-            Cart c = new Cart();
+            
             int orderID;
             switch (choise)
             {

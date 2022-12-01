@@ -53,6 +53,7 @@ namespace BlImplementation
                             Amount = 1,
                             Totalprice = item.Price
                         };
+
                         cart.Items.Add(orderItemBo);
                         Console.WriteLine("sucsess");
                         break;
