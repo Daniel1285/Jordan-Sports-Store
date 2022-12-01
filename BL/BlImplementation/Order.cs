@@ -202,8 +202,9 @@ namespace BlImplementation
                         ProductID = i.ProductID,
                         Price = i.Price,
                         Name = Dal.Product.GetByID(i.ProductID).Name,
+                        Totalprice = i.Amount * i.Price
                     };
-                    sum += i.Price;
+                    sum += orderItem.Totalprice;
                     orderItems.Add(orderItem);
                 }
 
