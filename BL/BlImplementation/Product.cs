@@ -99,13 +99,9 @@ namespace BlImplementation
                         Price = p.Price,
                         Category = (BO.Enums.Category)p.Category,
                         InStock = (p.InStock > 0 ? true : false),
-                        
-                    };
-                    //if (c.Items != null)
-                    //{
-                    //    BO.OrderItem item = c.Items.Find(x => x.ProductID == id);
-
-                   // }
+                        Amount = c.Items.Find(x => x.ProductID == id).Amount,
+                };
+                    
 
                     
                 }
