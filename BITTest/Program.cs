@@ -232,7 +232,7 @@ namespace BITTest
 
         public static void choiceOrder()
         {
-            Console.WriteLine(" a.Get order list.\n" +
+            Console.WriteLine(" a. Get order list.\n" +
                               " b. Get order.\n" +
                               " c. Shipping update.\n" +
                               " d. Supply Update Order.\n" +
