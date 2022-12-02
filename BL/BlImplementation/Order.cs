@@ -101,9 +101,9 @@ namespace BlImplementation
 
             if (order.ShipDate == DateTime.MinValue)
             {
-                order.ShipDate = DateTime.Now; 
-                order1.ShipDate = DateTime.Now;    
-                
+                order.ShipDate = DateTime.Now;
+                order1.ShipDate = DateTime.Now;
+                order1.Status = BO.Enums.OrderStatus.Order_Sent;
             }
 
             return order1;
@@ -132,6 +132,7 @@ namespace BlImplementation
             {
                 order.DeliveryrDate = DateTime.Now;
                 order1.DeliveryDate = DateTime.Now;
+                order1.Status = BO.Enums.OrderStatus.Order_Provided;
             }
 
             return order1;

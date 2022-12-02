@@ -98,7 +98,7 @@ internal static class DataSource
                 Product product = MyProducts[R.Next(0,MyProducts.Count)];
                 NewOrderItem.ProductID = product.ID;   
                 NewOrderItem.Amount = R.Next(1,4);
-                NewOrderItem.Price = product.Price * NewOrderItem.Amount;
+                NewOrderItem.Price = product.Price;
                 MyOrderItem.Add(NewOrderItem);
             };
   
