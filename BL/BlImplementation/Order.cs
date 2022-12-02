@@ -103,7 +103,8 @@ namespace BlImplementation
             {
                 order.ShipDate = DateTime.Now;
                 order1.ShipDate = DateTime.Now;
-                order1.Status = BO.Enums.OrderStatus.Order_Sent;
+                order1.Status = getStatus(order);
+                Dal.Order.Update(order);
             }
 
             return order1;
@@ -132,7 +133,8 @@ namespace BlImplementation
             {
                 order.DeliveryrDate = DateTime.Now;
                 order1.DeliveryDate = DateTime.Now;
-                order1.Status = BO.Enums.OrderStatus.Order_Provided;
+                Dal.Order.Update(order);
+                order1.Status = getStatus(order);
             }
 
             return order1;
