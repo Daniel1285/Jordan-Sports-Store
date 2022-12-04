@@ -20,21 +20,5 @@ public class Cart
         }
 
         return TotalPrice.ToString();
-    }
-                                           
-
-    
+    }   
 }
-
-
-/*
-
-    public override string ToString() => $@"
-             Name of customer:{CustomerName}
-             Email of customer:{CustomerEmail}
-             Address of custumer:{CustomerAddress}
-             Items :{Items}
-             Total price:{TotalPrice}
-                                            ";
- 
- */
