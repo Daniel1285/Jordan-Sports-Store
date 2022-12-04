@@ -101,13 +101,13 @@ namespace BlImplementation
                     {
                         cart.TotalPrice -= item.Totalprice;
                         cart.Items.Remove(item);   
-
                     }
                 }
 
             }
             return cart;
         }
+
         public void ConfirmOrder(BO.Cart cart)
         {
             DO.Order order1 = new DO.Order()
@@ -119,6 +119,7 @@ namespace BlImplementation
                 ShipDate = DateTime.MinValue,
                 DeliveryrDate =DateTime.MinValue,
             };
+
             int orderId = Dal.Order.Add(order1);
             foreach(var item in cart.Items)
             {
@@ -132,16 +133,19 @@ namespace BlImplementation
                 };
                 Dal.OrderItem.Add(orderItem1);
             }
+
             DO.Product product1 = new DO.Product();
             foreach (var item in cart.Items)
             {
                 product1 = Dal.Product.GetByID(item.ProductID);
                 product1.InStock -= item.Amount;
-                Dal.Product.Update(product1);
+                try
+                {
+                    Dal.Product.Update(product1);
+
+                }
+                catch (BO.NotExistException ex) { Console.WriteLine(ex); }
             }
-
-
         }
-
     }
 }
