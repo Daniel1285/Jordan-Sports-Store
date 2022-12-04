@@ -138,7 +138,9 @@ namespace BITTest
                         Console.WriteLine(testMain.Product.GetProduct(id));
 
                     }
-                    catch (DO.NotExistException ex) { Console.WriteLine(ex); }
+                    catch (NotExistException ex) { Console.WriteLine(ex);}
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
+                    
 
                     break;
 

@@ -19,12 +19,7 @@ namespace BlImplementation
         {
             List<DO.Product> products = new List<DO.Product>();
             List<BO.ProductForList> productsForList = new List<BO.ProductForList>();
-            try
-            {
-                products = Dal.Product.GetAll().ToList();
-            }
-            catch (Exception) { }
-      
+            products = Dal.Product.GetAll().ToList();
             foreach (var item in products)
             {
                 productsForList.Add(new BO.ProductForList()
@@ -36,7 +31,6 @@ namespace BlImplementation
 
                 });
             }
-
             return productsForList;
 
 
@@ -67,7 +61,7 @@ namespace BlImplementation
                     };
                    
                 }
-                catch (BO.NotExistException ex) { Console.WriteLine(ex); }
+                catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex);}
                 return p1;
             }
 
