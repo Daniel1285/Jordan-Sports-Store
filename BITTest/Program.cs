@@ -28,14 +28,14 @@ namespace BITTest
                         break;
 
                     case (int)Enums.StartChoose.CART:
-                        choiceCart();
+                        choiceCart(); // All possible actions for cart
                         break;
 
                     case (int)Enums.StartChoose.PRODUCT:
-                        choiceProduct();
+                        choiceProduct(); // All possible actions product
                         break;
                     case (int)Enums.StartChoose.ORDER:
-                        choiceOrder();
+                        choiceOrder(); // All possible actions for order
                         break;
 
                     default:
@@ -45,14 +45,19 @@ namespace BITTest
             } while (choice != 0);
             Console.WriteLine();
         }
+
         //----------------------------------------------------------->>> MAIN'S FUNCTIONS <<<------------------------------------------------------------
 
+
+        /// <summary>
+        /// Feasibility for "Cart" entity.
+        /// </summary>
         public static void choiceCart()
         {
             Console.WriteLine("Please enter your choice:\n" +
                               " a. add product to the cart.\n" +
                               " b. Updat the quantity of a product in the shopping cart.\n" +
-                              " c. Confrim Order.");
+                              " c. Confrim Order.\n");
 
 
             string? choise = Console.ReadLine();
@@ -61,7 +66,7 @@ namespace BITTest
             {
                 case "a":
 
-                    Console.Write("Enter the id of product you want to add to the cart: ");
+                    Console.Write("Enter the ID of product you want to add to the cart: ");
                     int.TryParse(Console.ReadLine(), out idProduct);
                     try
                     {
@@ -106,6 +111,9 @@ namespace BITTest
 
         //------------------------------------------------->>>>> End of start with Cart <<<<<--------------------------------------------------
 
+        /// <summary>
+        /// Feasibility for "product" entity.
+        /// </summary>
         public static void choiceProduct()
         {
             Console.WriteLine("Please enter your choice:\n" +
@@ -114,7 +122,7 @@ namespace BITTest
                               " c. Get product for the claint.\n" +
                               " d. Add product (for the admin).\n" +
                               " e. Delete product.\n" +
-                              " f. Update product.");
+                              " f. Update product.\n");
 
             string? choise = Console.ReadLine();
             int id;
@@ -144,7 +152,7 @@ namespace BITTest
                 case "c":
                     Console.Write("Please enter ID :");
                     int.TryParse(Console.ReadLine(), out id);
-                    Console.WriteLine(testMain.Product.GetProduct(c, id)); // ######################## ERROR becaouse Amount ###############################
+                    Console.WriteLine(testMain.Product.GetProduct(c, id));
                     break;
 
                 case "d":
@@ -229,6 +237,10 @@ namespace BITTest
 
         //------------------------------------------------->>>>> End of start with Product <<<<<--------------------------------------------------
 
+
+        /// <summary>
+        /// Feasibility for "Order" entity.
+        /// </summary>
         public static void choiceOrder()
         {
             Console.WriteLine(" a. Get order list.\n" +
@@ -250,7 +262,8 @@ namespace BITTest
 
                 case "b":
                     Console.Write("Please enter order id: ");
-                    orderID = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out orderID);
+
                     try
                     {
                         Console.WriteLine(testMain.Order.GetOrder(orderID));
@@ -261,20 +274,20 @@ namespace BITTest
 
                 case "c":
                     Console.Write("Please enter order id: ");
-                    orderID = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out orderID);
                     Console.WriteLine(testMain.Order.ShippingUpdate(orderID));
 
                     break;
 
                 case "d":
                     Console.Write("Please enter order id: ");
-                    orderID = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out orderID);
                     Console.WriteLine(testMain.Order.SupplyUpdateOrder(orderID));
                     break;
 
                 case "e":
                     Console.Write("Please enter order id: ");
-                    orderID = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out orderID);
                     Console.WriteLine(testMain.Order.TrackingOtder(orderID));
                     break;
 
