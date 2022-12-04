@@ -1,6 +1,8 @@
 ﻿using BlApi;
 using Dal;
 using DalApi;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace BlImplementation
@@ -108,8 +110,11 @@ namespace BlImplementation
             return cart;
         }
 
-        public void ConfirmOrder(BO.Cart cart)
+        public void ConfirmOrder(BO.Cart cart,string name, string email, string addres)
         {
+            if (name == null) throw new BO.NameIsEmptyException("Name is empty!");
+            if (addres == null) throw new BO.AddresIsempty(" Addres is empty!");
+            if (!new EmailAddressAttribute().IsValid(email)) throw new BO.EmailInValidException("Email invalid worng");
             DO.Order order1 = new DO.Order()
             {
                 CustomerName = cart.CustomerName,
@@ -144,7 +149,7 @@ namespace BlImplementation
                     Dal.Product.Update(product1);
 
                 }
-                catch (BO.NotExistException ex) { Console.WriteLine(ex); }
+                catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
             }
         }
     }

@@ -74,6 +74,7 @@ namespace BITTest
 
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
 
                     break;
 
@@ -83,12 +84,23 @@ namespace BITTest
                     Console.Write("ID product: ");
                     int.TryParse(Console.ReadLine(), out idProduct);
                     OrderItem o = new OrderItem();
+      
                     o = c.Items.Find(x => x.ProductID == idProduct);
+
+
                     Console.WriteLine(o);
                     Console.WriteLine("For update please enter the following details:");
                     Console.Write("Amount of product to update: ");
                     newAmount = int.Parse(Console.ReadLine());
-                    testMain.Cart.UpdateAmountOfProduct(c, idProduct, newAmount);
+                    try
+                    {
+
+                        testMain.Cart.UpdateAmountOfProduct(c, idProduct, newAmount);
+                    }
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
+                    catch (AmountLessThenZero ex) { Console.WriteLine(ex); }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+
                     break;
 
                 case "c":
@@ -98,8 +110,14 @@ namespace BITTest
                     c.CustomerEmail = Console.ReadLine();
                     Console.Write("Please enter a your addres home: ");
                     c.CustomerAddress = Console.ReadLine();
-                    testMain.Cart.ConfirmOrder(c);
-
+                    try
+                    {
+                        testMain.Cart.ConfirmOrder(c, c.CustomerName, c.CustomerEmail, c.CustomerAddress);
+                    }
+                    catch(NameIsEmptyException ex) { Console.WriteLine(ex); }
+                    catch (AddresIsempty ex) { Console.WriteLine(ex); }
+                    catch(EmailInValidException ex) { Console.WriteLine(ex); }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
                     break;
 
                 default:

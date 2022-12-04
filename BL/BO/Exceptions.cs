@@ -91,3 +91,27 @@ public class AmountLessThenZero : Exception
       System.Runtime.Serialization.SerializationInfo info,
       System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 }
+
+[Serializable]
+public class AddresIsempty : Exception
+{
+    public AddresIsempty() { }
+    public AddresIsempty(string message) : base(message) { }
+    public AddresIsempty(string message, Exception inner) : base(message, inner) { }
+    protected AddresIsempty(
+      System.Runtime.Serialization.SerializationInfo info,
+      System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+
+}
+
+
+[Serializable]
+public class EmailInValidException : Exception
+{
+    public EmailInValidException() { }
+    public EmailInValidException(string message) : base(message) { }
+    public EmailInValidException(string message, Exception inner) : base(message, inner) { }
+    protected EmailInValidException(
+      System.Runtime.Serialization.SerializationInfo info,
+      System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+}
