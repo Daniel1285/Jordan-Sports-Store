@@ -94,12 +94,11 @@ namespace BlImplementation
                         Category = (BO.Enums.Category)p.Category,
                         InStock = (p.InStock > 0 ? true : false),
                         Amount = c.Items.Find(x => x.ProductID == id).Amount,
-                };
-                    
-
-                    
+                
+                    };
+                       
                 }
-                catch (BO.NotExistException ex) { Console.WriteLine(ex); }
+                catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
                 return pi;
             }
             else
@@ -137,7 +136,7 @@ namespace BlImplementation
             {
                 Dal.Product.Add(p1);
             }
-            catch (DO.AlreadyExistException ex) { Console.WriteLine(ex);}
+            catch (DO.AlreadyExistException ex) { throw new BO.AlreadyExistException("", ex);}
         }
         /// <summary>
         /// The function verifies that the product does not appear in any order and then deletes the product
@@ -153,7 +152,7 @@ namespace BlImplementation
             {
                 Dal.Product.GetByID(id);
             }
-            catch (DO.NotExistException ex) { Console.WriteLine(ex);}
+            catch (DO.NotExistException ex) { throw new BO.NotExistException("",ex);}
 
             foreach (var p in Dal.OrderItem.GetAll())
             {
@@ -195,7 +194,7 @@ namespace BlImplementation
             {
                 Dal.Product.Update(p1);
             }
-            catch (DO.NotExistException ex) { Console.WriteLine(ex); }
+            catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
         }
 
     }

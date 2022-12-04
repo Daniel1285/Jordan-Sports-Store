@@ -17,12 +17,8 @@ namespace BlImplementation
         {
             List<DO.Order> orders = new List<DO.Order>();
             List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
-            try
-            {
-                orders = Dal.Order.GetAll().ToList();
-            }
-            catch (Exception) { }
-     
+            orders = Dal.Order.GetAll().ToList();
+            
             foreach (var item in orders)
             {
                 BO.OrderForList order = new BO.OrderForList()
@@ -60,7 +56,7 @@ namespace BlImplementation
                  OrderFromDo = Dal.Order.GetByID(orderId);
 
             }
-            catch (BO.NotExistException ex) { Console.WriteLine(ex); }
+            catch (DO.NotExistException ex) { throw new BO.NotExistException("",ex); }
        
             OrderItemFromDo = Dal.OrderItem.GetAll().ToList();
 
@@ -97,8 +93,8 @@ namespace BlImplementation
                 order = Dal.Order.GetByID(orderId);
                 order1 = GetOrder(orderId);
             }
-            catch (BO.NotExistException ex) { Console.WriteLine(ex); }
-
+            catch (DO.NotExistException ex) { throw new BO.NotExistException("",ex);}
+            
             if (order.ShipDate == DateTime.MinValue)
             {
                 order.ShipDate = DateTime.Now;
@@ -127,7 +123,7 @@ namespace BlImplementation
                 order = Dal.Order.GetByID(orderId);
                 order1 = GetOrder(orderId);
             }
-            catch (BO.NotExistException ex) { Console.WriteLine(ex); }
+            catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
 
             if (order.DeliveryrDate == DateTime.MinValue)
             {
@@ -155,7 +151,7 @@ namespace BlImplementation
             {
                 order = Dal.Order.GetByID(orderId);
             }
-            catch (BO.NotExistException ex) { Console.WriteLine(ex); }
+            catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
 
             order1.ID= orderId; 
             order1.Status = GetOrder(orderId).Status;

@@ -154,7 +154,12 @@ namespace BITTest
                 case "c":
                     Console.Write("Please enter ID :");
                     int.TryParse(Console.ReadLine(), out id);
-                    Console.WriteLine(testMain.Product.GetProduct(c, id));
+                    try
+                    {
+                        Console.WriteLine(testMain.Product.GetProduct(c, id));
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
                     break;
 
                 case "d":
@@ -180,7 +185,11 @@ namespace BITTest
                     {
                         testMain.Product.AddProduct(p);
                     }
-                    catch (AlreadyExistException str) { Console.WriteLine(str); }
+                    catch (AlreadyExistException str) { Console.WriteLine(str);}
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
+                    catch (NameIsEmptyException ex) { Console.WriteLine(ex); }
+                    catch (PriceSmallThanZeroException ex) { Console.WriteLine(ex); }
+                    catch (InStokeSmallThanZeroException ex) { Console.WriteLine(ex); }
                     break;
 
                 case "e":
@@ -192,6 +201,7 @@ namespace BITTest
                         Console.WriteLine("sucsses");
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (CanNotDeleteProductException ex) { Console.WriteLine(ex); ; }
                     break;
 
                 case "f":
@@ -203,7 +213,7 @@ namespace BITTest
                         Console.WriteLine(testMain.Product.GetProduct(id));
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
-
+                    
 
                     Console.WriteLine("Please enter the detials product to update:");
 
@@ -227,12 +237,17 @@ namespace BITTest
                         testMain.Product.UpdateProduct(p);
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
+                    catch (NameIsEmptyException ex) { Console.WriteLine(ex); }
+                    catch (PriceSmallThanZeroException ex) { Console.WriteLine(ex); }
+                    catch (InStokeSmallThanZeroException ex) { Console.WriteLine(ex); }
 
                     break;
 
                 default:
                     Console.WriteLine("Error Tayping");
                     break;
+                
 
             }
         }
@@ -277,20 +292,35 @@ namespace BITTest
                 case "c":
                     Console.Write("Please enter order id: ");
                     int.TryParse(Console.ReadLine(), out orderID);
-                    Console.WriteLine(testMain.Order.ShippingUpdate(orderID));
+                    try
+                    {
+                        Console.WriteLine(testMain.Order.ShippingUpdate(orderID));
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
 
                     break;
 
                 case "d":
                     Console.Write("Please enter order id: ");
                     int.TryParse(Console.ReadLine(), out orderID);
-                    Console.WriteLine(testMain.Order.SupplyUpdateOrder(orderID));
+                    try
+                    {
+                        Console.WriteLine(testMain.Order.SupplyUpdateOrder(orderID));
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
                     break;
 
                 case "e":
                     Console.Write("Please enter order id: ");
                     int.TryParse(Console.ReadLine(), out orderID);
-                    Console.WriteLine(testMain.Order.TrackingOtder(orderID));
+                    try
+                    {
+                        Console.WriteLine(testMain.Order.TrackingOtder(orderID));
+                    }
+                    catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
                     break;
 
                 default:
