@@ -10,15 +10,16 @@ namespace BlImplementation
         private IDal Dal = new DalList();
         public BO.Cart AddProdctToCatrt(BO.Cart cart, int id)
         {
+            if (id < 0) throw new BO.IdSmallThanZeroException("ID small zero!");
             DO.Product product1 = new DO.Product();
             List<DO.OrderItem> orderItem1 = Dal.OrderItem.GetAll().ToList();
             try
             {
                 product1 = Dal.Product.GetByID(id);
             }
-            catch (BO.NotExistException ex)
+            catch (DO.NotExistException ex)
             {
-                Console.WriteLine(ex);
+                throw new BO.NotExistException("", ex);
             }
             if (cart.Items != null)
             {
@@ -66,15 +67,16 @@ namespace BlImplementation
 
         public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int id, int newAmount)
         {
+            if(id < 0) throw new BO.IdSmallThanZeroException("ID small than zero!");
+            if (newAmount < 0) throw new BO.AmountLessThenZero("Amount small than zero!");
             DO.Product product1 = new DO.Product();
             try
             {
                 product1 = Dal.Product.GetByID(id);
             }
-            catch (Exception)
+            catch (DO.NotExistException ex)
             {
-
-                throw;
+                throw new BO.NotExistException("", ex);
             }
             foreach (var item in cart.Items)
             {

@@ -80,3 +80,14 @@ public class CanNotDeleteProductException : Exception
       System.Runtime.Serialization.SerializationInfo info,
       System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 }
+
+[Serializable]
+public class AmountLessThenZero : Exception
+{
+    public AmountLessThenZero() { }
+    public AmountLessThenZero(string message) : base(message) { }
+    public AmountLessThenZero(string message, Exception inner) : base(message, inner) { }
+    protected AmountLessThenZero(
+      System.Runtime.Serialization.SerializationInfo info,
+      System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+}
