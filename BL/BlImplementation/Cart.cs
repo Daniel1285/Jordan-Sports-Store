@@ -16,10 +16,7 @@ namespace BlImplementation
             {
                 product1 = Dal.Product.GetByID(id);
             }
-            catch (BO.NotExistException ex)
-            {
-                Console.WriteLine(ex);
-            }
+            catch (BO.NotExistException ex) { Console.WriteLine(ex); }
             if (cart.Items != null)
             {
                 foreach (var item in cart.Items)
@@ -71,11 +68,8 @@ namespace BlImplementation
             {
                 product1 = Dal.Product.GetByID(id);
             }
-            catch (Exception)
-            {
+            catch (BO.NotExistException ex) { Console.WriteLine(ex); }
 
-                throw;
-            }
             foreach (var item in cart.Items)
             {
                 if (id == item.ProductID)
@@ -99,13 +93,13 @@ namespace BlImplementation
                     {
                         cart.TotalPrice -= item.Totalprice;
                         cart.Items.Remove(item);   
-
                     }
                 }
 
             }
             return cart;
         }
+
         public void ConfirmOrder(BO.Cart cart)
         {
             DO.Order order1 = new DO.Order()
@@ -117,6 +111,7 @@ namespace BlImplementation
                 ShipDate = DateTime.MinValue,
                 DeliveryrDate =DateTime.MinValue,
             };
+
             int orderId = Dal.Order.Add(order1);
             foreach(var item in cart.Items)
             {
@@ -130,16 +125,19 @@ namespace BlImplementation
                 };
                 Dal.OrderItem.Add(orderItem1);
             }
+
             DO.Product product1 = new DO.Product();
             foreach (var item in cart.Items)
             {
                 product1 = Dal.Product.GetByID(item.ProductID);
                 product1.InStock -= item.Amount;
-                Dal.Product.Update(product1);
+                try
+                {
+                    Dal.Product.Update(product1);
+
+                }
+                catch (BO.NotExistException ex) { Console.WriteLine(ex); }
             }
-
-
         }
-
     }
 }
