@@ -62,7 +62,7 @@ namespace BITTest
                 case "a":
 
                     Console.Write("Enter the id of product you want to add to the cart: ");
-                     idProduct = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out idProduct);
                     try
                     {
                         testMain.Cart.AddProdctToCatrt(c, idProduct); 
@@ -96,7 +96,6 @@ namespace BITTest
                     testMain.Cart.ConfirmOrder(c);
 
                     break;
-
 
                 default:
                     Console.WriteLine("Error Tayping");
@@ -132,7 +131,7 @@ namespace BITTest
 
                 case "b":
                     Console.Write("Please enter id :");
-                    id = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out id);
                     try
                     {
                         Console.WriteLine(testMain.Product.GetProduct(id));
@@ -144,7 +143,7 @@ namespace BITTest
 
                 case "c":
                     Console.Write("Please enter ID :");
-                    id = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out id);
                     Console.WriteLine(testMain.Product.GetProduct(c, id)); // ######################## ERROR becaouse Amount ###############################
                     break;
 
@@ -188,7 +187,7 @@ namespace BITTest
                 case "f":
                     p = new Product();
                     Console.Write("Enter the ID number of the product you want to update: ");
-                    id = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out id);
                     try
                     {
                         Console.WriteLine(testMain.Product.GetProduct(id));
