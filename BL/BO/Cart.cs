@@ -14,9 +14,9 @@ public class Cart
         $"Address of custumer: {CustomerAddress} \n ");
         
 
-        foreach (var item in Items)
+        foreach (var item in Items!)
         {
-            Console.WriteLine($"{item}"+ item);
+            Console.WriteLine(item);
         }
 
         return TotalPrice.ToString();

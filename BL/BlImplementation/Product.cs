@@ -82,7 +82,7 @@ namespace BlImplementation
             BO.ProductItem pi = new BO.ProductItem();
             if (id > 0)
             {
-                BO.OrderItem p2 = c.Items?.Find(x => x?.ProductID == id) ?? throw new BO.NotExistException("Not exsits!");
+                BO.OrderItem p2 = c.Items?.Find(x => x?.ProductID == id) ?? throw new BO.NotExistException("Not exists!");
                 DO.Product p = new DO.Product();
                 try
                 {

@@ -80,7 +80,7 @@ namespace BlImplementation
             {
                 throw new BO.NotExistException("", ex);
             }
-            foreach (var item in cart.Items)
+            foreach (var item in cart.Items!)
             {
                 if (id == item?.ProductID)
                 {
@@ -131,28 +131,33 @@ namespace BlImplementation
             };
 
             int orderId = Dal.Order.Add(order1);
-            foreach(var item in cart.Items)
+            if (cart.Items != null)
             {
-                DO.OrderItem orderItem1 = new DO.OrderItem()
+                foreach (var item in cart.Items)
                 {
-                    ID = item.ID,
-                    ProductID = item.ProductID,
-                    OrderID = orderId,
-                    Price = item.Price,
-                    Amount = item.Amount,
-                };
-                Dal.OrderItem.Add(orderItem1);
+                    DO.OrderItem orderItem1 = new DO.OrderItem()
+                    {
+                        ID = item!.ID,
+                        ProductID = item.ProductID,
+                        OrderID = orderId,
+                        Price = item.Price,
+                        Amount = item.Amount,
+                    };
+                    Dal.OrderItem.Add(orderItem1);
+                }
             }
+            else
+                throw new BO.NotExistException("not exists!");
 
             DO.Product product1 = new DO.Product();
             foreach (var item in cart.Items)
             {
-                product1 = Dal.Product.GetByID(item.ProductID);
-                product1.InStock -= item.Amount;
+               
                 try
                 {
+                    product1 = Dal.Product.GetByID(item!.ProductID);
+                    product1.InStock -= item.Amount;
                     Dal.Product.Update(product1);
-
                 }
                 catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
             }
