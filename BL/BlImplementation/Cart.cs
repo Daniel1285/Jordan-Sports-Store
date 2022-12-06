@@ -102,7 +102,8 @@ namespace BlImplementation
                     else
                     {
                         cart.TotalPrice -= item.Totalprice;
-                        cart.Items.Remove(item);   
+                        cart.Items.Remove(item);
+                        return cart;
                     }
                 }
 
