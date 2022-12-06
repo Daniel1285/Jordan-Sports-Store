@@ -82,23 +82,23 @@ namespace BlImplementation
             BO.ProductItem pi = new BO.ProductItem();
             if (id > 0)
             {
+                BO.OrderItem p2 = c.Items?.Find(x => x?.ProductID == id) ?? throw new BO.NotExistException("Not exsits!");
+                DO.Product p = new DO.Product();
                 try
                 {
-                    DO.Product p = new DO.Product();
-                    p = Dal.Product.GetByID(id);
-                    pi = new BO.ProductItem
-                    {
-                        ID = p.ID,
-                        Name = p.Name,
-                        Price = p.Price,
-                        Category = (BO.Enums.Category)p.Category,
-                        InStock = (p.InStock > 0 ? true : false),
-                        Amount = c.Items.Find(x => x.ProductID == id).Amount,
-                
-                    };
-                       
+                    p = Dal.Product.GetByID(id);          
                 }
-                catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
+                catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex);}
+                pi = new BO.ProductItem
+                {
+                    ID = p.ID,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Category = (BO.Enums.Category)p.Category,
+                    InStock = (p.InStock > 0 ? true : false),
+                    Amount = p2.Amount,
+                };
+                
                 return pi;
             }
             else

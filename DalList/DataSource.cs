@@ -182,7 +182,7 @@ internal static class DataSource
             if (id == p.ID)
             {
                 throw new Exception("ID of product alrady exist");
-                return false;
+               
             }
         }
         return true;

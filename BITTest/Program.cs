@@ -3,6 +3,8 @@ using Dal;
 using DalApi;
 using BO;
 using System.Threading.Channels;
+using System.Security.Cryptography;
+using System;
 
 namespace BITTest
 {
@@ -13,7 +15,7 @@ namespace BITTest
 
         static void Main(string[] args)
         {
-        c.Items = new List<OrderItem>();
+        c.Items = new List<OrderItem?>();
 
             int choice;
             do
@@ -82,17 +84,22 @@ namespace BITTest
                 case "b":
 
                     int newAmount;
+                    
                     Console.Write("ID product: ");
                     int.TryParse(Console.ReadLine(), out idProduct);
                     OrderItem o = new OrderItem();
-      
-                    o = c.Items.Find(x => x.ProductID == idProduct);
+
+                    try
+                    {
+                        o = c.Items?.Find(x => x?.ProductID == idProduct) ?? throw new BO.NotExistException("not exisst!");
+                    }
+                    catch(NotExistException ex) { Console.WriteLine(ex);break;}
 
 
                     Console.WriteLine(o);
                     Console.WriteLine("For update please enter the following details:");
                     Console.Write("Amount of product to update: ");
-                    newAmount = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out newAmount);
                     try
                     {
 
@@ -101,6 +108,7 @@ namespace BITTest
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
                     catch (AmountLessThenZero ex) { Console.WriteLine(ex); }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (NotEnougeInStock ex) { Console.WriteLine(ex); }   
 
                     break;
 
@@ -182,23 +190,27 @@ namespace BITTest
                     break;
 
                 case "d":
+                    int num2;
                     Product p = new Product();
 
                     Console.Write("Please enter a product ID number: ");
-                    p.ID = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out num2);
+                    p.ID = num2;
 
                     Console.Write("Please enter Product Name:");
                     p.Name = Console.ReadLine();
 
                     Console.Write("Please enter a product price: ");
-                    p.Price = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out num2);
+                    p.Price = num2;
 
                     Console.WriteLine("Please select a product category \n 0. Shose.\n 1. Shirts. \n 2. Shorts. \n 3. Hoodies. \n 4. Socks.");
-                    int choise2 = int.Parse(Console.ReadLine());
-                    p.Category = (Enums.Category)choise2;
+                    int.TryParse(Console.ReadLine(), out num2);
+                    p.Category = (Enums.Category)num2;
 
                     Console.Write("Please enter the quantity of the product in stock: ");
-                    p.InStock = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out num2);
+                    p.InStock = num2;
 
                     try
                     {
@@ -212,11 +224,12 @@ namespace BITTest
                     break;
 
                 case "e":
+                    int num;
                     Console.Write("Enter Prodcut ID to delete: ");
-                    int IdToDelete = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out num);
                     try
                     {
-                        testMain.Product.DeleteProduct(IdToDelete);
+                        testMain.Product.DeleteProduct(num);
                         Console.WriteLine("sucsses");
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
@@ -224,6 +237,7 @@ namespace BITTest
                     break;
 
                 case "f":
+                    int num3;
                     p = new Product();
                     Console.Write("Enter the ID number of the product you want to update: ");
                     int.TryParse(Console.ReadLine(), out id);
@@ -237,20 +251,24 @@ namespace BITTest
                     Console.WriteLine("Please enter the detials product to update:");
 
                     Console.Write("Please enter a product ID number: ");
-                    p.ID = int.Parse(Console.ReadLine());
+                   
+                    int.TryParse(Console.ReadLine(),out num3);
+                    p.ID = num3;
 
                     Console.Write("Please enter Product Name Product ID: ");
                     p.Name = Console.ReadLine();
 
                     Console.Write("Please enter a product price: ");
-                    p.Price = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out num3);
+                    p.Price = num3;
 
                     Console.WriteLine("Please select a product category \n 0. Shose.\n 1. Shirts. \n 2. Shorts. \n 3. Hoodies. \n 4. Socks.");
-                    int choise3 = int.Parse(Console.ReadLine());
-                    p.Category = (Enums.Category)choise3;
+                    int.TryParse(Console.ReadLine(), out num3);
+                    p.Category = (Enums.Category)num3;
 
                     Console.Write("Please enter the quantity of the product in stock: ");
-                    p.InStock = int.Parse(Console.ReadLine());
+                    int.TryParse(Console.ReadLine(), out num3);
+                    p.InStock = num3;
                     try
                     {
                         testMain.Product.UpdateProduct(p);
