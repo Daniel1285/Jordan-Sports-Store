@@ -17,7 +17,7 @@ namespace BlImplementation
             List<DO.OrderItem?> orderItem1 = Dal.OrderItem.GetAll().ToList();
             try
             {
-                product1 = Dal.Product.GetByID(id);
+                product1 =  Dal.Product.GetByID(id);
             }
             catch (DO.NotExistException ex)
             {
