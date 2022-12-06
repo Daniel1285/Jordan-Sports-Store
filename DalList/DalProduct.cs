@@ -32,7 +32,7 @@ internal class DalProduct : IProduct
         bool flag = false;
         for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
-            if (ID == DataSource.MyProducts[i].ID)
+            if (ID == DataSource.MyProducts[i]?.ID)
             {
                 DataSource.MyProducts.RemoveAt(i);  
                 flag = true;
@@ -55,7 +55,7 @@ internal class DalProduct : IProduct
         
         for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
-            if (p.ID == DataSource.MyProducts[i].ID)
+            if (p.ID == DataSource.MyProducts[i]?.ID)
             {
                 DataSource.MyProducts[i] = p;
 
@@ -91,13 +91,13 @@ internal class DalProduct : IProduct
     /// Returns All products in the array.
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Product>? GetAll()
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter)
     {
-        List<Product> products = new List<Product>();
+        List<Product?> products = new List<Product?>();
         for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
             Product p = new Product();
-            p = DataSource.MyProducts[i];
+            p = (Product)DataSource.MyProducts[i];
             products.Add(p);
         }
 

@@ -15,11 +15,11 @@ namespace BlImplementation
         /// <returns></returns>
         public IEnumerable<BO.OrderForList> GetOrderLists()
         {
-            List<DO.Order> orders = new List<DO.Order>();
-            List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
+            List<DO.Order?> orders = new List<DO.Order?>();
+            List<BO.OrderForList?> ordersForList = new List<BO.OrderForList?>();
             orders = Dal.Order.GetAll().ToList();
             
-            foreach (var item in orders)
+            foreach (DO.Order item in orders)
             {
                 BO.OrderForList order = new BO.OrderForList()
                 {
@@ -27,8 +27,8 @@ namespace BlImplementation
                     CustomerName= item.CustomerName,
                     Status = getStatus(item),
                 };
-                List<DO.OrderItem> orderItem = Dal.OrderItem.GetOrdersItem(item.ID);
-                foreach (var i in orderItem)
+                List<DO.OrderItem?> orderItem = Dal.OrderItem.GetOrdersItem(item.ID);
+                foreach (DO.OrderItem i in orderItem)
                 {
                     order.AmountOfItems += i.Amount;
                     order.TotalPrice += i.Price * i.Amount;
@@ -47,7 +47,7 @@ namespace BlImplementation
         /// <exception cref="BO.IdSmallThanZeroException"></exception>
         public BO.Order GetOrder(int orderId)
         {
-            List<DO.OrderItem> OrderItemFromDo = new List<DO.OrderItem>();
+            List<DO.OrderItem?> OrderItemFromDo = new List<DO.OrderItem?>();
             DO.Order OrderFromDo = new DO.Order();
             
             if (orderId < 0) throw new BO.IdSmallThanZeroException("ID small than zero!");
@@ -146,7 +146,7 @@ namespace BlImplementation
             if (orderId < 0) throw new BO.IdSmallThanZeroException("ID small than zero");
             DO.Order order = new DO.Order();
             BO.OrderTracking order1 = new BO.OrderTracking();
-            Tuple<DateTime, BO.Enums.OrderStatus>? p;
+            Tuple<DateTime, BO.Enums.OrderStatus>?p;
             try
             {
                 order = Dal.Order.GetByID(orderId);
@@ -184,13 +184,13 @@ namespace BlImplementation
         /// <param name="id"></param>
         /// <param name="items"></param>
         /// <returns></returns>
-        private (List<BO.OrderItem> , double) FromDotToBoOrderItem(int id, List<DO.OrderItem>? items)
+        private (List<BO.OrderItem> , double) FromDotToBoOrderItem(int id, List<DO.OrderItem?> items)
 
         {
-            items = (List<DO.OrderItem>?)Dal.OrderItem.GetAll();
-            List<BO.OrderItem>? orderItems = new List<BO.OrderItem>();
+            items = (List<DO.OrderItem?>)Dal.OrderItem.GetAll();
+            List<BO.OrderItem?> orderItems = new List<BO.OrderItem?>();
             double sum = 0;
-            foreach (var i in items)
+            foreach (DO.OrderItem i in items)
             {
                 if (id == i.OrderID)
                 {

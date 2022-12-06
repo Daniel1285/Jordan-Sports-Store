@@ -18,7 +18,7 @@ public struct OrderItem
     /// <summary>
     /// Order ID number
     /// </summary>
-    public int OrderID { get; set; }
+    public int ?OrderID { get; set; }
 
     /// <summary>
     /// Price per unit

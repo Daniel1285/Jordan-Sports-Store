@@ -17,7 +17,7 @@ namespace DalApi
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns></returns>
-        public List<OrderItem> GetOrdersItem(int orderID);
+        public List<OrderItem?> GetOrdersItem(int orderID);
 
     }
 }

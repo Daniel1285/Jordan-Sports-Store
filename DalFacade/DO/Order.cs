@@ -14,17 +14,17 @@ public struct Order
     /// <summary>
     /// The name of the ordering customer.
     /// </summary>
-    public string CustomerName { get; set; }
+    public string? CustomerName { get; set; }
 
     /// <summary>
     /// Customer's email address.
     /// </summary>
-    public string CustomerEmail { get; set; }
+    public string? CustomerEmail { get; set; }
 
     /// <summary>
     /// Customer's address.
     /// </summary>
-    public string CustomerAdress { get; set; }
+    public string? CustomerAdress { get; set; }
 
     /// <summary>
     /// Order creation date.

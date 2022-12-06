@@ -17,10 +17,10 @@ namespace BlImplementation
         /// <returns></returns>
         public IEnumerable<BO.ProductForList> GetProductList()
         {
-            List<DO.Product> products = new List<DO.Product>();
-            List<BO.ProductForList> productsForList = new List<BO.ProductForList>();
+            List<DO.Product?> products = new List<DO.Product?>();
+            List<BO.ProductForList?> productsForList = new List<BO.ProductForList?>();
             products = Dal.Product.GetAll().ToList();
-            foreach (var item in products)
+            foreach (DO.Product item in products)
             {
                 productsForList.Add(new BO.ProductForList()
                 {
@@ -154,9 +154,9 @@ namespace BlImplementation
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("",ex);}
 
-            foreach (var p in Dal.OrderItem.GetAll())
+            foreach (DO.OrderItem p in Dal.OrderItem.GetAll())
             {
-                if (p.ProductID == id) throw new BO.CanNotDeleteProductException("Can't deleta product!");
+                if (p.ProductID == id) throw new BO.CanNotDeleteProductException("Can't delete product!");
         
             }
             Dal.Product.Delete(id);

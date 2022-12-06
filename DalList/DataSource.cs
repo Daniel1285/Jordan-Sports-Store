@@ -16,11 +16,6 @@ internal static class DataSource
     /// </summary>
     internal static class Config
     {
-        // Size arrays in real time
-        //internal static int SizeOfProducts = 0;
-        //internal static int SizeOfOrder = 0;
-       // internal static int SizeOfOrderItem = 0;
-
 
         internal static int MinOrder = 100000;
         internal static int MinOrderItem = 100000;
@@ -39,9 +34,9 @@ internal static class DataSource
 
     private static readonly Random R = new Random(); // Random number generation
 
-    internal static List<Product>  MyProducts = new List<Product>();
-    internal static List<Order> MyOrder = new List<Order>();
-    internal static List<OrderItem> MyOrderItem = new List<OrderItem>();
+    internal static List<Product?> MyProducts = new List<Product?>();
+    internal static List<Order?> MyOrder = new List<Order?>();
+    internal static List<OrderItem?> MyOrderItem = new List<OrderItem?>();
 
 
 
@@ -94,8 +89,8 @@ internal static class DataSource
             for (int j =0; j < R.Next(1,5); j++)
             {
                 NewOrderItem.ID = Config.GetIdForOrderItem;
-                NewOrderItem.OrderID = MyOrder[i].ID;
-                Product product = MyProducts[R.Next(0,MyProducts.Count)];
+                NewOrderItem.OrderID = MyOrder[i]?.ID;
+                Product product = (Product)MyProducts[R.Next(0,MyProducts.Count)];
                 NewOrderItem.ProductID = product.ID;   
                 NewOrderItem.Amount = R.Next(1,4);
                 NewOrderItem.Price = product.Price;
@@ -180,7 +175,7 @@ internal static class DataSource
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public static bool CheckID(int id)
+    public static bool CheckID(int? id)
     {
         foreach (Product p in MyProducts )
         {

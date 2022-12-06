@@ -26,7 +26,7 @@ internal class DalOrder: IOrder
         
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
-            if (id == DataSource.MyOrder[i].ID)
+            if (id == DataSource.MyOrder[i]?.ID)
             {
                 DataSource.MyOrder.Remove(DataSource.MyOrder[i]);  
                 Console.WriteLine("sucsses");
@@ -45,7 +45,7 @@ internal class DalOrder: IOrder
     {
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
-            if (o.ID == DataSource.MyOrder[i].ID)
+            if (o.ID == DataSource.MyOrder[i]?.ID)
             {
                 DataSource.MyOrder[i] = o;
                 return;
@@ -76,13 +76,13 @@ internal class DalOrder: IOrder
     /// Returns All Orders in the array.
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Order>? GetAll()
+    public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter)
     {
-        List<Order> GetOrders = new List<Order>();
+        List<Order?> GetOrders = new List<Order?>();
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
             Order o = new Order();
-            o = DataSource.MyOrder[i];
+            o = (Order)DataSource.MyOrder[i];
             GetOrders.Add(o);
             
         }

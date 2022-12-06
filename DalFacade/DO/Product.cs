@@ -14,7 +14,7 @@ public struct Product
      /// <summary>
      /// Name of the product.
      /// </summary>
-     public string Name { get; set; } 
+     public string? Name { get; set; } 
 
      /// <summary>
      /// price of the product.

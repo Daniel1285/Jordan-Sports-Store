@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using Dal;
 using DalApi;
+using DO;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace BlImplementation
         {
             if (id < 0) throw new BO.IdSmallThanZeroException("ID small zero!");
             DO.Product product1 = new DO.Product();
-            List<DO.OrderItem> orderItem1 = Dal.OrderItem.GetAll().ToList();
+            List<DO.OrderItem?> orderItem1 = Dal.OrderItem.GetAll().ToList();
             try
             {
                 product1 = Dal.Product.GetByID(id);
@@ -43,7 +44,7 @@ namespace BlImplementation
             
             if(product1.InStock > 0)
             {
-                foreach (var item in orderItem1)
+                foreach (DO.OrderItem item in orderItem1)
                 {
                     if(id == item.ProductID)
                     {

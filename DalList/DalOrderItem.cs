@@ -27,7 +27,7 @@ internal class DalOrderItem : IOrderItem
     {
         for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
-            if (id == DataSource.MyOrderItem[i].OrderID)
+            if (id == DataSource.MyOrderItem[i]?.OrderID)
             {
                 DataSource.MyOrderItem[i] = DataSource.MyOrderItem[DataSource.MyOrderItem.Count];
                 Console.WriteLine("sucssce");
@@ -48,7 +48,7 @@ internal class DalOrderItem : IOrderItem
 
         for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
-            if (o.ProductID == DataSource.MyOrderItem[i].ProductID)
+            if (o.ProductID == DataSource.MyOrderItem[i]?.ProductID)
             {
                 DataSource.MyOrderItem[i] = o;
                 return;
@@ -102,13 +102,13 @@ internal class DalOrderItem : IOrderItem
     /// Returns All Order Item in the list.
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem>? GetAll()
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter)
     {
-        List<OrderItem> newOrdersItem = new List<OrderItem>();
+        List<OrderItem?> newOrdersItem = new List<OrderItem?>();
         for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
             OrderItem o = new OrderItem();
-            o = DataSource.MyOrderItem[i];
+            o = (OrderItem)DataSource.MyOrderItem[i];
             newOrdersItem.Add(o);
         }
 
@@ -125,10 +125,10 @@ internal class DalOrderItem : IOrderItem
     /// </summary>
     /// <param name="orderID"></param>
     /// <returns></returns>
-    public List<OrderItem> GetOrdersItem(int orderID)
+    public List<OrderItem?> GetOrdersItem(int orderID)
     {
-        List<OrderItem> ArrOrders = new List<OrderItem>();
-        foreach (var item in DataSource.MyOrderItem)
+        List<OrderItem?> ArrOrders = new List<OrderItem?>();
+        foreach (DO.OrderItem item in DataSource.MyOrderItem)
         {
             if (item.OrderID == orderID)
             {
