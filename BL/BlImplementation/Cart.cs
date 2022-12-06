@@ -86,12 +86,14 @@ namespace BlImplementation
                 {
                     if(newAmount > item.Amount)
                     {
-                        if(product1.InStock >= item.Amount + newAmount)
+                        if (product1.InStock >= item.Amount + newAmount)
                         {
                             item.Amount += newAmount;
                             item.Totalprice += item.Price * newAmount;
                             cart.TotalPrice += item.Price * newAmount;
                         }
+                        else
+                            throw new BO.NotEnougeInStock(" Not enouge in stock!");
                     }
                     else if(newAmount < item.Amount && newAmount != 0)
                     {

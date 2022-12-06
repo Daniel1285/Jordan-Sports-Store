@@ -101,6 +101,7 @@ namespace BITTest
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
                     catch (AmountLessThenZero ex) { Console.WriteLine(ex); }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
+                    catch (NotEnougeInStock ex) { Console.WriteLine(ex); }   
 
                     break;
 

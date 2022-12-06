@@ -115,3 +115,16 @@ public class EmailInValidException : Exception
       System.Runtime.Serialization.SerializationInfo info,
       System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 }
+
+[Serializable]
+public class NotEnougeInStock : Exception
+{
+    public NotEnougeInStock() { }
+    public NotEnougeInStock(string message) : base(message) { }
+    public NotEnougeInStock(string message, Exception inner) : base(message, inner) { }
+    protected NotEnougeInStock(
+      System.Runtime.Serialization.SerializationInfo info,
+      System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+}
+
+
