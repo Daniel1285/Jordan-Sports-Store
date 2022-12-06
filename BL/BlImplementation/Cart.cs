@@ -27,7 +27,7 @@ namespace BlImplementation
             {
                 foreach (var item in cart.Items)
                 {
-                    if (id == item.ProductID)
+                    if (id == item?.ProductID)
                     {
                         if (product1.InStock > item.Amount)
                         {
@@ -57,7 +57,7 @@ namespace BlImplementation
                             Totalprice = item.Price
                         };
 
-                        cart.Items.Add(orderItemBo);
+                        cart.Items?.Add(orderItemBo);
                         Console.WriteLine("sucsess");
                         break;
                     }
@@ -82,7 +82,7 @@ namespace BlImplementation
             }
             foreach (var item in cart.Items)
             {
-                if (id == item.ProductID)
+                if (id == item?.ProductID)
                 {
                     if(newAmount > item.Amount)
                     {
@@ -91,6 +91,7 @@ namespace BlImplementation
                             item.Amount += newAmount;
                             item.Totalprice += item.Price * newAmount;
                             cart.TotalPrice += item.Price * newAmount;
+                            break;
                         }
                         else
                             throw new BO.NotEnougeInStock(" Not enouge in stock!");
@@ -100,6 +101,7 @@ namespace BlImplementation
                         item.Amount -= newAmount;
                         item.Totalprice -= item.Price * newAmount;
                         cart.TotalPrice -= item.Price * newAmount;
+                        break;
                     }
                     else
                     {
