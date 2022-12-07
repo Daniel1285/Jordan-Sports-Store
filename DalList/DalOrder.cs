@@ -89,7 +89,26 @@ internal class DalOrder: IOrder
         return GetOrders;   
     }
 
- 
+    
+    //public Order GetOneObject(Func<Order? , bool>? filter)
+    //{
+    //    Order o = new Order();
+    //    foreach (Order o in DataSource.MyOrder)
+    //    {
+    //        if (id == o.ID)
+    //        {
+    //            return o;
+    //        }
+    //    }
+    //    throw new NotExistException("Order are not found!");
+
+    //    return o;
+        
+    //}
+    
+
+
+
 }
 
 
