@@ -12,9 +12,9 @@ internal class DalProduct : IProduct
     /// <returns></returns>
     public int Add(Product p)
     {
-        foreach (Product s  in DataSource.MyProducts)
+        foreach (Product? s  in DataSource.MyProducts)
         {
-            if (p.ID == s.ID )
+            if (p.ID == s?.ID )
             {
                 throw new AlreadyExistException("the product alrady exist!");
             }
@@ -93,15 +93,21 @@ internal class DalProduct : IProduct
     /// <returns></returns>
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter)
     {
-        List<Product?> products = new List<Product?>();
-        for (int i = 0; i < DataSource.MyProducts.Count; i++)
+       
+        if (filter == null)
         {
-            Product p = new Product();
-            p = (Product)DataSource.MyProducts[i];
-            products.Add(p);
+            var list = from item in DataSource.MyProducts
+                       select item;
+            return list;
         }
-
-        return products;
+        else
+        {
+            var list = from item in DataSource.MyProducts
+                       where (filter(item))
+                       select item;
+            return list;
+        }
+        
     }
 
 }

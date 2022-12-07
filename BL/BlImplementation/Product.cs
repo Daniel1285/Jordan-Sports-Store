@@ -15,7 +15,7 @@ namespace BlImplementation
         /// We will ask DO for a list of products and build a new list of ProductForList  
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<BO.ProductForList> GetProductList()
+        public IEnumerable<BO.ProductForList?> GetProductList()
         {
             List<DO.Product?> products = new List<DO.Product?>();
             List<BO.ProductForList?> productsForList = new List<BO.ProductForList?>();

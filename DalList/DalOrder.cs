@@ -78,15 +78,19 @@ internal class DalOrder: IOrder
     /// <returns></returns>
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter)
     {
-        List<Order?> GetOrders = new List<Order?>();
-        for (int i = 0; i < DataSource.MyOrder.Count; i++)
+        if (filter == null)
         {
-            Order o = new Order();
-            o = (Order)DataSource.MyOrder[i];
-            GetOrders.Add(o);
-            
+            var list = from item in DataSource.MyOrder
+                       select item;
+            return list;
         }
-        return GetOrders;   
+        else
+        {
+            var list = from item in DataSource.MyOrder
+                       where (filter(item))
+                       select item;
+            return list;
+        }
     }
 
     
