@@ -7,7 +7,7 @@ namespace BlApi
         /// Product list request (for the manager screen and for the buyer's catalog screen.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ProductForList> GetProductList();
+        public IEnumerable<ProductForList?> GetProductList();
 
         /// <summary>
         /// Product details request for manager.

@@ -104,21 +104,20 @@ internal class DalOrderItem : IOrderItem
     /// <returns></returns>
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter)
     {
-        List<OrderItem?> newOrdersItem = new List<OrderItem?>();
-        for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
+        if (filter == null)
         {
-            OrderItem o = new OrderItem();
-            o = (OrderItem)DataSource.MyOrderItem[i];
-            newOrdersItem.Add(o);
+            var list = from item in DataSource.MyOrderItem
+                       select item;
+            return list;
         }
-
-        return newOrdersItem;
+        else
+        {
+            var list = from item in DataSource.MyOrderItem
+                       where (filter(item))
+                       select item;
+            return list;
+        }
     }
-
-
-
-
-
 
     /// <summary>
     /// Method of reading a list/array of order details according to the ID number of the order.
@@ -128,9 +127,9 @@ internal class DalOrderItem : IOrderItem
     public List<OrderItem?> GetOrdersItem(int orderID)
     {
         List<OrderItem?> ArrOrders = new List<OrderItem?>();
-        foreach (DO.OrderItem item in DataSource.MyOrderItem)
+        foreach (DO.OrderItem? item in DataSource.MyOrderItem)
         {
-            if (item.OrderID == orderID)
+            if (item?.OrderID == orderID)
             {
                 ArrOrders.Add(item);
             }
