@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/440347.jpg"/>
+        </Grid.Background>
         <Label Content="Label" HorizontalAlignment="Left" Margin="-432,304,0,0" VerticalAlignment="Top"/>
+        <Button Content="Start" HorizontalAlignment="Center" Margin="0,390,0,0" VerticalAlignment="Top" Width="118" Height="25" Click="ShowProductListButton_Click"/>
 
     </Grid>
 </Window>

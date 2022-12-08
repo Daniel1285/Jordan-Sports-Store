@@ -1,6 +1,8 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,14 +17,27 @@ using System.Windows.Shapes;
 
 namespace PL
 {
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
+        private IBl Bl = new BlImplementation.Bl();   
         public MainWindow()
         {
             InitializeComponent();
+
         }
+
+        private void ShowProductListButton_Click(object sender, RoutedEventArgs e)
+        {
+            new PL.PlProduct.ListProduct().Show();
+
+            this.Close();
+        }
+        
+   
     }
 }

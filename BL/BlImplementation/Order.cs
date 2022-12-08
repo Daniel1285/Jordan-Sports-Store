@@ -187,7 +187,7 @@ namespace BlImplementation
         private (List<BO.OrderItem> , double) FromDotToBoOrderItem(int id, List<DO.OrderItem?> items)
 
         {
-            items = (List<DO.OrderItem?>)Dal.OrderItem.GetAll();
+            items = Dal.OrderItem.GetAll().ToList();
             List<BO.OrderItem?> orderItems = new List<BO.OrderItem?>();
             double sum = 0;
             foreach (DO.OrderItem i in items)
