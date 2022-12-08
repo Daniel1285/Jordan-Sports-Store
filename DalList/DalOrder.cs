@@ -33,7 +33,7 @@ internal class DalOrder: IOrder
                 return;
             }
         }
-        throw new NotExistException("Not found order to delete");
+        throw new NotExistException();
     }
 
     /// <summary>
@@ -41,35 +41,18 @@ internal class DalOrder: IOrder
     /// </summary>
     /// <param name="o"></param>
     /// <exception cref="Exception"></exception>
-    public void Update(Order o)
+    public void Update(Order? o)
     {
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
-            if (o.ID == DataSource.MyOrder[i]?.ID)
+            if (o?.ID == DataSource.MyOrder[i]?.ID)
             {
+                
                 DataSource.MyOrder[i] = o;
                 return;
             }
         }
-        throw new NotExistException("Not found order to Update! ");
-    }
-
-    /// <summary>
-    /// Returns a Order by ID number.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public Order GetByID(int id)
-    {
-        foreach (Order o  in DataSource.MyOrder)
-        {
-            if (id == o.ID)
-            {
-                return o;
-            }
-        }
-        throw new NotExistException("Order are not found!");
+        throw new NotExistException("Not found order to Update!");
     }
 
     /// <summary>
@@ -92,24 +75,24 @@ internal class DalOrder: IOrder
             return list;
         }
     }
+    /// <summary>
+    /// Receives a function for testing (for example, ID resonance) and returns an object according to this
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    /// <exception cref="DO.NotExistException"></exception>
+    public Order GetByCondition(Func<Order?, bool>? filter)
+    {
+        foreach (Order? p in DataSource.MyOrder)
+        {
+            if (filter!(p))
+            {
+                return (Order)p!;
+            }
+        }
+        throw new DO.NotExistException("NOT exists!");
+    }
 
-    
-    //public Order GetOneObject(Func<Order? , bool>? filter)
-    //{
-    //    Order o = new Order();
-    //    foreach (Order o in DataSource.MyOrder)
-    //    {
-    //        if (id == o.ID)
-    //        {
-    //            return o;
-    //        }
-    //    }
-    //    throw new NotExistException("Order are not found!");
-
-    //    return o;
-        
-    //}
-    
 
 
 

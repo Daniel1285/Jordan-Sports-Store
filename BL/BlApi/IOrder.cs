@@ -8,7 +8,7 @@ namespace BlApi
         /// Order list request (admin screen).
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<OrderForList> GetOrderLists();
+        public IEnumerable<OrderForList?> GetOrderLists();
 
 
         /// <summary>

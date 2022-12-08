@@ -50,12 +50,12 @@ internal class DalProduct : IProduct
     /// </summary>
     /// <param name="p"></param>
     /// <exception cref="Exception"></exception>
-    public void Update(Product p)
+    public void Update(Product? p)
     {
         
         for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
-            if (p.ID == DataSource.MyProducts[i]?.ID)
+            if (p?.ID == DataSource.MyProducts[i]?.ID)
             {
                 DataSource.MyProducts[i] = p;
 
@@ -69,22 +69,21 @@ internal class DalProduct : IProduct
 
 
     /// <summary>
-    /// Returns a product by ID number.
+    /// Receives a function for testing (for example, ID resonance) and returns an object according to this
     /// </summary>
     /// <param name="ID"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public Product GetByID(int ID)
+    public Product GetByCondition(Func<Product?, bool>? filter)
     {
-        foreach (Product p in DataSource.MyProducts)
+        foreach (Product? p in DataSource.MyProducts)
         {
-            if (ID == p.ID)
+            if (filter!(p))
             {
-                return p;
+                return (Product)p!;
             }
-            
         }
-        throw new NotExistException("Product not found");
+        throw new DO.NotExistException("NOT exists!");
     }
 
     /// <summary>
@@ -109,6 +108,10 @@ internal class DalProduct : IProduct
         }
         
     }
+    
+       
+        
+    }
 
-}
+
 

@@ -13,11 +13,11 @@ namespace BlImplementation
         public BO.Cart AddProdctToCatrt(BO.Cart cart, int id)
         {
             if (id < 0) throw new BO.IdSmallThanZeroException("ID small zero!");
-            DO.Product product1 = new DO.Product();
+            DO.Product? product1 = new DO.Product();
             List<DO.OrderItem?> orderItem1 = Dal.OrderItem.GetAll().ToList();
             try
             {
-                product1 =  Dal.Product.GetByID(id);
+                product1 =  Dal.Product.GetByCondition(x => x?.ID == id);
             }
             catch (DO.NotExistException ex)
             {
@@ -29,7 +29,7 @@ namespace BlImplementation
                 {
                     if (id == item?.ProductID)
                     {
-                        if (product1.InStock > item.Amount)
+                        if (product1?.InStock > item.Amount)
                         {
                             item.Amount++;
                             item.Totalprice += item.Price;
@@ -41,20 +41,20 @@ namespace BlImplementation
                 }
             }
             
-            if(product1.InStock > 0)
+            if(product1?.InStock > 0)
             {
-                foreach (DO.OrderItem item in orderItem1)
+                foreach (DO.OrderItem? item in orderItem1)
                 {
-                    if(id == item.ProductID)
+                    if(id == item?.ProductID)
                     {
                         BO.OrderItem orderItemBo = new BO.OrderItem
                         {
-                            ID = item.ID,
-                            Name = product1.Name,
-                            ProductID = item.ProductID,
-                            Price = item.Price,
+                            ID = (int)item?.ID!,
+                            Name = product1?.Name,
+                            ProductID = (int)item?.ProductID!,
+                            Price = (double)item?.Price!,
                             Amount = 1,
-                            Totalprice = item.Price
+                            Totalprice = (double)item?.Price!
                         };
 
                         cart.Items?.Add(orderItemBo);
@@ -71,10 +71,10 @@ namespace BlImplementation
         {
             if(id < 0) throw new BO.IdSmallThanZeroException("ID small than zero!");
             if (newAmount < 0) throw new BO.AmountLessThenZero("Amount small than zero!");
-            DO.Product product1 = new DO.Product();
+            DO.Product? product1 = new DO.Product();
             try
             {
-                product1 = Dal.Product.GetByID(id);
+                product1 = Dal.Product.GetByCondition(x => x?.ID == id);
             }
             catch (DO.NotExistException ex)
             {
@@ -86,7 +86,7 @@ namespace BlImplementation
                 {
                     if(newAmount > item.Amount)
                     {
-                        if (product1.InStock >= item.Amount + newAmount)
+                        if (product1?.InStock >= item.Amount + newAmount)
                         {
                             item.Amount += newAmount;
                             item.Totalprice += item.Price * newAmount;
@@ -115,7 +115,7 @@ namespace BlImplementation
             return cart;
         }
 
-        public void ConfirmOrder(BO.Cart cart,string name, string email, string addres)
+        public void ConfirmOrder(BO.Cart cart,string? name, string? email, string? addres)
         {
             if (name == null) throw new BO.NameIsEmptyException("Name is empty!");
             if (addres == null) throw new BO.AddresIsempty(" Addres is empty!");
@@ -126,8 +126,8 @@ namespace BlImplementation
                 CustomerEmail = cart.CustomerEmail,
                 CustomerAdress = cart.CustomerAddress,
                 OrderDate = DateTime.Now,
-                ShipDate = DateTime.MinValue,
-                DeliveryrDate =DateTime.MinValue,
+                ShipDate = null,
+                DeliveryrDate = null,
             };
 
             int orderId = Dal.Order.Add(order1);
@@ -150,13 +150,13 @@ namespace BlImplementation
                 throw new BO.NotExistException("not exists!");
 
             DO.Product product1 = new DO.Product();
-            foreach (var item in cart.Items)
+            foreach (BO.OrderItem? item in cart.Items)
             {
                
                 try
                 {
-                    product1 = Dal.Product.GetByID(item!.ProductID);
-                    product1.InStock -= item.Amount;
+                    product1 = Dal.Product.GetByCondition(x => x?.ID == item!.ProductID);
+                    product1.InStock -= item!.Amount;
                     Dal.Product.Update(product1);
                 }
                 catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }

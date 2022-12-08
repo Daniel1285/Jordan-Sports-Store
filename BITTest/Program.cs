@@ -158,7 +158,7 @@ namespace BITTest
             {
                 case "a":
 
-                    List<BO.ProductForList> products = new List<BO.ProductForList>();
+                    List<BO.ProductForList?> products = new List<BO.ProductForList?>();
                     products = testMain.Product.GetProductList().ToList();
                     products.ForEach(product => Console.WriteLine(product));
 
@@ -310,7 +310,7 @@ namespace BITTest
             switch (choise)
             {
                 case "a":
-                    List<OrderForList> orders = testMain.Order.GetOrderLists().ToList();
+                    List<OrderForList?> orders = testMain.Order.GetOrderLists().ToList();
                     orders.ForEach(order => Console.WriteLine(order));
                     break;
 

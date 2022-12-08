@@ -86,14 +86,14 @@ internal static class DataSource
         OrderItem NewOrderItem = new OrderItem();
         for (int i = 0; i < MyOrder.Count; i++)
         {
-            for (int j =0; j < R.Next(1,5); j++)
+            for (int j =0; j < R.Next(1,4); j++)
             {
                 NewOrderItem.ID = Config.GetIdForOrderItem;
-                NewOrderItem.OrderID = MyOrder[i]?.ID;
-                Product product = (Product)MyProducts[R.Next(0,MyProducts.Count)];
-                NewOrderItem.ProductID = product.ID;   
+                NewOrderItem.OrderID = (int)MyOrder[i]?.ID!;
+                Product? product = MyProducts[R.Next(0,MyProducts.Count)];
+                NewOrderItem.ProductID = (int)product?.ID!;   
                 NewOrderItem.Amount = R.Next(1,4);
-                NewOrderItem.Price = product.Price;
+                NewOrderItem.Price = (double)product?.Price!;
                 MyOrderItem.Add(NewOrderItem);
             };
   
@@ -132,12 +132,10 @@ internal static class DataSource
 
             if (i < 16)
                 newOrder.ShipDate = newOrder.OrderDate + new TimeSpan(R.Next(2, 4), 0, 0, 0);
-            if (i > 16)
-                newOrder.ShipDate = DateTime.MinValue;
+            
             if (i <  10)
                 newOrder.DeliveryrDate = newOrder.ShipDate + new TimeSpan(R.Next(1, 3), 0, 0, 0);
-            if (i > 10)
-                newOrder.DeliveryrDate = DateTime.MinValue;
+           
             MyOrder.Add(newOrder); 
         }
 
@@ -177,9 +175,9 @@ internal static class DataSource
     /// <exception cref="Exception"></exception>
     public static bool CheckID(int? id)
     {
-        foreach (Product p in MyProducts )
+        foreach (Product? p in MyProducts )
         {
-            if (id == p.ID)
+            if (id == p?.ID)
             {
                 throw new Exception("ID of product alrady exist");
                

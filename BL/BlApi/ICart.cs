@@ -25,6 +25,6 @@ namespace BlApi
         /// Basket confirmation for order \ placing an order (for shopping basket screen or order completion screen)
         /// </summary>
         /// <param name="cart"></param>
-        public void ConfirmOrder(Cart c , string name , string email,string adrres);    
+        public void ConfirmOrder(Cart c , string? name , string? email,string? adrres);    
     }
 }
