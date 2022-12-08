@@ -13,7 +13,7 @@ public class Order
     public DateTime? ShipDate    { get; set; }
     public DateTime? DeliveryDate { get; set; }  
     public List<OrderItem?>?Items { get; set; }    
-    public Double? TotalPrice { get; set; }
+    public Double TotalPrice { get; set; }
     public override string ToString()
     {
 
@@ -26,7 +26,7 @@ public class Order
              $"              Ship date: {ShipDate}  \n" +
              $"              Delivery date:{DeliveryDate}  \n");
 
-        foreach (var item in Items)
+        foreach (var item in Items!)
         {
             Console.WriteLine(item);
         }

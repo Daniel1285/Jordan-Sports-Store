@@ -27,10 +27,10 @@ internal class DalOrderItem : IOrderItem
     {
         for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
-            if (id == DataSource.MyOrderItem[i]?.OrderID)
+            if (id == DataSource.MyOrderItem[i]?.ID)
             {
-                DataSource.MyOrderItem[i] = DataSource.MyOrderItem[DataSource.MyOrderItem.Count];
-                Console.WriteLine("sucssce");
+                DataSource.MyOrderItem.RemoveAt(i);
+
                 return;
             }
         }
@@ -43,12 +43,12 @@ internal class DalOrderItem : IOrderItem
     /// </summary>
     /// <param name="o"></param>
     /// <exception cref="Exception"></exception>
-    public void Update(OrderItem o)
+    public void Update(OrderItem? o)
     {
 
         for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
-            if (o.ProductID == DataSource.MyOrderItem[i]?.ProductID)
+            if (o?.ProductID == DataSource.MyOrderItem[i]?.ProductID)
             {
                 DataSource.MyOrderItem[i] = o;
                 return;
@@ -59,45 +59,22 @@ internal class DalOrderItem : IOrderItem
     }
 
     /// <summary>
-    /// Returns a Order Item by ID number of order.
+    /// Receives a function for testing (for example, ID resonance) and returns an object according to this
     /// </summary>
     /// <param name="ID"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public OrderItem GetByID(int orderId)
+    public OrderItem GetByCondition(Func<OrderItem?, bool>? filter)
     {
-        foreach (OrderItem o in DataSource.MyOrderItem)
+        foreach (OrderItem? p in DataSource.MyOrderItem)
         {
-            if ( orderId == o.OrderID)
+            if (filter!(p))
             {
-                return o;
-            }
-
-        }
-        throw new NotExistException("Order item not found");
-    }
-
-
-    /// <summary>
-    /// Returns a Order Item by ID number of product and order.
-    /// </summary>
-    /// <param name="ID"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public OrderItem GetByTwoID(int orderId, int productID)
-    {
-        foreach (OrderItem o in DataSource.MyOrderItem)
-        {
-            if (orderId == o.OrderID && productID == o.ProductID)
-            {
-                return o;
+                return (OrderItem)p!;
             }
         }
-        throw new NotExistException("Order item not found");
+        throw new DO.NotExistException("NOT exists!");
     }
-
-
-
     /// <summary>
     /// Returns All Order Item in the list.
     /// </summary>
@@ -117,26 +94,6 @@ internal class DalOrderItem : IOrderItem
                        select item;
             return list;
         }
-    }
-
-    /// <summary>
-    /// Method of reading a list/array of order details according to the ID number of the order.
-    /// </summary>
-    /// <param name="orderID"></param>
-    /// <returns></returns>
-    public List<OrderItem?> GetOrdersItem(int orderID)
-    {
-        List<OrderItem?> ArrOrders = new List<OrderItem?>();
-        foreach (DO.OrderItem? item in DataSource.MyOrderItem)
-        {
-            if (item?.OrderID == orderID)
-            {
-                ArrOrders.Add(item);
-            }
-        }
-        
-        return ArrOrders;   
-
-    }
-
+    }  
+   
 }

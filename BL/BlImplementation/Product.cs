@@ -20,14 +20,14 @@ namespace BlImplementation
             List<DO.Product?> products = new List<DO.Product?>();
             List<BO.ProductForList?> productsForList = new List<BO.ProductForList?>();
             products = Dal.Product.GetAll().ToList();
-            foreach (DO.Product item in products)
+            foreach (DO.Product? item in products)
             {
                 productsForList.Add(new BO.ProductForList()
                 {
-                    ID = item.ID,
-                    Name = item.Name,
-                    Price = item.Price,
-                    Category = (BO.Enums.Category)item.Category
+                    ID = (int)item?.ID!,
+                    Name = item?.Name,
+                    Price = (double)item?.Price!,
+                    Category = (BO.Enums.Category)item?.Category!
 
                 });
             }
@@ -43,21 +43,21 @@ namespace BlImplementation
         /// <exception cref="BO.IdSmallThanZeroException"></exception>
         public BO.Product GetProduct(int id)
         {
-            BO.Product p1 = null;
+            BO.Product? p1 = null;
             if (id > 0)
             {
                 try
                 {
-                    DO.Product p = new DO.Product();
-                    p = Dal.Product.GetByID(id);
+                    DO.Product? p = new DO.Product();
+                    p = Dal.Product.GetByCondition(x => x?.ID == id);
 
                     p1 = new BO.Product
                     {
-                        ID = p.ID,
-                        Name = p.Name,
-                        Price = p.Price,
-                        Category = (BO.Enums.Category)p.Category,
-                        InStock = p.InStock,
+                        ID = (int)p?.ID!,
+                        Name = p?.Name,
+                        Price = (double)p?.Price!,
+                        Category = (BO.Enums.Category)p?.Category!,
+                        InStock = (int)p?.InStock!,
                     };
                    
                 }
@@ -83,19 +83,19 @@ namespace BlImplementation
             if (id > 0)
             {
                 BO.OrderItem p2 = c.Items?.Find(x => x?.ProductID == id) ?? throw new BO.NotExistException("Not exists!");
-                DO.Product p = new DO.Product();
+                DO.Product? p = new DO.Product();
                 try
                 {
-                    p = Dal.Product.GetByID(id);          
+                    p = Dal.Product.GetByCondition(x => x?.ID == id);          
                 }
                 catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex);}
                 pi = new BO.ProductItem
                 {
-                    ID = p.ID,
-                    Name = p.Name,
-                    Price = p.Price,
-                    Category = (BO.Enums.Category)p.Category,
-                    InStock = (p.InStock > 0 ? true : false),
+                    ID = (int)p?.ID!,
+                    Name = p?.Name,
+                    Price = (double)p?.Price!,
+                    Category = (BO.Enums.Category)p?.Category!,
+                    InStock = (p?.InStock > 0 ? true : false),
                     Amount = p2.Amount,
                 };
                 
@@ -128,7 +128,7 @@ namespace BlImplementation
                 ID = p.ID,
                 Name = p.Name,
                 Price = p.Price,
-                Category = (DO.Enums.Category)p.Category,
+                Category = (DO.Enums.Category)p.Category!,
                 InStock = p.InStock, 
 
             };
@@ -150,13 +150,13 @@ namespace BlImplementation
                 
             try
             {
-                Dal.Product.GetByID(id);
+                Dal.Product.GetByCondition(x => x?.ID == id);
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("",ex);}
 
-            foreach (DO.OrderItem p in Dal.OrderItem.GetAll())
+            foreach (DO.OrderItem? p in Dal.OrderItem.GetAll())
             {
-                if (p.ProductID == id) throw new BO.CanNotDeleteProductException("Can't delete product!");
+                if (p?.ProductID == id) throw new BO.CanNotDeleteProductException("Can't delete product!");
         
             }
             Dal.Product.Delete(id);
@@ -186,7 +186,7 @@ namespace BlImplementation
                 ID = p.ID,
                 Name = p.Name,
                 Price = p.Price,
-                Category = (DO.Enums.Category)p.Category,
+                Category = (DO.Enums.Category)p.Category!,
                 InStock = p.InStock,
 
             };
