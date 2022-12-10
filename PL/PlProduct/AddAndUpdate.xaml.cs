@@ -22,6 +22,44 @@ namespace PL.PlProduct
         public AddAndUpdate()
         {
             InitializeComponent();
+            CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+
+        }
+
+        private void ProductIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ProductNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ProductPriceTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ProductInstokeBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void AddProductToList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackLastWindow(object sender, RoutedEventArgs e)
+        {
+            new PL.PlProduct.ListProduct().Show();
+            this.Close();
         }
     }
 }

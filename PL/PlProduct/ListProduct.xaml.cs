@@ -28,8 +28,7 @@ namespace PL.PlProduct
             InitializeComponent();
             SetProductComboBox();
             ProductsListView.ItemsSource = Bl.Product.GetProductList();
-           // AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums));
-
+            //ProductsListView.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
         }
 
         public void SetProductComboBox()
@@ -41,13 +40,16 @@ namespace PL.PlProduct
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string choice = AttributeSelector.Text.ToString();
+            
+            /*
             switch (choice)
             {
                 case "SHOES":
-                    //ProductsListView.ItemsSource = Bl.Product.GetAll()
+                    //ProductsListView.ItemsSource = Bl.Product.GetProductList();
                     break;
                 case "SHIRTS":
-                    //ProductsListView.ItemsSource = Bl.Product.GetAll()
+                    //ProductsListView.ItemsSource = Bl.Product.GetProductList()
+
                     break;
                 case "SHORTS":
                     //ProductsListView.ItemsSource = Bl.Product.GetAll()
@@ -66,6 +68,20 @@ namespace PL.PlProduct
                     ProductsListView.ItemsSource = Bl.Product.GetProductList();
                     break;
             }
+            */
+            
+        }
+
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            new PL.PlProduct.AddAndUpdate().Show();
+            this.Close();
+        }
+
+        private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            new PL.MainWindow().Show();
+            this.Close();
         }
     }
 }

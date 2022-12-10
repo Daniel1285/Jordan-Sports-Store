@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.PlProduct"
         mc:Ignorable="d"
-        Title="AddAndUpdate" Height="450" Width="800">
+        Title="AddAndUpdate" Height="350" Width="700">
     <Grid>
+        <Label x:Name="IdText" Content="ID :" HorizontalAlignment="Left" Margin="191,43,0,0" Width="38" Height="31" RenderTransformOrigin="0.483,0.269" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductIdTextBox_TextChanged" FontSize="16"/>
+
+        <Label x:Name="CategoryText" Content="Category:" HorizontalAlignment="Left" Margin="191,92,0,0" Width="77" Height="29" RenderTransformOrigin="0.483,0.269" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <ComboBox x:Name="CategoryComboBox" HorizontalAlignment="Center" Margin="0,90,0,0" VerticalAlignment="Top" Width="154" SelectionChanged="CategoryComboBox_SelectionChanged" Height="30" FontSize="14"/>
+
+        <Label   Content="Name:" HorizontalAlignment="Left" Margin="191,140,0,0" Width="52" RenderTransformOrigin="0.483,0.269" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <TextBox x:Name="ProductNameBox" HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductNameBox_TextChanged" FontSize="16"/>
+
+        <Label x:Name="ProductPriceText" Content="Price:" HorizontalAlignment="Left" Margin="191,185,0,0" Width="50" Height="26" RenderTransformOrigin="0.405,0.548" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <TextBox Margin="0,188,0,0" TextWrapping="Wrap" Text="0" Width="154" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductPriceTextBox_TextChanged" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+
+        <Label   Content="In stock:" HorizontalAlignment="Left" Margin="191,235,0,0" Width="68" Height="26" RenderTransformOrigin="0.483,0.269" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <TextBox x:Name="ProductInstokeBox" HorizontalAlignment="Center" Margin="0,237,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="154" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductInstokeBox_TextChanged" FontSize="16"/>
+        <Button x:Name="AddProductToList" Content="Add" HorizontalAlignment="Center" Margin="0,288,0,0" VerticalAlignment="Top" Width="64" Click="AddProductToList_Click"/>
+        <Button x:Name="backWindow" Content="Back" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="64" Click="BackLastWindow"/>
+
 
     </Grid>
 </Window>
