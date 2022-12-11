@@ -43,12 +43,12 @@ internal class DalOrderItem : IOrderItem
     /// </summary>
     /// <param name="o"></param>
     /// <exception cref="Exception"></exception>
-    public void Update(OrderItem? o)
+    public void Update(OrderItem o)
     {
 
         for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
         {
-            if (o?.ProductID == DataSource.MyOrderItem[i]?.ProductID)
+            if (o.ProductID == DataSource.MyOrderItem[i]?.ProductID)
             {
                 DataSource.MyOrderItem[i] = o;
                 return;

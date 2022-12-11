@@ -28,7 +28,7 @@ namespace PL.PlProduct
             InitializeComponent();
             SetProductComboBox();
             ProductsListView.ItemsSource = Bl.Product.GetProductList();
-            //ProductsListView.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+            ProductsListView.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
         }
 
         public void SetProductComboBox()
