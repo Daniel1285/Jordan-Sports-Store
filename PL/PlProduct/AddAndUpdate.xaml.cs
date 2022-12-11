@@ -45,8 +45,6 @@ namespace PL.PlProduct
             AddOrUpdateProductButton.Content = "Update";
         }
 
-
-
         private void AddProductToList_Click(object sender, RoutedEventArgs e)
         {
             BO.Product p = new BO.Product
@@ -65,8 +63,6 @@ namespace PL.PlProduct
             new PL.PlProduct.ListProduct().Show();
             this.Close();
         }
-
-
 
         private void ProductIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
