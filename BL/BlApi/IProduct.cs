@@ -43,6 +43,14 @@ namespace BlApi
         /// <param name="p"></param>
         public void UpdateProduct(Product p);
 
+        /// <summary>
+        /// Get list of product by condition check. 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        IEnumerable<Product?> GetListByCondition(Func<DO.Product?, bool>? filter);
+
+
 
     }
 }

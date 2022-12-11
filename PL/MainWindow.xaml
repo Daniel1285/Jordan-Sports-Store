@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/440347.jpg"/>
         </Grid.Background>
         <Label Content="Label" HorizontalAlignment="Left" Margin="-432,304,0,0" VerticalAlignment="Top"/>
-        <Button Content="Start" HorizontalAlignment="Center" Margin="0,390,0,0" VerticalAlignment="Top" Width="118" Height="25" Click="ShowProductListButton_Click"/>
+        <Button Content="Start" HorizontalAlignment="Center" Margin="0,379,0,0" VerticalAlignment="Top" Width="118" Height="25" Click="ShowProductListButton_Click" FontWeight="Bold" FontSize="14" FontFamily="Rockwell Extra Bold"/>
 
     </Grid>
 </Window>

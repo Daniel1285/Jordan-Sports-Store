@@ -40,35 +40,7 @@ namespace PL.PlProduct
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string choice = AttributeSelector.Text.ToString();
-            
-            /*
-            switch (choice)
-            {
-                case "SHOES":
-                    //ProductsListView.ItemsSource = Bl.Product.GetProductList();
-                    break;
-                case "SHIRTS":
-                    //ProductsListView.ItemsSource = Bl.Product.GetProductList()
-
-                    break;
-                case "SHORTS":
-                    //ProductsListView.ItemsSource = Bl.Product.GetAll()
-                    break;
-                case "HOODIES":
-                    //ProductsListView.ItemsSource = Bl.Product.GetAll()  
-                    break;
-                case "SOCKS":
-                    //ProductsListView.ItemsSource = Bl.Product.GetAll()
-                    break;
-                case "All":
-                    //ProductsListView.ItemsSource = Bl.Product.GetAll()
-                    break;
-
-                default:
-                    ProductsListView.ItemsSource = Bl.Product.GetProductList();
-                    break;
-            }
-            */
+           // ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All"? Bl.Product.GetProductList() : Bl.Product.GetProductList(X =?);   
             
         }
 

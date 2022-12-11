@@ -197,5 +197,13 @@ namespace BlImplementation
             catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
         }
 
+        IEnumerable<BO.Product?> GetListByCondition(Func<DO.Product?, bool>? filter)
+        {
+            var p = from item in Dal.Product.GetAll()
+                    where (filter!(item))
+                    select item;
+            return p;
+        }
+
     }
 }

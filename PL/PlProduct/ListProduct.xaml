@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.PlProduct"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="ListProduct" Height="640" Width="800">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -20,15 +21,8 @@
             </Grid.ColumnDefinitions >
             <ComboBox Name="AttributeSelector" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged"/>
 
-            <Label Content="Category" Grid.Column="0" FontSize="40" FontFamily="Aharoni" HorizontalAlignment="Center" Width="400" >
-                <Label.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="White" Offset="0.526"/>
-                        <GradientStop Color="Black" Offset="1"/>
-                    </LinearGradientBrush>
-                </Label.Background>
-            </Label>
+            <Label Content="Category" Grid.Column="0" FontSize="30" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" />
+            
 
         </Grid>
         <ListView x:Name="ProductsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}">
@@ -38,9 +32,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        
         <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductButton_Click"/>
         <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToLastWindowButton_Click" Width="95.9466666666667" Height="26.63"/>
-
-
+        
+        
     </Grid>
 </Window>
