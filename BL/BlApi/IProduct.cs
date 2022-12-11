@@ -48,7 +48,7 @@ namespace BlApi
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        IEnumerable<Product?> GetListByCondition(Func<DO.Product?, bool>? filter);
+        public IEnumerable<ProductForList?> GetListByCondition(Func<ProductForList?, bool>? filter);
 
 
 

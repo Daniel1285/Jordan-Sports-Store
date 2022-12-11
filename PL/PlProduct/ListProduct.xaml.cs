@@ -2,8 +2,10 @@
 using BlImplementation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,12 +25,13 @@ namespace PL.PlProduct
     {
         private IBl Bl = new BlImplementation.Bl();
 
+
         public ListProduct()
         {
             InitializeComponent();
             SetProductComboBox();
             ProductsListView.ItemsSource = Bl.Product.GetProductList();
-            ProductsListView.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+            //ProductsListView.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
         }
 
         public void SetProductComboBox()
@@ -39,17 +42,30 @@ namespace PL.PlProduct
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string choice = AttributeSelector.Text.ToString();
-           ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All"? Bl.Product.GetProductList() : Bl.Product.GetListByCondition(X => X.Category == (BO.Enums.Category)AttributeSelector.SelectedItem);   
-            
+            ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All"? Bl.Product.GetProductList() : Bl.Product.GetListByCondition(X => X?.Category.ToString() == AttributeSelector.SelectedItem.ToString());              
         }
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            new PL.PlProduct.AddAndUpdate().Show();
+            new AddAndUpdate().Show();
+        
             this.Close();
         }
 
+
+        private void doubleClick_Update(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
+            new AddAndUpdate(id).Show();
+
+
+            this.Close();
+        }
+
+        private void ProductsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
         private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
         {
             new PL.MainWindow().Show();

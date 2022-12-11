@@ -24,22 +24,58 @@ namespace PL.PlProduct
         private static readonly Random R = new Random(); // Random number generation
         private IBl Bl = new BlImplementation.Bl();
 
-
+        /// <summary>
+        /// Constructor for adding product.
+        /// </summary>
         public AddAndUpdate()
         {
             InitializeComponent();
             CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
-            
+            AddOrUpdateProductButton.Content = "Add";
         }
+        /// <summary>
+        /// Constructor gor Updateing product.
+        /// </summary>
+        /// <param name="id"></param>
+        public AddAndUpdate(int id)
+        {
+            InitializeComponent();
+            CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+            IdBox.Text = id.ToString();
+            AddOrUpdateProductButton.Content = "Update";
+        }
+
+
+
+        private void AddProductToList_Click(object sender, RoutedEventArgs e)
+        {
+            BO.Product p = new BO.Product
+            {
+                ID = int.Parse(IdBox.Text),
+                Category = (BO.Enums.Category)CategoryComboBox.SelectedItem,
+                Name = ProductNameBox.Text.ToString(),
+                Price = int.Parse(ProductInstokeBox.Text),
+                InStock = int.Parse(ProductInstokeBox.Text)
+            };
+            Bl.Product.AddProduct(p);
+        }
+
+        private void BackLastWindow(object sender, RoutedEventArgs e)
+        {
+            new PL.PlProduct.ListProduct().Show();
+            this.Close();
+        }
+
+
 
         private void ProductIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
+
         }
 
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         private void ProductNameBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -55,26 +91,6 @@ namespace PL.PlProduct
         private void ProductInstokeBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
-        }
-
-        private void AddProductToList_Click(object sender, RoutedEventArgs e)
-        {
-            BO.Product p = new BO.Product
-            {
-                ID = int.Parse(IdBox.Text.ToString()),
-                Category = (BO.Enums.Category)CategoryComboBox.SelectedItem,
-                Name = ProductNameBox.Text.ToString(),
-                Price = int.Parse(ProductInstokeBox.Text.ToString()),
-                InStock = int.Parse(ProductInstokeBox.Text.ToString())
-            };
-            Bl.Product.AddProduct(p);
-        }
-
-        
-        private void BackLastWindow(object sender, RoutedEventArgs e)
-        {
-            new PL.PlProduct.ListProduct().Show();
-            this.Close();
         }
     }
 }

@@ -9,7 +9,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/440347.jpg"/>
+            <ImageBrush ImageSource="/11111.jpg"/>
         </Grid.Background>
         <Label Content="Label" HorizontalAlignment="Left" Margin="-432,304,0,0" VerticalAlignment="Top"/>
         <Button Content="Start" HorizontalAlignment="Center" Margin="0,379,0,0" VerticalAlignment="Top" Width="118" Height="25" Click="ShowProductListButton_Click" FontWeight="Bold" FontSize="14" FontFamily="Rockwell Extra Bold"/>

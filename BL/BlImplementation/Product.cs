@@ -133,7 +133,7 @@ namespace BlImplementation
 
             };
             try
-            {
+            { 
                 Dal.Product.Add(p1);
             }
             catch (DO.AlreadyExistException ex) { throw new BO.AlreadyExistException("", ex);}
@@ -197,12 +197,12 @@ namespace BlImplementation
             catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
         }
 
-        IEnumerable<BO.Product?> GetListByCondition(Func<DO.Product?, bool>? filter)
+        public IEnumerable<BO.ProductForList?> GetListByCondition(Func<BO.ProductForList?, bool>? filter)
         {
-            var p = from item in Dal.Product.GetAll()
+            var p = from item in GetProductList()
                     where (filter!(item))
                     select item;
-            return p;
+            return p!;
         }
 
     }

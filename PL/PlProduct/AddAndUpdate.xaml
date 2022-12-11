@@ -23,7 +23,7 @@
         <Label   Content="In stock:" HorizontalAlignment="Left" Margin="191,235,0,0" Width="68" Height="26" RenderTransformOrigin="0.483,0.269" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         <TextBox x:Name="ProductInstokeBox" HorizontalAlignment="Center" Margin="0,237,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductInstokeBox_TextChanged" FontSize="16"/>
         
-        <Button x:Name="AddOrUpdateProductButton" Content="" HorizontalAlignment="Center" Margin="0,288,0,0" VerticalAlignment="Top" Width="64" Click="AddProductToList_Click"/>
+        <Button x:Name="AddOrUpdateProductButton"  HorizontalAlignment="Center" Margin="0,288,0,0" VerticalAlignment="Top" Width="64" Click="AddProductToList_Click"/>
         <Button x:Name="backWindow" Content="Back" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="64" Click="BackLastWindow"/>
 
 
