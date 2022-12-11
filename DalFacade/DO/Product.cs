@@ -24,7 +24,7 @@ public struct Product
      /// <summary>
      /// Category of product.
      /// </summary>
-     public  Enums.Category? Category { get; set; } 
+     public  Enums.Category Category { get; set; } 
 
      /// <summary>
      /// Product quantity in stock.
