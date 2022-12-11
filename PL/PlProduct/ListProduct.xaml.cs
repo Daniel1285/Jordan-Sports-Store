@@ -40,7 +40,7 @@ namespace PL.PlProduct
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string choice = AttributeSelector.Text.ToString();
-           // ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All"? Bl.Product.GetProductList() : Bl.Product.GetProductList(X =?);   
+           ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All"? Bl.Product.GetProductList() : Bl.Product.GetListByCondition(X => X.Category == (BO.Enums.Category)AttributeSelector.SelectedItem);   
             
         }
 
