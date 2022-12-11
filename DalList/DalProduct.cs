@@ -50,12 +50,12 @@ internal class DalProduct : IProduct
     /// </summary>
     /// <param name="p"></param>
     /// <exception cref="Exception"></exception>
-    public void Update(Product? p)
+    public void Update(Product p)
     {
         
         for (int i = 0; i < DataSource.MyProducts.Count; i++)
         {
-            if (p?.ID == DataSource.MyProducts[i]?.ID)
+            if (p.ID == DataSource.MyProducts[i]?.ID)
             {
                 DataSource.MyProducts[i] = p;
 

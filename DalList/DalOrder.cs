@@ -41,11 +41,11 @@ internal class DalOrder: IOrder
     /// </summary>
     /// <param name="o"></param>
     /// <exception cref="Exception"></exception>
-    public void Update(Order? o)
+    public void Update(Order o)
     {
         for (int i = 0; i < DataSource.MyOrder.Count; i++)
         {
-            if (o?.ID == DataSource.MyOrder[i]?.ID)
+            if (o.ID == DataSource.MyOrder[i]?.ID)
             {
                 
                 DataSource.MyOrder[i] = o;
