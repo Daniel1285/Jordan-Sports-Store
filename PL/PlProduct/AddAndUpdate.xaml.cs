@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PL;
 
 namespace PL.PlProduct
 {
@@ -23,6 +24,9 @@ namespace PL.PlProduct
 
         private static readonly Random R = new Random(); // Random number generation
         private IBl Bl = new BlImplementation.Bl();
+        
+            //((BO.ProductForList)ProductsListView.SelectedItem).ID;
+
 
         /// <summary>
         /// Constructor for adding product.
@@ -58,9 +62,10 @@ namespace PL.PlProduct
         /// <param name="e"></param>
         private void AddOrUpdateProductToList_Click(object sender, RoutedEventArgs e)
         {
+            
             try
             {
-
+                
                 if (IdBox.Text.ToString() == "")
                     throw new BO.NameIsEmptyException("Field ID is empty !");
                 if (ProductNameBox.Text.ToString() == "")
@@ -71,7 +76,6 @@ namespace PL.PlProduct
                     throw new BO.NameIsEmptyException("Field in stock is empty !");
                 if (CategoryComboBox.Text == "")
                     throw new BO.NameIsEmptyException("Field in Category is empty !");
-
 
                 try
                 {
@@ -95,8 +99,24 @@ namespace PL.PlProduct
                 
             }
                 
-            catch (BO.NameIsEmptyException ex ) {MessageBox.Show(ex.Message, "ERROR");}
+            catch (BO.NameIsEmptyException ex ) 
+            { 
+                MessageBoxResult mbresult = MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                
+                switch (mbresult)
+                {
+                    case MessageBoxResult.Yes:
+                        if (AddOrUpdateProductButton.Content.ToString() == "Update")
+                            new AddAndUpdate(int.Parse(IdBox.Text)).Show();
+                        else
+                            new AddAndUpdate().Show(); 
+                        break;
 
+                    default:
+                        break;
+                } 
+
+            }
 
             new ListProduct().Show();
             this.Close();

@@ -33,7 +33,7 @@ namespace PL
 
         private void ShowProductListButton_Click(object sender, RoutedEventArgs e)
         {
-            new PL.PlProduct.ListProduct().Show();
+            new PlProduct.ListProduct().Show();
 
             this.Close();
         }
