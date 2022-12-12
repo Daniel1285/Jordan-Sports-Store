@@ -42,25 +42,69 @@ namespace PL.PlProduct
             InitializeComponent();
             CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
             IdBox.Text = id.ToString();
+            CategoryComboBox.SelectedItem = Bl.Product.GetProduct(id).Category;
+            ProductNameBox.Text = Bl.Product.GetProduct(id).Name;
+            ProductPriceBox.Text = Bl.Product.GetProduct(id).Price.ToString();
+            ProductInstokeBox.Text = Bl.Product.GetProduct(id).InStock.ToString();  
+
+            IdBox.IsReadOnly = true; // blocks the possibility to change the ID.
             AddOrUpdateProductButton.Content = "Update";
         }
 
-        private void AddProductToList_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddOrUpdateProductToList_Click(object sender, RoutedEventArgs e)
         {
-            BO.Product p = new BO.Product
+            try
             {
-                ID = int.Parse(IdBox.Text),
-                Category = (BO.Enums.Category)CategoryComboBox.SelectedItem,
-                Name = ProductNameBox.Text.ToString(),
-                Price = int.Parse(ProductInstokeBox.Text),
-                InStock = int.Parse(ProductInstokeBox.Text)
-            };
-            Bl.Product.AddProduct(p);
+
+                if (IdBox.Text.ToString() == "")
+                    throw new BO.NameIsEmptyException("Field ID is empty !");
+                if (ProductNameBox.Text.ToString() == "")
+                    throw new BO.NameIsEmptyException("Field name is empty !");
+                if (ProductPriceBox.Text.ToString() == "")
+                    throw new BO.NameIsEmptyException("Field price is empty !");
+                if (ProductInstokeBox.Text.ToString() == "")
+                    throw new BO.NameIsEmptyException("Field in stock is empty !");
+                if (CategoryComboBox.Text == "")
+                    throw new BO.NameIsEmptyException("Field in Category is empty !");
+
+
+                try
+                {
+                    BO.Product p = new BO.Product
+                    {
+                        ID = int.Parse(IdBox.Text),
+                        Category = (BO.Enums.Category)CategoryComboBox.SelectedItem,
+                        Name = ProductNameBox.Text.ToString(),
+                        Price = double.Parse(ProductPriceBox.Text),
+                        InStock = int.Parse(ProductInstokeBox.Text)
+                    };
+                    if (AddOrUpdateProductButton.Content.ToString() == "Add")
+                        Bl.Product.AddProduct(p);
+                    else
+                        Bl.Product.UpdateProduct(p);
+                }
+                catch (BO.AlreadyExistException) { MessageBox.Show("ID exists !"); }
+                catch (BO.IdSmallThanZeroException) { MessageBox.Show("ID smalll than zero !"); }
+                catch (BO.InStokeSmallThanZeroException) { MessageBox.Show("In stoke smalll than zero !"); }
+                catch (BO.PriceSmallThanZeroException) { MessageBox.Show("Price smalll than zero !"); }
+                
+            }
+                
+            catch (BO.NameIsEmptyException ex ) {MessageBox.Show(ex.Message);}
+
+
+            new ListProduct().Show();
+            this.Close();
         }
 
         private void BackLastWindow(object sender, RoutedEventArgs e)
         {
-            new PL.PlProduct.ListProduct().Show();
+            new ListProduct().Show();
             this.Close();
         }
 
