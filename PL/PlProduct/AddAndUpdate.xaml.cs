@@ -52,7 +52,7 @@ namespace PL.PlProduct
         }
 
         /// <summary>
-        /// 
+        /// add and update Product.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -88,14 +88,14 @@ namespace PL.PlProduct
                     else
                         Bl.Product.UpdateProduct(p);
                 }
-                catch (BO.AlreadyExistException) { MessageBox.Show("ID exists !"); }
-                catch (BO.IdSmallThanZeroException) { MessageBox.Show("ID smalll than zero !"); }
-                catch (BO.InStokeSmallThanZeroException) { MessageBox.Show("In stoke smalll than zero !"); }
-                catch (BO.PriceSmallThanZeroException) { MessageBox.Show("Price smalll than zero !"); }
+                catch (BO.AlreadyExistException) { MessageBox.Show("ID exists !","EROOR"); }
+                catch (BO.IdSmallThanZeroException) { MessageBox.Show("ID smalll than zero !", "EROOR"); }
+                catch (BO.InStokeSmallThanZeroException) { MessageBox.Show("In stoke smalll than zero !", "EROOR"); }
+                catch (BO.PriceSmallThanZeroException) { MessageBox.Show("Price smalll than zero !", "EROOR"); }
                 
             }
                 
-            catch (BO.NameIsEmptyException ex ) {MessageBox.Show(ex.Message);}
+            catch (BO.NameIsEmptyException ex ) {MessageBox.Show(ex.Message, "ERROR");}
 
 
             new ListProduct().Show();
