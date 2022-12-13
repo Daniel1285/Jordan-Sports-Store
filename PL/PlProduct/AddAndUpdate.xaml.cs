@@ -62,8 +62,8 @@ namespace PL.PlProduct
         /// <param name="e"></param>
         private void AddOrUpdateProductToList_Click(object sender, RoutedEventArgs e)
         {
-            bool flag = true;
-            
+            bool flag = true; // for Checks if there is any exception 
+
             try
             {
                 
@@ -101,10 +101,11 @@ namespace PL.PlProduct
             }
                 
             catch (BO.NameIsEmptyException ex ) 
-            { 
+            {
+                // If there is an exception, a window will open with the option to try again or not.
                 MessageBoxResult mbresult = MessageBox.Show(ex.Message + "\n do you want try again ?", "ERROR", MessageBoxButton.YesNo, MessageBoxImage.Error);
                 
-                switch (mbresult)
+                switch (mbresult) // Checks the user's choice and acts accordingly.
                 {
                     case MessageBoxResult.Yes:
                         if (AddOrUpdateProductButton.Content.ToString() == "Update")
@@ -120,7 +121,7 @@ namespace PL.PlProduct
                             this.Close();
                         }
 
-                        else
+                        else // if the choice is "No"
                             new AddAndUpdate().Show(); 
                         break;
 
@@ -129,7 +130,9 @@ namespace PL.PlProduct
                 } 
 
             }
-            if (flag)
+            /* If the flag is true then it will open the windows...
+               And if it's a false, he will already open them by calling the window in catch */
+            if (flag) 
             {
                 new ListProduct().Show();
                 this.Close();
