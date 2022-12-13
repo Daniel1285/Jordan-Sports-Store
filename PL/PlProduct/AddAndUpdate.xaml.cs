@@ -101,7 +101,7 @@ namespace PL.PlProduct
                 
             catch (BO.NameIsEmptyException ex ) 
             { 
-                MessageBoxResult mbresult = MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                MessageBoxResult mbresult = MessageBox.Show(ex.Message + "\t\n do you want try again ?", "ERROR", MessageBoxButton.YesNo, MessageBoxImage.Error);
                 
                 switch (mbresult)
                 {
