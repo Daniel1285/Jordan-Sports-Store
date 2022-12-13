@@ -22,10 +22,10 @@
         <TextBox x:Name="ProductNameBox" HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductNameBox_TextChanged" FontSize="12"/>
 
         <Label   Content="Price:" HorizontalAlignment="Left" Margin="168,190,0,0" Width="50" Height="26" RenderTransformOrigin="0.405,0.548" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="White"/>
-        <TextBox x:Name="ProductPriceBox" Margin="0,188,0,0" TextWrapping="Wrap" Text="" Width="200" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductPriceTextBox_TextChanged" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox x:Name="ProductPriceBox" Margin="0,188,0,0" TextWrapping="Wrap" Text="0" Width="200" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductPriceTextBox_TextChanged" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
 
         <Label   Content="In stock:" HorizontalAlignment="Left" Margin="168,237,0,0" Width="68" Height="26" RenderTransformOrigin="0.483,0.269" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Foreground="White"/>
-        <TextBox x:Name="ProductInstokeBox" HorizontalAlignment="Center" Margin="0,237,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductInstokeBox_TextChanged" FontSize="16"/>
+        <TextBox x:Name="ProductInstokeBox" HorizontalAlignment="Center" Margin="0,237,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.052,-2.59" Height="30" TextChanged="ProductInstokeBox_TextChanged" FontSize="16"/>
 
         <Button x:Name="AddOrUpdateProductButton"  HorizontalAlignment="Center" Margin="0,288,0,0" VerticalAlignment="Top" Width="64" Click="AddOrUpdateProductToList_Click"/>
         <Button x:Name="backWindow" Content="Back" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="64" Click="BackLastWindow"/>

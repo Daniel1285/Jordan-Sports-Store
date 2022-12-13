@@ -2,6 +2,7 @@
 using BlImplementation;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -57,15 +58,14 @@ namespace PL.PlProduct
         {
             int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
             new AddAndUpdate(id).Show();
-
-
             this.Close();
         }
-
+        
         private void ProductsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
         }
+        
         private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
         {
             new PL.MainWindow().Show();

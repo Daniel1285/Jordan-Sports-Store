@@ -62,6 +62,7 @@ namespace PL.PlProduct
         /// <param name="e"></param>
         private void AddOrUpdateProductToList_Click(object sender, RoutedEventArgs e)
         {
+            bool flag = true;
             
             try
             {
@@ -101,13 +102,24 @@ namespace PL.PlProduct
                 
             catch (BO.NameIsEmptyException ex ) 
             { 
-                MessageBoxResult mbresult = MessageBox.Show(ex.Message + "\t\n do you want try again ?", "ERROR", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                MessageBoxResult mbresult = MessageBox.Show(ex.Message + "\n do you want try again ?", "ERROR", MessageBoxButton.YesNo, MessageBoxImage.Error);
                 
                 switch (mbresult)
                 {
                     case MessageBoxResult.Yes:
                         if (AddOrUpdateProductButton.Content.ToString() == "Update")
+                        {
                             new AddAndUpdate(int.Parse(IdBox.Text)).Show();
+                            flag = false;
+                            this.Close();
+                        }
+                        else if (AddOrUpdateProductButton.Content.ToString() == "Add")
+                        {
+                            new AddAndUpdate().Show();
+                            flag = false;
+                            this.Close();
+                        }
+
                         else
                             new AddAndUpdate().Show(); 
                         break;
@@ -117,9 +129,12 @@ namespace PL.PlProduct
                 } 
 
             }
-
-            new ListProduct().Show();
-            this.Close();
+            if (flag)
+            {
+                new ListProduct().Show();
+                this.Close();
+            }
+         
         }
 
         private void BackLastWindow(object sender, RoutedEventArgs e)
@@ -130,7 +145,7 @@ namespace PL.PlProduct
 
         private void ProductIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            
         }
 
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

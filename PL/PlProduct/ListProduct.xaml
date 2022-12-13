@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.PlProduct"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="ListProduct" Height="640" Width="800">
+        Title="ListProduct" Height="440" Width="800">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
@@ -21,11 +21,11 @@
             </Grid.ColumnDefinitions >
             <ComboBox Name="AttributeSelector" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged"/>
 
-            <Label Content="Category" Grid.Column="0" FontSize="30" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" />
+            <Label Content="Category" Grid.Column="0" FontSize="18" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold" />
             
 
         </Grid>
-        <ListView x:Name="ProductsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" MouseDoubleClick="doubleClick_Update" SelectionChanged="ProductsListView_SelectionChanged">
+        <ListView x:Name="ProductsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" MouseDoubleClick="doubleClick_Update" SelectionChanged="ProductsListView_SelectionChanged" FontWeight="Bold">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -33,14 +33,20 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="100" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Name" Width="100"/>
+                <GridView> 
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Name" Width="250"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="100"/>
-
-
-
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter Property="Background" Value="AntiqueWhite" />
+                            <Setter Property="FontSize" Value="14" />
+                            
+                            
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
                 </GridView>
             </ListView.View>
         </ListView>
