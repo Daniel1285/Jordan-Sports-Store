@@ -16,7 +16,7 @@ namespace BlImplementation
         {
             List<DO.Order?> orders = new List<DO.Order?>();
             List<BO.OrderForList?> ordersForList = new List<BO.OrderForList?>();
-            orders = Dal.Order.GetAll().ToList();
+            orders = Dal?.Order.GetAll().ToList();
             
             foreach (DO.Order? item in orders)
             {
