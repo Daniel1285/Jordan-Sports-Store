@@ -5,6 +5,7 @@ using DalApi;
 
 internal class DalOrder: IOrder
 {
+
     /// <summary>
     /// Add a Order to array "MyOrder" in DataSource and increases the size of the array "SizeOfOrder" by one.
     /// </summary>

@@ -5,13 +5,20 @@ using System.Security.Principal;
 
 namespace Dal;
 
-sealed public class DalList : IDal
+sealed internal class DalList : IDal
 {
-    
-    public IProduct Product => new DalProduct();
+    public static IDal Instance { get; } = new DalList();
 
-    public IOrder Order => new DalOrder();
+    private DalList() 
+    { 
+        Order = new DalOrder();
+        Product= new DalProduct();
+        OrderItem = new DalOrderItem(); 
+    }
+    public IProduct Product { get; }
 
-    public IOrderItem OrderItem => new DalOrderItem();
+    public IOrder Order { get; } 
+
+    public IOrderItem OrderItem { get; }
 
 }

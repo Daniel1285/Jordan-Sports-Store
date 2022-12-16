@@ -1,13 +1,12 @@
 ﻿using BlApi;
-using Dal;
-using DalApi;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BlImplementation
 {
     internal class Order: BlApi.IOrder
     {
-        private IDal Dal = new DalList();
+        private DalApi.IDal? Dal = DalApi.Factory.Get();
+
         /// <summary>
         /// Brings a list of orders from the data layer and builds an order list 
         /// OrderForList on this data
@@ -120,7 +119,7 @@ namespace BlImplementation
             BO.Order order1 = new BO.Order();
             try
             {
-                order = Dal.Order.GetByCondition(x => x?.ID == orderId) ;
+                order = Dal?.Order.GetByCondition(x => x?.ID == orderId) ;
                 order1 = GetOrder(orderId);
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
@@ -187,7 +186,7 @@ namespace BlImplementation
         private (List<BO.OrderItem?> , double) FromDotToBoOrderItem(int id, List<DO.OrderItem?> items)
 
         {
-            items = Dal.OrderItem.GetAll().ToList();
+            items = Dal?.OrderItem.GetAll().ToList() ?? throw new NullReferenceException(); ;
             List<BO.OrderItem?> orderItems = new List<BO.OrderItem?>();
             double sum = 0;
             foreach (DO.OrderItem? i in items)

@@ -1,6 +1,4 @@
 ﻿using BlApi;
-using Dal;
-using DalApi;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,15 +7,16 @@ namespace BlImplementation
 {
     internal class Cart : ICart
     {
-        private IDal Dal = new DalList();
+        private DalApi.IDal? Dal = DalApi.Factory.Get();
+        
         public BO.Cart AddProdctToCatrt(BO.Cart cart, int id)
         {
             if (id < 0) throw new BO.IdSmallThanZeroException("ID small zero!");
             DO.Product? product1 = new DO.Product();
-            List<DO.OrderItem?> orderItem1 = Dal.OrderItem.GetAll().ToList();
+            List<DO.OrderItem?> orderItem1 = Dal?.OrderItem.GetAll().ToList()?? throw new NullReferenceException();
             try
             {
-                product1 =  Dal.Product.GetByCondition(x => x?.ID == id);
+                product1 =  Dal?.Product.GetByCondition(x => x?.ID == id);
             }
             catch (DO.NotExistException ex)
             {
@@ -74,7 +73,7 @@ namespace BlImplementation
             DO.Product? product1 = new DO.Product();
             try
             {
-                product1 = Dal.Product.GetByCondition(x => x?.ID == id);
+                product1 = Dal?.Product.GetByCondition(x => x?.ID == id);
             }
             catch (DO.NotExistException ex)
             {
@@ -130,7 +129,7 @@ namespace BlImplementation
                 DeliveryrDate = null,
             };
 
-            int orderId = Dal.Order.Add(order1);
+            int orderId = Dal?.Order.Add(order1)?? throw new NullReferenceException();
             if (cart.Items != null)
             {
                 foreach (var item in cart.Items)

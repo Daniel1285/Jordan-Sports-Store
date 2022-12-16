@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{F206
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BITest", "BITTest\BITest.csproj", "{B337B579-27E8-4A60-B617-2A1E9E0BC427}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{9B2D7936-BDF7-4BBB-B8F7-39CAAA735EC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{9B2D7936-BDF7-4BBB-B8F7-39CAAA735EC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{7A071B7C-E373-4CE5-B65A-8706D314066E}"
+	ProjectSection(SolutionItems) = preProject
+		xml\dal-config.xml = xml\dal-config.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

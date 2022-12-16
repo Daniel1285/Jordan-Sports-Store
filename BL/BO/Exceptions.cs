@@ -127,4 +127,15 @@ public class NotEnougeInStock : Exception
       System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 }
 
+[Serializable]
+public class NullRefrenceException : Exception
+{
+    public NullRefrenceException() { }
+    public NullRefrenceException(string message) : base(message) { }
+    public NullRefrenceException(string message, Exception inner) : base(message, inner) { }
+    protected NullRefrenceException(
+      System.Runtime.Serialization.SerializationInfo info,
+      System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+}
+
 

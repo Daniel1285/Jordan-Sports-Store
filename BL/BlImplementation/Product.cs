@@ -1,6 +1,5 @@
 ﻿using BlApi;
-using DalApi;
-using Dal;
+
 
 
 namespace BlImplementation
@@ -10,7 +9,7 @@ namespace BlImplementation
     /// </summary>
     internal class Product : BlApi.IProduct
     {
-        private IDal Dal = new DalList();
+        private DalApi.IDal? Dal = DalApi.Factory.Get();
         /// <summary>
         /// We will ask DO for a list of products and build a new list of ProductForList  
         /// </summary>
@@ -19,7 +18,7 @@ namespace BlImplementation
         {
             List<DO.Product?> products = new List<DO.Product?>();
             List<BO.ProductForList?> productsForList = new List<BO.ProductForList?>();
-            products = Dal.Product.GetAll().ToList();
+            products = Dal?.Product.GetAll().ToList() ?? throw new NullReferenceException();
             foreach (DO.Product? item in products)
             {
                 productsForList.Add(new BO.ProductForList()
@@ -49,7 +48,7 @@ namespace BlImplementation
                 try
                 {
                     DO.Product? p = new DO.Product();
-                    p = Dal.Product.GetByCondition(x => x?.ID == id);
+                    p = Dal?.Product.GetByCondition(x => x?.ID == id);
 
                     p1 = new BO.Product
                     {
@@ -86,7 +85,7 @@ namespace BlImplementation
                 DO.Product? p = new DO.Product();
                 try
                 {
-                    p = Dal.Product.GetByCondition(x => x?.ID == id);          
+                    p = Dal?.Product.GetByCondition(x => x?.ID == id);          
                 }
                 catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex);}
                 pi = new BO.ProductItem
@@ -134,7 +133,7 @@ namespace BlImplementation
             };
             try
             { 
-                Dal.Product.Add(p1);
+                Dal?.Product.Add(p1);
             }
             catch (DO.AlreadyExistException ex) { throw new BO.AlreadyExistException("", ex);}
         }
@@ -150,11 +149,11 @@ namespace BlImplementation
                 
             try
             {
-                Dal.Product.GetByCondition(x => x?.ID == id);
+                Dal?.Product.GetByCondition(x => x?.ID == id);
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("",ex);}
 
-            foreach (DO.OrderItem? p in Dal.OrderItem.GetAll())
+            foreach (DO.OrderItem? p in Dal?.OrderItem.GetAll() ?? throw new NullReferenceException())
             {
                 if (p?.ProductID == id) throw new BO.CanNotDeleteProductException("Can't delete product!");
         
@@ -192,7 +191,7 @@ namespace BlImplementation
             };
             try
             {
-                Dal.Product.Update(p1);
+                Dal?.Product.Update(p1);
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
         }
