@@ -37,7 +37,7 @@ namespace PL.PlProduct
 
         public void SetProductComboBox()
         {
-            for(int i = 0; i < 4;i++) { AttributeSelector.Items.Add($"{(BO.Enums.Category)i}");}     
+            for(int i = 0; i <= 4;i++) { AttributeSelector.Items.Add($"{(BO.Enums.Category)i}");}     
             AttributeSelector.Items.Add("All");
         }
 

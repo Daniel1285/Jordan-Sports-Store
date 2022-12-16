@@ -25,7 +25,7 @@
             
 
         </Grid>
-        <ListView x:Name="ProductsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" MouseDoubleClick="doubleClick_Update" SelectionChanged="ProductsListView_SelectionChanged" FontWeight="Bold">
+        <ListView x:Name="ProductsListView" Grid.Row="1" ItemsSource="{Binding}" MouseDoubleClick="doubleClick_Update" SelectionChanged="ProductsListView_SelectionChanged" FontWeight="Bold">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
