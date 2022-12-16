@@ -6,9 +6,8 @@ namespace DalTest;
 
 internal class Program
 {
-  
-    
-    private DalApi.IDal? testMain = DalApi.Factory.Get();
+
+    private static DalApi.IDal? testMain = DalApi.Factory.Get();
     static void Main(string[] args)
     {
         int choice;
@@ -78,7 +77,7 @@ internal class Program
 
                 try
                 {
-                    testMain.Product.Add(p);    
+                    testMain?.Product.Add(p);    
                 }
                 catch (AlreadyExistException str) { Console.WriteLine(str); }
                 
@@ -101,7 +100,7 @@ internal class Program
                 try
                 {
                    
-                    List<Product?> products = testMain.Product.GetAll().ToList();
+                    List<Product?> products = testMain?.Product.GetAll().ToList()?? throw new NullReferenceException();
                     foreach (DO.Product? product in products)
                     {
                         Console.WriteLine(testMain.Product.GetByCondition(x => x?.ID == product?.ID));
@@ -120,7 +119,7 @@ internal class Program
                 int.TryParse(Console.ReadLine(),out ID2);
                 try
                 {
-                    Console.WriteLine(testMain.Product.GetByCondition(x => x?.ID == ID2));
+                    Console.WriteLine(testMain?.Product.GetByCondition(x => x?.ID == ID2));
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
 
@@ -146,7 +145,7 @@ internal class Program
                 p.InStock = num;
                 try
                 {
-                    testMain.Product.Update(p);
+                    testMain?.Product.Update(p);
                 }
                 catch (NotExistException str) { Console.WriteLine(str);}
   
@@ -160,7 +159,7 @@ internal class Program
                
                 try
                 {
-                    testMain.Product.Delete(num);
+                    testMain?.Product.Delete(num);
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
 
@@ -207,7 +206,7 @@ internal class Program
                 int.TryParse(Console.ReadLine(), out num);
                 item.Amount = num;
 
-                testMain.OrderItem.Add(item);
+                testMain?.OrderItem.Add(item);
                  
                 
 
@@ -225,11 +224,11 @@ internal class Program
 
                 try
                 {
-                    testMain.OrderItem.GetByCondition(x => x?.OrderID == num);
+                    testMain?.OrderItem.GetByCondition(x => x?.OrderID == num);
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
  
-                Console.WriteLine(testMain.OrderItem.GetByCondition(x => x?.OrderID == num)); 
+                Console.WriteLine(testMain?.OrderItem.GetByCondition(x => x?.OrderID == num)); 
 
                 break;
 
@@ -237,7 +236,7 @@ internal class Program
 
                 try
                 {
-                    List<OrderItem?>items = testMain.OrderItem.GetAll().ToList();
+                    List<OrderItem?>items = testMain?.OrderItem.GetAll().ToList() ?? throw new NullReferenceException();
                     foreach (var itemOfOrderItem in items)
                     {
                         Console.WriteLine(testMain.OrderItem.GetByCondition(x => x?.ID ==itemOfOrderItem?.ID));
@@ -258,7 +257,7 @@ internal class Program
                 int.TryParse(Console.ReadLine(), out num1);
                 try
                 {
-                    Console.WriteLine(testMain.OrderItem.GetByCondition(x => x?.OrderID == num && x?.ProductID == num1));
+                    Console.WriteLine(testMain?.OrderItem.GetByCondition(x => x?.OrderID == num && x?.ProductID == num1));
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }   
    
@@ -286,7 +285,7 @@ internal class Program
                 item.Amount = num;
                 try
                 {
-                    testMain.OrderItem.Update(item);
+                    testMain?.OrderItem.Update(item);
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }   
 
@@ -299,7 +298,7 @@ internal class Program
                 int IDd = num;
                 try
                 {
-                    testMain.OrderItem.Delete(IDd);
+                    testMain?.OrderItem.Delete(IDd);
                     Console.WriteLine("succees");
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }   
@@ -309,7 +308,7 @@ internal class Program
             case "f":
                 Console.WriteLine("Enter ID of order:");
                 int.TryParse(Console.ReadLine(), out num);
-                List<OrderItem?> ArrOrders = testMain.OrderItem.GetAll(x => x?.OrderID == num).ToList();
+                List<OrderItem?> ArrOrders = testMain?.OrderItem.GetAll(x => x?.OrderID == num).ToList() ?? throw new NullReferenceException();
 
                 try
                 {
@@ -356,7 +355,7 @@ internal class Program
                 o.CustomerAdress = Console.ReadLine();
 
             
-                 testMain.Order.Add(o);
+                 testMain?.Order.Add(o);
                
 
                 break;
@@ -368,19 +367,19 @@ internal class Program
 
                 try
                 {
-                    testMain.Order.GetByCondition(x => x?.ID == num2);
+                    testMain?.Order.GetByCondition(x => x?.ID == num2);
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }   
 
                 
-                Console.WriteLine(testMain.Order.GetByCondition(x => x?.ID == num2));
+                Console.WriteLine(testMain?.Order.GetByCondition(x => x?.ID == num2));
 
                 break;
 
             case "c":
                 try
                 {
-                    List<Order?> orders = testMain.Order.GetAll().ToList();
+                    List<Order?> orders = testMain?.Order.GetAll().ToList() ?? throw new NullReferenceException();
                     foreach (var order in orders)
                     {
                         Console.WriteLine(testMain.Order.GetByCondition(x => x?.ID ==order?.ID));
@@ -397,7 +396,7 @@ internal class Program
 
                 try
                 {
-                    Console.WriteLine(testMain.Order.GetByCondition(x => x?.ID ==num2));
+                    Console.WriteLine(testMain?.Order.GetByCondition(x => x?.ID ==num2));
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }   
   
@@ -420,7 +419,7 @@ internal class Program
                 o.OrderDate = DateTime.Now;
                 try
                 {
-                    testMain.Order.Update(o);
+                    testMain?.Order.Update(o);
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }   
       
@@ -432,7 +431,7 @@ internal class Program
                 int IDd = num2;
                 try
                 {
-                    testMain.Order.Delete(IDd);
+                    testMain?.Order.Delete(IDd);
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
 

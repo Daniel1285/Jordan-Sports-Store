@@ -1,5 +1,4 @@
-﻿using BlApi;
-using BlImplementation;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -24,7 +23,7 @@ namespace PL.PlProduct
     /// </summary>
     public partial class ListProduct : Window
     {
-        private IBl Bl = new BlImplementation.Bl();
+        private BlApi.IBl? Bl = BlApi.Factory.Get();
 
 
         public ListProduct()
@@ -43,7 +42,7 @@ namespace PL.PlProduct
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All"? Bl.Product.GetProductList() : Bl.Product.GetListByCondition(X => X?.Category.ToString() == AttributeSelector.SelectedItem.ToString());              
+            ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All"? Bl?.Product.GetProductList() : Bl?.Product.GetListByCondition(X => X?.Category.ToString() == AttributeSelector.SelectedItem.ToString());              
         }
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,4 @@
-﻿using BlApi;
+﻿
 using Dal;
 using DalApi;
 using BO;
@@ -10,7 +10,7 @@ namespace BITTest
 {
     internal class Program
     {
-        private static IBl testMain = new BlImplementation.Bl();
+        private static BlApi.IBl? testMain = BlApi.Factory.Get();
         static Cart c = new Cart();
 
         static void Main(string[] args)
@@ -73,7 +73,7 @@ namespace BITTest
                     int.TryParse(Console.ReadLine(), out idProduct);
                     try
                     {
-                        testMain.Cart.AddProdctToCatrt(c, idProduct); 
+                        testMain?.Cart.AddProdctToCatrt(c, idProduct); 
 
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
@@ -103,7 +103,7 @@ namespace BITTest
                     try
                     {
 
-                        testMain.Cart.UpdateAmountOfProduct(c, idProduct, newAmount);
+                        testMain?.Cart.UpdateAmountOfProduct(c, idProduct, newAmount);
                     }
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
                     catch (AmountLessThenZero ex) { Console.WriteLine(ex); }
@@ -121,7 +121,7 @@ namespace BITTest
                     c.CustomerAddress = Console.ReadLine();
                     try
                     {
-                        testMain.Cart.ConfirmOrder(c, c.CustomerName, c.CustomerEmail, c.CustomerAddress);
+                        testMain?.Cart.ConfirmOrder(c, c.CustomerName, c.CustomerEmail, c.CustomerAddress);
                     }
                     catch(NameIsEmptyException ex) { Console.WriteLine(ex); }
                     catch (AddresIsempty ex) { Console.WriteLine(ex); }
@@ -159,7 +159,7 @@ namespace BITTest
                 case "a":
 
                     List<BO.ProductForList?> products = new List<BO.ProductForList?>();
-                    products = testMain.Product.GetProductList().ToList();
+                    products = testMain?.Product.GetProductList().ToList()??throw new NullReferenceException();
                     products.ForEach(product => Console.WriteLine(product));
 
                     break;
@@ -169,7 +169,7 @@ namespace BITTest
                     int.TryParse(Console.ReadLine(), out id);
                     try
                     {
-                        Console.WriteLine(testMain.Product.GetProduct(id));
+                        Console.WriteLine(testMain?.Product.GetProduct(id));
 
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex);}
@@ -183,7 +183,7 @@ namespace BITTest
                     int.TryParse(Console.ReadLine(), out id);
                     try
                     {
-                        Console.WriteLine(testMain.Product.GetProduct(c, id));
+                        Console.WriteLine(testMain?.Product.GetProduct(c, id));
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
@@ -214,7 +214,7 @@ namespace BITTest
 
                     try
                     {
-                        testMain.Product.AddProduct(p);
+                        testMain?.Product.AddProduct(p);
                     }
                     catch (AlreadyExistException str) { Console.WriteLine(str);}
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
@@ -229,7 +229,7 @@ namespace BITTest
                     int.TryParse(Console.ReadLine(), out num);
                     try
                     {
-                        testMain.Product.DeleteProduct(num);
+                        testMain?.Product.DeleteProduct(num);
                         Console.WriteLine("sucsses");
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
@@ -243,7 +243,7 @@ namespace BITTest
                     int.TryParse(Console.ReadLine(), out id);
                     try
                     {
-                        Console.WriteLine(testMain.Product.GetProduct(id));
+                        Console.WriteLine(testMain?.Product.GetProduct(id));
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     
@@ -271,7 +271,7 @@ namespace BITTest
                     p.InStock = num3;
                     try
                     {
-                        testMain.Product.UpdateProduct(p);
+                        testMain?.Product.UpdateProduct(p);
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
@@ -310,7 +310,7 @@ namespace BITTest
             switch (choise)
             {
                 case "a":
-                    List<OrderForList?> orders = testMain.Order.GetOrderLists().ToList();
+                    List<OrderForList?> orders = testMain?.Order.GetOrderLists().ToList()?? throw new NullReferenceException();
                     orders.ForEach(order => Console.WriteLine(order));
                     break;
 
@@ -320,7 +320,7 @@ namespace BITTest
 
                     try
                     {
-                        Console.WriteLine(testMain.Order.GetOrder(orderID));
+                        Console.WriteLine(testMain?.Order.GetOrder(orderID));
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     
@@ -331,7 +331,7 @@ namespace BITTest
                     int.TryParse(Console.ReadLine(), out orderID);
                     try
                     {
-                        Console.WriteLine(testMain.Order.ShippingUpdate(orderID));
+                        Console.WriteLine(testMain?.Order.ShippingUpdate(orderID));
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
@@ -343,7 +343,7 @@ namespace BITTest
                     int.TryParse(Console.ReadLine(), out orderID);
                     try
                     {
-                        Console.WriteLine(testMain.Order.SupplyUpdateOrder(orderID));
+                        Console.WriteLine(testMain?.Order.SupplyUpdateOrder(orderID));
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
@@ -354,7 +354,7 @@ namespace BITTest
                     int.TryParse(Console.ReadLine(), out orderID);
                     try
                     {
-                        Console.WriteLine(testMain.Order.TrackingOtder(orderID));
+                        Console.WriteLine(testMain?.Order.TrackingOtder(orderID));
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }

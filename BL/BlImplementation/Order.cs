@@ -16,7 +16,7 @@ namespace BlImplementation
         {
             List<DO.Order?> orders = new List<DO.Order?>();
             List<BO.OrderForList?> ordersForList = new List<BO.OrderForList?>();
-            orders = Dal?.Order.GetAll().ToList();
+            orders = Dal?.Order.GetAll().ToList()?? throw new NullReferenceException();
             
             foreach (DO.Order? item in orders)
             {
@@ -52,12 +52,12 @@ namespace BlImplementation
             if (orderId < 0) throw new BO.IdSmallThanZeroException("ID small than zero!");
             try
             {
-                 OrderFromDo = Dal.Order.GetByCondition(x => x?.ID == orderId);
+                 OrderFromDo = Dal?.Order.GetByCondition(x => x?.ID == orderId);
 
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("",ex); }
        
-            OrderItemFromDo = Dal.OrderItem.GetAll().ToList();
+            OrderItemFromDo = Dal?.OrderItem.GetAll().ToList() ?? throw new NullReferenceException();
 
             BO.Order o = new BO.Order
             {
@@ -89,7 +89,7 @@ namespace BlImplementation
             BO.Order order1 = new BO.Order();
             try
             {
-                order = Dal.Order.GetByCondition(x => x?.ID == orderId);
+                order = Dal?.Order.GetByCondition(x => x?.ID == orderId) ?? throw new NullReferenceException();
                 order1 = GetOrder(orderId);
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("",ex);}
@@ -119,7 +119,7 @@ namespace BlImplementation
             BO.Order order1 = new BO.Order();
             try
             {
-                order = Dal?.Order.GetByCondition(x => x?.ID == orderId) ;
+                order = Dal?.Order.GetByCondition(x => x?.ID == orderId) ??throw new NullReferenceException();
                 order1 = GetOrder(orderId);
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
@@ -149,7 +149,7 @@ namespace BlImplementation
             Tuple<DateTime, BO.Enums.OrderStatus>? p;
             try
             {
-                order = Dal.Order.GetByCondition(x => x?.ID == orderId);
+                order = Dal?.Order.GetByCondition(x => x?.ID == orderId) ?? throw new NullReferenceException();
             }
             catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
 

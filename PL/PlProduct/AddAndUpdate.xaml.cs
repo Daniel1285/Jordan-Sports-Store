@@ -1,4 +1,4 @@
-﻿using BlApi;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +23,9 @@ namespace PL.PlProduct
     {
 
         private static readonly Random R = new Random(); // Random number generation
-        private IBl Bl = new BlImplementation.Bl();
-        
-            //((BO.ProductForList)ProductsListView.SelectedItem).ID;
+        private BlApi.IBl? Bl = BlApi.Factory.Get();
+
+        //((BO.ProductForList)ProductsListView.SelectedItem).ID;
 
 
         /// <summary>
@@ -89,9 +89,9 @@ namespace PL.PlProduct
                         InStock = int.Parse(ProductInstokeBox.Text)
                     };
                     if (AddOrUpdateProductButton.Content.ToString() == "Add")
-                        Bl.Product.AddProduct(p);
+                        Bl?.Product.AddProduct(p);
                     else
-                        Bl.Product.UpdateProduct(p);
+                        Bl?.Product.UpdateProduct(p);
                 }
                 catch (BO.AlreadyExistException) { MessageBox.Show("ID exists !","EROOR"); }
                 catch (BO.IdSmallThanZeroException) { MessageBox.Show("ID smalll than zero !", "EROOR"); }
