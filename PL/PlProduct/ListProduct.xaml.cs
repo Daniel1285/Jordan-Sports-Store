@@ -24,20 +24,21 @@ namespace PL.PlProduct
     public partial class ListProduct : Window
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-
+        public List<BO.ProductForList?> myList; 
 
         public ListProduct()
         {
             InitializeComponent();
             SetProductComboBox();
-            ProductsListView.ItemsSource = Bl.Product.GetProductList();
-            //ProductsListView.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+            myList = Bl.Product.GetProductList().ToList();
         }
 
         public void SetProductComboBox()
         {
+
             for(int i = 0; i <= 4;i++) { AttributeSelector.Items.Add($"{(BO.Enums.Category)i}");}     
             AttributeSelector.Items.Add("All");
+            AttributeSelector.SelectedItem = "All";
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
