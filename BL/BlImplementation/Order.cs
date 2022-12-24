@@ -14,28 +14,38 @@ namespace BlImplementation
         /// <returns></returns>
         public IEnumerable<BO.OrderForList?> GetOrderLists()
         {
-            List<DO.Order?> orders = new List<DO.Order?>();
-            List<BO.OrderForList?> ordersForList = new List<BO.OrderForList?>();
-            orders = Dal?.Order.GetAll().ToList()?? throw new NullReferenceException();
-            
-            foreach (DO.Order? item in orders)
-            {
-                BO.OrderForList order = new BO.OrderForList()
-                {
-                    ID = (int)item?.ID!,
-                    CustomerName= item?.CustomerName,
-                    Status = getStatus(item),
-                };
-                List<DO.OrderItem?> orderItem = Dal.OrderItem.GetAll(x => x?.OrderID == item?.ID).ToList();
-                foreach (DO.OrderItem? i in orderItem)
-                {
-                    order.AmountOfItems += (int)i?.Amount!;
-                    order.TotalPrice += (double)(i?.Price * i?.Amount)!;
-                }
-                ordersForList.Add(order);
-            }
+            //List<DO.Order?> orders = new List<DO.Order?>();
+            //List<BO.OrderForList?> ordersForList = new List<BO.OrderForList?>();
+            //orders = Dal?.Order.GetAll().ToList() ?? throw new NullReferenceException();
 
-            return ordersForList;
+            //foreach (DO.Order? item in orders)
+            //{
+            //    BO.OrderForList order = new BO.OrderForList()
+            //    {
+            //        ID = (int)item?.ID!,
+            //        CustomerName = item?.CustomerName,
+            //        Status = getStatus(item),
+            //    };
+            //    List<DO.OrderItem?> orderItem = Dal.OrderItem.GetAll(x => x?.OrderID == item?.ID).ToList();
+            //    foreach (DO.OrderItem? i in orderItem)
+            //    {
+            //        order.AmountOfItems += (int)i?.Amount!;
+            //        order.TotalPrice += (double)(i?.Price * i?.Amount)!;
+            //    }
+            //    ordersForList.Add(order);
+            //}
+            var ordersForList1 = from DOOrder in Dal?.Order.GetAll()
+                                 let sumAmount = Dal?.OrderItem.GetAll(x => x?.OrderID == DOOrder?.ID).Sum(x => x?.Amount)
+                                 let sumTotalPrice = Dal?.OrderItem.GetAll(x => x?.OrderID == DOOrder?.ID).Sum(x => x?.Price * x?.Amount)
+                                 select new BO.OrderForList {
+                                     ID = (int)DOOrder?.ID!,
+                                     CustomerName = DOOrder?.CustomerName,
+                                     Status = getStatus(DOOrder),
+                                     AmountOfItems = (int)sumAmount,
+                                     TotalPrice = (int)sumTotalPrice,
+                                 };
+
+            return ordersForList1;
         }
         /// <summary>
         /// Receives data if the data is correct we will ask do for an order 
@@ -187,27 +197,39 @@ namespace BlImplementation
 
         {
             items = Dal?.OrderItem.GetAll().ToList() ?? throw new NullReferenceException(); ;
-            List<BO.OrderItem?> orderItems = new List<BO.OrderItem?>();
-            double sum = 0;
-            foreach (DO.OrderItem? i in items)
-            {
-                if (id == i?.OrderID)
-                {
-                    BO.OrderItem orderItem = new BO.OrderItem()
-                    {
-                        ID = (int)i?.ID!,
-                        Amount = (int)i?.Amount!,
-                        ProductID = (int)i?.ProductID!,
-                        Price = (int)i?.Price!,
-                        Name = Dal.Product.GetByCondition(x => x?.ID == i?.ProductID).Name,
-                        Totalprice = (int)(i?.Amount * i?.Price)!,
-                    };
-                    sum += orderItem.Totalprice;
-                    orderItems.Add(orderItem);
-                }
+            //List<BO.OrderItem?> orderItems = new List<BO.OrderItem?>();
+            //foreach (DO.OrderItem? i in items)
+            //{
+            //    if (id == i?.OrderID)
+            //    {
+            //        BO.OrderItem orderItem = new BO.OrderItem()
+            //        {
+            //            ID = (int)i?.ID!,
+            //            Amount = (int)i?.Amount!,
+            //            ProductID = (int)i?.ProductID!,
+            //            Price = (int)i?.Price!,
+            //            Name = Dal.Product.GetByCondition(x => x?.ID == i?.ProductID).Name,
+            //            Totalprice = (int)(i?.Amount * i?.Price)!,
+            //        };
+            //        sum += orderItem.Totalprice;
+            //        orderItems.Add(orderItem);
+            //    }
 
-            }
-            return (orderItems, sum);
+            //}
+            var orderItems = from i in items
+                             where id == i?.OrderID
+                             select new BO.OrderItem()
+                             {
+                                 ID = (int)i?.ID!,
+                                 Amount = (int)i?.Amount!,
+                                 ProductID = (int)i?.ProductID!,
+                                 Price = (int)i?.Price!,
+                                 Name = Dal.Product.GetByCondition(x => x?.ID == i?.ProductID).Name,
+                                 Totalprice = (int)(i?.Amount * i?.Price)!,
+                             };
+            double sum = orderItems.Sum(x => x.Totalprice);
+                             
+            return (orderItems.ToList(), sum);
         }
 
     }

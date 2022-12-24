@@ -29,18 +29,28 @@ internal class DalProduct : IProduct
     /// <param name="ID"></param>
     public void Delete(int ID)
     {
-        bool flag = false;
-        for (int i = 0; i < DataSource.MyProducts.Count; i++)
-        {
-            if (ID == DataSource.MyProducts[i]?.ID)
-            {
-                DataSource.MyProducts.RemoveAt(i);  
-                flag = true;
-                break;
-            }
+        //bool flag = false;
+        //for (int i = 0; i < DataSource.MyProducts.Count; i++)
+        //{
+        //    if (ID == DataSource.MyProducts[i]?.ID)
+        //    {
+        //        DataSource.MyProducts.RemoveAt(i);
+        //        //flag = true;
+        //        //break;
+        //        return;
+        //    }
+        //}
+        //if (flag == false)
+        var product1 = (from item in DataSource.MyProducts
+                        where (item?.ID == ID)
+                        select item).FirstOrDefault();
+        if (product1 != null)
+        { 
+            DataSource.MyProducts.Remove(product1);
+            return;
         }
-        if (flag == false)
-            throw new NotExistException("Not found Product to delete");
+        throw new NotExistException("Not found Product to delete");
+           
 
     }
 
@@ -53,16 +63,27 @@ internal class DalProduct : IProduct
     public void Update(Product p)
     {
         
-        for (int i = 0; i < DataSource.MyProducts.Count; i++)
+        //for (int i = 0; i < DataSource.MyProducts.Count; i++)
+        //{
+        //    if (p.ID == DataSource.MyProducts[i]?.ID)
+        //    {
+        //        DataSource.MyProducts[i] = p;
+
+        //        return;
+        //    }
+        //}
+        var product1 = (from item in DataSource.MyProducts
+                        where (item?.ID== p.ID)
+                        select item).FirstOrDefault();
+        if(product1 != null)
         {
-            if (p.ID == DataSource.MyProducts[i]?.ID)
-            {
-                DataSource.MyProducts[i] = p;
+            int index = DataSource.MyProducts.IndexOf(product1);
+            DataSource.MyProducts.Remove(product1);
+            DataSource.MyProducts.Insert(index, p);
+            //DataSource.MyProducts = DataSource.MyProducts.OrderBy(x => x?.ID).ToList();
+            return;
 
-                return;
-            }
         }
-
         throw new NotExistException("Not found Product to Update");
     }
 
@@ -76,14 +97,21 @@ internal class DalProduct : IProduct
     /// <exception cref="Exception"></exception>
     public Product GetByCondition(Func<Product?, bool>? filter)
     {
-        foreach (Product? p in DataSource.MyProducts)
+        //foreach (Product? p in DataSource.MyProducts)
+        //{
+        //    if (filter!(p))
+        //    {
+        //        return (Product)p!;
+        //    }
+        //}
+        var product1 = (from item in DataSource.MyProducts
+                       where(filter!(item))
+                       select item).FirstOrDefault();
+        if(product1 != null)
         {
-            if (filter!(p))
-            {
-                return (Product)p!;
-            }
+            return (Product)product1;
         }
-        throw new DO.NotExistException("NOT exists!");
+        throw new NotExistException("NOT exists!");
     }
 
     /// <summary>

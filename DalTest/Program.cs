@@ -101,11 +101,11 @@ internal class Program
                 {
                    
                     List<Product?> products = testMain?.Product.GetAll().ToList()?? throw new NullReferenceException();
-                    foreach (DO.Product? product in products)
-                    {
-                        Console.WriteLine(testMain.Product.GetByCondition(x => x?.ID == product?.ID));
-                    }
-                    
+                    //foreach (DO.Product? product in products)
+                    //{
+                    //    Console.WriteLine(testMain.Product.GetByCondition(x => x?.ID == product?.ID));
+                    //}
+                    products.ForEach(p => Console.WriteLine(p));
                 }
 
                 catch (NotExistException str) { Console.WriteLine(str); }
@@ -121,7 +121,7 @@ internal class Program
                 {
                     Console.WriteLine(testMain?.Product.GetByCondition(x => x?.ID == ID2));
                 }
-                catch (NotExistException str) { Console.WriteLine(str); }
+                catch (NotExistException str) { Console.WriteLine(str);break; }
 
                 
                 Console.WriteLine("Please enter the product to update:");
@@ -220,15 +220,18 @@ internal class Program
 
                 Console.WriteLine("Enter the Order ID:");
                 int.TryParse(Console.ReadLine(), out num);
-                
 
+                List<OrderItem?> x = new List<OrderItem?>();
                 try
                 {
-                    testMain?.OrderItem.GetByCondition(x => x?.OrderID == num);
+                    x = testMain?.OrderItem.GetAll(x => x?.OrderID == num).ToList()!;
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
- 
-                Console.WriteLine(testMain?.OrderItem.GetByCondition(x => x?.OrderID == num)); 
+                foreach(var i in x)
+                {
+                    Console.WriteLine(i.ToString());
+                }
+
 
                 break;
 
@@ -237,10 +240,11 @@ internal class Program
                 try
                 {
                     List<OrderItem?>items = testMain?.OrderItem.GetAll().ToList() ?? throw new NullReferenceException();
-                    foreach (var itemOfOrderItem in items)
-                    {
-                        Console.WriteLine(testMain.OrderItem.GetByCondition(x => x?.ID ==itemOfOrderItem?.ID));
-                    }    
+                    //foreach (var itemOfOrderItem in items)
+                    //{
+                    //    Console.WriteLine(testMain.OrderItem.GetByCondition(x => x?.ID ==itemOfOrderItem?.ID));
+                    //}
+                    items.ForEach(p => Console.WriteLine(p));
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
 
@@ -250,16 +254,16 @@ internal class Program
             case "d":
                 int num1;
                 item = new OrderItem();
-                Console.WriteLine("For update please enter a Order  ID number:");
+                Console.WriteLine("For update please enter a Order item ID number:");
                 int.TryParse(Console.ReadLine(), out num); 
 
                 Console.WriteLine("For update please enter the Product ID:");
                 int.TryParse(Console.ReadLine(), out num1);
                 try
                 {
-                    Console.WriteLine(testMain?.OrderItem.GetByCondition(x => x?.OrderID == num && x?.ProductID == num1));
+                    Console.WriteLine(testMain?.OrderItem.GetByCondition(x => x?.ID == num && x?.ProductID == num1));
                 }
-                catch (NotExistException str) { Console.WriteLine(str); }   
+                catch (NotExistException str) { Console.WriteLine(str);break; }   
    
                 
                 Console.WriteLine("Please enter the details of the Order item you want to update:");
@@ -353,9 +357,9 @@ internal class Program
 
                 Console.WriteLine("Please enter the CustomerAdress:");
                 o.CustomerAdress = Console.ReadLine();
-
+                o.OrderDate = DateTime.Now;//chack
             
-                 testMain?.Order.Add(o);
+                testMain?.Order.Add(o);
                
 
                 break;
@@ -380,10 +384,11 @@ internal class Program
                 try
                 {
                     List<Order?> orders = testMain?.Order.GetAll().ToList() ?? throw new NullReferenceException();
-                    foreach (var order in orders)
-                    {
-                        Console.WriteLine(testMain.Order.GetByCondition(x => x?.ID ==order?.ID));
-                    }
+                    //foreach (var order in orders)
+                    //{
+                    //    Console.WriteLine(testMain.Order.GetByCondition(x => x?.ID ==order?.ID));
+                    //}
+                    orders.ForEach(o => Console.WriteLine(o));
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
           

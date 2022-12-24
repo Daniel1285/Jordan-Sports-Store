@@ -2,6 +2,7 @@
 using DO;
 namespace Dal;
 using DalApi;
+using System.Security.Cryptography.X509Certificates;
 
 internal class DalOrder: IOrder
 {
@@ -24,15 +25,15 @@ internal class DalOrder: IOrder
     /// <param name="id"></param>
     public void Delete(int id)
     {
-        
-        for (int i = 0; i < DataSource.MyOrder.Count; i++)
+
+        var order1 =(from item in DataSource.MyOrder
+                    where(item?.ID == id)
+                    select item).FirstOrDefault();
+
+        if (order1 != null)
         {
-            if (id == DataSource.MyOrder[i]?.ID)
-            {
-                DataSource.MyOrder.Remove(DataSource.MyOrder[i]);  
-                Console.WriteLine("sucsses");
-                return;
-            }
+            DataSource.MyOrder.Remove(order1);
+            return;
         }
         throw new NotExistException();
     }
@@ -44,14 +45,17 @@ internal class DalOrder: IOrder
     /// <exception cref="Exception"></exception>
     public void Update(Order o)
     {
-        for (int i = 0; i < DataSource.MyOrder.Count; i++)
+
+        var order1 = (from item in DataSource.MyOrder
+                      where (item?.ID == o.ID)
+                      select item).FirstOrDefault();
+        if (order1 != null)
         {
-            if (o.ID == DataSource.MyOrder[i]?.ID)
-            {
-                
-                DataSource.MyOrder[i] = o;
-                return;
-            }
+            int index = DataSource.MyOrder.IndexOf(order1);
+            DataSource.MyOrder.Remove(order1);
+            DataSource.MyOrder.Insert(index,o);
+            //DataSource.MyOrder = DataSource.MyOrder.OrderBy(x => x?.ID).ToList();
+            return;
         }
         throw new NotExistException("Not found order to Update!");
     }
@@ -84,14 +88,13 @@ internal class DalOrder: IOrder
     /// <exception cref="DO.NotExistException"></exception>
     public Order GetByCondition(Func<Order?, bool>? filter)
     {
-        foreach (Order? p in DataSource.MyOrder)
-        {
-            if (filter!(p))
-            {
-                return (Order)p!;
-            }
-        }
-        throw new DO.NotExistException("NOT exists!");
+        
+        var order = (from item in DataSource.MyOrder
+                    where(filter!(item))
+                    select (item)).FirstOrDefault();
+        if (order != null)
+            return (Order)order;
+        throw new NotExistException("NOT exists!");
     }
 
 

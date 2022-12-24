@@ -25,36 +25,33 @@ internal class DalOrderItem : IOrderItem
     /// <param name="id"></param>
     public void Delete(int id)
     {
-        for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
+        var orderItem1 = DataSource.MyOrderItem.Where(x => x?.ID == id).Select(x => x).FirstOrDefault();
+        if(orderItem1 != null)
         {
-            if (id == DataSource.MyOrderItem[i]?.ID)
-            {
-                DataSource.MyOrderItem.RemoveAt(i);
-
-                return;
-            }
+            DataSource.MyOrderItem.Remove(orderItem1);
+            return;
         }
         throw new NotExistException("Not found order item to delete");
-    }
+    } 
 
 
     /// <summary>
     /// Updates a Order Item by overwriting an existing Order Item.
     /// </summary>
-    /// <param name="o"></param>
+    /// <param name="o"></param>(
     /// <exception cref="Exception"></exception>
     public void Update(OrderItem o)
     {
 
-        for (int i = 0; i < DataSource.MyOrderItem.Count; i++)
+        
+        var orderItem1 = DataSource.MyOrderItem.Where(x => x?.ID == o.ID).Select(x => x).FirstOrDefault();
+        if (orderItem1 != null)
         {
-            if (o.ProductID == DataSource.MyOrderItem[i]?.ProductID)
-            {
-                DataSource.MyOrderItem[i] = o;
-                return;
-            }
+            DataSource.MyOrderItem.Remove(orderItem1);
+            DataSource.MyOrderItem.Add(o);
+            DataSource.MyOrderItem = DataSource.MyOrderItem.OrderBy(x => x?.ID).ToList();
+            return;
         }
-
         throw new NotExistException("Not found Order item to Update");
     }
 
@@ -66,13 +63,10 @@ internal class DalOrderItem : IOrderItem
     /// <exception cref="Exception"></exception>
     public OrderItem GetByCondition(Func<OrderItem?, bool>? filter)
     {
-        foreach (OrderItem? p in DataSource.MyOrderItem)
-        {
-            if (filter!(p))
-            {
-                return (OrderItem)p!;
-            }
-        }
+        
+        var orderItem1 = DataSource.MyOrderItem.Where(filter!).Select(x => x).FirstOrDefault();
+        if (orderItem1 != null)
+            return (OrderItem)orderItem1;
         throw new DO.NotExistException("NOT exists!");
     }
     /// <summary>

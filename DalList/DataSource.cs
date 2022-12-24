@@ -2,6 +2,7 @@
 using DO;
 using System.Diagnostics;
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Xml.Linq;
 using static DO.Enums;
 
@@ -17,8 +18,8 @@ internal static class DataSource
     internal static class Config
     {
 
-        internal static int MinOrder = 100000;
-        internal static int MinOrderItem = 100000;
+        static int MinOrder = 100000;
+        static int MinOrderItem = 100000;
 
 
         private static int IdForOrder = MinOrder; // Automatic ID number for order
@@ -82,23 +83,24 @@ internal static class DataSource
     /// <param name="O_i"></param>
     private static void Add_OrderItem()
     {
-        
+
         OrderItem NewOrderItem = new OrderItem();
         for (int i = 0; i < MyOrder.Count; i++)
         {
-            for (int j =0; j < R.Next(1,4); j++)
+            for (int j = 0; j < R.Next(1, 4); j++)
             {
                 NewOrderItem.ID = Config.GetIdForOrderItem;
                 NewOrderItem.OrderID = (int)MyOrder[i]?.ID!;
-                Product? product = MyProducts[R.Next(0,MyProducts.Count)];
-                NewOrderItem.ProductID = (int)product?.ID!;   
-                NewOrderItem.Amount = R.Next(1,4);
+                Product? product = MyProducts[R.Next(0, MyProducts.Count)];
+                NewOrderItem.ProductID = (int)product?.ID!;
+                NewOrderItem.Amount = R.Next(1, 4);
                 NewOrderItem.Price = (double)product?.Price!;
                 MyOrderItem.Add(NewOrderItem);
-            };
-  
+            }
+
         }
-        
+
+
     }
 
 
@@ -141,12 +143,6 @@ internal static class DataSource
 
     }
 
-
-
-
-
-
-
     /// <summary>
     /// constructor initialization
     /// </summary>
@@ -175,15 +171,13 @@ internal static class DataSource
     /// <exception cref="Exception"></exception>
     public static bool CheckID(int? id)
     {
-        foreach (Product? p in MyProducts )
+        MyProducts.ForEach(p =>
         {
             if (id == p?.ID)
             {
-                throw new Exception("ID of product alrady exist");
-               
+                throw new AlreadyExistException("ID of product alrady exist");
             }
-        }
+        });
         return true;
-    } 
-
+    }
 }
