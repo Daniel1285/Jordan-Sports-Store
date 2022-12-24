@@ -80,7 +80,6 @@ internal class DalProduct : IProduct
             int index = DataSource.MyProducts.IndexOf(product1);
             DataSource.MyProducts.Remove(product1);
             DataSource.MyProducts.Insert(index, p);
-            //DataSource.MyProducts = DataSource.MyProducts.OrderBy(x => x?.ID).ToList();
             return;
 
         }

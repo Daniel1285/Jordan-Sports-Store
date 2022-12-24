@@ -57,7 +57,6 @@ namespace BlImplementation
                         };
 
                         cart.Items?.Add(orderItemBo);
-                        Console.WriteLine("sucsess");
                         break;
                     }
                 }

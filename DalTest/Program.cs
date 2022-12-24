@@ -178,7 +178,7 @@ internal class Program
     /// </summary>
     public static void choiceOrderItem()
     {
-        Console.WriteLine("Please enter your choice: \n a. add Order Item. \n b. Order Item display option by ID. \n c. Product list view option. \n d. Update Order item data. \n e. Delete order item. \n f. show orderItem ");
+        Console.WriteLine("Please enter your choice: \n a. add Order Item. \n b. Order Item display option by ID. \n c. Product list view option. \n d. Update Order item data. \n e. Delete order item. \n f. show orderItem by Order ID");
         string? choise = Console.ReadLine();
         OrderItem item = new OrderItem();
         int num;
@@ -224,13 +224,10 @@ internal class Program
                 List<OrderItem?> x = new List<OrderItem?>();
                 try
                 {
-                    x = testMain?.OrderItem.GetAll(x => x?.OrderID == num).ToList()!;
+                    x = testMain?.OrderItem.GetAll(x => x?.OrderID == num && x?.ProductID == IDp).ToList()!;
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
-                foreach(var i in x)
-                {
-                    Console.WriteLine(i.ToString());
-                }
+                x.ForEach(p => Console.WriteLine(p));
 
 
                 break;
@@ -240,15 +237,11 @@ internal class Program
                 try
                 {
                     List<OrderItem?>items = testMain?.OrderItem.GetAll().ToList() ?? throw new NullReferenceException();
-                    //foreach (var itemOfOrderItem in items)
-                    //{
-                    //    Console.WriteLine(testMain.OrderItem.GetByCondition(x => x?.ID ==itemOfOrderItem?.ID));
-                    //}
                     items.ForEach(p => Console.WriteLine(p));
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
 
-                
+               
                 break;
 
             case "d":
@@ -316,10 +309,7 @@ internal class Program
 
                 try
                 {
-                    foreach (var i in ArrOrders)
-                    {
-                        Console.WriteLine(testMain.OrderItem.GetByCondition(x => x?.OrderID == i?.OrderID));
-                    }
+                    ArrOrders.ForEach(p => Console.WriteLine(p));
                 }
                 catch (NotExistException str) { Console.WriteLine(str); }
                 break;
