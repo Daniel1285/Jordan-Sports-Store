@@ -47,5 +47,15 @@ namespace BlApi
         /// <param name="o"></param>
         public void UpdateOrder(Order o);
         */
+
+        /// <summary>
+        /// Get list of Orders by condition check. 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public IEnumerable<OrderForList?> GetListByCondition(Func<OrderForList?, bool>? filter);
     }
+
+   
+
 }

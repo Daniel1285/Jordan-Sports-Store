@@ -31,13 +31,30 @@ namespace PL
 
         }
 
-        private void ShowProductListButton_Click(object sender, RoutedEventArgs e)
+        private void ManagerButton_Click(object sender, RoutedEventArgs e)
         {
             new PlProduct.ListProduct().Show();
 
             this.Close();
         }
-        
-   
+
+        private void ClientButton_Click(object sender, RoutedEventArgs e)
+        {
+            new PL.PlProduct.OrdersManager().Show();
+            this.Close();
+        }
+
+        private void TruckingButton_Click(object sender, RoutedEventArgs e)
+        {
+            new PL.PlProduct.TruckingOrder().Show();
+            this.Close();
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }

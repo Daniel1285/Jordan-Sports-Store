@@ -7,26 +7,26 @@
         xmlns:local="clr-namespace:PL.PlProduct"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="ListProduct" Height="440" Width="800">
-    <Grid x:Name="MainGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
+        Title="ListProduct" Height="440" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="MainGrid" >
+        <Grid.RowDefinitions >
+            <RowDefinition Height="55*"/>
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
          VerticalAlignment="Stretch" Width="auto">
-            <Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="AttributeSelector" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged"/>
 
-            <Label Content="Category" Grid.Column="0" FontSize="18" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold" />
-            
-
+            <ComboBox Name="AttributeSelector" Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" FontSize="16" SelectedIndex="5"/>
+            <Label Content="Category" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
         </Grid>
-        <ListView x:Name="ProductsListView" Grid.Row="1" ItemsSource="{Binding myList}" MouseDoubleClick="doubleClick_Update" SelectionChanged="ProductsListView_SelectionChanged" FontWeight="Bold">
+        
+        
+        <ListView x:Name="ProductsListView" Grid.Row="1" ItemsSource="{Binding myListProduct}" MouseDoubleClick="doubleClick_Update" SelectionChanged="ProductsListView_SelectionChanged" FontWeight="Bold">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -44,8 +44,6 @@
                             <Setter Property="IsHitTestVisible" Value="False"/>
                             <Setter Property="Background" Value="AntiqueWhite" />
                             <Setter Property="FontSize" Value="14" />
-                            
-                            
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
                 </GridView>
@@ -53,8 +51,9 @@
         </ListView>
         
         <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductButton_Click"/>
-        <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToLastWindowButton_Click" Width="95.9466666666667" Height="26.63"/>
+        <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToLastWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
 
-        
+        <Frame x:Name="MainList" Grid.Row="1"/>
     </Grid>
+
 </Window>

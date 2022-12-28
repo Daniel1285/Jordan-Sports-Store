@@ -24,13 +24,13 @@ namespace PL.PlProduct
     public partial class ListProduct : Window
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public List<BO.ProductForList?> myList; 
+        public List<BO.ProductForList?> myListProduct; 
 
         public ListProduct()
         {
             InitializeComponent();
             SetProductComboBox();
-            myList = Bl.Product.GetProductList().ToList();
+            myListProduct = Bl.Product.GetProductList().ToList();
         }
 
         public void SetProductComboBox()
@@ -38,7 +38,6 @@ namespace PL.PlProduct
 
             for(int i = 0; i <= 4;i++) { AttributeSelector.Items.Add($"{(BO.Enums.Category)i}");}     
             AttributeSelector.Items.Add("All");
-            AttributeSelector.SelectedItem = "All";
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,17 +47,24 @@ namespace PL.PlProduct
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddAndUpdate().Show();
-        
+            new AddAndUpdate().Show();     
             this.Close();
+            
         }
 
 
         private void doubleClick_Update(object sender, MouseButtonEventArgs e)
         {
-            int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
-            new AddAndUpdate(id).Show();
-            this.Close();
+
+            if(ProductsListView.SelectedItem != null)
+            {
+                int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
+                new AddAndUpdate(id).Show();
+                this.Close();
+            }
+            else
+                MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);  
+            
         }
         
         private void ProductsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

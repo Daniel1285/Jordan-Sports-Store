@@ -151,11 +151,6 @@ namespace PL.PlProduct
             
         }
 
-        private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void ProductNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 

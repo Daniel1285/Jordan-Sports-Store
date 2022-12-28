@@ -3,16 +3,82 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:PL" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"     
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/1.jpg"/>
         </Grid.Background>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="-432,304,0,0" VerticalAlignment="Top"/>
-        <Button Content="Start" HorizontalAlignment="Center" Margin="0,379,0,0" VerticalAlignment="Top" Width="118" Height="25" Click="ShowProductListButton_Click" FontWeight="Bold" FontSize="14" FontFamily="Rockwell Extra Bold"/>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <Button Content="Admin" HorizontalAlignment="Center"  Width="150" Height="45" Click="ManagerButton_Click" Grid.Column="1" Grid.Row="0" FontWeight="Bold" FontSize="22" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
+
+        <Button Content="Client" HorizontalAlignment="Center"  Width="150" Height="45" Click="ClientButton_Click" Grid.Column="1" Grid.Row="1" FontWeight="Bold" FontSize="22" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
+
+        <Button Content="Truckingorder" HorizontalAlignment="Center"  Width="Auto" Height="45" Click="TruckingButton_Click" Grid.Column="1" Grid.Row="2" FontWeight="Bold" FontSize="22" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
+
+        <Button Content="Login" HorizontalAlignment="Center"  Width="Auto" Height="45" Click="LoginButton_Click" Grid.Column="1" Grid.Row="3" FontWeight="Bold" FontSize="22" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
+
+        <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="2" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0, 35,0,0"/>
+        <materialDesign:PackIcon Kind="AccountTie" Grid.Column="0" Grid.Row="0" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0, 35,0,0"/>
+        <materialDesign:PackIcon Kind="AccountDetails" Grid.Column="0" Grid.Row="1" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0, 35,0,0"/>
+        <materialDesign:PackIcon Kind="Login" Grid.Column="0" Grid.Row="3" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,18,0,0"/>
+        
+
+        <materialDesign:Card Grid.Column="2" Grid.Row="0" Height="25" Width="Auto"
+              materialDesign:ShadowAssist.ShadowEdges="Bottom,Right">
+            <TextBlock Text="Admin screen for product settings and orders" TextAlignment="Center"  Foreground="#FF9C0E0E" FontSize="16" FontFamily="Arial Black"/>                               
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Column="2" Grid.Row="1" Height="25" Width="Auto"
+              materialDesign:ShadowAssist.ShadowEdges="Bottom,Right">
+            <TextBlock Text="Customer display screen for orders" TextAlignment="Center"  Foreground="#FF9C0E0E" FontSize="16" FontFamily="Arial Black"/>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Column="2" Grid.Row="2" Height="25" Width="Auto" TextElement.FontWeight="Black"
+              materialDesign:ShadowAssist.ShadowEdges="Bottom,Right">
+            <TextBlock Text="Information about tracking the package" TextAlignment="Center" Foreground="#FF9C0E0E" FontSize="16" FontFamily="Arial Black" />
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Column="2" Grid.Row="3" Height="25" Width="Auto" TextElement.FontWeight="Black"
+              materialDesign:ShadowAssist.ShadowEdges="Bottom,Right">
+            <TextBlock Text="Login for an existing user" TextAlignment="Center" Foreground="#FF9C0E0E" FontSize="16" FontFamily="Arial Black" />
+        </materialDesign:Card>
 
     </Grid>
 </Window>

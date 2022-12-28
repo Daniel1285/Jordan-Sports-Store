@@ -34,6 +34,7 @@ namespace BlImplementation
             //    }
             //    ordersForList.Add(order);
             //}
+            
             var ordersForList1 = from DOOrder in Dal?.Order.GetAll()
                                  let sumAmount = Dal?.OrderItem.GetAll(x => x?.OrderID == DOOrder?.ID).Sum(x => x?.Amount)
                                  let sumTotalPrice = Dal?.OrderItem.GetAll(x => x?.OrderID == DOOrder?.ID).Sum(x => x?.Price * x?.Amount)
@@ -230,6 +231,14 @@ namespace BlImplementation
             double sum = orderItems.Sum(x => x.Totalprice);
                              
             return (orderItems.ToList(), sum);
+        }
+
+        public IEnumerable<BO.OrderForList?> GetListByCondition(Func<BO.OrderForList?, bool>? filter)
+        {
+            var p = from item in GetOrderLists()
+                    where (filter!(item))
+                    select item;
+            return p!;
         }
 
     }
