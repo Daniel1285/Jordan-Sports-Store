@@ -24,9 +24,15 @@ namespace PL.PlProduct
         public OrdersManager()
         {
             InitializeComponent();
-            myListOrders = Bl.Order.GetOrderLists().ToList();
+            SetProductComboBox();
+            myListOrders = Bl.Order.GetOrderLists().ToList(); 
+           
         }
-
+        public void SetProductComboBox()
+        {
+            for (int i = 0; i <= 2; i++) { OrderInformation.Items.Add($"{(BO.Enums.OrderStatus)i}"); }
+            OrderInformation.Items.Add("All");
+        }
         private void doubleClick_orderItem(object sender, MouseButtonEventArgs e)
         {
 
@@ -34,8 +40,8 @@ namespace PL.PlProduct
 
         private void OrderInformation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OrdersListView.ItemsSource = Bl?.Order.GetOrderLists();
-                //. Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
+            //OrdersListView.ItemsSource = Bl?.Order.GetOrderLists();
+            OrdersListView.ItemsSource = OrderInformation.SelectedItem.ToString() == "All"? Bl?.Order.GetOrderLists(): Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
         }
 
         private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)

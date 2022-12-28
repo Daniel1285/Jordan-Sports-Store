@@ -54,9 +54,9 @@
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
 
-        <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="2" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0, 35,0,0"/>
-        <materialDesign:PackIcon Kind="AccountTie" Grid.Column="0" Grid.Row="0" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0, 35,0,0"/>
-        <materialDesign:PackIcon Kind="AccountDetails" Grid.Column="0" Grid.Row="1" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0, 35,0,0"/>
+        <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="2" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0, 20,0,0"/>
+        <materialDesign:PackIcon Kind="AccountTie" Grid.Column="0" Grid.Row="0" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0, 20,0,0"/>
+        <materialDesign:PackIcon Kind="AccountDetails" Grid.Column="0" Grid.Row="1" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,20,0,0"/>
         <materialDesign:PackIcon Kind="Login" Grid.Column="0" Grid.Row="3" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,18,0,0"/>
         
 

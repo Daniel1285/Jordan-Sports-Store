@@ -25,11 +25,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox Name="OrderInformation" Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="OrderInformation_SelectionChanged" FontWeight="Bold" FontSize="16" SelectedIndex="0">
-                <ComboBoxItem Content= "All"/>
+            <ComboBox Name="OrderInformation" Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="OrderInformation_SelectionChanged" FontWeight="Bold" FontSize="16" SelectedIndex="3">
+                <!--<ComboBoxItem Content= "All"/>
                 <ComboBoxItem Content= "Order_Confirmed"/>
                 <ComboBoxItem Content= "Order_Sent"/>
-                <ComboBoxItem Content= "Order_Provided"/>
+                <ComboBoxItem Content= "Order_Provided"/>-->
                 
             </ComboBox>
                       

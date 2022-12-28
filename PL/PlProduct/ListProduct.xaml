@@ -16,44 +16,20 @@
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
          VerticalAlignment="Stretch" Width="auto">
-            <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox Name="AttributeSelector" Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" FontSize="16" SelectedIndex="5"/>
-            <Label Content="Category" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
+            <Button Content="Products" Grid.Column="0" Width="250" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left"  FontWeight="Bold" HorizontalContentAlignment="Center" Click="GotoProductManager_Click" Foreground="Black" Background="White" />
+            <Button Content="Orders" Grid.Column="2" Width="250" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Right"  FontWeight="Bold" HorizontalContentAlignment="Center"  Click="GotoOrdersManager_Click"  Foreground="Black" Background="White"/>
+            
         </Grid>
-        
-        
-        <ListView x:Name="ProductsListView" Grid.Row="1" ItemsSource="{Binding myListProduct}" MouseDoubleClick="doubleClick_Update" SelectionChanged="ProductsListView_SelectionChanged" FontWeight="Bold">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.View>
-                
-                <GridView> 
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Name" Width="250"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="100"/>
-                    <GridView.ColumnHeaderContainerStyle>
-                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                            <Setter Property="IsHitTestVisible" Value="False"/>
-                            <Setter Property="Background" Value="AntiqueWhite" />
-                            <Setter Property="FontSize" Value="14" />
-                        </Style>
-                    </GridView.ColumnHeaderContainerStyle>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductButton_Click"/>
+
         <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToLastWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
 
-        <Frame x:Name="MainList" Grid.Row="1"/>
+        <Frame x:Name="MainList" Grid.Row="1" ContentRendered="myFrame_ContentRendered"/>
     </Grid>
 
 </Window>
