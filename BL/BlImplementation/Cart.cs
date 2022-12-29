@@ -140,7 +140,7 @@ namespace BlImplementation
             var item = cart.Items?.FirstOrDefault(i => i?.ProductID == id);
             if (item != null)
             {
-                if (newAmount > item.Amount)
+                if (newAmount >= item.Amount)
                 {
                     if (product1?.InStock >= item.Amount + newAmount)
                     {

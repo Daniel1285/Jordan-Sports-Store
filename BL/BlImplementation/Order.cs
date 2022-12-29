@@ -43,7 +43,7 @@ namespace BlImplementation
                                      CustomerName = DOOrder?.CustomerName,
                                      Status = getStatus(DOOrder),
                                      AmountOfItems = (int)sumAmount,
-                                     TotalPrice = (int)sumTotalPrice,
+                                     TotalPrice = (double)sumTotalPrice,
                                  };
 
             return ordersForList1;
@@ -224,7 +224,7 @@ namespace BlImplementation
                                  ID = (int)i?.ID!,
                                  Amount = (int)i?.Amount!,
                                  ProductID = (int)i?.ProductID!,
-                                 Price = (int)i?.Price!,
+                                 Price = (double)i?.Price!,
                                  Name = Dal.Product.GetByCondition(x => x?.ID == i?.ProductID).Name,
                                  Totalprice = (int)(i?.Amount * i?.Price)!,
                              };
