@@ -57,22 +57,8 @@ internal static class DataSource
         Double[] priceOfProduct = { 550, 400, 250, 332.5, 210, 129.99, 49, 63, 122.5, 140 };
         Enums.Category[] categories = { Category.SHOES, Category.SHOES, Category.SHORTS, Category.SHOES, Category.HOODIES, Category.HOODIES, Category.SOCKS, Category.SOCKS, Category.SHIRTS, Category.SHIRTS };
         int[] AmountInSoke = { 0, 7, 25, 15, 20, 19, 10, 16, 3, 10 };
-        //for (int i = 0; i < SIZE; i++)
-        //{
-        //    Product p = new Product
-        //    {
-        //        ID = R.Next(100000,900000),
-        //        Name = namePprodcut[i],
-        //        Price = priceOfProduct[i],
-        //        Category = categories[i],
-        //        InStock = AmountInSoke[i],  
-
-        //    };
-        //    if (CheckID(p.ID))
-        //    {
-        //        MyProducts.Add(p);
-        //    }      
-        //}
+        
+       
         Enumerable.Range(0, SIZE).ToList().ForEach(i =>
         {
             Product p = new Product
@@ -100,21 +86,7 @@ internal static class DataSource
     private static void Add_OrderItem()
     {
 
-        //OrderItem NewOrderItem = new OrderItem();
-        //for (int i = 0; i < MyOrder.Count; i++)
-        //{
-        //    for (int j = 0; j < R.Next(1, 4); j++)
-        //    {
-        //        NewOrderItem.ID = Config.GetIdForOrderItem;
-        //        NewOrderItem.OrderID = (int)MyOrder[i]?.ID!;
-        //        Product? product = MyProducts[R.Next(0, MyProducts.Count)];
-        //        NewOrderItem.ProductID = (int)product?.ID!;
-        //        NewOrderItem.Amount = R.Next(1, 4);
-        //        NewOrderItem.Price = (double)product?.Price!;
-        //        MyOrderItem.Add(NewOrderItem);
-        //    }
-
-        //}
+        
         OrderItem NewOrderItem = new OrderItem();
         MyOrder.ToList().ForEach(order =>
         {
@@ -151,26 +123,7 @@ internal static class DataSource
         DateTime date2 = new DateTime(2022, 10, R.Next(1, 30));
         TimeSpan t = date - date2;
 
-        //for (int i = 0; i < SIZE; i++)
-        //{
-
-        //    Order newOrder = new Order
-        //    {
-        //        ID = Config.GetIdForOrder,
-        //        CustomerName = Name[i],
-        //        CustomerAdress = Address[i],
-        //        CustomerEmail = Name[i]+"@gmail.com",
-        //        OrderDate = date - new TimeSpan(num, 0, 0, 0)
-        //    };
-
-        //    if (i < 16)
-        //        newOrder.ShipDate = newOrder.OrderDate + new TimeSpan(R.Next(2, 4), 0, 0, 0);
-
-        //    if (i <  10)
-        //        newOrder.DeliveryrDate = newOrder.ShipDate + new TimeSpan(R.Next(1, 3), 0, 0, 0);
-
-        //    MyOrder.Add(newOrder); 
-        //}
+        
         Enumerable.Range(0, SIZE).ToList().ForEach(i =>
         {
             Order newOrder = new Order

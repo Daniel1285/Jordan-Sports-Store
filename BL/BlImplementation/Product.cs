@@ -16,21 +16,8 @@ namespace BlImplementation
         /// <returns></returns>
         public IEnumerable<BO.ProductForList?> GetProductList()
         {
-            //List<DO.Product?> products = new List<DO.Product?>();
-            //List<BO.ProductForList?> productsForList = new List<BO.ProductForList?>();
-            //products = Dal?.Product.GetAll().ToList() ?? throw new NullReferenceException();
-            //foreach (DO.Product? item in products)
-            //{
-            //    productsForList.Add(new BO.ProductForList()
-            //    {
-            //        ID = (int)item?.ID!,
-            //        Name = item?.Name,
-            //        Price = (double)item?.Price!,
-            //        Category = (BO.Enums.Category)item?.Category!
-
-            //    });
-            //}
-            //return productsForList;
+           
+            
             var productsForList = from DOProduct in Dal?.Product.GetAll()
                                   select new BO.ProductForList()
                                   {
