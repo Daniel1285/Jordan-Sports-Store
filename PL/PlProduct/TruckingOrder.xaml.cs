@@ -34,5 +34,10 @@ namespace PL.PlProduct
             new MainWindow().Show();
             this.Close();
         }
+
+        private void Truckingresult_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

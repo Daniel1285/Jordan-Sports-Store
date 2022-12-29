@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,8 +44,10 @@ namespace PL.PagesManager
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            new AddAndUpdate().Show();        
-
+            new AddAndUpdate().Show();
+           
+            (Window.GetWindow(this)).Close();
+            
         }
 
 
@@ -54,7 +57,9 @@ namespace PL.PagesManager
             if (ProductsListView.SelectedItem != null)
             {
                 int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
-                new AddAndUpdate(id).Show();          
+                new AddAndUpdate(id).Show();  
+                (Window.GetWindow(this)).Close();
+
             }
             else
                 MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);

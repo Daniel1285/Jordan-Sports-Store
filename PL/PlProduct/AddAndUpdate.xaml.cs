@@ -143,6 +143,7 @@ namespace PL.PlProduct
         private void BackLastWindow(object sender, RoutedEventArgs e)
         {
             new ListProduct().Show();
+           
             this.Close();
         }
 
