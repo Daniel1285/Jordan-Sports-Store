@@ -14,11 +14,16 @@ using System.Windows.Shapes;
 
 namespace PL.PlProduct
 {
+
+
     /// <summary>
     /// Interaction logic for TruckingOrder.xaml
     /// </summary>
     public partial class TruckingOrder : Window
     {
+        private BlApi.IBl? Bl = BlApi.Factory.Get();
+        //public List<BO.ProductForList?> myListProduct;
+
         public TruckingOrder()
         {
             InitializeComponent();
@@ -26,7 +31,11 @@ namespace PL.PlProduct
 
         private void Trucking_Click(object sender, RoutedEventArgs e)
         {
-
+            int IDTrucking = int.Parse(truck.Text);  
+            BO.OrderTracking? a = new BO.OrderTracking();
+            a = Bl?.Order.TrackingOtder(IDTrucking);
+            
+            MessageBox.Show($"{a.ID} : {a.Pair} : {a.Status}");
         }
 
         private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
@@ -35,9 +44,5 @@ namespace PL.PlProduct
             this.Close();
         }
 
-        private void Truckingresult_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
