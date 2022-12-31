@@ -31,11 +31,20 @@ namespace PL.PlProduct
 
         private void Trucking_Click(object sender, RoutedEventArgs e)
         {
-            int IDTrucking = int.Parse(truck.Text);  
-            BO.Order? a = new BO.Order();
-            a = Bl?.Order.GetOrder(IDTrucking);
-            ResultTrucking.Text = "";
-            ResultTrucking.Text = (a?.ID + "\n" + a?.OrderDate + "\n" + a?.Status).ToString(); 
+            int IDTrucking = int.Parse(truck.Text);
+            try
+            {
+                BO.Order? a = new BO.Order();
+                a = Bl?.Order.GetOrder(IDTrucking);
+                ResultTrucking.Text = "";
+                ResultTrucking.Text = (a?.ID + "\n" + a?.OrderDate + "\n" + a?.Status).ToString();
+            }
+            catch (BO.NotExistException)
+            {
+                ResultTrucking.Text = "ID not found !" + "\n   please try again.";
+            }
+
+
         }
 
         private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
