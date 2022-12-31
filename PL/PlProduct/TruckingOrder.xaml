@@ -15,7 +15,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -32,18 +32,17 @@
 
         <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,0" Padding="5" Click="BackToLastWindowButton_Click" Width="100" Height="30" Background="#FF6931CC" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
 
-        <materialDesign:Card x:Name="cardResult" Width="200" Padding="8" Grid.Column="2" Grid.Row="1" Height="80" Opacity="0.4" Visibility="Visible"                             
-             Background="{DynamicResource PrimaryHueDarkBrush}"
-             Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-             UniformCornerRadius="6" Margin="100,10,0,0">
-            <TextBlock x:Name="ResultTrucking" Text="kmkdmckdcmdkdcm" TextWrapping="Wrap" />
+        <materialDesign:Card Width="200" Padding="8" Grid.Column="2" Grid.Row="1" Height="100" Opacity="0.8"                          
+             Background="{x:Null}" 
+             Foreground="{x:Null}"
+             UniformCornerRadius="6" Margin="0,50,220,0" Grid.RowSpan="2">
+            <TextBlock x:Name="ResultTrucking" Text="" TextWrapping="Wrap" Height="Auto" FontWeight="Bold" FontSize="14" Foreground="White"/>
         </materialDesign:Card>
 
-
-
-        <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="1"  Width="50" Height="70" HorizontalAlignment="Right" Foreground="Black" Margin="0,70,20,0"/>
-        <Label   Content="ID :" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="Auto" Height="31" VerticalAlignment="Center" FontWeight="Bold"  FontSize="14" Foreground="White" />
-        <TextBox x:Name="truck" materialDesign:TransitionAssist.DisableTransitions="True" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2"  Width="100" Height="30" MaxLength="6" Foreground="White" BorderBrush="White" Text="000000" TextAlignment="Center" />
+        <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="1"  Width="50" Height="70" HorizontalAlignment="Right" Foreground="Black" Margin="0,10,20,0"/>
+        <Label Content="ID :" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="Auto" Height="31" VerticalAlignment="Center" FontWeight="Bold"  FontSize="14" Foreground="White"  Margin="0,10,20,130" />
+        <Label Content="Result :" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="Auto" Height="31" VerticalAlignment="Center" FontWeight="Bold"  FontSize="14" Foreground="White"  Margin="0,0,0,30" />
+        <TextBox x:Name="truck" materialDesign:TransitionAssist.DisableTransitions="True" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2"  Width="100" Height="30" MaxLength="6" Foreground="White" BorderBrush="White" Text="000000" TextAlignment="Center"  Margin="0,0,50,130"/>
 
 
     </Grid>

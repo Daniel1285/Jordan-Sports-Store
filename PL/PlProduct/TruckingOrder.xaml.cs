@@ -32,10 +32,10 @@ namespace PL.PlProduct
         private void Trucking_Click(object sender, RoutedEventArgs e)
         {
             int IDTrucking = int.Parse(truck.Text);  
-            BO.OrderTracking? a = new BO.OrderTracking();
-            a = Bl?.Order.TrackingOtder(IDTrucking);
-            
-            MessageBox.Show($"{a.ID} : {a.Pair} : {a.Status}");
+            BO.Order? a = new BO.Order();
+            a = Bl?.Order.GetOrder(IDTrucking);
+            ResultTrucking.Text = "";
+            ResultTrucking.Text = (a?.ID + "\n" + a?.OrderDate + "\n" + a?.Status).ToString(); 
         }
 
         private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
