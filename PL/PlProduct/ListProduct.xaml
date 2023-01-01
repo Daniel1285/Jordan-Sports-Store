@@ -17,8 +17,8 @@
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
          VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions >
 
@@ -28,6 +28,26 @@
         </Grid>
 
         <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToLastWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
+        
+        <GroupBox x:Name="productCard"  BorderThickness="0" Header="Product" FontSize="16" Grid.Row="1" Grid.Column="0" Width="225" Height="200" HorizontalAlignment="Left" Margin="16,0,0,50"
+            Style="{StaticResource MaterialDesignGroupBox}">
+            <TextBlock  
+                Text="Manager's product management:
+                   - Adding a product                
+                   - Product deletion               
+                   - Product editing"
+                TextWrapping="Wrap" FontSize="14" />
+        </GroupBox>
+
+        <GroupBox x:Name="ordersCard"  BorderThickness="0" Header="Order" FontSize="16" Grid.Row="1" Grid.Column="2" Width="225" Height="200" HorizontalAlignment="Right" Margin="0,0,16,50"
+            Style="{StaticResource MaterialDesignGroupBox}">
+            <TextBlock  
+                Text="Order management for a client : 
+                     - Item Type                                
+                     - Order creation date     
+                     - Arrival time etc... "
+                TextWrapping="Wrap" FontSize="14" />
+        </GroupBox>
 
         <Frame x:Name="MainList" Grid.Row="1" ContentRendered="myFrame_ContentRendered"/>
     </Grid>

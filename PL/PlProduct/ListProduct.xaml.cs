@@ -38,12 +38,16 @@ namespace PL.PlProduct
 
         private void GotoOrdersManager_Click(object sender, RoutedEventArgs e)
         {
-            MainList.Content = new OrdersPage(); 
+            MainList.Content = new OrdersPage();
+            ordersCard.Visibility = Visibility.Hidden;
+            productCard.Visibility = Visibility.Hidden;
         }
 
         private void GotoProductManager_Click(object sender, RoutedEventArgs e)
         {
             MainList.Content = new ProductsPage();
+            productCard.Visibility = Visibility.Hidden;
+            ordersCard.Visibility = Visibility.Hidden;
         }
 
         private void myFrame_ContentRendered(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.PlProduct;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,18 @@ namespace PL.PagesManager
         }
         private void doubleClick_orderItem(object sender, MouseButtonEventArgs e)
         {
+            if (OrdersListView.SelectedItem != null)
+            {
+                OrdersListView.Visibility = Visibility.Hidden;
+                OrderInformation.Visibility = Visibility.Hidden;
+
+                int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
+                MyOrderPage.Content = new OrderItemView(id);
+            }
+            else
+                MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
 
         }
 
@@ -46,5 +59,9 @@ namespace PL.PagesManager
             OrdersListView.ItemsSource = OrderInformation.SelectedItem.ToString() == "All" ? Bl?.Order.GetOrderLists() : Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
         }
 
+        private void UpdateOrderDetails_Click(object sender, ContextMenuEventArgs e)
+        {
+            UpdateDetailsOrder_List.Visibility = Visibility.Visible;
+        }
     }
 }

@@ -71,5 +71,9 @@ namespace PL.PagesManager
 
         }
 
+        private void rightClick_Delete(object sender, MouseButtonEventArgs e)
+        {
+            deleteView.Visibility = Visibility.Visible;
+        }
     }
 }
