@@ -59,9 +59,17 @@ namespace PL.PagesManager
             OrdersListView.ItemsSource = OrderInformation.SelectedItem.ToString() == "All" ? Bl?.Order.GetOrderLists() : Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
         }
 
-        private void UpdateOrderDetails_Click(object sender, ContextMenuEventArgs e)
+
+        private void UpdateToSent_Click(object sender, RoutedEventArgs e)
         {
-            UpdateDetailsOrder_List.Visibility = Visibility.Visible;
+            int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
+            Bl?.Order.ShippingUpdate(id);
+        }
+
+        private void UpdateToProvided_Click(object sender, RoutedEventArgs e)
+        {
+            int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
+            Bl?.Order.SupplyUpdateOrder(id);
         }
     }
 }
