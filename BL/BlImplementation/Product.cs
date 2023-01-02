@@ -204,6 +204,24 @@ namespace BlImplementation
                     select item;
             return p!;
         }
+        public IEnumerable<BO.ProductItem?> GetListOfProdyctItem(BO.Cart cart)
+        {
+            var ListofProductItem = from item in Dal?.Product.GetAll()
+                                    
+                                    select new BO.ProductItem
+                                    {
+                                        ID = (int)item?.ID!,
+                                        Name = item?.Name,
+                                        Price = (double)item?.Price!,
+                                        Category = (BO.Enums.Category)item?.Category!,
+                                        InStock = (item?.InStock > 0 ? true : false),
+                                        Amount = 0,
+                                    };
+            return ListofProductItem;
+        }
 
     }
+
+    
+   
 }
