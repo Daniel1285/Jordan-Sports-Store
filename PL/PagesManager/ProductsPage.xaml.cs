@@ -71,9 +71,12 @@ namespace PL.PagesManager
 
         }
 
-        private void rightClick_Delete(object sender, MouseButtonEventArgs e)
+
+
+        private void DeleteProductManager_Click(object sender, RoutedEventArgs e)
         {
-            deleteView.Visibility = Visibility.Visible;
+            int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
+            Bl.Product.DeleteProduct(id);
         }
     }
 }
