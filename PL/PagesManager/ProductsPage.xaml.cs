@@ -1,6 +1,8 @@
 ﻿using PL.PlProduct;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,12 +26,12 @@ namespace PL.PagesManager
     public partial class ProductsPage : Page
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public List<BO.ProductForList?> myListProduct;
+        public ObservableCollection<BO.ProductForList?> myListProduct { get; set;}
         public ProductsPage()
         {
-           InitializeComponent();
+            myListProduct = new ObservableCollection<BO.ProductForList?>(Bl.Product.GetProductList());
+            InitializeComponent();
             SetProductComboBox();
-            myListProduct = Bl.Product.GetProductList().ToList();
         }
 
         public void SetProductComboBox()
@@ -50,8 +52,6 @@ namespace PL.PagesManager
             (Window.GetWindow(this)).Close();
             
         }
-
-
         private void doubleClick_Update(object sender, MouseButtonEventArgs e)
         {
 
@@ -78,9 +78,13 @@ namespace PL.PagesManager
             {
                 int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
                 Bl?.Product.DeleteProduct(id);
+                deleteEx.Text = "Product deleted successfully";
+                deleteEx.Visibility = Visibility.Visible;
+
             }
             catch (BO.CanNotDeleteProductException)
             {
+                deleteEx.Text = "Can't delete a product because it's in the middle of an order.";
                 deleteEx.Visibility = Visibility.Visible;
             }
         }

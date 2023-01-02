@@ -13,22 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PL.PagesManager
+namespace PL.PlCart
 {
     /// <summary>
-    /// Interaction logic for OrderItemView.xaml
+    /// Interaction logic for CartOrderItem.xaml
     /// </summary>
-    public partial class OrderItemView : Page
+    public partial class CartOrderItem : Page
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public List<BO.OrderItem?> myListOrderItem;
-        
-        
-        public OrderItemView(int OrderId)
+        public CartOrderItem()
         {
             InitializeComponent();
-            myListOrderItem = Bl.Order.GetOrder(OrderId).Items!;
-           // OrdersListView.ItemsSource = myListOrderItem;
+            listProductForClient();
+        }
+
+        public void listProductForClient()
+        {
+            
         }
     }
 }

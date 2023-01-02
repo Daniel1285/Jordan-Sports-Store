@@ -48,9 +48,6 @@ namespace PL.PagesManager
             }
             else
                 MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-
         }
 
         private void OrderInformation_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,6 +61,8 @@ namespace PL.PagesManager
         {
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.ShippingUpdate(id);
+            this.NavigationService.Refresh();
+            
         }
 
         private void UpdateToProvided_Click(object sender, RoutedEventArgs e)
@@ -71,5 +70,6 @@ namespace PL.PagesManager
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.SupplyUpdateOrder(id);
         }
+
     }
 }

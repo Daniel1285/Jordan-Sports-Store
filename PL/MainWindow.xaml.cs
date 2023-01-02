@@ -28,7 +28,6 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void ManagerButton_Click(object sender, RoutedEventArgs e)
@@ -40,13 +39,13 @@ namespace PL
 
         private void ClientButton_Click(object sender, RoutedEventArgs e)
         {
-            new PL.PlProduct.OrdersManager().Show();
+            new PlCart.MainCartView().Show();
             this.Close();
         }
 
         private void TruckingButton_Click(object sender, RoutedEventArgs e)
         {
-            new PL.PlProduct.TruckingOrder().Show();
+            new PlProduct.TruckingOrder().Show();
             this.Close();
         }
 

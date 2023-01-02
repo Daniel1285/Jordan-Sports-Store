@@ -7,6 +7,7 @@
       xmlns:local="clr-namespace:PL.PagesManager" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      
       Title="ProductsPage">
 
     <Grid x:Name="MainGrid">
@@ -66,7 +67,7 @@
              Background="{x:Null}" 
              Foreground="{x:Null}"
              UniformCornerRadius="6">
-            <TextBlock x:Name="deleteEx" Text="Can't delete a product because it's in the middle of an order." TextWrapping="Wrap" Height="Auto" FontWeight="Bold" FontSize="14" Foreground="Red" Visibility="Hidden"/>
+            <TextBlock x:Name="deleteEx" Text="" TextWrapping="Wrap" Height="Auto" FontWeight="Bold" FontSize="14" Foreground="Red" Visibility="Hidden" HorizontalAlignment="Center" />
         </materialDesign:Card>
 
     </Grid>
