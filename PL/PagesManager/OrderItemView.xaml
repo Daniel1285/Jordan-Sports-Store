@@ -27,7 +27,7 @@
 
         </Grid>
 
-        <ListView x:Name="OrdersListView" Grid.Row="1" d:ItemsSource="{d:Binding myListOrderItem}" FontWeight="Bold">
+        <ListView x:Name="OrdersItemListView" Grid.Row="1" ItemsSource="{Binding myListOrderItem}" FontWeight="Bold">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,14 @@ namespace PL.PagesManager
     public partial class OrderItemView : Page
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public List<BO.OrderItem?> myListOrderItem;
+        public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
         
         
         public OrderItemView(int OrderId)
         {
+            myListOrderItem = new ObservableCollection<BO.OrderItem?>(Bl.Order.GetOrder(OrderId).Items!);
             InitializeComponent();
-            myListOrderItem = Bl.Order.GetOrder(OrderId).Items!;
+            
            // OrdersListView.ItemsSource = myListOrderItem;
         }
     }

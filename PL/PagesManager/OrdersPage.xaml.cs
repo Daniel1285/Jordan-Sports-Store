@@ -1,6 +1,7 @@
 ﻿using PL.PlProduct;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +24,13 @@ namespace PL.PagesManager
     {
 
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public List<BO.OrderForList?> myListOrders;
+        public ObservableCollection<BO.OrderForList?> myListOrders { get; set; }
         public OrdersPage()
         {
+            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl.Order.GetOrderLists());
             InitializeComponent();
             SetProductComboBox();
-            myListOrders = Bl.Order.GetOrderLists().ToList();
+           
         }
 
         public void SetProductComboBox()

@@ -189,7 +189,7 @@ namespace BlImplementation
                                  ProductID = (int)i?.ProductID!,
                                  Price = (double)i?.Price!,
                                  Name = Dal.Product.GetByCondition(x => x?.ID == i?.ProductID).Name,
-                                 Totalprice = (int)(i?.Amount * i?.Price)!,
+                                 Totalprice = (double)(i?.Amount * i?.Price)!,
                              };
             double sum = orderItems.Sum(x => x.Totalprice);
                              
