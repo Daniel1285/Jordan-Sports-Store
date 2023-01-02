@@ -207,7 +207,7 @@ namespace BlImplementation
         public IEnumerable<BO.ProductItem?> GetListOfProdyctItem(BO.Cart cart)
         {
             var ListofProductItem = from item in Dal?.Product.GetAll()
-                                    let amount = cart.Items.Find(x => x?.ProductID == item?.)
+                                    
                                     select new BO.ProductItem
                                     {
                                         ID = (int)item?.ID!,
