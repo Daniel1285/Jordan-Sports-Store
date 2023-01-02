@@ -204,7 +204,7 @@ namespace BlImplementation
                     select item;
             return p!;
         }
-        public IEnumerable<BO.ProductItem?> GetListOfProdyctItem()
+        public IEnumerable<BO.ProductItem?> GetListOfProductItem()
         {
             var ListofProductItem = from item in Dal?.Product.GetAll()
                                     

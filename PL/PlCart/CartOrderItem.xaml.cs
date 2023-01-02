@@ -26,11 +26,22 @@ namespace PL.PlCart
         {
             InitializeComponent();
             listProductForClient();
+            
         }
 
         public void listProductForClient()
         {
             
+        }
+
+        private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ConfrimOrder_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

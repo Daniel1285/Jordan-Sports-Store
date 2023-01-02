@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,22 +26,17 @@ namespace PL.PlCart
         {
             InitializeComponent();
             SetProductComboBox();
-            //myListProductItem = Bl.Product.GetProduct();
+            myListProductItem = Bl.Product.GetListOfProductItem().ToList();
         }
         public void SetProductComboBox()
         {
-            for (int i = 0; i <= 4; i++) { AttributeSelector.Items.Add($"{(BO.Enums.Category)i}"); }
-            AttributeSelector.Items.Add("All");
+            for (int i = 0; i <= 4; i++) { ProductInfromation.Items.Add($"{(BO.Enums.Category)i}"); }
+            ProductInfromation.Items.Add("All");
         }
         private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();    
             this.Close();
-        }
-
-        private void OrderInformation_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -50,6 +46,15 @@ namespace PL.PlCart
 
         private void GoToCartOrderitem_Click(object sender, RoutedEventArgs e)
         {
+            OrderItemListView.Visibility= Visibility.Hidden;
+            ProductInfromation.Visibility= Visibility.Hidden;
+            Label_P.Visibility= Visibility.Hidden;  
+            FramCart.Content = new CartOrderItem();
+        }
+
+        private void ProductInfromation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OrderItemListView.ItemsSource = ProductInfromation.SelectedItem.ToString() == "All" ? Bl?.Product.GetListOfProductItem() : Bl?.Product.GetListByCondition(X => X?.Category.ToString() == ProductInfromation.SelectedItem.ToString());
 
         }
     }

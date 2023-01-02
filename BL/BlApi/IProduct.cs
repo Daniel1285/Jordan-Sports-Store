@@ -50,7 +50,7 @@ namespace BlApi
         /// <returns></returns>
         public IEnumerable<ProductForList?> GetListByCondition(Func<ProductForList?, bool>? filter);
 
-        public IEnumerable<ProductItem?> GetListOfProdyctItem();
+        public IEnumerable<ProductItem?> GetListOfProductItem();
 
     }
 }

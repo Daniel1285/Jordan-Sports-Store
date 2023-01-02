@@ -54,7 +54,7 @@
         <Label Content="Ordr item" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
 
         <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,0,0,0" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
-        <Button Content="Confrim Order" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,5,0" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
+        <Button Content="Confrim Order" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,5,0" Padding="5" Click="ConfrimOrder_Click" Width="120" Height="32" Background="#FF6931CC"/>
 
 
     </Grid>

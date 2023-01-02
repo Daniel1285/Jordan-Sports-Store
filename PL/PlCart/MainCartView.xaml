@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.PlCart" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
         Title="MainCartView" Height="450" Width="800">
     <Grid>
@@ -21,12 +22,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox Name="AttributeSelector" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
-            <Label Content="Product list" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
-            
         </Grid>
 
-        <ListView x:Name="OrdersListView" Grid.Row="1" ItemsSource="{Binding myListOrders}"  FontWeight="Bold">
+        <ListView x:Name="OrderItemListView" Grid.Row="1" ItemsSource="{Binding myListProductItem}"  FontWeight="Bold">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -35,12 +33,12 @@
             <ListView.View>
 
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="250"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= price}" Header="price" Width="122.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="122.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="122.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= InStoke}" Header="In stoke" Width="122.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= price}" Header="price" Width="112.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="112.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="112.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= InStoke}" Header="In stoke" Width="112.5"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>
@@ -52,12 +50,15 @@
             </ListView.View>
         </ListView>
 
-        <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
-        <Button Content="{materialDesign:PackIcon Kind = CartArrowDown, Size=19}" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,8,5" Padding="5" Click="GoToCartOrderitem_Click" Width="60" Height="32" Background="#FF6931CC"
+
+        <ComboBox x:Name="ProductInfromation" Width="200" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" HorizontalContentAlignment="Center"  SelectionChanged="ProductInfromation_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
+        <Label x:Name="Label_P" Content="Product list" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
+        <Button x:Name="backOfMCart" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
+        <Button x:Name="buttonCart" Content="{materialDesign:PackIcon Kind = CartArrowDown, Size=19}" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,8,5" Padding="5" Click="GoToCartOrderitem_Click" Width="60" Height="32" Background="#FF6931CC"
                  Style="{StaticResource MaterialDesignRaisedButton}"    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                  materialDesign:ButtonProgressAssist.Value="-1"/>
 
-
+        <Frame x:Name="FramCart" NavigationUIVisibility="Hidden" Grid.Row="1"/>
     </Grid>
 </Window>

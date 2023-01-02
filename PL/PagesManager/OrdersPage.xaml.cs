@@ -36,6 +36,8 @@ namespace PL.PagesManager
             for (int i = 0; i <= 2; i++) { OrderInformation.Items.Add($"{(BO.Enums.OrderStatus)i}"); }
             OrderInformation.Items.Add("All");
         }
+
+
         private void doubleClick_orderItem(object sender, MouseButtonEventArgs e)
         {
             if (OrdersListView.SelectedItem != null)
