@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows;
@@ -71,12 +72,17 @@ namespace PL.PagesManager
 
         }
 
-
-
         private void DeleteProductManager_Click(object sender, RoutedEventArgs e)
         {
-            int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
-            Bl.Product.DeleteProduct(id);
+            try
+            {
+                int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
+                Bl?.Product.DeleteProduct(id);
+            }
+            catch (BO.CanNotDeleteProductException)
+            {
+                deleteEx.Visibility = Visibility.Visible;
+            }
         }
     }
 }

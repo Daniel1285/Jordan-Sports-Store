@@ -61,6 +61,13 @@
 
 
         <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductButton_Click"/>
+        
+        <materialDesign:Card Width="430" Padding="8" Grid.Column="2" Grid.Row="2" Height="50" Opacity="0.8"                          
+             Background="{x:Null}" 
+             Foreground="{x:Null}"
+             UniformCornerRadius="6">
+            <TextBlock x:Name="deleteEx" Text="Can't delete a product because it's in the middle of an order." TextWrapping="Wrap" Height="Auto" FontWeight="Bold" FontSize="14" Foreground="Red" Visibility="Hidden"/>
+        </materialDesign:Card>
 
     </Grid>
 </Page>
