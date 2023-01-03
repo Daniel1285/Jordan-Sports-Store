@@ -149,7 +149,8 @@ namespace BITTest
                               " c. Get product for the claint.\n" +
                               " d. Add product (for the admin).\n" +
                               " e. Delete product.\n" +
-                              " f. Update product.\n");
+                              " f. Update product.\n" +
+                              " g. get all product item in Cart");
 
             string? choise = Console.ReadLine();
             int id;
@@ -165,6 +166,8 @@ namespace BITTest
                     break;
 
                 case "b":
+
+                    
                     Console.Write("Please enter id :");
                     int.TryParse(Console.ReadLine(), out id);
                     try
@@ -184,6 +187,7 @@ namespace BITTest
                     try
                     {
                         Console.WriteLine(testMain?.Product.GetProduct(c, id));
+
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
@@ -278,6 +282,15 @@ namespace BITTest
                     catch (NameIsEmptyException ex) { Console.WriteLine(ex); }
                     catch (PriceSmallThanZeroException ex) { Console.WriteLine(ex); }
                     catch (InStokeSmallThanZeroException ex) { Console.WriteLine(ex); }
+
+                    break;
+
+                case "g":
+                    List<ProductItem> pia = testMain?.Product.GetListProductItemInCart(c).ToList()!;
+                    foreach (var item in pia)
+                    {
+                        Console.WriteLine(item);
+                    }
 
                     break;
 

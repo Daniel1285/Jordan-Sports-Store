@@ -25,9 +25,6 @@ namespace PL.PlProduct
         private static readonly Random R = new Random(); // Random number generation
         private BlApi.IBl? Bl = BlApi.Factory.Get();
 
-        //((BO.ProductForList)ProductsListView.SelectedItem).ID;
-
-
         /// <summary>
         /// Constructor for adding product.
         /// </summary>

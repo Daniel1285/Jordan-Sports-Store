@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:PL.PlCart" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
-        Title="MainCartView" Height="450" Width="800">
+        Title="MainCartView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="370*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Grid Name="UpGridOrder" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
@@ -30,6 +30,14 @@
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 </Style>
             </ListView.ItemContainerStyle>
+
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="AddToCartMenu" Header="Add to cart" Icon="{materialDesign:PackIcon Kind= Add}" Click="AddToCart_Click"/>
+                    <MenuItem x:Name="RemoveFromCartMenu" Header="Remove from cart" Icon="{materialDesign:PackIcon Kind= Remove }" Click="RemoveFromCart_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+
             <ListView.View>
 
                 <GridView>
@@ -53,12 +61,12 @@
 
         <ComboBox x:Name="ProductInfromation" Width="200" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" HorizontalContentAlignment="Center"  SelectionChanged="ProductInfromation_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
         <Label x:Name="Label_P" Content="Product list" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
-        <Button x:Name="backOfMCart" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
-        <Button x:Name="buttonCart" Content="{materialDesign:PackIcon Kind = CartArrowDown, Size=19}" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,8,5" Padding="5" Click="GoToCartOrderitem_Click" Width="60" Height="32" Background="#FF6931CC"
+        <Button x:Name="backOfMCart" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="30" Background="#FF6931CC"/>
+        <Button x:Name="buttonCart" Content="{materialDesign:PackIcon Kind = CartArrowDown, Size=19}" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,8,5" Padding="5" Click="GoToCartOrderitem_Click" Width="60" Height="30" Background="#FF6931CC"
                  Style="{StaticResource MaterialDesignRaisedButton}"    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                  materialDesign:ButtonProgressAssist.Value="-1"/>
 
-        <Frame x:Name="FramCart" NavigationUIVisibility="Hidden" Grid.Row="1"/>
+        <Frame x:Name="FramCart" NavigationUIVisibility="Hidden"  Grid.RowSpan ="3"/>
     </Grid>
 </Window>

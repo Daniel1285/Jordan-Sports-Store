@@ -27,6 +27,7 @@
             
         </Grid>
 
+        <Button x:Name="NewProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductButton_Click" Visibility="Hidden"/>
         <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToLastWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
         
         <GroupBox x:Name="productCard"  BorderThickness="0" Header="Product" FontSize="16" Grid.Row="1" Grid.Column="0" Width="225" Height="200" HorizontalAlignment="Left" Margin="16,0,0,50"

@@ -1,6 +1,5 @@
 ﻿using BlApi;
-
-
+using System.Runtime.CompilerServices;
 
 namespace BlImplementation
 {
@@ -100,6 +99,28 @@ namespace BlImplementation
             else
                 throw new BO.IdSmallThanZeroException("ID small than zero!");
         }
+
+        /// <summary>
+        /// return all items in the cart.
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public IEnumerable<BO.ProductItem> GetListProductItemInCart(BO.Cart c) 
+        {
+            var OrderItems = from items in c.Items
+                             let p = Dal?.Product.GetByCondition(x => x?.ID == items.ProductID)
+                             select new BO.ProductItem()
+                             {
+                                 ID = (int)items?.ID!,
+                                 Name = items?.Name,
+                                 Price = (double)items?.Price!,
+                                 Category = (BO.Enums.Category)p?.Category!,
+                                 InStock = (p?.InStock > 0 ? true : false),
+                                 Amount = items.Amount,                       
+                             };
+            return (IEnumerable<BO.ProductItem>)OrderItems;
+        }
+
         /// <summary>
         /// Adds a product to the data layer if the data is correct
         /// </summary>
@@ -204,10 +225,18 @@ namespace BlImplementation
                     select item;
             return p!;
         }
-        public IEnumerable<BO.ProductItem?> GetListOfProductItem(BO.Cart cart)
+
+        public IEnumerable<BO.ProductItem?> GetListByConditionForProductItem(Func<BO.ProductItem?, bool>? filter)
+        {
+            var p = from item in GetListOfProductItem()
+                    where (filter!(item))
+                    select item;
+            return p!;
+        }
+        public IEnumerable<BO.ProductItem?> GetListOfProductItem()
         {
             var ListofProductItem = from item in Dal?.Product.GetAll()
-                                    let amount = (cart.Items == null ? 0 : cart.Items.Find(x => x?.ProductID == item?.ID)!.Amount)
+                                    //let amount = (cart.Items == null ? 0 : cart.Items.Find(x => x?.ProductID == item?.ID)!.Amount)
                                     select new BO.ProductItem
                                     {
                                         ID = (int)item?.ID!,
@@ -215,7 +244,7 @@ namespace BlImplementation
                                         Price = (double)item?.Price!,
                                         Category = (BO.Enums.Category)item?.Category!,
                                         InStock = (item?.InStock > 0 ? true : false),
-                                        Amount = amount,
+                                        Amount = 0,
                                     };
             return ListofProductItem;
         }

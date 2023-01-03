@@ -29,8 +29,6 @@ namespace PL.PagesManager
         {
             myListOrderItem = new ObservableCollection<BO.OrderItem?>(Bl.Order.GetOrder(OrderId).Items!);
             InitializeComponent();
-            
-           // OrdersListView.ItemsSource = myListOrderItem;
         }
     }
 }

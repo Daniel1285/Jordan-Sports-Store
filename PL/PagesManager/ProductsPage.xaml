@@ -14,7 +14,6 @@
         <Grid.RowDefinitions >
             <RowDefinition Height="55*"/>
             <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
@@ -60,8 +59,6 @@
             </ListView.View >
         </ListView>
 
-
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductButton_Click"/>
         
         <materialDesign:Card Width="430" Padding="8" Grid.Column="2" Grid.Row="2" Height="50" Opacity="0.8"                          
              Background="{x:Null}" 

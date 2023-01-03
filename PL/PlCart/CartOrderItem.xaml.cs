@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,10 @@ namespace PL.PlCart
     public partial class CartOrderItem : Page
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public List<BO.OrderItem?> myListOrderItem;
+        //public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
         public CartOrderItem()
         {
+            //myListOrderItem = new ObservableCollection<BO.OrderItem?>(Bl.Product.GetListProductItemInCart(TempCart).ToList());
             InitializeComponent();
             listProductForClient();
             
@@ -34,14 +36,9 @@ namespace PL.PlCart
             
         }
 
-        private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
+        private void GoToConfrimOrder_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void ConfrimOrder_Click(object sender, RoutedEventArgs e)
-        {
-
+            CartOrderItemFram.Content = new ConfrimOrder();
         }
     }
 }

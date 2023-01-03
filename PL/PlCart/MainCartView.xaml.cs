@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -21,17 +22,26 @@ namespace PL.PlCart
     public partial class MainCartView : Window
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public List<BO.ProductItem?> myListProductItem;
+        public ObservableCollection<BO.ProductItem?> myListProductItem { get; set; }
+        public ObservableCollection<BO.ProductItem?> myListOrderItem { get; set; }
+
+        public BO.Cart TempCart = new BO.Cart();
         public MainCartView()
         {
+            myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem());
             InitializeComponent();
             SetProductComboBox();
-            myListProductItem = Bl.Product.GetListOfProductItem().ToList();
         }
         public void SetProductComboBox()
         {
             for (int i = 0; i <= 4; i++) { ProductInfromation.Items.Add($"{(BO.Enums.Category)i}"); }
             ProductInfromation.Items.Add("All");
+        }
+
+        private void ProductInfromation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OrderItemListView.ItemsSource = ProductInfromation.SelectedItem.ToString() == "All" ? Bl?.Product.GetListOfProductItem() : Bl?.Product.GetListByConditionForProductItem(X => X?.Category.ToString() == ProductInfromation.SelectedItem.ToString());
+
         }
         private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
         {
@@ -39,23 +49,28 @@ namespace PL.PlCart
             this.Close();
         }
 
-        private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void GoToCartOrderitem_Click(object sender, RoutedEventArgs e)
         {
             OrderItemListView.Visibility= Visibility.Hidden;
             ProductInfromation.Visibility= Visibility.Hidden;
-            Label_P.Visibility= Visibility.Hidden;  
+            Label_P.Visibility= Visibility.Hidden;
+            buttonCart.Visibility= Visibility.Hidden;
+            backOfMCart.Visibility  = Visibility.Hidden;
             FramCart.Content = new CartOrderItem();
         }
 
-        private void ProductInfromation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
-            OrderItemListView.ItemsSource = ProductInfromation.SelectedItem.ToString() == "All" ? Bl?.Product.GetListOfProductItem() : Bl?.Product.GetListByCondition(X => X?.Category.ToString() == ProductInfromation.SelectedItem.ToString());
+            int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
+            Bl?.Cart.AddProdctToCatrt(TempCart, id);
+            Bl?.Cart.UpdateAmountOfProduct(TempCart, id,1);
+            myListOrderItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListProductItemInCart(TempCart).ToList()!);
+        }
+
+        private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
+        {
 
         }
+
     }
 }

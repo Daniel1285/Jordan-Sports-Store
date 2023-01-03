@@ -41,18 +41,27 @@ namespace PL.PlProduct
             MainList.Content = new OrdersPage();
             ordersCard.Visibility = Visibility.Hidden;
             productCard.Visibility = Visibility.Hidden;
+            NewProduct.Visibility = Visibility.Hidden;
         }
 
         private void GotoProductManager_Click(object sender, RoutedEventArgs e)
         {
             MainList.Content = new ProductsPage();
+            NewProduct.Visibility = Visibility.Visible;  
             productCard.Visibility = Visibility.Hidden;
-            ordersCard.Visibility = Visibility.Hidden;
+            ordersCard.Visibility = Visibility.Hidden;    
         }
 
         private void myFrame_ContentRendered(object sender, EventArgs e)
         {
             MainList.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
+        }
+
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddAndUpdate().Show();
+
+            (Window.GetWindow(this)).Close();
         }
     }
 }

@@ -44,13 +44,34 @@ namespace BlApi
         public void UpdateProduct(Product p);
 
         /// <summary>
-        /// Get list of product by condition check. 
+        /// Get list of product for list by condition check. 
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
         public IEnumerable<ProductForList?> GetListByCondition(Func<ProductForList?, bool>? filter);
+        /// <summary>
+        /// get list of product Item by condition check. 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public IEnumerable<ProductItem?> GetListByConditionForProductItem(Func<ProductItem?, bool>? filter);
 
-        public IEnumerable<ProductItem?> GetListOfProductItem(Cart cart);
+        /// <summary>
+        /// Show list of product item
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
+        public IEnumerable<ProductItem?> GetListOfProductItem();
+
+        /// <summary>
+        /// return list of corrunt productItem in cert.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public IEnumerable<ProductItem?> GetListProductItemInCart(BO.Cart c);
+
+
+
 
     }
 }

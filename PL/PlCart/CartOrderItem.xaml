@@ -3,15 +3,18 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PL.PlCart"
+      xmlns:local="clr-namespace:PL.PlCart" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
+      DataContext="{Binding RelativeSource={RelativeSource Self}}"
+      
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CartOrderItem">
 
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="500*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="370*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
@@ -22,24 +25,23 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-
         </Grid>
 
         <ListView x:Name="OrdersListView" Grid.Row="1" d:ItemsSource="{d:Binding myListOrderItem}" FontWeight="Bold">
+
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 </Style>
             </ListView.ItemContainerStyle>
-            <ListView.View>
 
+            <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="Order ID" Width="60"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="240"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ProductID}" Header="Product ID" Width="125"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="125"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="125"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="125"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="Product ID" Width="137.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="250"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="137.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="137.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="137.5"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>
@@ -51,11 +53,15 @@
             </ListView.View>
         </ListView>
 
-        <Label Content="Ordr item" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
+        <Label x:Name="Label_c" Content="Item Order list" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
 
-        <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,0,0,0" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="32" Background="#FF6931CC"/>
-        <Button Content="Confrim Order" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,5,0" Padding="5" Click="ConfrimOrder_Click" Width="120" Height="32" Background="#FF6931CC"/>
+        <Button x:Name="buttonConfrim" Content="Confrim order" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,8,5" Padding="5" Click="GoToConfrimOrder_Click" Width="Auto" Height="30" Background="#FF6931CC"
+                 Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                 materialDesign:ButtonProgressAssist.Value="-1"/>
+        
 
+        <Frame x:Name="CartOrderItemFram" Grid.RowSpan="3"/>
 
     </Grid>
 </Page>

@@ -29,8 +29,7 @@ namespace PL.PagesManager
         {
             myListOrders = new ObservableCollection<BO.OrderForList?>(Bl.Order.GetOrderLists());
             InitializeComponent();
-            SetProductComboBox();
-           
+            SetProductComboBox();      
         }
 
         public void SetProductComboBox()

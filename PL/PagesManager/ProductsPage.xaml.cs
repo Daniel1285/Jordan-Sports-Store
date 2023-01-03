@@ -45,13 +45,6 @@ namespace PL.PagesManager
             ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All" ? Bl?.Product.GetProductList() : Bl?.Product.GetListByCondition(X => X?.Category.ToString() == AttributeSelector.SelectedItem.ToString());
         }
 
-        private void AddProductButton_Click(object sender, RoutedEventArgs e)
-        {
-            new AddAndUpdate().Show();
-           
-            (Window.GetWindow(this)).Close();
-            
-        }
         private void doubleClick_Update(object sender, MouseButtonEventArgs e)
         {
 
