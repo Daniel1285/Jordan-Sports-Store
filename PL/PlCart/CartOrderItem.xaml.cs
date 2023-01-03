@@ -40,7 +40,8 @@ namespace PL.PlCart
 
         private void BackToMainCartView_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).Show();
+            new MainCartView().Show();
+            Window.GetWindow(this).Close();
         }
     }
 }
