@@ -22,23 +22,25 @@ namespace PL.PlCart
     public partial class CartOrderItem : Page
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        //public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
-        public CartOrderItem()
+        //public List<BO.OrderItem?> myOrderItem { get; set; }
+        public CartOrderItem(BO.Cart c)
         {
-            //myListOrderItem = new ObservableCollection<BO.OrderItem?>(Bl.Product.GetListProductItemInCart(TempCart).ToList());
-            InitializeComponent();
-            listProductForClient();
             
+            InitializeComponent();
+            //myOrderItem = c.Items!;
+            OrdersListView.ItemsSource = c.Items!;
+
         }
 
-        public void listProductForClient()
-        {
-            
-        }
 
         private void GoToConfrimOrder_Click(object sender, RoutedEventArgs e)
         {
             CartOrderItemFram.Content = new ConfrimOrder();
+        }
+
+        private void BackToMainCartView_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).Show();
         }
     }
 }

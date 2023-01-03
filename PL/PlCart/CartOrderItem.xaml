@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PL.PlCart" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      DataContext="{Binding RelativeSource={RelativeSource Self}}"
       
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CartOrderItem">
@@ -27,7 +26,7 @@
             </Grid.ColumnDefinitions >
         </Grid>
 
-        <ListView x:Name="OrdersListView" Grid.Row="1" d:ItemsSource="{d:Binding myListOrderItem}" FontWeight="Bold">
+        <ListView x:Name="OrdersListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" FontWeight="Bold">
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -37,8 +36,9 @@
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="Product ID" Width="137.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="250"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header=" Order ID" Width="137.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ProductID}" Header="Product ID" Width="50"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="137.5"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="137.5"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="137.5"/>
@@ -59,7 +59,10 @@
                  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                  materialDesign:ButtonProgressAssist.Value="-1"/>
-        
+
+        <Button x:Name="BackToMainCartView_button" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,8,5" Padding="5" Click="BackToMainCartView_Click" Width="90" Height="30" Background="#FF6931CC"/>
+
+
 
         <Frame x:Name="CartOrderItemFram" Grid.RowSpan="3"/>
 

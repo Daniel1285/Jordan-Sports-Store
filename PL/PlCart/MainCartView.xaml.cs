@@ -23,7 +23,7 @@ namespace PL.PlCart
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.ProductItem?> myListProductItem { get; set; }
-        public ObservableCollection<BO.ProductItem?> myListOrderItem { get; set; }
+        public List<BO.OrderItem?> myListOrderItem { get; set; }
 
         public BO.Cart TempCart = new BO.Cart();
         public MainCartView()
@@ -31,6 +31,8 @@ namespace PL.PlCart
             myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem());
             InitializeComponent();
             SetProductComboBox();
+            //myListOrderItem = new ObservableCollection<BO.OrderItem?> ();
+            
         }
         public void SetProductComboBox()
         {
@@ -56,15 +58,16 @@ namespace PL.PlCart
             Label_P.Visibility= Visibility.Hidden;
             buttonCart.Visibility= Visibility.Hidden;
             backOfMCart.Visibility  = Visibility.Hidden;
-            FramCart.Content = new CartOrderItem();
+            FramCart.Content = new CartOrderItem(TempCart);
         }
 
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             Bl?.Cart.AddProdctToCatrt(TempCart, id);
-            Bl?.Cart.UpdateAmountOfProduct(TempCart, id,1);
-            myListOrderItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListProductItemInCart(TempCart).ToList()!);
+            //Bl?.Cart.UpdateAmountOfProduct(TempCart, id,1);
+            //myListOrderItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListProductItemInCart(TempCart).ToList()!);
+            myListOrderItem = TempCart.Items!;
         }
 
         private void RemoveFromCart_Click(object sender, RoutedEventArgs e)

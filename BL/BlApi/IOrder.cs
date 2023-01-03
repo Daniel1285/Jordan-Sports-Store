@@ -54,8 +54,7 @@ namespace BlApi
         /// <param name="filter"></param>
         /// <returns></returns>
         public IEnumerable<OrderForList?> GetListByCondition(Func<OrderForList?, bool>? filter);
-    }
 
-   
+    }   
 
 }

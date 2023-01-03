@@ -32,7 +32,7 @@ namespace PL
 
         private void ManagerButton_Click(object sender, RoutedEventArgs e)
         {
-            new PlProduct.ListProduct().Show();
+            new PlProduct.AdminView().Show();
 
             this.Close();
         }

@@ -131,7 +131,7 @@ namespace PL.PlProduct
                And if it's a false, he will already open them by calling the window in catch */
             if (flag) 
             {
-                new ListProduct().Show();
+                new AdminView().Show();
                 this.Close();
             }
          
@@ -139,7 +139,7 @@ namespace PL.PlProduct
 
         private void BackLastWindow(object sender, RoutedEventArgs e)
         {
-            new ListProduct().Show();
+            new AdminView().Show();
            
             this.Close();
         }

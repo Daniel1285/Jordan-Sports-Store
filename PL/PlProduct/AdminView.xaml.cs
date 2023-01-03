@@ -21,18 +21,18 @@ namespace PL.PlProduct
     /// <summary>
     /// Interaction logic for ListProduct.xaml
     /// </summary>
-    public partial class ListProduct : Window
+    public partial class AdminView : Window
     {
 
 
-        public ListProduct()
+        public AdminView()
         {
             InitializeComponent();
         }
         
         private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            new PL.MainWindow().Show();
+            new MainWindow().Show();
             this.Close();
         }
 
