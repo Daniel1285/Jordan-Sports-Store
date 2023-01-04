@@ -42,9 +42,15 @@ namespace PL.PlCart
         private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
         {
             BO.OrderItem removeOrderItem = new BO.OrderItem();
-            int id = ((BO.OrderItem)OrdersListView.SelectedItem).ID;
+            int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
             removeOrderItem = myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException();
             temp.Items!.Remove(removeOrderItem);
+        }
+
+        private void UpdateAmountInCart_Click(object sender, RoutedEventArgs e)
+        {
+            int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
+            Bl?.Cart.UpdateAmountOfProduct(temp, id, 2);
         }
     }
 }

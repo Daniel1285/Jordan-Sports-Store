@@ -37,6 +37,7 @@
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="RemoveFromCartMenu" Header="Remove from cart" Icon="{materialDesign:PackIcon Kind= Remove }" Click="RemoveFromCart_Click"/>
+                    <MenuItem x:Name="UpdateAmountInCart" Header="Update amount" Icon="{materialDesign:PackIcon Kind=Update }" Click="UpdateAmountInCart_Click"/>
                 </ContextMenu>
             </ListView.ContextMenu>
 

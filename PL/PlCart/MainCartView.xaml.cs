@@ -23,7 +23,6 @@ namespace PL.PlCart
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.ProductItem?> myListProductItem { get; set; }
-        public ObservableCollection<BO.OrderItem?>? myListOrderItem { get; set; }
 
         public BO.Cart TempCart = new BO.Cart();
         
@@ -91,12 +90,11 @@ namespace PL.PlCart
         /// <param name="e"></param>
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
+            BO.ProductItem p = new BO.ProductItem();
+            
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             Bl?.Cart.AddProdctToCatrt(TempCart, id);
-            myListProductItem.FirstOrDefault(x => x?.ID == id).Amount += 1;
-            //Bl?.Cart.UpdateAmountOfProduct(TempCart, id,1);
-            //myListOrderItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListProductItemInCart(TempCart).ToList()!);
-            //myListOrderItem = new ObservableCollection<BO.OrderItem?>(TempCart.Items!);
+            myListProductItem.FirstOrDefault(x => x?.ID == id)!.Amount += 1;
         }
 
         /// <summary>
@@ -109,7 +107,7 @@ namespace PL.PlCart
         {
             BO.OrderItem removeOrderItem = new BO.OrderItem();
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
-            removeOrderItem = myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException();
+            removeOrderItem = TempCart.Items!.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException();
             TempCart.Items!.Remove(removeOrderItem);
         }
 

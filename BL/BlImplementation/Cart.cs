@@ -115,9 +115,9 @@ namespace BlImplementation
             if (!new EmailAddressAttribute().IsValid(email)) throw new BO.EmailInValidException("Email invalid worng");
             DO.Order order1 = new DO.Order()
             {
-                CustomerName = cart.CustomerName,
-                CustomerEmail = cart.CustomerEmail,
-                CustomerAdress = cart.CustomerAddress,
+                CustomerName = name,
+                CustomerEmail = email,
+                CustomerAdress = addres,
                 OrderDate = DateTime.Now,
                 ShipDate = null,
                 DeliveryrDate = null,

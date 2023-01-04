@@ -42,11 +42,11 @@
 
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="250"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="240"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="price" Width="112.5"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="112.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="112.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= InStock}" Header="In stoke" Width="112.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount in cart" Width="125"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= InStock}" Header="In stoke" Width="110"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>
