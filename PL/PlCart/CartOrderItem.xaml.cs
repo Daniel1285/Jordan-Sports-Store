@@ -22,12 +22,13 @@ namespace PL.PlCart
     public partial class CartOrderItem : Page
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        //public List<BO.OrderItem?> myOrderItem { get; set; }
+        public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
         public BO.Cart temp = new BO.Cart();
         public CartOrderItem(BO.Cart c)
         {
+            myListOrderItem = new ObservableCollection<BO.OrderItem?>(c.Items!);
             InitializeComponent();
-            OrdersListView.ItemsSource = c.Items!;
+            //OrdersListView.ItemsSource = c.Items!;
             temp = c;
         }
 

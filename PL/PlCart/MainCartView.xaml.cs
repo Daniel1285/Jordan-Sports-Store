@@ -26,11 +26,13 @@ namespace PL.PlCart
         public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
 
         public BO.Cart TempCart = new BO.Cart();
+        
         public MainCartView()
         {
             myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem());
             InitializeComponent();
             SetProductComboBox();
+            TempCart.Items = new List<BO.OrderItem?>();
         }
         public void SetProductComboBox()
         {
@@ -66,7 +68,7 @@ namespace PL.PlCart
             myListProductItem.FirstOrDefault(x => x?.ID == id).Amount += 1;
             //Bl?.Cart.UpdateAmountOfProduct(TempCart, id,1);
             //myListOrderItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListProductItemInCart(TempCart).ToList()!);
-            myListOrderItem = new ObservableCollection<BO.OrderItem?>(TempCart.Items!);
+            //myListOrderItem = new ObservableCollection<BO.OrderItem?>(TempCart.Items!);
         }
 
         private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
