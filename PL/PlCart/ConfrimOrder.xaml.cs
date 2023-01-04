@@ -59,32 +59,41 @@ namespace PL.PlCart
         /// <param name="e"></param>
         private void EndOfOrder_Click(object sender, RoutedEventArgs e)
         {
-            try
+
+            if (temp.Items!.Count == 0)
             {
-                if (NameTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Name is empty !");
-                    
-                if (EmailTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Email is empty !");
+                ErrorEx.Text = "No items in order!";
+                ErrorEx.Visibility = Visibility.Visible;
+            }
 
-                if (AddressTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Address is empty !");
-
-                string? nameClaint = NameTextBox.Text.ToString();
-                string? emailClaint = EmailTextBox.Text.ToString();
-                string? addressClaint = AddressTextBox.Text.ToString();
-
+            else
+            {
                 try
                 {
-                    Bl?.Cart.ConfirmOrder(temp, nameClaint, emailClaint, addressClaint);
+                    if (NameTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Name is empty !");
+
+                    if (EmailTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Email is empty !");
+
+                    if (AddressTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Address is empty !");
+
+                    string? nameClaint = NameTextBox.Text.ToString();
+                    string? emailClaint = EmailTextBox.Text.ToString();
+                    string? addressClaint = AddressTextBox.Text.ToString();
+
+                    try
+                    {
+                        Bl?.Cart.ConfirmOrder(temp, nameClaint, emailClaint, addressClaint);
+
+                    }
+                    catch (EmailInValidException) { ErrorEx.Text = "Invalid email !"; }
 
                 }
-                catch (EmailInValidException) { ErrorEx.Text = "Invalid email !"; }
-
+                catch (NameIsEmptyException ex)
+                {
+                    ErrorEx.Text = $"{ex.Message}";
+                    ErrorEx.Visibility = Visibility.Visible;
+                }
             }
-            catch (NameIsEmptyException ex)
-            {
-                ErrorEx.Text = $"{ex.Message}";
-                ErrorEx.Visibility= Visibility.Visible;   
-            }
-
         }
 
 

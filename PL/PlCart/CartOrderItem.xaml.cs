@@ -28,20 +28,23 @@ namespace PL.PlCart
         {
             myListOrderItem = new ObservableCollection<BO.OrderItem?>(c.Items!);
             InitializeComponent();
-            //OrdersListView.ItemsSource = c.Items!;
             temp = c;
         }
-
-
         private void GoToConfrimOrder_Click(object sender, RoutedEventArgs e)
         {
             CartOrderItemFram.Content = new ConfrimOrder(temp);
         }
-
         private void BackToMainCartView_Click(object sender, RoutedEventArgs e)
         {
             new MainCartView().Show();
             Window.GetWindow(this).Close();
+        }
+        private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
+        {
+            BO.OrderItem removeOrderItem = new BO.OrderItem();
+            int id = ((BO.OrderItem)OrdersListView.SelectedItem).ID;
+            removeOrderItem = myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException();
+            temp.Items!.Remove(removeOrderItem);
         }
     }
 }

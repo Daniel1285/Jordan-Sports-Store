@@ -34,14 +34,20 @@
                 </Style>
             </ListView.ItemContainerStyle>
 
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="RemoveFromCartMenu" Header="Remove from cart" Icon="{materialDesign:PackIcon Kind= Remove }" Click="RemoveFromCart_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header=" Order ID" Width="137.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="200"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ProductID}" Header="Product ID" Width="50"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header=" Order ID" Width="85"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="252.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ProductID}" Header="Product ID" Width="85"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="137.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="137.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="137.5"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="120"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>

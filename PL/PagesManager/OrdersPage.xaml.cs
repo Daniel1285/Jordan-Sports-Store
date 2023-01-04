@@ -55,7 +55,6 @@ namespace PL.PagesManager
 
         private void OrderInformation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //OrdersListView.ItemsSource = Bl?.Order.GetOrderLists();
             OrdersListView.ItemsSource = OrderInformation.SelectedItem.ToString() == "All" ? Bl?.Order.GetOrderLists() : Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
         }
 
@@ -65,7 +64,6 @@ namespace PL.PagesManager
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.ShippingUpdate(id);
             this.NavigationService.Refresh();
-            
         }
 
         private void UpdateToProvided_Click(object sender, RoutedEventArgs e)

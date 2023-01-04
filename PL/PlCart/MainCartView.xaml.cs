@@ -40,17 +40,32 @@ namespace PL.PlCart
             ProductInfromation.Items.Add("All");
         }
 
+        /// <summary>
+        /// Filter by category.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProductInfromation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OrderItemListView.ItemsSource = ProductInfromation.SelectedItem.ToString() == "All" ? Bl?.Product.GetListOfProductItem() : Bl?.Product.GetListByConditionForProductItem(X => X?.Category.ToString() == ProductInfromation.SelectedItem.ToString());
-
         }
+
+        /// <summary>
+        /// Back to main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();    
             this.Close();
         }
 
+        /// <summary>
+        /// Open page of Order item in the Cart. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoToCartOrderitem_Click(object sender, RoutedEventArgs e)
         {
             OrderItemListView.Visibility= Visibility.Hidden;
@@ -61,19 +76,30 @@ namespace PL.PlCart
             FramCart.Content = new CartOrderItem(TempCart);
         }
 
+        /// <summary>
+        /// Add product to cart.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             Bl?.Cart.AddProdctToCatrt(TempCart, id);
-            myListProductItem.FirstOrDefault(x => x?.ID == id).Amount += 1;
-            //Bl?.Cart.UpdateAmountOfProduct(TempCart, id,1);
-            //myListOrderItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListProductItemInCart(TempCart).ToList()!);
-            //myListOrderItem = new ObservableCollection<BO.OrderItem?>(TempCart.Items!);
+            myListProductItem.FirstOrDefault(x => x?.ID == id)!.Amount += 1;
         }
 
+        /// <summary>
+        /// Remove product from cart.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="BO.NotExistException"></exception>
         private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
         {
-
+            BO.OrderItem removeOrderItem = new BO.OrderItem();
+            int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
+            removeOrderItem = myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException();
+            TempCart.Items!.Remove(removeOrderItem);
         }
 
     }
