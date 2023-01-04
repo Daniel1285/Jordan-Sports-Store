@@ -23,7 +23,7 @@ namespace PL.PlCart
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.ProductItem?> myListProductItem { get; set; }
-        public List<BO.OrderItem?> myListOrderItem { get; set; }
+        public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
 
         public BO.Cart TempCart = new BO.Cart();
         public MainCartView()
@@ -63,9 +63,10 @@ namespace PL.PlCart
         {
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             Bl?.Cart.AddProdctToCatrt(TempCart, id);
+            myListProductItem.FirstOrDefault(x => x?.ID == id).Amount += 1;
             //Bl?.Cart.UpdateAmountOfProduct(TempCart, id,1);
             //myListOrderItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListProductItemInCart(TempCart).ToList()!);
-            myListOrderItem = TempCart.Items!;
+            myListOrderItem = new ObservableCollection<BO.OrderItem?>(TempCart.Items!);
         }
 
         private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
