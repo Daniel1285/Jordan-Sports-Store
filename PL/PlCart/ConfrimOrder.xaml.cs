@@ -23,10 +23,33 @@ namespace PL.PlCart
     public partial class ConfrimOrder : Page
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public BO.Cart Cart = new BO.Cart();
-        public ConfrimOrder()
+        public BO.Cart temp = new BO.Cart();
+        public ConfrimOrder(BO.Cart c)
         {
             InitializeComponent();
+            temp = c;      
+        }
+
+        private void BackToChosenWindow_listBox(object sender, SelectionChangedEventArgs e)
+        {
+             int chosenWindow = BackToChosenWindow.SelectedIndex;
+            if (chosenWindow == 0)
+            {
+                new MainWindow().Show();
+                Window.GetWindow(this).Close();
+            }
+            else if (chosenWindow == 2)
+            {
+                new MainCartView().Show();
+                Window.GetWindow(this).Close();
+            }
+            else
+                Window.GetWindow(this).Content = new CartOrderItem(temp);
+
+
+            //else if (chosenWindow == "Order iten") new ;
+            //else
+            //    new CartOrderItem();
         }
 
         /// <summary>
@@ -48,15 +71,12 @@ namespace PL.PlCart
                 string? emailClaint = EmailTextBox.Text.ToString();
                 string? addressClaint = AddressTextBox.Text.ToString();
 
-                //try
-                //{
-                //    Bl?.Cart.ConfirmOrder(Cart, nameClaint, emailClaint, addressClaint);
+                try
+                {
+                    Bl?.Cart.ConfirmOrder(temp, nameClaint, emailClaint, addressClaint);
 
-                //}
-                //catch (EmailInValidException) {
-                //    HintAssist.SetHint(NameTextBox, "dskdmsdsd");
-                //    MaterialDesignThemes.Wpf.HintAssist.SetBackground(NameTextBox, Brushes.Red);
-                //}
+                }
+                catch (EmailInValidException) { ErrorEx.Text = "Invalid email !"; }
 
             }
             catch (NameIsEmptyException ex)
@@ -65,10 +85,8 @@ namespace PL.PlCart
                 ErrorEx.Visibility= Visibility.Visible;   
             }
 
-
-
-
-
         }
+
+
     }
 }

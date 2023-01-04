@@ -26,7 +26,7 @@
 
         <Grid>
             <Canvas>
-                <Polygon Points="0,20 230,140 0, 270" Fill="#4EB1B6 "/>
+                <Polygon Points="0,20 230,140 0, 270" Fill="#4EB1B6"/>
                 <Polygon Points="100,400 200,370 180, 450" Fill="#4EB1B6" Margin="50,0,0,0"/>
                 <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#4EB1B6"/>
                 <Ellipse Margin="250 40 0 0" Width="40" Height="50" Fill="#4EB1B6"/>
@@ -35,8 +35,29 @@
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Details" FontSize="60" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"/>
                 <TextBlock Text="Please fill in the details in order" FontSize="20"  Foreground="White" Margin="20,30" Opacity="0.8"/>
-                <TextBlock Text="to place the order" FontSize="20"  Foreground="White" HorizontalAlignment="Center" Opacity="0.8" Margin="0,-20,0,0"/>
-                
+                <TextBlock Text="to place the order." FontSize="20"  Foreground="White" HorizontalAlignment="Center" Opacity="0.8" Margin="0,-20,0,0"/>
+            </StackPanel>
+
+            <StackPanel>
+                <!--<Button x:Name="Option" Content="{materialDesign:PackIcon Kind = Settings}" Width="50" Height="30" HorizontalAlignment="Left" Background="White" Foreground="#4EB1B6" />-->
+
+                <materialDesign:ColorZone Padding="16" Mode="Inverted" Background="#3AA9AD" Foreground="White"   HorizontalAlignment="Stretch">
+                    <DockPanel>
+                        <materialDesign:PopupBox DockPanel.Dock="Right"  PlacementMode="BottomAndAlignRightEdges">
+                            <ListBox x:Name="BackToChosenWindow" SelectionChanged="BackToChosenWindow_listBox" >
+                                <ListBoxItem Content="Main window"/>
+                                <ListBoxItem Content="Order item"/>
+                                <ListBoxItem Content="Product list"/>
+                            </ListBox>
+                        </materialDesign:PopupBox>
+                        <StackPanel 
+                            Orientation="Horizontal">
+                            <ToggleButton
+                                Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                            <TextBlock Text="Back to" Margin="20,0,0,0" VerticalAlignment="Center" FontWeight="Bold"/>
+                        </StackPanel>
+                    </DockPanel>
+                </materialDesign:ColorZone>
             </StackPanel>
         </Grid>
         
@@ -60,7 +81,7 @@
                     </TextBox>
 
                     <TextBox x:Name="EmailTextBox" Margin="0,25,0,0"
-                    materialDesign:HintAssist.HelperText="Invalid email" 
+                    materialDesign:HintAssist.HelperText="Required email" 
                              materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Email">
                         <TextBox.Text>

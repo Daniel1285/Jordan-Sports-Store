@@ -23,19 +23,18 @@ namespace PL.PlCart
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         //public List<BO.OrderItem?> myOrderItem { get; set; }
+        public BO.Cart temp = new BO.Cart();
         public CartOrderItem(BO.Cart c)
         {
-            
             InitializeComponent();
-            //myOrderItem = c.Items!;
             OrdersListView.ItemsSource = c.Items!;
-
+            temp = c;
         }
 
 
         private void GoToConfrimOrder_Click(object sender, RoutedEventArgs e)
         {
-            CartOrderItemFram.Content = new ConfrimOrder();
+            CartOrderItemFram.Content = new ConfrimOrder(temp);
         }
 
         private void BackToMainCartView_Click(object sender, RoutedEventArgs e)

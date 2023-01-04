@@ -31,8 +31,6 @@ namespace PL.PlCart
             myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem());
             InitializeComponent();
             SetProductComboBox();
-            //myListOrderItem = new ObservableCollection<BO.OrderItem?> ();
-            
         }
         public void SetProductComboBox()
         {
