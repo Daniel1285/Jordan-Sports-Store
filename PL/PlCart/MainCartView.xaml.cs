@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.PlProduct;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -90,11 +91,17 @@ namespace PL.PlCart
         /// <param name="e"></param>
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
-            BO.ProductItem p = new BO.ProductItem();
-            
-            int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
-            Bl?.Cart.AddProdctToCatrt(TempCart, id);
-            
+            if (OrderItemListView.SelectedItem != null)
+            {
+                BO.ProductItem p = new BO.ProductItem();
+
+                int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
+                Bl?.Cart.AddProdctToCatrt(TempCart, id);
+                myListProductItem.FirstOrDefault(x => x?.ID == id)!.Amount += 1;
+            }
+            else
+                MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
 
         /// <summary>
