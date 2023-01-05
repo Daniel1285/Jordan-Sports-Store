@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PL;
+using PL.PagesManager;
+using PL.PlCart;
 
 namespace PL.PlProduct
 {
@@ -74,6 +76,9 @@ namespace PL.PlProduct
                     throw new BO.NameIsEmptyException("Field in stock is empty !");
                 if (CategoryComboBox.Text == "")
                     throw new BO.NameIsEmptyException("Field in Category is empty !");
+                if(CategoryComboBox.SelectedIndex == 5)
+                    throw new BO.NameIsEmptyException("Require field Category !");
+
 
                 try
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,18 @@ namespace PL.PlCart
     /// <summary>
     /// Interaction logic for CartOrderItem.xaml
     /// </summary>
-    public partial class CartOrderItem : Page
+    public partial class CartOrderItem : Page,INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        /// <summary>
+        /// Updates the list immediately.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        private void onPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
+        
+
+
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
         public BO.Cart temp = new BO.Cart();
@@ -45,12 +56,15 @@ namespace PL.PlCart
             int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
             removeOrderItem = myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException();
             temp.Items!.Remove(removeOrderItem);
+            onPropertyChanged(nameof(myListOrderItem)); 
         }
 
         private void UpdateAmountInCart_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
             Bl?.Cart.UpdateAmountOfProduct(temp, id, 2);
+            onPropertyChanged(nameof(myListOrderItem));
+
         }
     }
 }

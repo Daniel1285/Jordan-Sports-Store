@@ -46,10 +46,6 @@ namespace PL.PlCart
             else
                 Window.GetWindow(this).Content = new CartOrderItem(temp);
 
-
-            //else if (chosenWindow == "Order iten") new ;
-            //else
-            //    new CartOrderItem();
         }
 
         /// <summary>
