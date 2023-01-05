@@ -226,14 +226,14 @@ namespace BlImplementation
             return p!;
         }
 
-        public IEnumerable<BO.ProductItem?> GetListByConditionForProductItem(Func<BO.ProductItem?, bool>? filter)
-        {
-            var p = from item in GetListOfProductItem()
-                    where (filter!(item))
-                    select item;
-            return p!;
-        }
-        public IEnumerable<BO.ProductItem?> GetListOfProductItem()
+        //public IEnumerable<BO.ProductItem?> GetListByConditionForProductItem(Func<BO.ProductItem?, bool>? filter)
+        //{
+        //    var p = from item in GetListOfProductItem()
+        //            where (filter!(item))
+        //            select item;
+        //    return p!;
+        //}
+        public IEnumerable<BO.ProductItem?> GetListOfProductItem(BO.Cart cart)
         {
             var ListofProductItem = from item in Dal?.Product.GetAll()
                                     //let amount = (cart.Items == null ? 0 : cart.Items.Find(x => x?.ProductID == item?.ID)!.Amount)
@@ -244,7 +244,7 @@ namespace BlImplementation
                                         Price = (double)item?.Price!,
                                         Category = (BO.Enums.Category)item?.Category!,
                                         InStock = (item?.InStock > 0 ? true : false),
-                                        Amount = 0,
+                                        Amount = cart.Items != null && cart.Items.FirstOrDefault(x =>x?.ProductID == item?.ID) != null ? cart.Items.FirstOrDefault(x => x?.ProductID == item?.ID)!.Amount : 0,
                                     };
             return ListofProductItem;
         }

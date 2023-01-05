@@ -28,7 +28,7 @@ namespace PL.PlCart
 
         public MainCartView()
         {
-            myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem());
+            myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem(TempCart));
             InitializeComponent();
             //SetProductComboBox();
             TempCart.Items = new List<BO.OrderItem?>();
@@ -36,7 +36,7 @@ namespace PL.PlCart
         public MainCartView(BO.Cart cart)
         {
             TempCart = cart;
-            myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl.Product.GetListOfProductItem());
+            myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl.Product.GetListOfProductItem(TempCart));
             InitializeComponent();
             //SetProductComboBox();
 
@@ -94,7 +94,7 @@ namespace PL.PlCart
             
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             Bl?.Cart.AddProdctToCatrt(TempCart, id);
-            myListProductItem.FirstOrDefault(x => x?.ID == id)!.Amount += 1;
+            
         }
 
         /// <summary>

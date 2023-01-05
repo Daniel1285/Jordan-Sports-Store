@@ -54,21 +54,21 @@ namespace BlApi
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public IEnumerable<ProductItem?> GetListByConditionForProductItem(Func<ProductItem?, bool>? filter);
+        //public IEnumerable<ProductItem?> GetListByConditionForProductItem(Func<ProductItem?, bool>? filter);
 
         /// <summary>
         /// Show list of product item
         /// </summary>
         /// <param name="cart"></param>
         /// <returns></returns>
-        public IEnumerable<ProductItem?> GetListOfProductItem();
+        public IEnumerable<ProductItem?> GetListOfProductItem(Cart cart);
 
         /// <summary>
         /// return list of corrunt productItem in cert.
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public IEnumerable<ProductItem?> GetListProductItemInCart(BO.Cart c);
+        //public IEnumerable<ProductItem?> GetListProductItemInCart(BO.Cart c);
 
 
 
