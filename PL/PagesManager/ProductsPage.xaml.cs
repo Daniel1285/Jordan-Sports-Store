@@ -27,8 +27,7 @@ namespace PL.PagesManager
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.ProductForList?> myListProduct { get; set;}
-        public Array Categories { get {return Enum.GetValues(typeof(BO.Enums.Category)); }
-}
+        public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category));}}
         public ProductsPage()
         {
             myListProduct = new ObservableCollection<BO.ProductForList?>(Bl.Product.GetProductList());

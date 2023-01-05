@@ -23,14 +23,14 @@ namespace PL.PlCart
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.ProductItem?> myListProductItem { get; set; }
-
+        public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category)); } }
         public BO.Cart TempCart = new BO.Cart();
 
         public MainCartView()
         {
             myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem());
             InitializeComponent();
-            SetProductComboBox();
+            //SetProductComboBox();
             TempCart.Items = new List<BO.OrderItem?>();
         }
         public MainCartView(BO.Cart cart)
@@ -38,14 +38,14 @@ namespace PL.PlCart
             TempCart = cart;
             myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl.Product.GetListOfProductItem());
             InitializeComponent();
-            SetProductComboBox();
+            //SetProductComboBox();
 
         }
-        public void SetProductComboBox()
-        {
-            for (int i = 0; i <= 4; i++) { ProductInfromation.Items.Add($"{(BO.Enums.Category)i}"); }
-            ProductInfromation.Items.Add("All");
-        }
+        //public void SetProductComboBox()
+        //{
+        //    for (int i = 0; i <= 4; i++) { ProductInfromation.Items.Add($"{(BO.Enums.Category)i}"); }
+        //    ProductInfromation.Items.Add("All");
+        //}
 
         /// <summary>
         /// Filter by category.
@@ -54,7 +54,7 @@ namespace PL.PlCart
         /// <param name="e"></param>
         private void ProductInfromation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OrderItemListView.ItemsSource = ProductInfromation.SelectedItem.ToString() == "All" ? Bl?.Product.GetListOfProductItem() : Bl?.Product.GetListByConditionForProductItem(X => X?.Category.ToString() == ProductInfromation.SelectedItem.ToString());
+            //OrderItemListView.ItemsSource = ProductInfromation.SelectedItem.ToString() == "All" ? Bl?.Product.GetListOfProductItem() : Bl?.Product.GetListByConditionForProductItem(X => X?.Category.ToString() == ProductInfromation.SelectedItem.ToString());
         }
 
         /// <summary>
