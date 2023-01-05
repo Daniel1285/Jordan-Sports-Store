@@ -25,7 +25,7 @@ namespace PL.PlCart
         public ObservableCollection<BO.ProductItem?> myListProductItem { get; set; }
 
         public BO.Cart TempCart = new BO.Cart();
-        
+
         public MainCartView()
         {
             myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem());

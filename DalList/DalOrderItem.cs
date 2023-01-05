@@ -15,7 +15,7 @@ internal class DalOrderItem : IOrderItem
     {
         o.ID = DataSource.Config.GetIdForOrderItem;
         DataSource.MyOrderItem.Add(o);
-        return o.ProductID;
+        return o.ID;
     }
 
 

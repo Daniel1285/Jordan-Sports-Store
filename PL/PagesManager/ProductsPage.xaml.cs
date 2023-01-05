@@ -27,22 +27,24 @@ namespace PL.PagesManager
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.ProductForList?> myListProduct { get; set;}
+        public Array Categories { get {return Enum.GetValues(typeof(BO.Enums.Category)); }
+}
         public ProductsPage()
         {
             myListProduct = new ObservableCollection<BO.ProductForList?>(Bl.Product.GetProductList());
             InitializeComponent();
-            SetProductComboBox();
+            //SetProductComboBox();
         }
 
-        public void SetProductComboBox()
-        {
-            for (int i = 0; i <= 4; i++) { AttributeSelector.Items.Add($"{(BO.Enums.Category)i}"); }
-            AttributeSelector.Items.Add("All");
-        }
+        //public void SetProductComboBox()
+        //{
+        //    for (int i = 0; i <= 4; i++) { AttributeSelector.Items.Add($"{(BO.Enums.Category)i}"); }
+        //    AttributeSelector.Items.Add("All");
+        //}
 
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All" ? Bl?.Product.GetProductList() : Bl?.Product.GetListByCondition(X => X?.Category.ToString() == AttributeSelector.SelectedItem.ToString());
+            //ProductsListView.ItemsSource = AttributeSelector.SelectedItem.ToString() == "All" ? Bl?.Product.GetProductList() : Bl?.Product.GetListByCondition(X => X?.Category.ToString() == AttributeSelector.SelectedItem.ToString());
         }
 
         private void doubleClick_Update(object sender, MouseButtonEventArgs e)

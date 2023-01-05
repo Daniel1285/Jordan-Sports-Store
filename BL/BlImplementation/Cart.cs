@@ -13,7 +13,7 @@ namespace BlImplementation
         {
             if (id < 0) throw new BO.IdSmallThanZeroException("ID small zero!");
             DO.Product? product1 = new DO.Product();
-            List<DO.OrderItem?> orderItem1 = Dal?.OrderItem.GetAll().ToList()?? throw new NullReferenceException();
+            //List<DO.OrderItem?> orderItem1 = Dal?.OrderItem.GetAll().ToList()?? throw new NullReferenceException();
             try
             {
                 product1 =  Dal?.Product.GetByCondition(x => x?.ID == id);
@@ -33,7 +33,6 @@ namespace BlImplementation
                         item.Amount++;
                         item.Totalprice += item.Price;
                         cart.TotalPrice += item.Price;
-
                         cart.Items = cart.Items.Select(i => i?.ProductID == id ? item : i).ToList();
                         return cart;
                     }
@@ -41,21 +40,23 @@ namespace BlImplementation
             }
             if(product1?.InStock > 0)
             {
-                var item = orderItem1.FirstOrDefault(i => i?.ProductID == id);
-                if (item != null)
+                //var item = orderItem1.FirstOrDefault(i => i?.ProductID == id);
+                //if (item != null)
+                //{
+                BO.OrderItem orderItemBo = new BO.OrderItem
                 {
-                    BO.OrderItem orderItemBo = new BO.OrderItem
-                    {
-                        ID = (int)item?.ID!,
-                        Name = product1?.Name,
-                        ProductID = (int)item?.ProductID!,
-                        Price = (double)item?.Price!,
-                        Amount = 1,
-                        Totalprice = (double)item?.Price!
-                    };
 
-                    cart.Items?.Add(orderItemBo);
-                }
+                    Name = product1?.Name,
+                    ProductID = (int)product1?.ID!,
+                    Price = (double)product1?.Price!,
+                    Amount = 1,
+                    Totalprice = (double)product1?.Price!
+
+                };
+                
+                cart.Items?.Add(orderItemBo);
+ 
+                //}
 
             }
             return cart;
@@ -136,9 +137,7 @@ namespace BlImplementation
                                          Price = item.Price,
                                          Amount = item.Amount,
                                      }).ToList();
-               
                 orderItemList.ForEach(item => Dal.OrderItem.Add(item));
-               
             }
             else
                 throw new BO.NotExistException("not exists!");

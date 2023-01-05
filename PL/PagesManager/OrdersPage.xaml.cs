@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,18 +26,19 @@ namespace PL.PagesManager
 
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.OrderForList?> myListOrders { get; set; }
+        public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.OrderStatus)); } }
         public OrdersPage()
         {
             myListOrders = new ObservableCollection<BO.OrderForList?>(Bl.Order.GetOrderLists());
             InitializeComponent();
-            SetProductComboBox();      
+           // SetProductComboBox();      
         }
 
-        public void SetProductComboBox()
-        {
-            for (int i = 0; i <= 2; i++) { OrderInformation.Items.Add($"{(BO.Enums.OrderStatus)i}"); }
-            OrderInformation.Items.Add("All");
-        }
+        //public void SetProductComboBox()
+        //{
+        //    for (int i = 0; i <= 2; i++) { OrderInformation.Items.Add($"{(BO.Enums.OrderStatus)i}"); }
+        //    OrderInformation.Items.Add("All");
+        //}
 
 
         private void doubleClick_orderItem(object sender, MouseButtonEventArgs e)
@@ -55,7 +57,7 @@ namespace PL.PagesManager
 
         private void OrderInformation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OrdersListView.ItemsSource = OrderInformation.SelectedItem.ToString() == "All" ? Bl?.Order.GetOrderLists() : Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
+            //OrdersListView.ItemsSource = OrderInformation.SelectedItem.ToString() == "All" ? Bl?.Order.GetOrderLists() : Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
         }
 
 

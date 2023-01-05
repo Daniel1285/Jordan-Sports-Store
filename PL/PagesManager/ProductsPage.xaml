@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions >
         </Grid>
 
-        <ComboBox Name="AttributeSelector" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
+        <ComboBox Name="AttributeSelector" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" ItemsSource="{Binding Categories}" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
 
         <ListView x:Name="ProductsListView" Grid.Row="1" ItemsSource="{Binding myListProduct}" MouseDoubleClick="doubleClick_Update"  SelectionChanged="ProductsListView_SelectionChanged" FontWeight="Bold">
             <ListView.ItemContainerStyle>
