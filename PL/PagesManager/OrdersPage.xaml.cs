@@ -21,26 +21,23 @@ namespace PL.PagesManager
     /// <summary>
     /// Interaction logic for Orders.xaml
     /// </summary>
-    public partial class OrdersPage : Page
+    public partial class OrdersPage : Page,INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
 
+        private void OnPropertyChangd(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public ObservableCollection<BO.OrderForList?> myListOrders { get; set; }
+        public ObservableCollection<BO.OrderForList?> myListOrders => new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.OrderStatus)); } }
         public OrdersPage()
         {
-            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl.Order.GetOrderLists());
+           
             InitializeComponent();
-           // SetProductComboBox();      
+             
         }
-
-        //public void SetProductComboBox()
-        //{
-        //    for (int i = 0; i <= 2; i++) { OrderInformation.Items.Add($"{(BO.Enums.OrderStatus)i}"); }
-        //    OrderInformation.Items.Add("All");
-        //}
-
-
         private void doubleClick_orderItem(object sender, MouseButtonEventArgs e)
         {
             if (OrdersListView.SelectedItem != null)
@@ -65,13 +62,14 @@ namespace PL.PagesManager
         {
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.ShippingUpdate(id);
-            this.NavigationService.Refresh();
+            OnPropertyChangd(nameof(myListOrders));
         }
 
         private void UpdateToProvided_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.SupplyUpdateOrder(id);
+            OnPropertyChangd(nameof(myListOrders));
         }
 
     }

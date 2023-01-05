@@ -29,7 +29,7 @@
         <TextBox x:Name="IdBox" HorizontalAlignment="left" TextWrapping="Wrap" Text="" TextAlignment="Center" Width="200"  Height="30" TextChanged="ProductIdTextBox_TextChanged" FontSize="16" Grid.Row="0" Grid.Column="1" BorderBrush="White" Foreground="White"/>
 
         <Label   Content="Category:" HorizontalAlignment="Right" Width="Auto" Height="29"  FontWeight="Bold" FontSize="14" Foreground="White" Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
-        <ComboBox x:Name="CategoryComboBox" HorizontalAlignment="Left" Width="200" HorizontalContentAlignment="Center" Height="30" FontSize="14" Grid.Row="1" Grid.Column="1" BorderBrush="White" Foreground="Black"/>
+        <ComboBox x:Name="CategoryComboBox" HorizontalAlignment="Left" Width="200" HorizontalContentAlignment="Center" Height="30" FontSize="14" Grid.Row="1" Grid.Column="1" BorderBrush="White" Foreground="Black" SelectedIndex="5"/>
 
 
         <Label   Content="Name:" HorizontalAlignment="Right"  Width="Auto" Height="29" FontWeight="Bold" FontSize="14" Foreground="White" Grid.Row="2" Grid.Column="0" Margin="0,0,20,0" />
