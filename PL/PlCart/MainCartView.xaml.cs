@@ -31,7 +31,7 @@ namespace PL.PlCart
         {
             myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem(TempCart));
             InitializeComponent();
-            //SetProductComboBox();
+            
             TempCart.Items = new List<BO.OrderItem?>();
         }
         public MainCartView(BO.Cart cart)
@@ -42,12 +42,6 @@ namespace PL.PlCart
             //SetProductComboBox();
 
         }
-        //public void SetProductComboBox()
-        //{
-        //    for (int i = 0; i <= 4; i++) { ProductInfromation.Items.Add($"{(BO.Enums.Category)i}"); }
-        //    ProductInfromation.Items.Add("All");
-        //}
-
         /// <summary>
         /// Filter by category.
         /// </summary>
