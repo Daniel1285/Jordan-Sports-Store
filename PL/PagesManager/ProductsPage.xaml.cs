@@ -45,8 +45,7 @@ namespace PL.PagesManager
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category));}}
         public ProductsPage()
         {
-            InitializeComponent();
-           
+            InitializeComponent();          
         }
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -62,7 +61,6 @@ namespace PL.PagesManager
                 new AddAndUpdate(id).Show();  
                 (Window.GetWindow(this)).Close();
                 onPropertyChanged(nameof(myListProduct));   
-
             }
             else
                 MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -78,8 +76,6 @@ namespace PL.PagesManager
                 deleteEx.Text = "Product deleted successfully";
                 deleteEx.Visibility = Visibility.Visible;
                 onPropertyChanged(nameof(myListProduct));
-
-
             }
             catch (BO.CanNotDeleteProductException)
             {
