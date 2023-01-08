@@ -1,4 +1,6 @@
 ﻿using BlApi;
+
+using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 
 namespace BlImplementation
@@ -246,7 +248,15 @@ namespace BlImplementation
                                         InStock = (item?.InStock > 0 ? true : false),
                                         Amount = cart.Items != null && cart.Items.FirstOrDefault(x =>x?.ProductID == item?.ID) != null ? cart.Items.FirstOrDefault(x => x?.ProductID == item?.ID)!.Amount : 0,
                                     };
+            
             return ListofProductItem;
+        }
+        public IEnumerable<IGrouping<BO.Enums.Category,BO.ProductItem?>> GetListProductIGrouping(IEnumerable<BO.ProductItem?> list)
+        {
+            var group = from item in list
+                        group item by item.Category into g
+                        select g;
+            return group;
         }
 
     }

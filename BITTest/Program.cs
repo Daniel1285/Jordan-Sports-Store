@@ -285,19 +285,7 @@ namespace BITTest
 
                     break;
 
-                case "g":
-                    List<ProductItem> pia = testMain?.Product.GetListProductItemInCart(c).ToList()!;
-                    foreach (var item in pia)
-                    {
-                        Console.WriteLine(item);
-                    }
-
-                    break;
-
-                default:
-                    Console.WriteLine("Error Tayping");
-                    break;
-                
+               
 
             }
         }

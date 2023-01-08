@@ -1,4 +1,4 @@
-﻿using BO;
+﻿
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -79,12 +79,14 @@ namespace PL.PlCart
                     try
                     {
                         Bl?.Cart.ConfirmOrder(temp, nameClaint, emailClaint, addressClaint);
+                        ErrorEx.Text = "Order confrim :)";
+                        ErrorEx.Visibility = Visibility.Visible;
 
                     }
-                    catch (EmailInValidException) { ErrorEx.Text = "Invalid email !"; }
+                    catch (BO.EmailInValidException) { ErrorEx.Text = "Invalid email !"; }
 
                 }
-                catch (NameIsEmptyException ex)
+                catch (BO.NameIsEmptyException ex)
                 {
                     ErrorEx.Text = $"{ex.Message}";
                     ErrorEx.Visibility = Visibility.Visible;

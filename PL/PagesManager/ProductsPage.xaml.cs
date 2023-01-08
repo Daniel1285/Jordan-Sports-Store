@@ -30,17 +30,25 @@ namespace PL.PagesManager
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        /// <summary>
-        /// Updates the list immediately.
-        /// </summary>
-        /// <param name="propertyName"></param>
-        private void onPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));   
         }
          
 
-        public ObservableCollection<BO.ProductForList?> myListProduct => new ObservableCollection<BO.ProductForList?>(Bl.Product.GetProductList());
+        public ObservableCollection<BO.ProductForList?> myListProduct
+        {
+            get
+            {
+                if (AttributeSelector.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
+                {
+                    return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetProductList());
+
+                }
+                else
+                    return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetListByCondition(x => x?.Category.ToString() == AttributeSelector.SelectedItem.ToString()));
+            }
+        }
 
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category));}}
         public ProductsPage()
@@ -49,7 +57,7 @@ namespace PL.PagesManager
         }
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+            OnPropertyChanged(nameof(myListProduct));
         }
 
         private void doubleClick_Update(object sender, MouseButtonEventArgs e)
@@ -60,7 +68,7 @@ namespace PL.PagesManager
                 int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
                 new AddAndUpdate(id).Show();  
                 (Window.GetWindow(this)).Close();
-                onPropertyChanged(nameof(myListProduct));   
+                OnPropertyChanged(nameof(myListProduct));   
             }
             else
                 MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -75,7 +83,7 @@ namespace PL.PagesManager
                 Bl?.Product.DeleteProduct(id);
                 deleteEx.Text = "Product deleted successfully";
                 deleteEx.Visibility = Visibility.Visible;
-                onPropertyChanged(nameof(myListProduct));
+                OnPropertyChanged(nameof(myListProduct));
             }
             catch (BO.CanNotDeleteProductException)
             {

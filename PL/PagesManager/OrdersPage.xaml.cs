@@ -27,16 +27,28 @@ namespace PL.PagesManager
 
         private void OnPropertyChangd(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public ObservableCollection<BO.OrderForList?> myListOrders => new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
+        public ObservableCollection<BO.OrderForList?> myListOrders
+        {
+            get
+            {
+                if (OrderInformation.SelectedItem.ToString() == BO.Enums.OrderStatus.NONE.ToString())
+                {
+                    return new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
+                }
+                else
+                    return new ObservableCollection<BO.OrderForList?>(Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString())!);
+            }
+        }
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.OrderStatus)); } }
         public OrdersPage()
         {
-           
-            InitializeComponent();
-             
+            InitializeComponent();  
         }
         private void doubleClick_orderItem(object sender, MouseButtonEventArgs e)
         {
@@ -55,6 +67,9 @@ namespace PL.PagesManager
         private void OrderInformation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //OrdersListView.ItemsSource = OrderInformation.SelectedItem.ToString() == "All" ? Bl?.Order.GetOrderLists() : Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
+            //OnPropertyChangd(nameof(myListOrders));
+            OnPropertyChangd(nameof(myListOrders));
+            
         }
 
 
