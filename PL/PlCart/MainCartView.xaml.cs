@@ -39,7 +39,6 @@ namespace PL.PlCart
             TempCart = cart;
             myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl.Product.GetListOfProductItem(TempCart));
             InitializeComponent();
-            //SetProductComboBox();
 
         }
         /// <summary>
@@ -49,7 +48,27 @@ namespace PL.PlCart
         /// <param name="e"></param>
         private void ProductInfromation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //OrderItemListView.ItemsSource = ProductInfromation.SelectedItem.ToString() == "All" ? Bl?.Product.GetListOfProductItem() : Bl?.Product.GetListByConditionForProductItem(X => X?.Category.ToString() == ProductInfromation.SelectedItem.ToString());
+            var group = (Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException()) ?? throw new NullReferenceException()).ToList();
+            myListProductItem.Clear();
+            if (ProductInfromation.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
+            {
+                
+                foreach (var x in Bl?.Product.GetListOfProductItem(TempCart)!)
+                    myListProductItem.Add(x);
+               
+            }
+            else
+            {
+                foreach (var g in group)
+                {
+                    if (g.Key == (BO.Enums.Category)ProductInfromation.SelectedItem)
+                    {
+                        foreach (var shorts in g)
+                            myListProductItem.Add(shorts);
+                        
+                    }
+                }
+            }
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
 ﻿using BO;
+using System.Collections.ObjectModel;
+
 namespace BlApi
 {
     public interface IProduct
@@ -68,7 +70,7 @@ namespace BlApi
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        //public IEnumerable<ProductItem?> GetListProductItemInCart(BO.Cart c);
+        public IEnumerable<IGrouping<Enums.Category, ProductItem?>> GetListProductIGrouping(IEnumerable<ProductItem?> list);
 
 
 
