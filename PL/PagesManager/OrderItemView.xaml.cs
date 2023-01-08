@@ -15,31 +15,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PL.PagesManager
+namespace PL.PagesManager;
+
+/// <summary>
+/// Interaction logic for OrderItemView.xaml
+/// </summary>
+public partial class OrderItemView : Page
 {
-    /// <summary>
-    /// Interaction logic for OrderItemView.xaml
-    /// </summary>
-    public partial class OrderItemView : Page
+    private BlApi.IBl? Bl = BlApi.Factory.Get();
+    public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
+    public BO.Order Order = new BO.Order();
+         
+    public OrderItemView(int OrderId)
     {
-        private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
-        public BO.Order Order = new BO.Order();
-             
-        public OrderItemView(int OrderId)
-        {
-            myListOrderItem = new ObservableCollection<BO.OrderItem?>(Bl.Order.GetOrder(OrderId).Items!);
-            Order = Bl.Order.GetOrder(OrderId);
-            InitializeComponent();
-        }
+        myListOrderItem = new ObservableCollection<BO.OrderItem?>(Bl.Order.GetOrder(OrderId).Items!);
+        Order = Bl.Order.GetOrder(OrderId);
+        InitializeComponent();
+    }
 
-        private void doubleClick_DetailsOrder(object sender, MouseButtonEventArgs e)
-        {
-            if (OrdersItemListView.SelectedItems != null)
-                orderItemFrame.Content = new OrderDetails(Order);
-            else
-                MessageBox.Show("Please chose only from the order", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-        }
+    private void GotoDetailsOrder_Click(object sender, RoutedEventArgs e)
+    {
+        orderItemFrame.Content = new OrderDetails(Order);
+        GotoDetailsOrder_Button.Visibility = Visibility.Hidden;
     }
 }

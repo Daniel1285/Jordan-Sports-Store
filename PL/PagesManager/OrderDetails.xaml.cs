@@ -30,14 +30,15 @@ public partial class OrderDetails : Page, INotifyPropertyChanged
     }
 
     private BlApi.IBl? Bl = BlApi.Factory.Get();
-    private BO.Order myOrder = new BO.Order();
+    public BO.Order myOrder { get; set; }   
 
 
     public OrderDetails(BO.Order order)
-    {
-        InitializeComponent();
-        myOrder = order;
+    {     
+        myOrder = order;    
         OnPropertyChangd(myOrder.ToString());
+
+        InitializeComponent();
     }
 
 

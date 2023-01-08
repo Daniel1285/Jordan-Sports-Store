@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="55*"/>
             <RowDefinition Height="500*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Grid Name="UpGridOrder" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
@@ -27,7 +28,7 @@
 
         </Grid>
 
-        <ListView x:Name="OrdersItemListView" Grid.Row="1" ItemsSource="{Binding myListOrderItem}" MouseDoubleClick="doubleClick_DetailsOrder" FontWeight="Bold">
+        <ListView x:Name="OrdersItemListView" Grid.Row="1" ItemsSource="{Binding myListOrderItem}" FontWeight="Bold">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -52,6 +53,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <Button x:Name="GotoDetailsOrder_Button" Content="Details Order" Grid.Row="2" Width="Auto" FontSize="18" FontFamily="Aharoni" HorizontalAlignment="Right"  FontWeight="Bold" HorizontalContentAlignment="Center" Click="GotoDetailsOrder_Click" Foreground="Black" Background="White" />
+
 
         <Frame x:Name="orderItemFrame" Grid.RowSpan="2" />
     </Grid>

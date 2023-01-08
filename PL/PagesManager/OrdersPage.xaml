@@ -62,7 +62,7 @@
             </ListView.View>
         </ListView>
 
-        <Frame x:Name="MyOrderPage"  Grid.Row="1" />
+        <Frame x:Name="MyOrderPage"  Grid.RowSpan="2" />
 
     </Grid>
 </Page>
