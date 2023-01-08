@@ -78,10 +78,9 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
     /// <exception cref="BO.NotExistException"></exception>
     private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
     {
-        BO.OrderItem removeOrderItem = new BO.OrderItem();
         int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
-        removeOrderItem = myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException();
-        temp.Items!.Remove(removeOrderItem);
+        temp.Items!.Remove(myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException());
+        myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
         onPropertyChanged(nameof(myListOrderItem)); 
     }
 
@@ -100,6 +99,7 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
         int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
         int newAmount = int.Parse(NumForUpdate.SelectedItem.ToString()!);
         Bl?.Cart.UpdateAmountOfProduct(temp, id, newAmount);
+        myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
         onPropertyChanged(nameof(myListOrderItem));
     }
 }
