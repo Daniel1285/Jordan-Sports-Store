@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -20,24 +21,63 @@ namespace PL.PlCart
     /// <summary>
     /// Interaction logic for MainCartView.xaml
     /// </summary>
-    public partial class MainCartView : Window
+    public partial class MainCartView : Window, INotifyPropertyChanged
     {
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public ObservableCollection<BO.ProductItem?> myListProductItem { get; set; }
+        //private ObservableCollection<BO.ProductItem?> _myListProductItem;
+        public ObservableCollection<BO.ProductItem?> myListProductItem
+        {
+            get
+            {
+                if (ProductInfromation.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
+                {
+                    return new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
+                }
+                else
+                {
+                    var group = (Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException()) ?? throw new NullReferenceException()).ToList();
+                    foreach (var g in group)
+                    {
+                        if (g.Key == (BO.Enums.Category)ProductInfromation.SelectedItem)
+                        {
+                            return new ObservableCollection<BO.ProductItem?>(g);
+
+                        }
+                    }
+                    return new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
+
+                }
+
+
+            }
+
+
+        }
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category)); } }
         public BO.Cart TempCart = new BO.Cart();
+        
 
         public MainCartView()
         {
-            myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem(TempCart));
+            TempCart.Items = new ObservableCollection<BO.OrderItem?>().ToList();
+            //_myListProductItem = new ObservableCollection<BO.ProductItem?> (Bl.Product.GetListOfProductItem(TempCart));
             InitializeComponent();
             
-            TempCart.Items = new List<BO.OrderItem?>();
+            //TempCart.Items = new List<BO.OrderItem?>();
         }
         public MainCartView(BO.Cart cart)
         {
             TempCart = cart;
-            myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl.Product.GetListOfProductItem(TempCart));
+            //_myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl.Product.GetListOfProductItem(TempCart));
             InitializeComponent();
 
         }
@@ -48,27 +88,31 @@ namespace PL.PlCart
         /// <param name="e"></param>
         private void ProductInfromation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var group = (Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException()) ?? throw new NullReferenceException()).ToList();
-            myListProductItem.Clear();
-            if (ProductInfromation.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
-            {
-                
-                foreach (var x in Bl?.Product.GetListOfProductItem(TempCart)!)
-                    myListProductItem.Add(x);
-               
-            }
-            else
-            {
-                foreach (var g in group)
-                {
-                    if (g.Key == (BO.Enums.Category)ProductInfromation.SelectedItem)
-                    {
-                        foreach (var shorts in g)
-                            myListProductItem.Add(shorts);
-                        
-                    }
-                }
-            }
+            //var group = (Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException()) ?? throw new NullReferenceException()).ToList();
+            //myListProductItem.Clear();
+            //OnPropertyChanged(nameof(myListProductItem));
+            //if (ProductInfromation.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
+            //{
+
+            //    foreach (var x in Bl?.Product.GetListOfProductItem(TempCart)!)
+            //        myListProductItem.Add(x);
+            //    OnPropertyChanged(nameof(myListProductItem));
+
+            //}
+            //else
+            //{
+            //    foreach (var g in group)
+            //    {
+            //        if (g.Key == (BO.Enums.Category)ProductInfromation.SelectedItem)
+            //        {
+            //            foreach (var shorts in g)
+            //                myListProductItem.Add(shorts);
+            //            OnPropertyChanged(nameof(myListProductItem));
+
+            //        }
+            //    }
+            //}
+            OnPropertyChanged(nameof(myListProductItem));
         }
 
         /// <summary>
@@ -106,11 +150,14 @@ namespace PL.PlCart
         {
             if (OrderItemListView.SelectedItem != null)
             {
-                BO.ProductItem p = new BO.ProductItem();
+               // BO.ProductItem p = new BO.ProductItem();
 
                 int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
                 Bl?.Cart.AddProdctToCatrt(TempCart, id);
-                myListProductItem.FirstOrDefault(x => x?.ID == id)!.Amount += 1;
+                //OnPropertyChanged(nameof(_myListProductItem));
+                Bl?.Product.GetListOfProductItem(TempCart);
+               // OnPropertyChanged(nameof(_myListProductItem));
+                
             }
             else
                 MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
