@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.PlCart.TruckingOrder;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,12 +24,22 @@ namespace PL.PagesManager
     {
         private BlApi.IBl? Bl = BlApi.Factory.Get();
         public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
-        
-        
+        public BO.Order Order = new BO.Order();
+             
         public OrderItemView(int OrderId)
         {
             myListOrderItem = new ObservableCollection<BO.OrderItem?>(Bl.Order.GetOrder(OrderId).Items!);
+            Order = Bl.Order.GetOrder(OrderId);
             InitializeComponent();
+        }
+
+        private void doubleClick_DetailsOrder(object sender, MouseButtonEventArgs e)
+        {
+            if (OrdersItemListView.SelectedItems != null)
+                orderItemFrame.Content = new OrderDetails(Order);
+            else
+                MessageBox.Show("Please chose only from the order", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
     }
 }

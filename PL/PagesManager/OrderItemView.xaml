@@ -11,7 +11,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OrderItemView">
 
-    <Grid x:Name="MainGrid_OrderItemsAdmin">
+    <Grid x:Name="MainGrid_OrderItemsAdmin" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="55*"/>
             <RowDefinition Height="500*"/>
@@ -27,7 +27,7 @@
 
         </Grid>
 
-        <ListView x:Name="OrdersItemListView" Grid.Row="1" ItemsSource="{Binding myListOrderItem}" FontWeight="Bold">
+        <ListView x:Name="OrdersItemListView" Grid.Row="1" ItemsSource="{Binding myListOrderItem}" MouseDoubleClick="doubleClick_DetailsOrder" FontWeight="Bold">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -36,7 +36,7 @@
             <ListView.View>
 
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="Order ID" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="Item ID" Width="60"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="240"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= ProductID}" Header="Product ID" Width="125"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="125"/>
@@ -45,7 +45,7 @@
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>
-                            <Setter Property="Background" Value="AntiqueWhite" />
+                            <Setter Property="Background" Value="#FF662798" />
                             <Setter Property="FontSize" Value="14" />
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
@@ -53,6 +53,6 @@
             </ListView.View>
         </ListView>
 
-
+        <Frame x:Name="orderItemFrame" Grid.RowSpan="2" />
     </Grid>
 </Page>

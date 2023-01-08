@@ -79,6 +79,6 @@
               materialDesign:ShadowAssist.ShadowEdges="Bottom,Right">
             <TextBlock Text="Login for an existing user" TextAlignment="Center" Foreground="#FF9C0E0E" FontSize="16" FontFamily="Arial Black" />
         </materialDesign:Card>
-
+        <Frame x:Name="mainFram" Grid.ColumnSpan="3" Grid.RowSpan="4"/>
     </Grid>
 </Window>

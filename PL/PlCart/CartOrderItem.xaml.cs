@@ -20,7 +20,7 @@ namespace PL.PlCart
     /// <summary>
     /// Interaction logic for CartOrderItem.xaml
     /// </summary>
-    public partial class CartOrderItem : Page,INotifyPropertyChanged
+    public partial class CartOrderItem : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

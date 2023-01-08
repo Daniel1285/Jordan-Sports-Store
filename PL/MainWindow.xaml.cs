@@ -1,4 +1,5 @@
 ﻿
+using PL.PlCart.TruckingOrder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,8 +46,8 @@ namespace PL
 
         private void TruckingButton_Click(object sender, RoutedEventArgs e)
         {
-            new PlProduct.TruckingOrder().Show();
-            this.Close();
+            mainFram.Content =  new MainTrucking();
+
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -54,6 +55,9 @@ namespace PL
 
         }
 
+        private void mainFram_FragmentNavigation(object sender, FragmentNavigationEventArgs e)
+        {
 
+        }
     }
 }

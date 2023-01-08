@@ -149,24 +149,5 @@ namespace PL.PlProduct
             this.Close();
         }
 
-        private void ProductIdTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-
-        private void ProductNameBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ProductPriceTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ProductInstokeBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

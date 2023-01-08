@@ -42,8 +42,8 @@ namespace PL.PagesManager
         {
             if (OrdersListView.SelectedItem != null)
             {
-                OrdersListView.Visibility = Visibility.Hidden;
-                OrderInformation.Visibility = Visibility.Hidden;
+                //OrdersListView.Visibility = Visibility.Hidden;
+                //OrderInformation.Visibility = Visibility.Hidden;
 
                 int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
                 MyOrderPage.Content = new OrderItemView(id);

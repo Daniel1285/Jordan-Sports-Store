@@ -1,0 +1,145 @@
+﻿<Page x:Class="PL.PlCart.TruckingOrder.OrderDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PL.PlCart.TruckingOrder" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+       DataContext="{Binding RelativeSource={RelativeSource Self}}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrderDetails">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="10 0 0 10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="AntiqueWhite" Offset="0"/>
+                    <GradientStop Color="#3AA9AD" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Grid>
+            <Canvas>
+                <Polygon Points="0,20 230,140 0, 270" Fill="#4EB1B6"/>
+                <Polygon Points="100,400 200,370 180, 450" Fill="#4EB1B6" Margin="50,0,0,0"/>
+                <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#4EB1B6"/>
+            </Canvas>
+
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Details" FontSize="60" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                <TextBlock Text="Details of the order -->" FontSize="20"  Foreground="White" Margin="20,30" Opacity="0.8" TextAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel>
+                <!--<Button x:Name="Option" Content="{materialDesign:PackIcon Kind = Settings}" Width="50" Height="30" HorizontalAlignment="Left" Background="White" Foreground="#4EB1B6" />-->
+
+                <materialDesign:ColorZone Padding="16" Mode="Inverted" Background="{Binding null}" Foreground="White"   HorizontalAlignment="Stretch">
+                    <DockPanel>
+                        <materialDesign:PopupBox DockPanel.Dock="Right"  PlacementMode="BottomAndAlignRightEdges" Foreground="#4EB1B6">
+                            <ListBox x:Name="BackToChosenWindow" SelectionChanged="BackToChosenWindow_listBox" >
+                                <ListBoxItem Content="Main window"/>
+                                <ListBoxItem Content="Order item"/>
+                                <ListBoxItem Content="Product list"/>
+                            </ListBox>
+                        </materialDesign:PopupBox>
+                        <StackPanel 
+                            Orientation="Horizontal">
+                            <ToggleButton Foreground="#4EB1B6"
+                                Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                            <TextBlock Text="Back to" Margin="20,0,0,0" VerticalAlignment="Center" FontWeight="Bold" Foreground="#4EB1B6"/>
+                        </StackPanel>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+            </StackPanel>
+        </Grid>
+
+        <Border CornerRadius="0 10 10 0" Grid.Column="1" Background="White">
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel VerticalAlignment="Center" Width="200" Grid.Column="1" HorizontalAlignment="Left">
+
+                    <TextBox x:Name="NameTextBox" Text="{Binding myOrder.CustomerName}" IsReadOnly="True"
+                    materialDesign:HintAssist.HelperText="Required name"  
+                    materialDesign:HintAssist.HelperTextFontSize="8"
+                    materialDesign:HintAssist.Hint="Name">
+                    </TextBox>
+
+                    <TextBox x:Name="EmailTextBox" Margin="0,25,0,0" Text="{Binding myOrder.CustomerEmail}" IsReadOnly="True"
+                    materialDesign:HintAssist.HelperText="Required email" 
+                             materialDesign:HintAssist.HelperTextFontSize="8"
+                    materialDesign:HintAssist.Hint="Email">
+                    </TextBox>
+
+                    <TextBox x:Name="AddressTextBox" Margin="0,25,0,0" Text="{Binding myOrder.CustomerAddress}" IsReadOnly="True"
+                    materialDesign:HintAssist.HelperText="Required address"
+                             materialDesign:HintAssist.HelperTextFontSize="8"
+                    materialDesign:HintAssist.Hint="addres">
+                    </TextBox>
+
+                    <TextBox x:Name="orderDate" Margin="0,25,0,0" Text="{Binding myOrder.OrderDate}" IsReadOnly="True"
+                    materialDesign:HintAssist.HelperText="Required name"  
+                    materialDesign:HintAssist.HelperTextFontSize="8"
+                    materialDesign:HintAssist.Hint="Order date">
+                    </TextBox>
+
+                    <TextBox x:Name="StatusOrder" Margin="0,25,0,0" Text="{Binding myOrder.Status}" IsReadOnly="True"
+                    materialDesign:HintAssist.HelperText="Required name"   
+                    materialDesign:HintAssist.HelperTextFontSize="8"
+                    materialDesign:HintAssist.Hint="Status">
+                    </TextBox>
+
+                    <TextBox x:Name="shipDateOrder" Margin="0,25,0,0" Text="{Binding myOrder.ShipDate}" IsReadOnly="True"
+                    materialDesign:HintAssist.HelperText="Required name"  
+                    materialDesign:HintAssist.HelperTextFontSize="8"
+                    materialDesign:HintAssist.Hint="Ship date">
+                    </TextBox>
+
+                    <TextBox x:Name="DeliveryDateOrder" Margin="0,25,0,0" Text="{Binding myOrder.DeliveryDate}" IsReadOnly="True"
+                    materialDesign:HintAssist.HelperText="Required name"  
+                    materialDesign:HintAssist.HelperTextFontSize="8"
+                    materialDesign:HintAssist.Hint="Delivery Date">
+                    </TextBox>
+
+                    <TextBox x:Name="totalPriceOrder" Margin="0,25,0,0" Text="{Binding myOrder.TotalPrice}" IsReadOnly="True"
+                    materialDesign:HintAssist.HelperText="Required name"  
+                    materialDesign:HintAssist.HelperTextFontSize="8"
+                    materialDesign:HintAssist.Hint="Total price">
+                    </TextBox>
+
+                </StackPanel>
+
+                <materialDesign:PackIcon Kind="Account" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,346" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="Email" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Right" Foreground="Black" Margin="0,5,0,252"  VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="AddressMarker" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,146" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="CalendarRange" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,46" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="ListStatus" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Right" Foreground="Black" Margin="0,53,0,0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="AirplaneClock" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Right" Foreground="Black" Margin="0,153,0,0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="PackageVariantClosedCheck" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Right" Foreground="Black" Margin="0,253,0,0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="CreditCardSettingsOutline" Grid.Column="0" Width="50" Height="20" HorizontalAlignment="Right" Foreground="Black" Margin="0,353,0,0" VerticalAlignment="Center"/>
+
+                
+
+                <TextBlock x:Name="ErrorEx" Text="" FontSize="16" Grid.Column="1" Height="40" VerticalAlignment="Bottom" Foreground="#FFC91919" Margin="0,0,0,0" Opacity="0.8" Width="200" FontWeight="Bold" Visibility="Hidden"/>
+
+
+
+            </Grid>
+
+        </Border>
+
+
+
+
+    </Grid>
+</Page>
