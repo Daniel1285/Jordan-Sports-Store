@@ -51,8 +51,7 @@ public partial class OrderDetails : Page, INotifyPropertyChanged
         }
         else if (chosenWindow == 2)
         {
-            new MainCartView().Show();
-            Window.GetWindow(this).Close();
+            Window.GetWindow(this).Content = new MainCartViewPage();
         }
         //else
         //    Window.GetWindow(this).Content = new CartOrderItem(temp);

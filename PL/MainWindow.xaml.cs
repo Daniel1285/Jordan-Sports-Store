@@ -1,4 +1,5 @@
 ﻿
+using PL.PlCart;
 using PL.PlCart.TruckingOrder;
 using System;
 using System.Collections.Generic;
@@ -34,14 +35,12 @@ namespace PL
         private void ManagerButton_Click(object sender, RoutedEventArgs e)
         {
             new PlProduct.AdminView().Show();
-
             this.Close();
         }
 
         private void ClientButton_Click(object sender, RoutedEventArgs e)
         {
-            new PlCart.MainCartView().Show();
-            this.Close();
+            mainFram.Content = new  MainCartViewPage();
         }
 
         private void TruckingButton_Click(object sender, RoutedEventArgs e)

@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CartOrderItem">
 
-    <Grid>
+    <Grid Background="White">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
@@ -39,6 +39,7 @@
                     <MenuItem x:Name="RemoveFromCartMenu" Header="Remove from cart" Icon="{materialDesign:PackIcon Kind= Remove }" Click="RemoveFromCart_Click"/>
                     <MenuItem x:Name="UpdateAmountInCart" Header="Update amount" Icon="{materialDesign:PackIcon Kind=Update }" Click="UpdateAmountInCart_Click"/>
                 </ContextMenu>
+                
             </ListView.ContextMenu>
 
             <ListView.View>
@@ -68,9 +69,11 @@
 
         <Button x:Name="BackToMainCartView_button" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,8,5" Padding="5" Click="BackToMainCartView_Click" Width="90" Height="30" Background="#FF6931CC"/>
 
-
+        <ComboBox  MinWidth="72" x:Name="NumForUpdate" Grid.Column="1" Grid.Row="0" Width="25" HorizontalAlignment="Right" Visibility="Hidden" 
+            materialDesign:HintAssist.Hint="Update"
+            ItemsSource="{Binding LongIntegerList}" SelectionChanged="UpdateAmunt_SelectedChanged">
+        </ComboBox>
 
         <Frame x:Name="CartOrderItemFram" Grid.RowSpan="3"/>
-
     </Grid>
 </Page>

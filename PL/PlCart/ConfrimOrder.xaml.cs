@@ -40,8 +40,9 @@ namespace PL.PlCart
             }
             else if (chosenWindow == 2)
             {
-                new MainCartView().Show();
-                Window.GetWindow(this).Close();
+                //new MainCartView().Show();
+                //Window.GetWindow(this).Close();
+                Window.GetWindow(this).Content = new MainCartViewPage(temp);
             }
             else
                 Window.GetWindow(this).Content = new CartOrderItem(temp);
