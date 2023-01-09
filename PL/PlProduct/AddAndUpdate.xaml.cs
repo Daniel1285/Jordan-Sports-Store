@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,14 +27,32 @@ namespace PL.PlProduct
 
         private static readonly Random R = new Random(); // Random number generation
         private BlApi.IBl? Bl = BlApi.Factory.Get();
+        public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category)); } }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private BO.Product _product;
+        public BO.Product Product
+        {
+            get { return _product; }
+            set
+            {
+                _product = value;
+                OnPropertyChanged(nameof(Product));
+            }
+        }
 
         /// <summary>
         /// Constructor for adding product.
         /// </summary>
         public AddAndUpdate()
         {
+            
             InitializeComponent();
-            CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+           // CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
             AddOrUpdateProductButton.Content = "Add";
         }
         /// <summary>
@@ -42,13 +61,16 @@ namespace PL.PlProduct
         /// <param name="id"></param>
         public AddAndUpdate(int id)
         {
+            Product = Bl.Product.GetProduct(id);
             InitializeComponent();
-            CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
-            IdBox.Text = id.ToString();
+            // CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+            //Product.ID = 123456;
+            //Product.ID.ToString();
             CategoryComboBox.SelectedItem = Bl.Product.GetProduct(id).Category;
-            ProductNameBox.Text = Bl.Product.GetProduct(id).Name;
-            ProductPriceBox.Text = Bl.Product.GetProduct(id).Price.ToString();
-            ProductInstokeBox.Text = Bl.Product.GetProduct(id).InStock.ToString();  
+            //ProductNameBox.Text = Bl.Product.GetProduct(id).Name;
+            //ProductPriceBox.Text = Bl.Product.GetProduct(id).Price.ToString();
+            //ProductInstokeBox.Text = Bl.Product.GetProduct(id).InStock.ToString();
+            
 
             IdBox.IsReadOnly = true; // blocks the possibility to change the ID.
             AddOrUpdateProductButton.Content = "Update";
@@ -84,11 +106,11 @@ namespace PL.PlProduct
                 {
                     BO.Product p = new BO.Product
                     {
-                        ID = int.Parse(IdBox.Text),
+                        ID = Product.ID,
                         Category = (BO.Enums.Category)CategoryComboBox.SelectedItem,
-                        Name = ProductNameBox.Text.ToString(),
-                        Price = double.Parse(ProductPriceBox.Text),
-                        InStock = int.Parse(ProductInstokeBox.Text)
+                        Name = Product.Name,
+                        Price = Product.Price,
+                        InStock = Product.InStock,
                     };
                     if (AddOrUpdateProductButton.Content.ToString() == "Add")
                         Bl?.Product.AddProduct(p);
