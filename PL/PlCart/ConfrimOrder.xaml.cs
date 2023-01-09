@@ -32,7 +32,7 @@ namespace PL.PlCart
 
         private void BackToChosenWindow_listBox(object sender, SelectionChangedEventArgs e)
         {
-             int chosenWindow = BackToChosenWindow.SelectedIndex;
+            int chosenWindow = BackToChosenWindow.SelectedIndex;
             if (chosenWindow == 0)
             {
                 new MainWindow().Show();
