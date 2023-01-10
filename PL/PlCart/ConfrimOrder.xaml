@@ -12,6 +12,7 @@
         <local:NotBooleanToVisibilityConverter
            x:Key="notBooleanToVisibilityConverter" />
     </Page.Resources>
+    
     <Grid>
 
         <Grid.ColumnDefinitions>

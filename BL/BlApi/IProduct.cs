@@ -72,7 +72,5 @@ namespace BlApi
         /// <returns></returns>
         public IEnumerable<BO.ProductItem?> GetListProductIGrouping(IEnumerable<BO.ProductItem?> list, BO.Enums.Category category);
 
-
-
     }
 }

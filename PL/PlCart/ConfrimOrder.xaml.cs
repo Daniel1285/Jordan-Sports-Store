@@ -92,20 +92,12 @@ namespace PL.PlCart
 
 
                     }
-                    catch (BO.EmailInValidException) { str = "Invalid email !"; }
+                    catch (BO.EmailInValidException) { str = "Invalid email !"; OnPropertyChanged(nameof(str)); }
 
                 }
-                catch (BO.NameIsEmptyException ex)
-                {
-                    str = $"{ex.Message}";
-                    OnPropertyChanged(nameof(str));
-                }
+                catch (BO.NameIsEmptyException ex) { str = $"{ex.Message}"; OnPropertyChanged(nameof(str)); }
 
-                catch (BO.AddresIsempty ex)
-                {
-                    str = $"{ex.Message}";
-                    OnPropertyChanged(nameof(str));
-                }
+                catch (BO.AddresIsempty ex) {str = $"{ex.Message}"; OnPropertyChanged(nameof(str)); }
             }
         }
     }

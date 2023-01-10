@@ -31,22 +31,22 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
     /// </summary>
     /// <param name="propertyName"></param>
     private void onPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
-    
-
+  
+    public IEnumerable<int> LongIntegerList => Enumerable.Range(1, 100).ToList(); // Max option for update amount of order item in cart.
 
     private BlApi.IBl? Bl = BlApi.Factory.Get();
     public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
-    public IEnumerable<int> LongIntegerList => Enumerable.Range(1, 100).ToList();
-
-
     public BO.Cart temp = new BO.Cart();
+    public double TotalPriceCart { get; set; } 
 
 
     public CartOrderItem(BO.Cart c)
     {
         myListOrderItem = new ObservableCollection<BO.OrderItem?>(c.Items!);
+        TotalPriceCart = c.TotalPrice;
         InitializeComponent();
         temp = c;
+        
     }
     /// <summary>
     /// Transition to confrim order page.
@@ -82,6 +82,8 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
         temp.Items!.Remove(myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException());
         myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
         onPropertyChanged(nameof(myListOrderItem)); 
+        onPropertyChanged(nameof(TotalPriceCart));
+
     }
 
     /// <summary>

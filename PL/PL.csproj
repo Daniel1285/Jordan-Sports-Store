@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <None Remove="1.jpg" />
+    <None Remove="6.jpg" />
     <None Remove="PlProduct\2.jfif" />
     <None Remove="PlProduct\4.jfif" />
     <None Remove="PlProduct\truckPhoto.webp" />
@@ -35,6 +36,7 @@
 
   <ItemGroup>
     <Resource Include="1.jpg" />
+    <Resource Include="6.jpg" />
     <Resource Include="PlProduct\2.jfif" />
     <Resource Include="PlProduct\4.jfif" />
     <Resource Include="PlProduct\truckPhoto.webp" />

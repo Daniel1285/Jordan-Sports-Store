@@ -20,8 +20,9 @@
         <Grid Name="UpGridOrder" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
          VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions >
 
         </Grid>
@@ -68,6 +69,8 @@
                  Style="{StaticResource MaterialDesignRaisedButton}"   materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                  materialDesign:ButtonProgressAssist.Value="-1"/>
+        <Label Content="Help" Grid.Column="1" Width="150" FontSize="20" FontFamily="Aharoni" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="Black" Background="White" ToolTip="Right click for add product to cart / remove product." />
+
 
         <Frame x:Name="FramCart" NavigationUIVisibility="Hidden"  Grid.RowSpan ="3"/>
     </Grid>
