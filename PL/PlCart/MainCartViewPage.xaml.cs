@@ -32,7 +32,16 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
     }
     public event PropertyChangedEventHandler? PropertyChanged;
     private BlApi.IBl? Bl = BlApi.Factory.Get();
-    public ObservableCollection<BO.ProductItem?> myListProductItem { get; set; }    
+    private ObservableCollection<BO.ProductItem?> _myListProductItem;
+    public ObservableCollection<BO.ProductItem?> myListProductItem
+    {
+        get { return _myListProductItem; }
+        set
+        {
+            _myListProductItem = value;
+            OnPropertyChanged(nameof(myListProductItem));
+        }
+    }
 
     public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category)); } }
     public BO.Cart TempCart = new BO.Cart();
@@ -68,7 +77,7 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
         {
             myListProductItem = new ObservableCollection<BO.ProductItem?>((Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException(), (BO.Enums.Category)ProductInfromation.SelectedItem) ?? throw new NullReferenceException()));   
         }
-        OnPropertyChanged(nameof(myListProductItem));
+       
     }
 
     /// <summary>
@@ -107,12 +116,12 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             Bl?.Cart.AddProdctToCatrt(TempCart, id);
             myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
-            OnPropertyChanged(nameof(myListProductItem));
+            
 
         }
         else
             MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
-        OnPropertyChanged(nameof(myListProductItem));
+        
 
     }
 
@@ -129,7 +138,6 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             TempCart.Items!.Remove(TempCart.Items!.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException());
             myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
-            OnPropertyChanged(nameof(myListProductItem));
         }
         else
             MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
