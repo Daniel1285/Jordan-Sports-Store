@@ -32,7 +32,7 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
     /// <param name="propertyName"></param>
     private void onPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
   
-    public IEnumerable<int> LongIntegerList => Enumerable.Range(1, 100).ToList(); // Max option for update amount of order item in cart.
+    public IEnumerable<int> LongIntegerList => Enumerable.Range(0, 100).ToList(); // Max option for update amount of order item in cart.
 
     private BlApi.IBl? Bl = BlApi.Factory.Get();
     private ObservableCollection<BO.OrderItem?> _myListOrderItem;

@@ -70,8 +70,7 @@
                  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                  materialDesign:ButtonProgressAssist.Value="-1"/>
         <Label Content="Help" Grid.Column="1" Width="150" FontSize="20" FontFamily="Aharoni" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="Black" Background="White" ToolTip="Right click for add product to cart / remove product." />
-
-
+        
         <Frame x:Name="FramCart" NavigationUIVisibility="Hidden"  Grid.RowSpan ="3"/>
     </Grid>
 </Page>
