@@ -33,21 +33,25 @@ namespace PL.PagesManager
             }
         }
         private BlApi.IBl? Bl = BlApi.Factory.Get();
+        private ObservableCollection<BO.OrderForList?> _myListOrders;
         public ObservableCollection<BO.OrderForList?> myListOrders
         {
-            get
+            get {return _myListOrders;}
+            set
             {
-                if (OrderInformation.SelectedItem.ToString() == BO.Enums.OrderStatus.NONE.ToString())
-                {
-                    return new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
-                }
-                else
-                    return new ObservableCollection<BO.OrderForList?>(Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString())!);
+                _myListOrders = value;
+                OnPropertyChangd(nameof(myListOrders));
             }
         }
+        //public ObservableCollection<BO.OrderForList?> myListOrders
+        //{
+        //    get
+        //    {
+        //        
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.OrderStatus)); } }
         public OrdersPage()
         {
+            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
             InitializeComponent();  
         }
         private void doubleClick_orderItem(object sender, MouseButtonEventArgs e)
@@ -66,25 +70,32 @@ namespace PL.PagesManager
 
         private void OrderInformation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //OrdersListView.ItemsSource = OrderInformation.SelectedItem.ToString() == "All" ? Bl?.Order.GetOrderLists() : Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString());
-            //OnPropertyChangd(nameof(myListOrders));
-            OnPropertyChangd(nameof(myListOrders));
-            
+            if (OrderInformation.SelectedItem.ToString() == BO.Enums.OrderStatus.NONE.ToString())
+            {
+                myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
+            }
+            else
+                myListOrders = new ObservableCollection<BO.OrderForList?>(Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString())!);
         }
+    
+
+
 
 
         private void UpdateToSent_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.ShippingUpdate(id);
-            OnPropertyChangd(nameof(myListOrders));
+            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
+            
         }
 
         private void UpdateToProvided_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.SupplyUpdateOrder(id);
-            OnPropertyChangd(nameof(myListOrders));
+            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
+            
         }
 
     }

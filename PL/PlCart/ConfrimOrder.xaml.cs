@@ -29,8 +29,22 @@ namespace PL.PlCart
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public BO.Cart temp { get; set; } 
-        public string str { get; set; }
+        private BO.Cart _temp;
+        public BO.Cart temp 
+        {
+            get { return _temp; }
+            set
+            {
+                _temp = value;
+                OnPropertyChanged(nameof(temp));
+            }
+        }
+        private string _str; 
+        public string str
+        {
+            get { return _str; }
+            set { _str = value; OnPropertyChanged(nameof(str)); }
+        }
         public ConfrimOrder(BO.Cart c)
         {
             str = "";
@@ -67,7 +81,7 @@ namespace PL.PlCart
             if (temp.Items!.Count == 0)
             {
                 str = "No items in order!";
-                OnPropertyChanged(nameof(str));
+                
             }
 
             else
@@ -83,12 +97,9 @@ namespace PL.PlCart
                     try
                     {
                         Bl?.Cart.ConfirmOrder(temp, temp.CustomerName, temp.CustomerEmail, temp.CustomerAddress);
-                        OnPropertyChanged(nameof(temp));
                         str = "Order confrim :)";
-                        OnPropertyChanged(nameof(str));
                         temp = new BO.Cart();
                         temp.Items = new();
-                        OnPropertyChanged(nameof(temp));
 
 
                     }
@@ -98,13 +109,13 @@ namespace PL.PlCart
                 catch (BO.NameIsEmptyException ex)
                 {
                     str = $"{ex.Message}";
-                    OnPropertyChanged(nameof(str));
+                   
                 }
 
                 catch (BO.AddresIsempty ex)
                 {
                     str = $"{ex.Message}";
-                    OnPropertyChanged(nameof(str));
+                    
                 }
             }
         }

@@ -34,31 +34,54 @@ namespace PL.PagesManager
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));   
         }
-         
-
-        public ObservableCollection<BO.ProductForList?> myListProduct
+        private ObservableCollection<BO.ProductForList?> _myListProduct;
+        public ObservableCollection<BO.ProductForList?>  myListProduct
         {
-            get
+            get { return _myListProduct; }
+            set
             {
-                if (AttributeSelector.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
-                {
-                    return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetProductList());
-
-                }
-                else
-                    return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetListByCondition(x => x?.Category.ToString() == AttributeSelector.SelectedItem.ToString()));
+                _myListProduct = value;
+                OnPropertyChanged(nameof(myListProduct));
             }
         }
-        public string ssd { get; set; }
+
+        //public ObservableCollection<BO.ProductForList?> myListProduct
+        //{
+        //    get
+        //    {
+        //        if (AttributeSelector.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
+        //        {
+        //            return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetProductList());
+
+        //        }
+        //        else
+        //            return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetListByCondition(x => x?.Category.ToString() == AttributeSelector.SelectedItem.ToString()));
+        //    }
+        //}
+        private string _ssd;
+        public string ssd 
+        { 
+            get { return _ssd; }
+            set { _ssd = value; OnPropertyChanged(nameof(ssd)); }
+        }
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category));}}
+        public BO.Enums.Category Category { get; set; }
         public ProductsPage()
         {
+            myListProduct = new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetProductList());
             ssd = "";
             InitializeComponent();          
         }
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(myListProduct));
+            if (AttributeSelector.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
+            {
+                myListProduct =  new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetProductList());
+
+            }
+            else
+                myListProduct = new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetListByCondition(x => x?.Category.ToString() == AttributeSelector.SelectedItem.ToString()));
+            
         }
 
         private void doubleClick_Update(object sender, MouseButtonEventArgs e)
@@ -69,7 +92,7 @@ namespace PL.PagesManager
                 int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
                 new AddAndUpdate(id).Show();  
                 (Window.GetWindow(this)).Close();
-                OnPropertyChanged(nameof(myListProduct));   
+                   
             }
             else
                 MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -82,18 +105,13 @@ namespace PL.PagesManager
             {
                 int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
                 Bl?.Product.DeleteProduct(id);
-                //deleteEx.Text = "Product deleted successfully";
-                ssd = "Product deleted successfully";
-                OnPropertyChanged(nameof(ssd));
-                //deleteEx.Visibility = Visibility.Visible;
-                OnPropertyChanged(nameof(myListProduct));
+                myListProduct = new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetProductList());
+                ssd = "Product deleted successfully";  
+                
             }
             catch (BO.CanNotDeleteProductException)
             {
-                //deleteEx.Text = "Can't delete a product because it's in the middle of an order.";
                 ssd = "Can't delete a product because it's in the middle of an order.";
-                OnPropertyChanged(nameof(ssd));
-                //deleteEx.Visibility = Visibility.Visible;
             }
         }
     }
