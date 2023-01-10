@@ -4,12 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
-      xmlns:local="clr-namespace:PL.PagesManager" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:PL.Converter" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       
       Title="ProductsPage">
-
+    <Page.Resources>
+        <local:NotBooleanToVisibilityConverter
+           x:Key="notBooleanToVisibilityConverter" />
+    </Page.Resources>
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions >
             <RowDefinition Height="55*"/>
@@ -65,7 +68,7 @@
              Background="{x:Null}" 
              Foreground="{x:Null}"
              UniformCornerRadius="6">
-            <TextBlock x:Name="deleteEx" Text="" TextWrapping="Wrap" Height="Auto" FontWeight="Bold" FontSize="14" Foreground="Red" Visibility="Hidden" HorizontalAlignment="Center" />
+            <TextBlock x:Name="deleteEx" Text="{Binding ssd}" TextWrapping="Wrap" Height="Auto" FontWeight="Bold" FontSize="14" Foreground="Red"  HorizontalAlignment="Center" />
         </materialDesign:Card>
 
     </Grid>

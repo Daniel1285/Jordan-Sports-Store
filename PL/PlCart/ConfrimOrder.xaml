@@ -3,11 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PL.PlCart" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}"
+      xmlns:local="clr-namespace:PL.Converter" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ConfrimOrder">
-
+    <Page.Resources>
+        <local:NotBooleanToVisibilityConverter
+           x:Key="notBooleanToVisibilityConverter" />
+    </Page.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -71,31 +75,23 @@
 
                 <StackPanel VerticalAlignment="Center" Width="200" Grid.Column="1" HorizontalAlignment="Left">
                     
-                    <TextBox x:Name="NameTextBox"
+                    <TextBox x:Name="NameTextBox" Text="{Binding temp.CustomerName,Mode=TwoWay}"
                     materialDesign:HintAssist.HelperText="Required name"  
                     materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Name">
-                        <TextBox.Text>
-                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged"/>
-                        </TextBox.Text>
+
                     </TextBox>
 
-                    <TextBox x:Name="EmailTextBox" Margin="0,25,0,0"
+                    <TextBox x:Name="EmailTextBox" Margin="0,25,0,0" Text="{Binding temp.CustomerEmail,Mode=TwoWay}"
                     materialDesign:HintAssist.HelperText="Required email" 
                              materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Email">
-                        <TextBox.Text>
-                            <Binding Path="Email" UpdateSourceTrigger="PropertyChanged"/>
-                        </TextBox.Text>
                     </TextBox>
 
-                    <TextBox x:Name="AddressTextBox" Margin="0,25,0,0"
+                    <TextBox x:Name="AddressTextBox" Margin="0,25,0,0" Text="{Binding temp.CustomerAddress,Mode=TwoWay}"
                     materialDesign:HintAssist.HelperText="Required address"
                              materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="addres">
-                        <TextBox.Text>
-                            <Binding Path="Address" UpdateSourceTrigger="PropertyChanged"/>
-                        </TextBox.Text>
                     </TextBox>
                 </StackPanel>
 
@@ -112,7 +108,8 @@
                         IsDefault="True"
                         Style="{StaticResource MaterialDesignOutlinedButton}" FontWeight="Bold" Click="EndOfOrder_Click" />
 
-                <TextBlock x:Name="ErrorEx" Text="" FontSize="16" Grid.Column="1" Height="40" VerticalAlignment="Bottom" Foreground="#FFC91919" Margin="0,0,0,0" Opacity="0.8" Width="200" FontWeight="Bold" Visibility="Hidden"/>
+                <TextBlock x:Name="ErrorEx" Text="{Binding str}" FontSize="16" Grid.Column="1" Height="40" VerticalAlignment="Bottom" Foreground="#FFC91919" Margin="0,0,0,0" Opacity="0.8" Width="200" FontWeight="Bold"
+                           /> 
 
 
 

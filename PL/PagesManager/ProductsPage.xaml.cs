@@ -49,12 +49,12 @@ namespace PL.PagesManager
                     return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetListByCondition(x => x?.Category.ToString() == AttributeSelector.SelectedItem.ToString()));
             }
         }
-
+        public string ssd { get; set; }
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category));}}
         public ProductsPage()
         {
-            InitializeComponent();
-        
+            ssd = "";
+            InitializeComponent();          
         }
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -67,7 +67,6 @@ namespace PL.PagesManager
             if (ProductsListView.SelectedItem != null)
             {
                 int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
-                //int id = ((BO.ProductForList)(sender as ListViewItem)!.DataContext).ID;
                 new AddAndUpdate(id).Show();  
                 (Window.GetWindow(this)).Close();
                 OnPropertyChanged(nameof(myListProduct));   
@@ -83,14 +82,18 @@ namespace PL.PagesManager
             {
                 int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
                 Bl?.Product.DeleteProduct(id);
-                deleteEx.Text = "Product deleted successfully";
-                deleteEx.Visibility = Visibility.Visible;
+                //deleteEx.Text = "Product deleted successfully";
+                ssd = "Product deleted successfully";
+                OnPropertyChanged(nameof(ssd));
+                //deleteEx.Visibility = Visibility.Visible;
                 OnPropertyChanged(nameof(myListProduct));
             }
             catch (BO.CanNotDeleteProductException)
             {
-                deleteEx.Text = "Can't delete a product because it's in the middle of an order.";
-                deleteEx.Visibility = Visibility.Visible;
+                //deleteEx.Text = "Can't delete a product because it's in the middle of an order.";
+                ssd = "Can't delete a product because it's in the middle of an order.";
+                OnPropertyChanged(nameof(ssd));
+                //deleteEx.Visibility = Visibility.Visible;
             }
         }
     }

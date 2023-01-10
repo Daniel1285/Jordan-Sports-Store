@@ -251,12 +251,21 @@ namespace BlImplementation
             
             return ListofProductItem;
         }
-        public IEnumerable<IGrouping<BO.Enums.Category,BO.ProductItem?>> GetListProductIGrouping(IEnumerable<BO.ProductItem?> list)
+        public IEnumerable<BO.ProductItem?> GetListProductIGrouping(IEnumerable<BO.ProductItem?> list,BO.Enums.Category category)
         {
+            
             var group = from item in list
                         group item by item.Category into g
                         select g;
-            return group;
+            foreach (var g in group)
+            {
+                if (g.Key == category)
+                {
+                    list = g; 
+
+                }
+            }
+            return list;
         }
 
     }

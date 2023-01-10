@@ -2,6 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,19 +21,27 @@ namespace PL.PlCart
     /// <summary>
     /// Interaction logic for ConfrimOrder.xaml
     /// </summary>
-    public partial class ConfrimOrder : Page
+    public partial class ConfrimOrder : Page,INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private BlApi.IBl? Bl = BlApi.Factory.Get();
-        public BO.Cart temp = new BO.Cart();
+        public BO.Cart temp { get; set; } 
+        public string str { get; set; }
         public ConfrimOrder(BO.Cart c)
         {
+            str = "";
+            temp = c;
             InitializeComponent();
-            temp = c;      
+                
         }
 
         private void BackToChosenWindow_listBox(object sender, SelectionChangedEventArgs e)
         {
-             int chosenWindow = BackToChosenWindow.SelectedIndex;
+            int chosenWindow = BackToChosenWindow.SelectedIndex;
             if (chosenWindow == 0)
             {
                 new MainWindow().Show();
@@ -40,8 +49,6 @@ namespace PL.PlCart
             }
             else if (chosenWindow == 2)
             {
-                //new MainCartView().Show();
-                //Window.GetWindow(this).Close();
                 Window.GetWindow(this).Content = new MainCartViewPage(temp);
             }
             else
@@ -59,38 +66,45 @@ namespace PL.PlCart
 
             if (temp.Items!.Count == 0)
             {
-                ErrorEx.Text = "No items in order!";
-                ErrorEx.Visibility = Visibility.Visible;
+                str = "No items in order!";
+                OnPropertyChanged(nameof(str));
             }
 
             else
             {
                 try
                 {
-                    if (NameTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Name is empty !");
+                    if (temp.CustomerName == "") throw new BO.NameIsEmptyException("Field Name is empty !");
 
-                    if (EmailTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Email is empty !");
+                    if (temp.CustomerEmail == "") throw new BO.NameIsEmptyException("Field Email is empty !");
 
-                    if (AddressTextBox.Text.ToString() == "") throw new BO.NameIsEmptyException("Field Address is empty !");
-
-                    string? nameClaint = NameTextBox.Text.ToString();
-                    string? emailClaint = EmailTextBox.Text.ToString();
-                    string? addressClaint = AddressTextBox.Text.ToString();
+                    if (temp.CustomerAddress == "") throw new BO.AddresIsempty("Field Address is empty !");
 
                     try
                     {
-                        Bl?.Cart.ConfirmOrder(temp, nameClaint, emailClaint, addressClaint);
-                        ErrorEx.Text = "Order confrim :)";
-                        ErrorEx.Visibility = Visibility.Visible;
+                        Bl?.Cart.ConfirmOrder(temp, temp.CustomerName, temp.CustomerEmail, temp.CustomerAddress);
+                        OnPropertyChanged(nameof(temp));
+                        str = "Order confrim :)";
+                        OnPropertyChanged(nameof(str));
+                        temp = new BO.Cart();
+                        temp.Items = new();
+                        OnPropertyChanged(nameof(temp));
+
 
                     }
-                    catch (BO.EmailInValidException) { ErrorEx.Text = "Invalid email !"; }
+                    catch (BO.EmailInValidException) { str = "Invalid email !"; }
 
                 }
                 catch (BO.NameIsEmptyException ex)
                 {
-                    ErrorEx.Text = $"{ex.Message}";
-                    ErrorEx.Visibility = Visibility.Visible;
+                    str = $"{ex.Message}";
+                    OnPropertyChanged(nameof(str));
+                }
+
+                catch (BO.AddresIsempty ex)
+                {
+                    str = $"{ex.Message}";
+                    OnPropertyChanged(nameof(str));
                 }
             }
         }

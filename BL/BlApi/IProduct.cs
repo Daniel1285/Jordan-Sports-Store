@@ -70,8 +70,7 @@ namespace BlApi
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public IEnumerable<IGrouping<Enums.Category, ProductItem?>> GetListProductIGrouping(IEnumerable<ProductItem?> list);
-
+        public IEnumerable<BO.ProductItem?> GetListProductIGrouping(IEnumerable<BO.ProductItem?> list, BO.Enums.Category category);
 
 
 

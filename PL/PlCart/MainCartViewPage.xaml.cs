@@ -66,15 +66,7 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
         }
         else
         {
-            var group = (Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException()) ?? throw new NullReferenceException()).ToList();
-            foreach (var g in group)
-            {
-                if (g.Key == (BO.Enums.Category)ProductInfromation.SelectedItem)
-                {
-                    myListProductItem = new ObservableCollection<BO.ProductItem?>(g);
-
-                }
-            }
+            myListProductItem = new ObservableCollection<BO.ProductItem?>((Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException(), (BO.Enums.Category)ProductInfromation.SelectedItem) ?? throw new NullReferenceException()));   
         }
         OnPropertyChanged(nameof(myListProductItem));
     }

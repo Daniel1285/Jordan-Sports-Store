@@ -44,16 +44,18 @@ namespace PL.PlProduct
                 OnPropertyChanged(nameof(Product));
             }
         }
+        public string Str { get; set; }
+       
 
         /// <summary>
         /// Constructor for adding product.
         /// </summary>
         public AddAndUpdate()
         {
-            
-            InitializeComponent();
-           // CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
-            AddOrUpdateProductButton.Content = "Add";
+            Product = new();
+            Product.Category = BO.Enums.Category.NONE;
+            Str = "Add";
+            InitializeComponent(); 
         }
         /// <summary>
         /// Constructor gor Updateing product.
@@ -62,18 +64,10 @@ namespace PL.PlProduct
         public AddAndUpdate(int id)
         {
             Product = Bl.Product.GetProduct(id);
+            Str = "Update";
             InitializeComponent();
-            // CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
-            //Product.ID = 123456;
-            //Product.ID.ToString();
-            CategoryComboBox.SelectedItem = Bl.Product.GetProduct(id).Category;
-            //ProductNameBox.Text = Bl.Product.GetProduct(id).Name;
-            //ProductPriceBox.Text = Bl.Product.GetProduct(id).Price.ToString();
-            //ProductInstokeBox.Text = Bl.Product.GetProduct(id).InStock.ToString();
-            
-
             IdBox.IsReadOnly = true; // blocks the possibility to change the ID.
-            AddOrUpdateProductButton.Content = "Update";
+            
         }
 
         /// <summary>
@@ -83,12 +77,13 @@ namespace PL.PlProduct
         /// <param name="e"></param>
         private void AddOrUpdateProductToList_Click(object sender, RoutedEventArgs e)
         {
+
             bool flag = true; // for Checks if there is any exception 
 
             try
             {
                 
-                if (IdBox.Text.ToString() == "")
+                if (Product.ID.ToString() == "")
                     throw new BO.NameIsEmptyException("Field ID is empty !");
                 if (ProductNameBox.Text.ToString() == "")
                     throw new BO.NameIsEmptyException("Field name is empty !");
@@ -107,12 +102,13 @@ namespace PL.PlProduct
                     BO.Product p = new BO.Product
                     {
                         ID = Product.ID,
-                        Category = (BO.Enums.Category)CategoryComboBox.SelectedItem,
+                        Category = Product.Category,
                         Name = Product.Name,
                         Price = Product.Price,
                         InStock = Product.InStock,
                     };
-                    if (AddOrUpdateProductButton.Content.ToString() == "Add")
+                    
+                    if (Str == "Add")
                         Bl?.Product.AddProduct(p);
                     else
                         Bl?.Product.UpdateProduct(p);
@@ -132,13 +128,13 @@ namespace PL.PlProduct
                 switch (mbresult) // Checks the user's choice and acts accordingly.
                 {
                     case MessageBoxResult.Yes:
-                        if (AddOrUpdateProductButton.Content.ToString() == "Update")
+                        if (Str == "Update")
                         {
-                            new AddAndUpdate(int.Parse(IdBox.Text)).Show();
+                            new AddAndUpdate(Product.ID).Show();
                             flag = false;
                             this.Close();
                         }
-                        else if (AddOrUpdateProductButton.Content.ToString() == "Add")
+                        else if (Str == "Add")
                         {
                             new AddAndUpdate().Show();
                             flag = false;
