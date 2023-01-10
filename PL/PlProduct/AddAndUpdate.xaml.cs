@@ -45,6 +45,7 @@ namespace PL.PlProduct
             }
         }
         public string Str { get; set; }
+        public bool Flag { get; set; }
        
 
         /// <summary>
@@ -55,6 +56,7 @@ namespace PL.PlProduct
             Product = new();
             Product.Category = BO.Enums.Category.NONE;
             Str = "Add";
+            Flag = false;
             InitializeComponent(); 
         }
         /// <summary>
@@ -65,8 +67,9 @@ namespace PL.PlProduct
         {
             Product = Bl.Product.GetProduct(id);
             Str = "Update";
+            Flag = true;// blocks the possibility to change the ID.
             InitializeComponent();
-            IdBox.IsReadOnly = true; // blocks the possibility to change the ID.
+             
         }
 
         /// <summary>
