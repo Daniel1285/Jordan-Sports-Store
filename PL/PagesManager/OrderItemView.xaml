@@ -54,7 +54,7 @@
             </ListView.View>
         </ListView>
 
-        <Button x:Name="GotoDetailsOrder_Button" Content="Details Order" Grid.Row="2" Width="Auto" FontSize="18" FontFamily="Aharoni" HorizontalAlignment="Right"  FontWeight="Bold" HorizontalContentAlignment="Center" Click="GotoDetailsOrder_Click" Foreground="Black" Background="White" />
+        <Button x:Name="GotoDetailsOrder_Button" Content="Details Order" Grid.Row="2" Width="Auto" FontSize="18" FontFamily="Aharoni" HorizontalAlignment="Right"  FontWeight="Bold" HorizontalContentAlignment="Center" Click="GotoDetailsOrder_Click" Foreground="Black" Background="White" Margin="0,0,18,0" />
 
 
         <Frame x:Name="orderItemFrame" Grid.RowSpan="2" />

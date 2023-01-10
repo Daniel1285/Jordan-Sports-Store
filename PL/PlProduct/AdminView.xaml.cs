@@ -17,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PL.PagesManager;
+
+
 namespace PL.PlProduct;
 
 /// <summary>
@@ -24,19 +26,16 @@ namespace PL.PlProduct;
 /// </summary>
 public partial class AdminView : Window
 {
-
-
     public AdminView()
     {
         InitializeComponent();
     }
 
-    private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
-    {
-        new MainWindow().Show();
-        this.Close();
-    }
-
+    /// <summary>
+    /// Show all orders.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void GotoOrdersManager_Click(object sender, RoutedEventArgs e)
     {
         MainList.Content = new OrdersPage();
@@ -46,6 +45,11 @@ public partial class AdminView : Window
         NewProduct.Visibility = Visibility.Hidden;
     }
 
+    /// <summary>
+    /// Show all product in the store.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void GotoProductManager_Click(object sender, RoutedEventArgs e)
     {
         MainList.Content = new ProductsPage();
@@ -54,16 +58,37 @@ public partial class AdminView : Window
         ordersCard.Visibility = Visibility.Hidden;
     }
 
-    private void myFrame_ContentRendered(object sender, EventArgs e)
-    {
-        MainList.NavigationUIVisibility = NavigationUIVisibility.Hidden;
-    }
-
+    /// <summary>
+    /// Add product to list.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void AddProductButton_Click(object sender, RoutedEventArgs e)
     {
         new AddAndUpdate().Show();
 
         (Window.GetWindow(this)).Close();
+    }
+
+    /// <summary>
+    /// Remove UIV
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void myFrame_ContentRendered(object sender, EventArgs e)
+    {
+        MainList.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+    }
+
+    /// <summary>
+    /// open Main window.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void BackToLastWindowButton_Click(object sender, RoutedEventArgs e)
+    {
+        new MainWindow().Show();
+        this.Close();
     }
 
 }

@@ -82,7 +82,7 @@ namespace PL.PlProduct
             try
             {
                 
-                if (Product.ID.ToString() == "")
+                if (IdBox.Text.ToString() == "")
                     throw new BO.NameIsEmptyException("Field ID is empty !");
                 if (ProductNameBox.Text.ToString() == "")
                     throw new BO.NameIsEmptyException("Field name is empty !");
@@ -94,7 +94,6 @@ namespace PL.PlProduct
                     throw new BO.NameIsEmptyException("Field in Category is empty !");
                 if(CategoryComboBox.SelectedIndex == 5)
                     throw new BO.NameIsEmptyException("Require field Category !");
-
 
                 try
                 {
@@ -159,6 +158,11 @@ namespace PL.PlProduct
          
         }
 
+        /// <summary>
+        /// back to AdminView.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackLastWindow(object sender, RoutedEventArgs e)
         {
             new AdminView().Show();

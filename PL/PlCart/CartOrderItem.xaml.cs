@@ -99,8 +99,6 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
     private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
     {
         int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
-        //temp.Items!.Remove(myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException());
-        //myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
         BO.OrderItem order = temp.Items!.FirstOrDefault(x => x?.ProductID == id)!;
         temp.Items!.Remove(order);
         temp.TotalPrice -= order.Totalprice;
