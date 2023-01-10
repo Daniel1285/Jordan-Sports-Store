@@ -53,7 +53,8 @@ namespace PL.PagesManager
         public Array Categories { get { return Enum.GetValues(typeof(BO.Enums.Category));}}
         public ProductsPage()
         {
-            InitializeComponent();          
+            InitializeComponent();
+        
         }
         private void AttributeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -66,6 +67,7 @@ namespace PL.PagesManager
             if (ProductsListView.SelectedItem != null)
             {
                 int id = ((BO.ProductForList)ProductsListView.SelectedItem).ID;
+                //int id = ((BO.ProductForList)(sender as ListViewItem)!.DataContext).ID;
                 new AddAndUpdate(id).Show();  
                 (Window.GetWindow(this)).Close();
                 OnPropertyChanged(nameof(myListProduct));   
