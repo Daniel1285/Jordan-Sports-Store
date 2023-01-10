@@ -45,19 +45,6 @@ namespace PL.PagesManager
             }
         }
 
-        //public ObservableCollection<BO.ProductForList?> myListProduct
-        //{
-        //    get
-        //    {
-        //        if (AttributeSelector.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
-        //        {
-        //            return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetProductList());
-
-        //        }
-        //        else
-        //            return new ObservableCollection<BO.ProductForList?>(Bl!.Product.GetListByCondition(x => x?.Category.ToString() == AttributeSelector.SelectedItem.ToString()));
-        //    }
-        //}
         private string _ssd;
         public string ssd 
         { 

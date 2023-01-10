@@ -54,8 +54,5 @@ public partial class OrderDetails : Page, INotifyPropertyChanged
         {
             Window.GetWindow(this).Content = new MainCartViewPage();
         }
-        //else
-        //    Window.GetWindow(this).Content = new CartOrderItem(temp);
-
     }
 }
