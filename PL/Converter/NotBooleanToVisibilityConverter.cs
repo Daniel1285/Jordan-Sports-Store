@@ -14,8 +14,8 @@ namespace PL.Converter
         //convert from source property type to target property type
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool boolValue = (bool)value;
-            if (boolValue)
+            
+            if (value.ToString() == "")
             {
                 return Visibility.Hidden; //Visibility.Collapsed;
             }
