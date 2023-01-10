@@ -66,6 +66,6 @@
                 
             </Grid>
         </Border>
-        <Frame x:Name="mainFram" Grid.ColumnSpan="2" Grid.RowSpan="4"/>
+        <Frame x:Name="mainFram" Grid.ColumnSpan="2" Grid.RowSpan="4" ContentRendered="myFrame_ContentRendered"/>
     </Grid>
 </Window>

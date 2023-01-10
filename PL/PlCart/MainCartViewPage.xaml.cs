@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.PlProduct;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -111,18 +112,12 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
     {
         if (OrderItemListView.SelectedItem != null)
         {
-
-
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             Bl?.Cart.AddProdctToCatrt(TempCart, id);
             myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
-            
-
         }
         else
             MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
-        
-
     }
 
     /// <summary>
@@ -143,6 +138,8 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
             MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
     }
 
+
+    
     /// <summary>
     /// Show details of product.
     /// </summary>
@@ -153,7 +150,9 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
         if (OrderItemListView.SelectedItem != null)
         {
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
-            new PlProduct.AddAndUpdate(id).Show();
+            Window a = new AddAndUpdate(id);
+            a.IsEnabled = false;
+            a.Show();
             Window.GetWindow(this).Close();
         }
         else

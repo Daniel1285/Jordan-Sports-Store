@@ -67,7 +67,6 @@ namespace PL.PlProduct
             Str = "Update";
             InitializeComponent();
             IdBox.IsReadOnly = true; // blocks the possibility to change the ID.
-            
         }
 
         /// <summary>
