@@ -55,6 +55,7 @@ namespace BlImplementation
                 };
                 
                 cart.Items?.Add(orderItemBo);
+                cart.TotalPrice += orderItemBo.Totalprice;
  
                 //}
 

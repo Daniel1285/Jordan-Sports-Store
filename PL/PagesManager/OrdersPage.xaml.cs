@@ -86,16 +86,26 @@ namespace PL.PagesManager
         {
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.ShippingUpdate(id);
-            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
-            
+            if (OrderInformation.SelectedItem.ToString() == BO.Enums.OrderStatus.NONE.ToString())
+            {
+                myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
+            }
+            else
+                myListOrders = new ObservableCollection<BO.OrderForList?>(Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString())!);
+
         }
 
         private void UpdateToProvided_Click(object sender, RoutedEventArgs e)
         {
             int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
             Bl?.Order.SupplyUpdateOrder(id);
-            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
-            
+            if (OrderInformation.SelectedItem.ToString() == BO.Enums.OrderStatus.NONE.ToString())
+            {
+                myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
+            }
+            else
+                myListOrders = new ObservableCollection<BO.OrderForList?>(Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString())!);
+
         }
 
     }

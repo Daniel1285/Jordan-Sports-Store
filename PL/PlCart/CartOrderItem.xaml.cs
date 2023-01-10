@@ -35,9 +35,29 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
     public IEnumerable<int> LongIntegerList => Enumerable.Range(1, 100).ToList(); // Max option for update amount of order item in cart.
 
     private BlApi.IBl? Bl = BlApi.Factory.Get();
-    public ObservableCollection<BO.OrderItem?> myListOrderItem { get; set; }
+    private ObservableCollection<BO.OrderItem?> _myListOrderItem;
+    public ObservableCollection<BO.OrderItem?> myListOrderItem
+    {
+        get { return _myListOrderItem; }
+        set
+        {
+
+            _myListOrderItem = value;
+            onPropertyChanged(nameof(myListOrderItem));
+        }
+
+    }
     public BO.Cart temp = new BO.Cart();
-    public double TotalPriceCart { get; set; } 
+    private double totalPriceCart;
+    public double TotalPriceCart
+    {
+        get { return totalPriceCart; }
+        set
+        {
+            totalPriceCart = value;
+            onPropertyChanged(nameof(TotalPriceCart));
+        }
+    }
 
 
     public CartOrderItem(BO.Cart c)
@@ -79,10 +99,14 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
     private void RemoveFromCart_Click(object sender, RoutedEventArgs e)
     {
         int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
-        temp.Items!.Remove(myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException());
+        //temp.Items!.Remove(myListOrderItem.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException());
+        //myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
+        BO.OrderItem order = temp.Items!.FirstOrDefault(x => x?.ProductID == id)!;
+        temp.Items!.Remove(order);
+        temp.TotalPrice -= order.Totalprice;
+        TotalPriceCart = temp.TotalPrice;
         myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
-        onPropertyChanged(nameof(myListOrderItem)); 
-        onPropertyChanged(nameof(TotalPriceCart));
+
 
     }
 
@@ -104,7 +128,7 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
             int newAmount = int.Parse(NumForUpdate.SelectedItem.ToString()!);
             Bl?.Cart.UpdateAmountOfProduct(temp, id, newAmount);
             myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
-            onPropertyChanged(nameof(myListOrderItem));
+            
         }
         catch (BO.NotEnougeInStock) 
         {

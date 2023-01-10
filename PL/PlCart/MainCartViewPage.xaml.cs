@@ -115,8 +115,15 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
 
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
             Bl?.Cart.AddProdctToCatrt(TempCart, id);
-            myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
-            
+            if (ProductInfromation.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
+            {
+                myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
+            }
+            else
+            {
+                myListProductItem = new ObservableCollection<BO.ProductItem?>((Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException(), (BO.Enums.Category)ProductInfromation.SelectedItem) ?? throw new NullReferenceException()));
+            }
+
 
         }
         else
@@ -136,8 +143,19 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
         if (OrderItemListView.SelectedItem != null)
         {
             int id = ((BO.ProductItem)OrderItemListView.SelectedItem).ID;
-            TempCart.Items!.Remove(TempCart.Items!.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException());
-            myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
+            BO.OrderItem order = TempCart.Items!.FirstOrDefault(x => x?.ProductID == id)!;
+            TempCart.Items!.Remove(order);
+            TempCart.TotalPrice -= order.Totalprice;
+            //TempCart.Items!.Remove(TempCart.Items!.FirstOrDefault(x => x?.ProductID == id) ?? throw new BO.NotExistException());
+            //TempCart.TotalPrice -= ;
+            if (ProductInfromation.SelectedItem.ToString() == BO.Enums.Category.NONE.ToString())
+            {
+                myListProductItem = new ObservableCollection<BO.ProductItem?>(Bl?.Product.GetListOfProductItem(TempCart)!);
+            }
+            else
+            {
+                myListProductItem = new ObservableCollection<BO.ProductItem?>((Bl?.Product.GetListProductIGrouping(Bl?.Product.GetListOfProductItem(TempCart) ?? throw new NullReferenceException(), (BO.Enums.Category)ProductInfromation.SelectedItem) ?? throw new NullReferenceException()));
+            }
         }
         else
             MessageBox.Show("Please chose only from the products", "EROOR", MessageBoxButton.OK, MessageBoxImage.Error);
