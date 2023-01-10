@@ -97,9 +97,17 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
     private void UpdateAmunt_SelectedChanged(object sender, SelectionChangedEventArgs e)
     {
         int id = ((BO.OrderItem)OrdersListView.SelectedItem).ProductID;
-        int newAmount = int.Parse(NumForUpdate.SelectedItem.ToString()!);
-        Bl?.Cart.UpdateAmountOfProduct(temp, id, newAmount);
-        myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
-        onPropertyChanged(nameof(myListOrderItem));
+        try
+        {
+            int newAmount = int.Parse(NumForUpdate.SelectedItem.ToString()!);
+            Bl?.Cart.UpdateAmountOfProduct(temp, id, newAmount);
+            myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
+            onPropertyChanged(nameof(myListOrderItem));
+        }
+        catch (BO.NotEnougeInStock) 
+        {
+            MessageBox.Show("Not enouge in stock", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);       
+        }
+
     }
 }

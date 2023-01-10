@@ -46,7 +46,6 @@ namespace PL
         private void TruckingButton_Click(object sender, RoutedEventArgs e)
         {
             mainFram.Content =  new MainTrucking();
-
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
