@@ -70,56 +70,56 @@
                 
                 <StackPanel VerticalAlignment="Center" Width="200" Grid.Column="1" HorizontalAlignment="Left">
 
-                    <TextBox x:Name="NameTextBox" Text="{Binding myOrder.CustomerName}" IsReadOnly="True" Margin="0,45,0,0"
+                    <TextBox x:Name="NameTextBox" Text="{Binding myOrder.CustomerName}" IsReadOnly="True" Margin="0,30,0,0"
                     materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Name">
                     </TextBox>
 
-                    <TextBox x:Name="EmailTextBox" Margin="0,10,0,0" Text="{Binding myOrder.CustomerEmail, Mode=TwoWay}" IsReadOnly="True"
+                    <TextBox x:Name="EmailTextBox" Margin="0,10,0,10" Text="{Binding myOrder.CustomerEmail, Mode=TwoWay}" IsReadOnly="True"
                              materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Email">
                     </TextBox>
 
-                    <TextBox x:Name="AddressTextBox" Margin="0,10,0,0" Text="{Binding myOrder.CustomerAddress}" IsReadOnly="True"
+                    <TextBox x:Name="AddressTextBox" Margin="0,0,0,10" Text="{Binding myOrder.CustomerAddress}" IsReadOnly="True"
                              materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="addres">
                     </TextBox>
 
-                    <TextBox x:Name="orderDate" Margin="0,10,0,0" Text="{Binding myOrder.OrderDate}" IsReadOnly="True"
+                    <TextBox x:Name="orderDate" Margin="0,0,0,10" Text="{Binding myOrder.OrderDate}" IsReadOnly="True"
                     materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Order date">
                     </TextBox>
 
-                    <TextBox x:Name="StatusOrder" Margin="0,10,0,0" Text="{Binding myOrder.Status}" IsReadOnly="True"
+                    <TextBox x:Name="StatusOrder" Margin="0,0,0,10" Text="{Binding myOrder.Status}" IsReadOnly="True"
                     materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Status">
                     </TextBox>
 
-                    <TextBox x:Name="shipDateOrder" Margin="0,10,0,0" Text="{Binding myOrder.ShipDate}" IsReadOnly="True"
+                    <TextBox x:Name="shipDateOrder" Margin="0,0,0,10" Text="{Binding myOrder.ShipDate}" IsReadOnly="True"
                     materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Ship date">
                     </TextBox>
 
-                    <TextBox x:Name="DeliveryDateOrder" Margin="0,10,0,0" Text="{Binding myOrder.DeliveryDate}" IsReadOnly="True"
+                    <TextBox x:Name="DeliveryDateOrder" Margin="0,0,0,10" Text="{Binding myOrder.DeliveryDate}" IsReadOnly="True"
                     materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Delivery Date">
                     </TextBox>
 
-                    <TextBox x:Name="totalPriceOrder" Margin="0,10,0,0" Text="{Binding myOrder.TotalPrice}" IsReadOnly="True"
+                    <TextBox x:Name="totalPriceOrder" Margin="0,0,0,23" Text="{Binding myOrder.TotalPrice}" IsReadOnly="True"
                     materialDesign:HintAssist.HelperTextFontSize="8"
                     materialDesign:HintAssist.Hint="Total price">
                     </TextBox>
 
                 </StackPanel>
 
-                <materialDesign:PackIcon Kind="Account" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,193" VerticalAlignment="Center"/>
-                <materialDesign:PackIcon Kind="Email" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,5,0,128"  VerticalAlignment="Center"/>
-                <materialDesign:PackIcon Kind="AddressMarker" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,52" VerticalAlignment="Center"/>
-                <materialDesign:PackIcon Kind="CalendarRange" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,17,0,0" VerticalAlignment="Center"/>
-                <materialDesign:PackIcon Kind="ListStatus" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,86,0,0" VerticalAlignment="Center"/>
-                <materialDesign:PackIcon Kind="AirplaneClock" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,157,0,0" VerticalAlignment="Center"/>
-                <materialDesign:PackIcon Kind="PackageVariantClosedCheck" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,226,0,0" VerticalAlignment="Center"/>
-                <materialDesign:PackIcon Kind="CreditCardSettingsOutline" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,295,0,0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="Account" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,230" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="Email" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,160"  VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="AddressMarker" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,90" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="CalendarRange" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,0,0,20" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="ListStatus" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,50,0,0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="AirplaneClock" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,120,0,0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="PackageVariantClosedCheck" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,190,0,0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="CreditCardSettingsOutline" Grid.Column="0" Width="50" Height="15" HorizontalAlignment="Right" Foreground="Black" Margin="0,260,0,0" VerticalAlignment="Center"/>
 
                 
 

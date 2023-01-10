@@ -77,7 +77,7 @@
         <Label Content="Total price :" Grid.Row="2" FontSize="23" FontFamily="Aharoni" HorizontalAlignment="Center" Width="184" FontWeight="Bold" Foreground="#FF6931CC" VerticalAlignment="Center" />
         <Label Content="Help" Grid.Column="1" Width="150" FontSize="16" FontFamily="Aharoni" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="Black" Background="White" ToolTip="Right click for add remove product from cart / update amount product." />
 
-        <TextBlock x:Name="TotalPrice" Text="{Binding TotalPriceCart}" Grid.Row="2" FontSize="20" FontFamily="Aharoni" HorizontalAlignment="Center" Width="184" Height="23" FontWeight="Bold" Foreground="#FF6931CC" VerticalAlignment="Center" Margin="300,0,0,0"/>
+        <Label x:Name="TotalPrice" Content="{Binding TotalPriceCart}" Grid.Row="2" FontSize="23" FontWeight="Bold" FontFamily="Arial Black" HorizontalAlignment="Center"  Width="184" Height="Auto" Foreground="#FF6931CC" VerticalAlignment="Center" Margin="300,0,0,0"/>
 
         <Frame x:Name="CartOrderItemFram" Grid.RowSpan="3"/>
     </Grid>
