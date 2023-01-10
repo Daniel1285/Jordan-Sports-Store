@@ -127,6 +127,7 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
         {
             int newAmount = int.Parse(NumForUpdate.SelectedItem.ToString()!);
             Bl?.Cart.UpdateAmountOfProduct(temp, id, newAmount);
+            TotalPriceCart = temp.TotalPrice;
             myListOrderItem = new ObservableCollection<BO.OrderItem?>(temp.Items!);
             
         }
