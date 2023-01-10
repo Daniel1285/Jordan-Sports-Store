@@ -109,8 +109,8 @@
                         IsDefault="True"
                         Style="{StaticResource MaterialDesignOutlinedButton}" FontWeight="Bold" Click="EndOfOrder_Click" />
 
-                <TextBlock x:Name="ErrorEx" Text="{Binding str}" FontSize="16" Grid.Column="1" Height="40" VerticalAlignment="Bottom" Foreground="#FFC91919" Margin="0,0,0,0" Opacity="0.8" Width="200" FontWeight="Bold"
-                           /> 
+                <TextBlock x:Name="ErrorEx" Text="{Binding str}" FontSize="16" Grid.Column="1" Height="40" VerticalAlignment="Bottom" Foreground="#FFC91919" Margin="0,0,0,0" Opacity="0.8" Width="200" FontWeight="Bold"/>
+
 
 
 

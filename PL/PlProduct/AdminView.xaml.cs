@@ -56,7 +56,7 @@ public partial class AdminView : Window
 
     private void myFrame_ContentRendered(object sender, EventArgs e)
     {
-        MainList.NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden;
+        MainList.NavigationUIVisibility = NavigationUIVisibility.Hidden;
     }
 
     private void AddProductButton_Click(object sender, RoutedEventArgs e)

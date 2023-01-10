@@ -14,7 +14,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Background="Black">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="310"/>
@@ -30,10 +30,10 @@
         <Grid>
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Option" FontSize="60" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Text="Admin - screen for product settings and orders." FontSize="13" HorizontalAlignment="Center"  Foreground="White" Margin="0,10,0,0" Opacity="0.8"/>
-                <TextBlock Text="Client - Customer display screen for orders." FontSize="13"  Foreground="White" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0"/>
-                <TextBlock Text="Trucking - Information about tracking the package." FontSize="13"  Foreground="White" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0" />
-                <TextBlock Text="Login - Login for an existing user." FontSize="13"  Foreground="White" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0" />
+                <TextBlock Text="Admin - screen for product settings and orders." FontSize="13" FontWeight="Black" HorizontalAlignment="Center"  Foreground="White" Margin="0,10,0,0" Opacity="0.8"/>
+                <TextBlock Text="Client - Customer display screen for orders." FontSize="13"  Foreground="White" FontWeight="Black" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0"/>
+                <TextBlock Text="Trucking - Information about tracking the package." FontSize="13"  Foreground="White" FontWeight="Black" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0" />
+                <TextBlock Text="Login - Login for an existing user." FontSize="13"  Foreground="White" FontWeight="Black" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0" />
             </StackPanel>
         </Grid>
 
@@ -48,8 +48,6 @@
                 <materialDesign:PackIcon Kind="AccountTie" Grid.Column="0" Grid.Row="0" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,130,0,0"/>
                 <materialDesign:PackIcon Kind="AccountDetails" Grid.Column="0" Grid.Row="1" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,195,0,0" />
                 <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="2" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,265,0,0"/>
-                <!--<materialDesign:PackIcon Kind="Login" Grid.Column="0" Grid.Row="3" Width="50" Height="70" HorizontalAlignment="Right" Foreground="Black" Margin="0,305,0,0"/>-->
-
 
                 <Button Content="Admin" HorizontalAlignment="Center"  Width="150" Height="45" Click="ManagerButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,0,0,100" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
@@ -65,14 +63,9 @@
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
-
-                <!--<Button Content="Login" HorizontalAlignment="Center"  Width="Auto" Height="45" Click="LoginButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,250,0,0" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
-                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>-->
-
+                
             </Grid>
         </Border>
-        <Frame x:Name="mainFram" Grid.ColumnSpan="2" Grid.RowSpan="4"/>
+        <Frame x:Name="mainFram" Grid.ColumnSpan="2" Grid.RowSpan="4" ContentRendered="myFrame_ContentRendered"/>
     </Grid>
 </Window>

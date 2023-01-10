@@ -62,14 +62,14 @@
 
         <Label x:Name="Label_c" Content="Item Order list" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
 
-        <Button x:Name="buttonConfrim" Content="Confrim order" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,8,5" Padding="5" Click="GoToConfrimOrder_Click" Width="Auto" Height="30" Background="#FF6931CC"
+        <Button x:Name="buttonConfrim" Content="Confrim order" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,10,5" Padding="5" Click="GoToConfrimOrder_Click" Width="Auto" Height="30" Background="#FF6931CC"
                  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                  materialDesign:ButtonProgressAssist.Value="-1"/>
 
         <Button x:Name="BackToMainCartView_button" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,8,5" Padding="5" Click="BackToMainCartView_Click" Width="90" Height="30" Background="#FF6931CC"/>
 
-        <ComboBox  MinWidth="72" x:Name="NumForUpdate" Grid.Column="1" Grid.Row="0" Width="25" HorizontalAlignment="Right" Visibility="Hidden" 
+        <ComboBox  MinWidth="72" x:Name="NumForUpdate" Grid.Column="1" Grid.Row="0" Width="25" HorizontalAlignment="Center" Visibility="Hidden" 
             materialDesign:HintAssist.Hint="Update"
             ItemsSource="{Binding LongIntegerList}" SelectionChanged="UpdateAmunt_SelectedChanged">
         </ComboBox>

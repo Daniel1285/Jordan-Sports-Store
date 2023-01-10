@@ -62,8 +62,8 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
 
     public CartOrderItem(BO.Cart c)
     {
-        myListOrderItem = new ObservableCollection<BO.OrderItem?>(c.Items!);
         TotalPriceCart = c.TotalPrice;
+        myListOrderItem = new ObservableCollection<BO.OrderItem?>(c.Items!);
         InitializeComponent();
         temp = c;
         

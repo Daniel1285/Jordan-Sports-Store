@@ -47,15 +47,9 @@ namespace PL
         {
             mainFram.Content =  new MainTrucking();
         }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void myFrame_ContentRendered(object sender, EventArgs e)
         {
-
-        }
-
-        private void mainFram_FragmentNavigation(object sender, FragmentNavigationEventArgs e)
-        {
-
+            mainFram.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
     }
 }
