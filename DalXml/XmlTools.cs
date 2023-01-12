@@ -107,4 +107,31 @@ static class XMLTools
         }
     }
     #endregion
+    public static XElement Load_Config()
+    {
+        string filePath = $"{s_dir}Config.xml";
+        try
+        {
+            XElement? config = XElement.Load(filePath);
+            return config;
+        }
+        catch(Exception ex)
+        {
+            throw new Exception($"Fail to load xml: {filePath}", ex);
+        }
+    }
+    public static void SaveConfigXml(string entity,int serial)
+    {
+        string filePath = $"{s_dir}Config.xml";
+        try
+        {
+            XElement? config = XElement.Load(filePath);
+            config.Element(entity)!.Value = serial.ToString();
+            config.Save(filePath);
+        }
+        catch(Exception ex)
+        {
+            throw new Exception($"Fail to load xml: {filePath}", ex);
+        }
+    }
 }
