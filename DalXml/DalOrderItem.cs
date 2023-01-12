@@ -2,6 +2,7 @@
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,39 +13,37 @@ namespace Dal;
 
 internal class DalOrderItem : IOrderItem
 {
-    XElement? OrderItemRoot;
+    
     const string OrderItemPath = @"OrderItem"; //XML Serializer
-   
-    #region LoadData
-    /// <summary>
-    /// Load data.
-    /// </summary>
-    private void LoadData()
+    static OrderItem? createOrderItenFromXElement(XElement o)
     {
-        try
+        return new OrderItem
         {
-            OrderItemRoot = XElement.Load(OrderItemPath);
-        }
-        catch (Exception) { Console.WriteLine("File upload problem!");}
-    }
-    #endregion
+            ID = o.ToIntNullable("ID") ?? throw new FormatException("id"),
+            ProductID = o.ToIntNullable("ProductID") ?? throw new FormatException("productID"),
+            OrderID = o.ToIntNullable("OrderID") ?? throw new FormatException("orderID"),
+            Price = o.ToDoubleNullable("Price") ?? throw new FormatException("price"),
+            Amount = o.ToIntNullable("Amount") ?? throw new FormatException("amount"),
 
+        };
+    }
     #region AddFunction
     /// <summary>
-    /// Add 
+    /// Add object to xml file.
     /// </summary>
     /// <param name="o"></param>
     /// <returns></returns>
     public int Add(OrderItem o)
     {
-        XElement OrderItemID = new XElement ("ID", o.ID); 
-        XElement ProductID = new XElement ("ProductID", o.ProductID); 
-        XElement OrderID = new XElement ("OrderID", o.OrderID); 
-        XElement Price = new XElement ("Price", o.Price); 
-        XElement Amount = new XElement ("Amount", o.Amount);
-
-        OrderItemRoot?.Add(new XElement("OrderItem",OrderItemID, ProductID, OrderID, Price, Amount));
-        OrderItemRoot?.Save(OrderItemPath);
+        XElement OrderItemRoot = XMLTools.LoadListFromXMLElement(OrderItemPath);
+        XElement orderItem = new XElement("orderItem",
+                                          new XElement("ID", o.ID),
+                                          new XElement("ProductID", o.ProductID),
+                                          new XElement("OrderID", o.OrderID),
+                                          new XElement("Price", o.Price),
+                                          new XElement("Amount", o.Amount));
+        OrderItemRoot.Add(orderItem);
+        XMLTools.SaveListToXMLElement(OrderItemRoot, OrderItemPath);    
         return o.ID;
     }
     #endregion
@@ -56,22 +55,71 @@ internal class DalOrderItem : IOrderItem
     /// <param name="id"></param>
     public void Delete(int id)
     {
-        XElement? OrderItemElement;
-
+        XElement OrderItemRoot = XMLTools.LoadListFromXMLElement(OrderItemPath);
+        XElement? orderItem = (from item in OrderItemRoot.Elements()
+                               where item.ToIntNullable("ID") == id
+                               select item).FirstOrDefault() ?? throw new NotExistException("Not found order item to delete");
+        orderItem.Remove();
+        XMLTools.SaveListToXMLElement(OrderItemRoot, OrderItemPath);
         
-        OrderItemElement = (from OrderItems in OrderItemRoot?.Elements()
-                            where Convert.ToInt32(OrderItems.Element("ID")!.Value!) == id
-                            select OrderItems).FirstOrDefault();
-
-        if (OrderItemElement != null)
-        {
-            OrderItemElement.Remove();
-            OrderItemRoot?.Save(OrderItemPath);
-        }
-        else
-            throw new NotExistException("Not found order item to delete");
-         
     }
     #endregion
+    #region Update Function
+    /// <summary>
+    /// Update object in xml file
+    /// </summary>
+    /// <param name="o"></param>
+    public void Update (OrderItem o)
+    {
+        Delete(o.ID);
+        Add(o);
+    }
+    #endregion
+    #region get by condition
+    /// <summary>
+    /// get the object by condition
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    /// <exception cref="NotExistException"></exception>
+    public OrderItem GetByCondition(Func<OrderItem?, bool>? filter)
+    {
+        XElement? OrderItemRoot = XMLTools.LoadListFromXMLElement(OrderItemPath);
+        return (from item in OrderItemRoot.Elements()
+                let DOOrderItem = createOrderItenFromXElement(item)
+                where filter!(DOOrderItem)
+                select (OrderItem?)DOOrderItem).FirstOrDefault() ?? throw new NotExistException("NOT exists!");
+
+    }
+    #endregion
+    #region gat list 
+    /// <summary>
+    /// get List or by filter or by nothing
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter)
+    {
+        XElement? OrderItemRoot = XMLTools.LoadListFromXMLElement(OrderItemPath);
+        if(filter != null)
+        {
+            return from item in OrderItemRoot.Elements()
+                   let tempItem = createOrderItenFromXElement(item)
+                   where filter(tempItem)
+                   select (OrderItem?)tempItem;
+        }
+        else
+        {
+            return from item in OrderItemRoot.Elements()
+                   select createOrderItenFromXElement(item);
+        }
+    }
+    #endregion
+
+
+
+
+
+
 
 }
