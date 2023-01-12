@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
 
         <Label   Content="ID :" HorizontalAlignment="Right" Width="Auto" Height="31" VerticalAlignment="Center" FontWeight="Bold"  FontSize="14" Foreground="White" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
-        <TextBox x:Name="IdBox" Text="{Binding Product.ID,Mode=TwoWay}" HorizontalAlignment="left" TextWrapping="Wrap"  TextAlignment="Center" Width="200"  Height="30"  FontSize="16" Grid.Row="0" Grid.Column="1" BorderBrush="White" Foreground="White"/>
+        <TextBox x:Name="IdBox" Text="{Binding Product.ID,Mode=TwoWay}" HorizontalAlignment="left" IsReadOnly="{Binding Flag}" TextWrapping="Wrap"  TextAlignment="Center" Width="200"  Height="30"  FontSize="16" Grid.Row="0" Grid.Column="1" BorderBrush="White" Foreground="White"/>
 
         <Label   Content="Category:" HorizontalAlignment="Right" Width="Auto" Height="29"  FontWeight="Bold" FontSize="14" Foreground="White" Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
         <ComboBox x:Name="CategoryComboBox" HorizontalAlignment="Left" Width="200" SelectedValue="" HorizontalContentAlignment="Center" Height="30" FontSize="14" Grid.Row="1" Grid.Column="1" BorderBrush="White" Foreground="Black" SelectedIndex="5" ItemsSource="{Binding Categories}" Text="{Binding Product.Category,Mode=TwoWay}"/>

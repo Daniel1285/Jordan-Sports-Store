@@ -39,7 +39,7 @@
             <StackPanel>
                 <!--<Button x:Name="Option" Content="{materialDesign:PackIcon Kind = Settings}" Width="50" Height="30" HorizontalAlignment="Left" Background="White" Foreground="#4EB1B6" />-->
 
-                <materialDesign:ColorZone Padding="16" Mode="Inverted" Background="{Binding null}" Foreground="White"   HorizontalAlignment="Stretch">
+                <materialDesign:ColorZone Padding="16" Mode="Inverted" Background="{x:Null}" Foreground="White"   HorizontalAlignment="Stretch">
                     <DockPanel>
                         <materialDesign:PopupBox DockPanel.Dock="Right"  PlacementMode="BottomAndAlignRightEdges" Foreground="#4EB1B6">
                             <ListBox x:Name="BackToChosenWindow" SelectionChanged="BackToChosenWindow_listBox" >

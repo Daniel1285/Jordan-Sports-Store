@@ -58,8 +58,7 @@ public partial class CartOrderItem : Page, INotifyPropertyChanged
             onPropertyChanged(nameof(TotalPriceCart));
         }
     }
-
-
+    
     public CartOrderItem(BO.Cart c)
     {
         TotalPriceCart = c.TotalPrice;
