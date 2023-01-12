@@ -6,6 +6,7 @@ namespace Dal;
 
 internal class DalOrderItem : IOrderItem
 {
+    #region AddFunction
     /// <summary>
     /// Add a OrderItem to array "MyOrderItem" in DataSource and increases the size of the array "SizeOfOrderItem" by one.
     /// </summary>
@@ -17,8 +18,9 @@ internal class DalOrderItem : IOrderItem
         DataSource.MyOrderItem.Add(o);
         return o.ID;
     }
+    #endregion
 
-
+    #region DeleteFunction
     /// <summary>
     /// Deleteing an Order Item from the array "MyOrderItem".
     /// </summary>
@@ -32,9 +34,10 @@ internal class DalOrderItem : IOrderItem
             return;
         }
         throw new NotExistException("Not found order item to delete");
-    } 
+    }
+    #endregion
 
-
+    #region UpdateFunction
     /// <summary>
     /// Updates a Order Item by overwriting an existing Order Item.
     /// </summary>
@@ -54,7 +57,9 @@ internal class DalOrderItem : IOrderItem
         }
         throw new NotExistException("Not found Order item to Update");
     }
+    #endregion
 
+    #region GetOrderItemByCondition
     /// <summary>
     /// Receives a function for testing (for example, ID resonance) and returns an object according to this
     /// </summary>
@@ -69,6 +74,9 @@ internal class DalOrderItem : IOrderItem
             return (OrderItem)orderItem1;
         throw new DO.NotExistException("NOT exists!");
     }
+    #endregion
+
+    #region GetAll
     /// <summary>
     /// Returns All Order Item in the list.
     /// </summary>
@@ -88,6 +96,7 @@ internal class DalOrderItem : IOrderItem
                        select item;
             return list;
         }
-    }  
-   
+    }
+    #endregion
+
 }

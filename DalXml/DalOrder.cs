@@ -84,9 +84,4 @@ internal class DalOrder : IOrder
         }
         throw new NotExistException("NOT exists!");
     }
-
-
-
-
-
 }
