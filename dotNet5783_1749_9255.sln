@@ -20,7 +20,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{7A071B7C-E373-4CE5-B65A-8706D314066E}"
 	ProjectSection(SolutionItems) = preProject
 		xml\dal-config.xml = xml\dal-config.xml
+		DalOrder.xml = DalOrder.xml
+		DalOrderItem.xml = DalOrderItem.xml
+		DalProduct.xml = DalProduct.xml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +61,10 @@ Global
 		{9B2D7936-BDF7-4BBB-B8F7-39CAAA735EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B2D7936-BDF7-4BBB-B8F7-39CAAA735EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B2D7936-BDF7-4BBB-B8F7-39CAAA735EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
