@@ -49,7 +49,7 @@ internal class DalOrderItem : IOrderItem
     }
     #endregion
 
-    #region DeleteOrderItem
+    #region DeleteFunction
     /// <summary>
     /// Delete OrderItem from Xml file.
     /// </summary>
