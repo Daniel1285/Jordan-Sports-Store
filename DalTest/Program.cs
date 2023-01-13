@@ -34,13 +34,13 @@ internal class Program
                 case (int)Enums.StartChoose.ORDER:
                     choiceOrder();
                     break;
-                //case 4:
-                    
-                //    //List<Order?> list = XMLTools.LoadListFromXMLSerializer<O>("Order");
-                //    XMLTools.SaveListToXMLSerializer(testMain!.Product.GetAll().ToList(), "Product");
-                //    XMLTools.SaveListToXMLSerializer(testMain.Order.GetAll().ToList(), "Order");
-                //    XMLTools.SaveListToXMLSerializer(testMain.OrderItem.GetAll().ToList(), "OrderItem");
-                //    break;
+                case 4:
+                    XMLTools.SaveListToXMLSerializer(testMain!.Product.GetAll().ToList(), "Product");
+                    XMLTools.SaveListToXMLSerializer(testMain.Order.GetAll().ToList(), "Order");
+                    XMLTools.SaveListToXMLSerializer(testMain.OrderItem.GetAll().ToList(), "OrderItem");
+                    XMLTools.SaveConfigXml("OrderID", testMain.Order.GetAll().Last()?.ID ?? 0);
+                    XMLTools.SaveConfigXml("OrderItemID", testMain.OrderItem.GetAll().Last()?.ID ?? 0);
+                    break;
 
                 default:
                     break;

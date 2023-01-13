@@ -20,7 +20,8 @@ internal class DalOrder : IOrder
     /// <returns></returns>
     public int Add(Order o)
     {
-        //o.ID = 
+        o.ID = XMLTools.Load_Config().ToIntNullable("OrderID")!.Value + 1;
+        XMLTools.SaveConfigXml("OrderID", o.ID);
         List<Order?> list = XMLTools.LoadListFromXMLSerializer<Order>(s_Order);
         list.Add(o);
         XMLTools.SaveListToXMLSerializer(list, s_Order);

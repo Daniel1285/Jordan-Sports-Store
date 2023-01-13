@@ -36,6 +36,8 @@ internal class DalOrderItem : IOrderItem
     /// <returns></returns>
     public int Add(OrderItem o)
     {
+        o.ID = XMLTools.Load_Config().ToIntNullable("OrderItemID")!.Value + 1;
+        XMLTools.SaveConfigXml("OrderItemID", o.ID);
         XElement OrderItemRoot = XMLTools.LoadListFromXMLElement(OrderItemPath);
         XElement orderItem = new XElement("orderItem",
                                           new XElement("ID", o.ID),
