@@ -58,7 +58,7 @@ public partial class MainTrucking : Page, INotifyPropertyChanged
             BO.Order? a = new BO.Order();
             a = Bl?.Order.GetOrder(IDTrucking);
             strResult = $" {a?.ID} \n {a?.OrderDate} \n {a?.Status}";
-            truckingOrder.Visibility = Visibility.Hidden;
+            trackingOrder.Visibility = Visibility.Hidden;
             ViewOrderItemButton.Visibility = Visibility.Visible;
             order = Bl?.Order.GetOrder(IDTrucking);
         }
