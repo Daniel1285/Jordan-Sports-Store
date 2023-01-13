@@ -1,4 +1,5 @@
 ﻿using Dal;
+using DalApi;
 using DO;
 using System;
 
@@ -33,6 +34,13 @@ internal class Program
                 case (int)Enums.StartChoose.ORDER:
                     choiceOrder();
                     break;
+                //case 4:
+                    
+                //    //List<Order?> list = XMLTools.LoadListFromXMLSerializer<O>("Order");
+                //    XMLTools.SaveListToXMLSerializer(testMain!.Product.GetAll().ToList(), "Product");
+                //    XMLTools.SaveListToXMLSerializer(testMain.Order.GetAll().ToList(), "Order");
+                //    XMLTools.SaveListToXMLSerializer(testMain.OrderItem.GetAll().ToList(), "OrderItem");
+                //    break;
 
                 default:
                     break;
