@@ -17,6 +17,4 @@ sealed internal class DalXml :IDal
 
     public IOrderItem OrderItem { get; } = new DalOrderItem();
 
-
-
 }

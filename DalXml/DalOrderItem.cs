@@ -27,7 +27,8 @@ internal class DalOrderItem : IOrderItem
 
         };
     }
-    #region AddFunction
+
+    #region Add orderItem
     /// <summary>
     /// Add object to xml file.
     /// </summary>
@@ -48,7 +49,7 @@ internal class DalOrderItem : IOrderItem
     }
     #endregion
 
-    #region DeleteFunction
+    #region Delete orderItem
     /// <summary>
     /// Delete OrderItem from Xml file.
     /// </summary>
@@ -64,7 +65,8 @@ internal class DalOrderItem : IOrderItem
         
     }
     #endregion
-    #region Update Function
+
+    #region Update OrderItem
     /// <summary>
     /// Update object in xml file
     /// </summary>
@@ -75,6 +77,7 @@ internal class DalOrderItem : IOrderItem
         Add(o);
     }
     #endregion
+
     #region get by condition
     /// <summary>
     /// get the object by condition
@@ -92,6 +95,7 @@ internal class DalOrderItem : IOrderItem
 
     }
     #endregion
+
     #region gat list 
     /// <summary>
     /// get List or by filter or by nothing
@@ -115,11 +119,5 @@ internal class DalOrderItem : IOrderItem
         }
     }
     #endregion
-
-
-
-
-
-
 
 }

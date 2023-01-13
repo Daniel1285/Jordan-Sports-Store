@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 namespace Dal;
 
 internal class DalProduct :IProduct
-{
-    const string s_product = @"Product"; //XML Serializer
+{ 
+    const string s_product = @"Product"; // XML Serializer
 
+    #region Add product
     /// <summary>
     /// Add product to xml product.
     /// </summary>
@@ -28,7 +29,9 @@ internal class DalProduct :IProduct
 
         return p.ID;
     }
+    #endregion
 
+    #region Delete product
     /// <summary>
     /// Delete product from xml.
     /// </summary>
@@ -41,8 +44,9 @@ internal class DalProduct :IProduct
 
         XMLTools.SaveListToXMLSerializer(products, s_product);
     }
-    
+    #endregion
 
+    #region Update product
     /// <summary>
     /// Update product to xml.
     /// </summary>
@@ -53,7 +57,9 @@ internal class DalProduct :IProduct
         Delete(p.ID);
         Add(p);
     }
+    #endregion
 
+    #region Get by condition
     /// <summary>
     /// Get order grom xml by condition.
     /// </summary>
@@ -65,7 +71,9 @@ internal class DalProduct :IProduct
         List<Product?> products = XMLTools.LoadListFromXMLSerializer<Product>(s_product);
         return products.FirstOrDefault(filter!) ?? throw new NotExistException("Not exsist");
     }
+    #endregion
 
+    #region Get all
     /// <summary>
     /// Get all from xml.
     /// </summary>
@@ -88,4 +96,5 @@ internal class DalProduct :IProduct
             return list;
         }
     }
+    #endregion
 }

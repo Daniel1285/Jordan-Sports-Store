@@ -11,6 +11,8 @@ namespace Dal;
 internal class DalOrder : IOrder
 {
     const string s_Order = @"Order";
+
+    #region Add order
     /// <summary>
     /// Add a Order to xml file
     /// </summary>
@@ -24,6 +26,9 @@ internal class DalOrder : IOrder
         XMLTools.SaveListToXMLSerializer(list, s_Order);
         return o.ID;
     }
+    #endregion
+
+    #region Delete order
     /// <summary>
     /// Deleteing a Order from the the xml file Order.
     /// </summary>
@@ -37,6 +42,9 @@ internal class DalOrder : IOrder
         }
         XMLTools.SaveListToXMLSerializer(list, s_Order);
     }
+    #endregion
+
+    #region Update order
     /// <summary>
     /// Updates a Order by overwriting an existing Order in xml file.
     /// </summary>
@@ -47,6 +55,9 @@ internal class DalOrder : IOrder
         Delete(o.ID);
         Add(o);
     }
+    #endregion
+
+    #region Get all
     /// <summary>
     /// Returns All Orders in the file.
     /// </summary>
@@ -68,6 +79,9 @@ internal class DalOrder : IOrder
             return list;
         }
     }
+    #endregion
+
+    #region Get by condiyion
     /// <summary>
     /// Receives a function for testing (for example, ID resonance) and returns an object according to this
     /// </summary>
@@ -84,4 +98,5 @@ internal class DalOrder : IOrder
         }
         throw new NotExistException("NOT exists!");
     }
+    #endregion
 }
