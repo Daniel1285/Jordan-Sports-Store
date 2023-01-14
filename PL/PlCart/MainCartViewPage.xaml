@@ -12,8 +12,8 @@
     <Grid Background="White">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="370*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="300*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
@@ -60,17 +60,24 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
+        
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Label x:Name="Label_P" Content="Product list" Grid.Row="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
+            <Label Content="Help" Grid.Row="1" Width="200" Height="25" HorizontalAlignment="Left" ToolTip="Right click for add product to cart / remove product." />
+        </Grid>
 
         <ComboBox x:Name="ProductInfromation" Width="200" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" ItemsSource ="{Binding Categories}"  HorizontalContentAlignment="Center"  SelectionChanged="ProductInfromation_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
-        <Label x:Name="Label_P" Content="Product list" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
         <Button x:Name="backOfMCart" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="30" Background="#FF6931CC"/>
         <Button x:Name="buttonCart" Content="{materialDesign:PackIcon Kind = CartArrowDown, Size=19}" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,10,5" Padding="5" Click="GoToCartOrderitem_Click" Width="60" Height="30" Background="#FF6931CC"
                  Style="{StaticResource MaterialDesignRaisedButton}"   materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                  materialDesign:ButtonProgressAssist.Value="-1"/>
-        <Label Content="Help" Grid.Column="1" Width="150" FontSize="20" FontFamily="Aharoni" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="Black" Background="White" ToolTip="Right click for add product to cart / remove product." />
-        
+
         <Frame x:Name="FramCart" NavigationUIVisibility="Hidden"  Grid.RowSpan ="3"/>
     </Grid>
 </Page>

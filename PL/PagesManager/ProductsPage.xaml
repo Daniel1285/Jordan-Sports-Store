@@ -13,7 +13,7 @@
         <local:NotBooleanToVisibilityConverter
            x:Key="notBooleanToVisibilityConverter" />
     </Page.Resources>
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" Background="White">
         <Grid.RowDefinitions >
             <RowDefinition Height="55*"/>
             <RowDefinition Height="500*"/>
@@ -25,11 +25,12 @@
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="400"/>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions >
         </Grid>
 
-        <ComboBox Name="AttributeSelector" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" ItemsSource="{Binding Categories}" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
+        <ComboBox Name="AttributeSelector" Width="200" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" ItemsSource="{Binding Categories}" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
+        <Label Content="Help" Grid.Row="0" Grid.Column="0" Width="200" Height="30" HorizontalAlignment="Left" ToolTip="Right click to delete product" />
 
         <ListView x:Name="ProductsListView" Grid.Row="1" ItemsSource="{Binding myListProduct}" MouseDoubleClick="doubleClick_Update"  FontWeight="Bold">
             <ListView.ItemContainerStyle>

@@ -53,8 +53,20 @@ internal class DalOrder : IOrder
     /// <exception cref="Exception"></exception>
     public void Update(Order o)
     {
-        Delete(o.ID);
-        Add(o);
+        List<Order?> list = XMLTools.LoadListFromXMLSerializer<Order>(s_Order);
+        var order1 = (from item in list
+                      where (item?.ID == o.ID)
+                      select item).FirstOrDefault();
+        if (order1 != null)
+        {
+            int index = list.IndexOf(order1);
+            list.Remove(order1);
+            list.Insert(index, o);
+            XMLTools.SaveListToXMLSerializer<Order>(list,s_Order);
+            return;
+        }
+        throw new NotExistException("Not found order to Update!");
+
     }
     #endregion
 

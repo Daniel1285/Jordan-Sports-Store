@@ -39,9 +39,6 @@ public partial class AdminView : Window
     private void GotoOrdersManager_Click(object sender, RoutedEventArgs e)
     {
         MainList.Content = new OrdersPage();
-
-        ordersCard.Visibility = Visibility.Hidden;
-        productCard.Visibility = Visibility.Hidden;
         NewProduct.Visibility = Visibility.Hidden;
     }
 
@@ -54,8 +51,6 @@ public partial class AdminView : Window
     {
         MainList.Content = new ProductsPage();
         NewProduct.Visibility = Visibility.Visible;
-        productCard.Visibility = Visibility.Hidden;
-        ordersCard.Visibility = Visibility.Hidden;
     }
 
     /// <summary>

@@ -194,9 +194,9 @@ internal class Program
         {
             case "a":
 
-                Console.WriteLine("Please enter a Order item ID number:");
-                int.TryParse(Console.ReadLine(), out num);
-                item.ID = num;
+                //Console.WriteLine("Please enter a Order item ID number:");
+                //int.TryParse(Console.ReadLine(), out num);
+                //item.ID = num;
 
                 Console.WriteLine("Please enter the Product ID:");
                 int.TryParse(Console.ReadLine(), out num);
@@ -343,9 +343,9 @@ internal class Program
         {
             case "a":
 
-                Console.WriteLine("Please enter order ID number:");
-                int.TryParse(Console.ReadLine(), out num2);
-                o.ID = num2;
+                //Console.WriteLine("Please enter order ID number:");
+                //int.TryParse(Console.ReadLine(), out num2);
+                //o.ID = num2;
 
                 Console.WriteLine("Please enter the CustomerName:");
                 o.CustomerName = Console.ReadLine();

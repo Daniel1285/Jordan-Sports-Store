@@ -12,8 +12,8 @@
     <Grid Background="White">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="370*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="300*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
@@ -60,7 +60,14 @@
             </ListView.View>
         </ListView>
 
-        <Label x:Name="Label_c" Content="Item Order list" Grid.Column="0" FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label x:Name="Label_c" Content="Item Order list"  FontSize="24" FontFamily="Aharoni" HorizontalAlignment="Left" Width="184" FontWeight="Bold"/>
+            <Label Content="Help" Grid.Row="1" Width="200" Height="25" HorizontalAlignment="Left" ToolTip="Right click for add remove product from cart / update amount product." />
+        </Grid>
 
         <Button x:Name="buttonConfrim" Content="Confrim order" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,10,5" Padding="5" Click="GoToConfrimOrder_Click" Width="Auto" Height="30" Background="#FF6931CC"
                  Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonProgressAssist.IsIndeterminate="True"
@@ -75,8 +82,6 @@
         </ComboBox>
 
         <Label Content="Total price :" Grid.Row="2" FontSize="23" FontFamily="Aharoni" HorizontalAlignment="Center" Width="184" FontWeight="Bold" Foreground="#FF6931CC" VerticalAlignment="Center" />
-        <Label Content="Help" Grid.Column="1" Width="150" FontSize="16" FontFamily="Aharoni" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="Black" Background="White" ToolTip="Right click for add remove product from cart / update amount product." />
-
         <Label x:Name="TotalPrice" Content="{Binding TotalPriceCart}" Grid.Row="2" FontSize="23" FontWeight="Bold" FontFamily="Arial Black" HorizontalAlignment="Center"  Width="184" Height="Auto" Foreground="#FF6931CC" VerticalAlignment="Center" Margin="300,0,0,0"/>
 
         <Frame x:Name="CartOrderItemFram" Grid.RowSpan="3"/>
