@@ -1,73 +1,80 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<Product>
-		<ID>339794</ID>
-		<Name>shoes - Air Jordan 1 Zoom CMFT</Name>
-		<Price>550</Price>
-		<Category>SHOES</Category>
-		<InStock>0</InStock>
-	</Product>
-	<Product>
-		<ID>765819</ID>
-		<Name>shoes - Air Jordan 1 Element</Name>
-		<Price>400</Price>
-		<Category>SHOES</Category>
-		<InStock>7</InStock>
-	</Product>
-	<Product>
-		<ID>375692</ID>
-		<Name>short - Air Jordan x Titan</Name>
-		<Price>250</Price>
-		<Category>SHORTS</Category>
-		<InStock>25</InStock>
-	</Product>
-	<Product>
-		<ID>165048</ID>
-		<Name>shoes - Air Jordan 1 Low SE kids</Name>
-		<Price>332.5</Price>
-		<Category>SHOES</Category>
-		<InStock>15</InStock>
-	</Product>
-	<Product>
-		<ID>671498</ID>
-		<Name>hoodies - Jordan Essentials</Name>
-		<Price>210</Price>
-		<Category>HOODIES</Category>
-		<InStock>20</InStock>
-	</Product>
-	<Product>
-		<ID>151436</ID>
-		<Name>hoodies - Jordan Essentials red</Name>
-		<Price>129.99</Price>
-		<Category>HOODIES</Category>
-		<InStock>19</InStock>
-	</Product>
-	<Product>
-		<ID>226872</ID>
-		<Name>socks - Nike Elite Crew</Name>
-		<Price>49</Price>
-		<Category>SOCKS</Category>
-		<InStock>10</InStock>
-	</Product>
-	<Product>
-		<ID>874515</ID>
-		<Name>socks - Nike Everyday Plus Cushioned</Name>
-		<Price>63</Price>
-		<Category>SOCKS</Category>
-		<InStock>16</InStock>
-	</Product>
-	<Product>
-		<ID>355216</ID>
-		<Name>shirt - Nike Pro Dri-FIT</Name>
-		<Price>122.5</Price>
-		<Category>SHIRTS</Category>
-		<InStock>3</InStock>
-	</Product>
-	<Product>
-		<ID>389521</ID>
-		<Name>shirt - Nike Dri-FIT Legend</Name>
-		<Price>140</Price>
-		<Category>SHIRTS</Category>
-		<InStock>10</InStock>
-	</Product>
+  <Product>
+    <ID>339794</ID>
+    <Name>shoes - Air Jordan 1 Zoom CMFT</Name>
+    <Price>550</Price>
+    <Category>SHOES</Category>
+    <InStock>0</InStock>
+  </Product>
+  <Product>
+    <ID>765819</ID>
+    <Name>shoes - Air Jordan 1 Element</Name>
+    <Price>400</Price>
+    <Category>SHOES</Category>
+    <InStock>7</InStock>
+  </Product>
+  <Product>
+    <ID>375692</ID>
+    <Name>short - Air Jordan x Titan</Name>
+    <Price>250</Price>
+    <Category>SHORTS</Category>
+    <InStock>25</InStock>
+  </Product>
+  <Product>
+    <ID>165048</ID>
+    <Name>shoes - Air Jordan 1 Low SE kids</Name>
+    <Price>332.5</Price>
+    <Category>SHOES</Category>
+    <InStock>15</InStock>
+  </Product>
+  <Product>
+    <ID>151436</ID>
+    <Name>hoodies - Jordan Essentials red</Name>
+    <Price>129.99</Price>
+    <Category>HOODIES</Category>
+    <InStock>19</InStock>
+  </Product>
+  <Product>
+    <ID>226872</ID>
+    <Name>socks - Nike Elite Crew</Name>
+    <Price>49</Price>
+    <Category>SOCKS</Category>
+    <InStock>8</InStock>
+  </Product>
+  <Product>
+    <ID>123456</ID>
+    <Name>shirt - jordan max</Name>
+    <Price>249.9</Price>
+    <Category>SHIRTS</Category>
+    <InStock>12</InStock>
+  </Product>
+  <Product>
+    <ID>874515</ID>
+    <Name>socks - Nike Everyday Plus Cushioned</Name>
+    <Price>63</Price>
+    <Category>SOCKS</Category>
+    <InStock>13</InStock>
+  </Product>
+  <Product>
+    <ID>355216</ID>
+    <Name>shirt - Nike Pro Dri-FIT</Name>
+    <Price>122.5</Price>
+    <Category>SHIRTS</Category>
+    <InStock>0</InStock>
+  </Product>
+  <Product>
+    <ID>671498</ID>
+    <Name>hoodies - Jordan Essentials</Name>
+    <Price>210</Price>
+    <Category>HOODIES</Category>
+    <InStock>12</InStock>
+  </Product>
+  <Product>
+    <ID>389521</ID>
+    <Name>shirt - Nike Dri-FIT Legend</Name>
+    <Price>140</Price>
+    <Category>SHIRTS</Category>
+    <InStock>9</InStock>
+  </Product>
 </ArrayOfProduct>
