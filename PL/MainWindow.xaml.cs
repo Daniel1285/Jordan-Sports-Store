@@ -43,7 +43,7 @@ namespace PL
             mainFram.Content = new  MainCartViewPage();
         }
 
-        private void TruckingButton_Click(object sender, RoutedEventArgs e)
+        private void TrackingButton_Click(object sender, RoutedEventArgs e)
         {
             mainFram.Content =  new MainTrucking();
         }

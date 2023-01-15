@@ -58,7 +58,7 @@
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
 
-                <Button Content="Truckingorder" HorizontalAlignment="Center"  Width="Auto" Height="45" Click="TruckingButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,160,0,0" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
+                <Button Content="Trackingorder" HorizontalAlignment="Center"  Width="Auto" Height="45" Click="TrackingButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,160,0,0" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
