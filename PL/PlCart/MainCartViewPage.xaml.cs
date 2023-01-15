@@ -88,7 +88,7 @@ public partial class MainCartViewPage : Page, INotifyPropertyChanged
     /// <param name="e"></param>
     private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
     {
-        new MainWindow().Show();
+        new MainWindow(TempCart).Show();
         Window.GetWindow(this).Close(); 
        
     }
