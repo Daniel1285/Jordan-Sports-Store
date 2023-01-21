@@ -203,5 +203,25 @@ namespace BlImplementation
                     select item;
             return p!;
         }
+
+        public int? OldestOrder()
+        {
+            DateTime? time;
+            DO.Order? temp = new DO.Order();
+
+            foreach(var item in Dal!.Order.GetAll())
+            {
+                time = item?.OrderDate;
+                foreach (var item1 in Dal.Order.GetAll())
+                {
+                    if (time < item1?.OrderDate)
+                    {
+                        time = item1?.OrderDate;
+                        temp = item1;
+                    }
+                } 
+            }
+            return temp?.ID;
+        }
     }
 }

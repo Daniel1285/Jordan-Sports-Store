@@ -1,6 +1,7 @@
 ﻿
 using PL.PlCart;
 using PL.PlCart.TruckingOrder;
+using PL.Simulator;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -59,6 +60,11 @@ namespace PL
         private void myFrame_ContentRendered(object sender, EventArgs e)
         {
             mainFram.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+        }
+
+        private void Simulator_Click(object sender, RoutedEventArgs e)
+        {
+            new Simulator.Simulator().Show();
         }
     }
 }

@@ -16,6 +16,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BITest", "BITTest\BITest.csproj", "{B337B579-27E8-4A60-B617-2A1E9E0BC427}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{9B2D7936-BDF7-4BBB-B8F7-39CAAA735EC5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DA45F159-E2CC-4BD2-A239-605E64679B40} = {DA45F159-E2CC-4BD2-A239-605E64679B40}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{7A071B7C-E373-4CE5-B65A-8706D314066E}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{7A071B7C-E37
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simulator", "Simulator\Simulator.csproj", "{DA45F159-E2CC-4BD2-A239-605E64679B40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +71,10 @@ Global
 		{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA386FE3-8D49-44E8-9D8C-057B111E7CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA45F159-E2CC-4BD2-A239-605E64679B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA45F159-E2CC-4BD2-A239-605E64679B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA45F159-E2CC-4BD2-A239-605E64679B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA45F159-E2CC-4BD2-A239-605E64679B40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

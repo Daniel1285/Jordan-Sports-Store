@@ -40,7 +40,7 @@ namespace BITTest
                     case (int)Enums.StartChoose.ORDER:
                         choiceOrder(); // All possible actions for order
                         break;
-
+                    
                     default:
                         Console.WriteLine("Error Tayping");
                         break;
@@ -359,6 +359,9 @@ namespace BITTest
                     }
                     catch (NotExistException ex) { Console.WriteLine(ex); }
                     catch (IdSmallThanZeroException ex) { Console.WriteLine(ex); }
+                    break;
+                case "f":
+                    Console.WriteLine(testMain?.Order.OldestOrder()); 
                     break;
 
                 default:

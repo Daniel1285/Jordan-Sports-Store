@@ -204,7 +204,7 @@
     <CustomerEmail>ori@gmail.com</CustomerEmail>
     <CustomerAdress>oan123</CustomerAdress>
     <OrderDate>2023-01-16T00:51:09.2848525+02:00</OrderDate>
-    <ShipDate xsi:nil="true" />
+    <ShipDate>2023-01-18T17:20:41.0531943+02:00</ShipDate>
     <DeliveryrDate xsi:nil="true" />
   </Order>
 </ArrayOfOrder>

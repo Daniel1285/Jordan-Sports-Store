@@ -62,7 +62,13 @@
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
-                
+
+                <Button Grid.Column="2" Margin="220,340,0,0" Background="White" Click="Simulator_Click" 
+                 Style="{StaticResource MaterialDesignIconForegroundButton}"
+                 ToolTip="Simulator">
+                    <materialDesign:PackIcon Kind="Play" />
+                </Button>
+
             </Grid>
         </Border>
         <Frame x:Name="mainFram" Grid.ColumnSpan="2" Grid.RowSpan="4" ContentRendered="myFrame_ContentRendered"/>

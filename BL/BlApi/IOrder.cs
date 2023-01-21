@@ -55,6 +55,12 @@ namespace BlApi
         /// <returns></returns>
         public IEnumerable<OrderForList?> GetListByCondition(Func<OrderForList?, bool>? filter);
 
+        /// <summary>
+        /// Return the order with oldest time.
+        /// </summary>
+        /// <returns></returns>
+        public int? OldestOrder();
+
     }   
 
 }
