@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Simulator" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
         
         Title="Simulator" Height="450" Width="800">
     <Grid Background="Black">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="80"/>
             <RowDefinition/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -19,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="timerTextBlock"  Text="00:00:00"  Grid.Row="0"
-                   FontSize="70" TextAlignment="Center" Foreground="#FF37F10E"/>
+                   FontSize="54" TextAlignment="Center" Foreground="#FF37F10E"/>
         
         <ProgressBar x:Name="resultProgressBar" Height="10" Value="25" Grid.Row="2" Width="200" Background="Black"  />
         <Label x:Name="resultLabel"  Content="0 %" Grid.Row="3" HorizontalAlignment="Center" FontSize="16" Foreground="White"/>
@@ -29,6 +30,37 @@
         </Button>
 
         <Button Content="Stop" Grid.Row="4" Width="200" Click="StopButton_Click" />
+
+        <Grid Grid.Row="1">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+            <Label Content="Order ID:" Grid.Column="0" Grid.Row="0" Foreground="White" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Content="Status:" Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Content="Next status:" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Content="Next status:" Grid.Column="4" Grid.Row="0" Foreground="White" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Content="Next status:" Grid.Column="4" Grid.Row="1" Foreground="White" FontSize="22" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding OrderID}" Grid.Column="1" Grid.Row="0" FontSize="20" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" />
+            <TextBlock Text="{Binding CurrentStatus}" Grid.Column="1" Grid.Row="1" FontSize="20" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" />
+            <TextBlock Text="{Binding NextStatus}" Grid.Column="1" Grid.Row="2" FontSize="20" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" />
+            <TextBlock Text="00:00:00" Grid.Column="5" Grid.Row="0" FontSize="20" Foreground="#FFF60C0C" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,0,0" />
+            <TextBlock Text="00:00:00" Grid.Column="5" Grid.Row="1" FontSize="20" Foreground="#FFF60C0C" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,0,0" />
+         
+        </Grid>
 
 
     </Grid>
