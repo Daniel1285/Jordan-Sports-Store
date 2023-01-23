@@ -3,6 +3,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="o"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
+
     public int Add(Order o)
     {
         o.ID = XMLTools.Load_Config().ToIntNullable("OrderID")!.Value + 1;
@@ -34,6 +37,7 @@ internal class DalOrder : IOrder
     /// Deleteing a Order from the the xml file Order.
     /// </summary>
     /// <param name="id"></param>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         List<Order?> list = XMLTools.LoadListFromXMLSerializer<Order>(s_Order);
@@ -51,6 +55,7 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="o"></param>
     /// <exception cref="Exception"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Order o)
     {
         List<Order?> list = XMLTools.LoadListFromXMLSerializer<Order>(s_Order);
@@ -70,11 +75,12 @@ internal class DalOrder : IOrder
     }
     #endregion
 
-    #region Get all
+    #region Get all orders
     /// <summary>
     /// Returns All Orders in the file.
     /// </summary>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter)
     {
         IEnumerable<Order?> list = XMLTools.LoadListFromXMLSerializer<Order>(s_Order);
@@ -101,6 +107,7 @@ internal class DalOrder : IOrder
     /// <param name="filter"></param>
     /// <returns></returns>
     /// <exception cref="DO.NotExistException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Order GetByCondition(Func<Order?, bool>? filter)
     {
         IEnumerable<Order?> list = XMLTools.LoadListFromXMLSerializer<Order>(s_Order);

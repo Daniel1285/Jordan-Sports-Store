@@ -48,7 +48,7 @@ public static class Simulator
                 {
                     var Order = Bl!.Order.GetOrder(Bl?.Order.OldestOrder() ?? throw new NullReferenceException());
 
-                    var ProcessingTime = new Random().Next(3,5);
+                    var ProcessingTime = new Random().Next(3,10);
                     var EstimaredTime = new Random().Next(ProcessingTime - 2, ProcessingTime + 2);
 
                     updateSimulator?.Invoke(null, new Tuple<BO.Order, int>(Order, EstimaredTime));

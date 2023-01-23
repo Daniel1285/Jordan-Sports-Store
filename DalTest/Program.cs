@@ -14,7 +14,7 @@ internal class Program
         int choice;
         do
         {
-            Console.WriteLine("\nEnter your choice:\n 0. Exit. \n 1. Product. \n 2. OrderItem. \n 3. Order");
+            Console.WriteLine("\nEnter your choice:\n 0. Exit. \n 1. Product. \n 2. OrderItem. \n 3. Order \n 4. for initialization list.");
             int.TryParse(Console.ReadLine(), out choice);
 
             switch (choice)

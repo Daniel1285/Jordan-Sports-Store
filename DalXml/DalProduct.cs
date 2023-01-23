@@ -3,6 +3,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,7 @@ internal class DalProduct :IProduct
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(Product p)
     {
         List<Product?> products = XMLTools.LoadListFromXMLSerializer<Product>(s_product);
@@ -36,6 +38,7 @@ internal class DalProduct :IProduct
     /// Delete product from xml.
     /// </summary>
     /// <param name="productID"></param>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int productID)
     {
         List<Product?> products = XMLTools.LoadListFromXMLSerializer<Product>(s_product);
@@ -52,6 +55,7 @@ internal class DalProduct :IProduct
     /// </summary>
     /// <param name="p"></param>
     /// <exception cref="NotExistException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Product p)
     {
         Delete(p.ID);
@@ -59,13 +63,14 @@ internal class DalProduct :IProduct
     }
     #endregion
 
-    #region Get by condition
+    #region Get product by condition
     /// <summary>
     /// Get order grom xml by condition.
     /// </summary>
     /// <param name="filter"></param>
     /// <returns></returns>
     /// <exception cref="NotExistException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Product GetByCondition(Func<Product?, bool>? filter)
     {
         List<Product?> products = XMLTools.LoadListFromXMLSerializer<Product>(s_product);
@@ -73,12 +78,13 @@ internal class DalProduct :IProduct
     }
     #endregion
 
-    #region Get all
+    #region Get all products
     /// <summary>
     /// Get all from xml.
     /// </summary>
     /// <param name="filter"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter)
     {
         List<Product?> products = XMLTools.LoadListFromXMLSerializer<Product>(s_product);

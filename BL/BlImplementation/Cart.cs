@@ -2,13 +2,24 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace BlImplementation
 {
     internal class Cart : ICart
     {
         private DalApi.IDal? Dal = DalApi.Factory.Get();
-        
+
+        #region Add product to cart
+        /// <summary>
+        /// Add product to cart.
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="BO.IdSmallThanZeroException"></exception>
+        /// <exception cref="BO.NotExistException"></exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Cart AddProdctToCatrt(BO.Cart cart, int id)
         {
             if (id < 0) throw new BO.IdSmallThanZeroException("ID small zero!");
@@ -62,7 +73,21 @@ namespace BlImplementation
             }
             return cart;
         }
+        #endregion
 
+        #region Update amount of product
+        /// <summary>
+        /// Update Amount Of Product in cart of client.
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="id"></param>
+        /// <param name="newAmount"></param>
+        /// <returns></returns>
+        /// <exception cref="BO.IdSmallThanZeroException"></exception>
+        /// <exception cref="BO.AmountLessThenZero"></exception>
+        /// <exception cref="BO.NotExistException"></exception>
+        /// <exception cref="BO.NotEnougeInStock"></exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int id, int newAmount)
         {
             if(id < 0) throw new BO.IdSmallThanZeroException("ID small than zero!");
@@ -109,7 +134,22 @@ namespace BlImplementation
         
             return cart;
         }
+        #endregion
 
+        #region Confrim order
+        /// <summary>
+        /// Confrim Order.
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="name"></param>
+        /// <param name="email"></param>
+        /// <param name="addres"></param>
+        /// <exception cref="BO.NameIsEmptyException"></exception>
+        /// <exception cref="BO.AddresIsempty"></exception>
+        /// <exception cref="BO.EmailInValidException"></exception>
+        /// <exception cref="NullReferenceException"></exception>
+        /// <exception cref="BO.NotExistException"></exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ConfirmOrder(BO.Cart cart,string? name, string? email, string? addres)
         {
             if (name == null) throw new BO.NameIsEmptyException("Name is empty!");
@@ -155,5 +195,6 @@ namespace BlImplementation
                 catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
             });
         }
+        #endregion
     }
 }

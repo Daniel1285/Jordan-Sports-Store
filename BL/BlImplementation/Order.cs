@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace BlImplementation
 {
@@ -7,11 +8,13 @@ namespace BlImplementation
     {
         private DalApi.IDal? Dal = DalApi.Factory.Get();
 
+        #region Get order list
         /// <summary>
         /// Brings a list of orders from the data layer and builds an order list 
         /// OrderForList on this data
         /// </summary>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.OrderForList?> GetOrderLists()
         {
 
@@ -29,6 +32,9 @@ namespace BlImplementation
 
             return ordersForList1;
         }
+        #endregion
+
+        #region Get Order
         /// <summary>
         /// Receives data if the data is correct we will ask do for an order 
         /// and build an order of type bo
@@ -36,6 +42,7 @@ namespace BlImplementation
         /// <param name="orderId"></param>
         /// <returns></returns>
         /// <exception cref="BO.IdSmallThanZeroException"></exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Order GetOrder(int orderId)
         {
             List<DO.OrderItem?> OrderItemFromDo = new List<DO.OrderItem?>();
@@ -67,6 +74,25 @@ namespace BlImplementation
             };
             return o;
         }
+        #endregion
+
+        #region Get status
+        /// <summary>
+        /// Helper function for finding status
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        private BO.Enums.OrderStatus getStatus(DO.Order? order)
+        {
+            if (order?.DeliveryrDate != null)
+                return BO.Enums.OrderStatus.Order_Provided;
+            if (order?.ShipDate != null)
+                return BO.Enums.OrderStatus.Order_Sent;
+            return BO.Enums.OrderStatus.Order_Confirmed;
+        }
+        #endregion
+
+        #region Shipping update
         /// <summary>
         /// Receives a figure if the figure is correct updates the 
         /// shipping date of the order both bo and do
@@ -74,6 +100,7 @@ namespace BlImplementation
         /// <param name="orderId"></param>
         /// <returns></returns>
         /// <exception cref="BO.IdSmallThanZeroException"></exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Order ShippingUpdate(int orderId)
         {
             if (orderId < 0) throw new BO.IdSmallThanZeroException("ID small than zero!");
@@ -95,8 +122,11 @@ namespace BlImplementation
             }
 
             return order1;
-    
-         }
+
+        }
+        #endregion
+
+        #region Supply update order
         /// <summary>
         /// Receives a figure if the figure is correct updates the delivery 
         /// date of the order both bo and do
@@ -104,6 +134,7 @@ namespace BlImplementation
         /// <param name="orderId"></param>
         /// <returns></returns>
         /// <exception cref="BO.IdSmallThanZeroException"></exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Order SupplyUpdateOrder(int orderId)
         {
             if (orderId < 0) throw new BO.IdSmallThanZeroException("ID small than zero");
@@ -126,12 +157,16 @@ namespace BlImplementation
 
             return order1;
         }
+        #endregion
+
+        #region Tracking otder
         /// <summary>
-        /// 
+        /// Return tracking order. 
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
         /// <exception cref="BO.IdSmallThanZeroException"></exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.OrderTracking TrackingOtder(int orderId)
         {
             if (orderId < 0) throw new BO.IdSmallThanZeroException("ID small than zero");
@@ -150,24 +185,11 @@ namespace BlImplementation
             p = new Tuple<DateTime, BO.Enums.OrderStatus>(
                  (DateTime)order?.OrderDate!,order1.Status);
             order1.Pair.Add(p);
-            return order1;  
-            
-                
+            return order1;
         }
-        /// <summary>
-        /// Helper function for finding status
-        /// </summary>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        private BO.Enums.OrderStatus getStatus(DO.Order? order)
-        {
-            if (order?.DeliveryrDate != null)
-                return BO.Enums.OrderStatus.Order_Provided;
-            if (order?.ShipDate != null)
-                return BO.Enums.OrderStatus.Order_Sent;
-            return BO.Enums.OrderStatus.Order_Confirmed;
-        }
+        #endregion
 
+        #region From Do To Bo OrderItem
         /// <summary>
         /// An auxiliary function for calculating a general amount and also converting an order by heart 
         /// so that we can insert into the order the items of its type
@@ -175,6 +197,7 @@ namespace BlImplementation
         /// <param name="id"></param>
         /// <param name="items"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private (List<BO.OrderItem?> , double) FromDotToBoOrderItem(int id, List<DO.OrderItem?> items)
 
         {
@@ -195,7 +218,15 @@ namespace BlImplementation
                              
             return (orderItems.ToList(), sum);
         }
+        #endregion
 
+        #region Get list of orders by condition
+        /// <summary>
+        /// Return List of orders By Condition.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.OrderForList?> GetListByCondition(Func<BO.OrderForList?, bool>? filter)
         {
             var p = from item in GetOrderLists()
@@ -203,7 +234,14 @@ namespace BlImplementation
                     select item;
             return p!;
         }
+        #endregion
 
+        #region Oldest order
+        /// <summary>
+        /// Return oldest order Id 
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int? OldestOrder()
         {
             var orders = Dal!.Order.GetAll(x => getStatus(x) != BO.Enums.OrderStatus.Order_Provided);
@@ -214,8 +252,8 @@ namespace BlImplementation
                 return orders!.First()?.ID!;
 
             }catch (InvalidOperationException) { }
-            return 0;  
- ;          
+            return 0;
         }
+        #endregion
     }
 }

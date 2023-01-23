@@ -1,17 +1,19 @@
 ﻿
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
 
 namespace Dal;
 
 internal class DalOrderItem : IOrderItem
 {
-    #region AddFunction
+    #region Add orderItem
     /// <summary>
     /// Add a OrderItem to array "MyOrderItem" in DataSource and increases the size of the array "SizeOfOrderItem" by one.
     /// </summary>
     /// <param name="o"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(OrderItem o)
     {
         o.ID = DataSource.Config.GetIdForOrderItem;
@@ -20,11 +22,12 @@ internal class DalOrderItem : IOrderItem
     }
     #endregion
 
-    #region DeleteFunction
+    #region Delete orderItem
     /// <summary>
     /// Deleteing an Order Item from the array "MyOrderItem".
     /// </summary>
     /// <param name="id"></param>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         var orderItem1 = DataSource.MyOrderItem.Where(x => x?.ID == id).Select(x => x).FirstOrDefault();
@@ -37,12 +40,13 @@ internal class DalOrderItem : IOrderItem
     }
     #endregion
 
-    #region UpdateFunction
+    #region Update orderItem
     /// <summary>
     /// Updates a Order Item by overwriting an existing Order Item.
     /// </summary>
     /// <param name="o"></param>(
     /// <exception cref="Exception"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(OrderItem o)
     {
 
@@ -59,13 +63,14 @@ internal class DalOrderItem : IOrderItem
     }
     #endregion
 
-    #region GetOrderItemByCondition
+    #region Get OrderItem By Condition
     /// <summary>
     /// Receives a function for testing (for example, ID resonance) and returns an object according to this
     /// </summary>
     /// <param name="ID"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public OrderItem GetByCondition(Func<OrderItem?, bool>? filter)
     {
         
@@ -81,6 +86,7 @@ internal class DalOrderItem : IOrderItem
     /// Returns All Order Item in the list.
     /// </summary>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter)
     {
         if (filter == null)

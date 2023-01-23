@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Dal;
 
@@ -34,6 +35,7 @@ internal class DalOrderItem : IOrderItem
     /// </summary>
     /// <param name="o"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(OrderItem o)
     {
         o.ID = XMLTools.Load_Config().ToIntNullable("OrderItemID")!.Value + 1;
@@ -56,6 +58,7 @@ internal class DalOrderItem : IOrderItem
     /// Delete OrderItem from Xml file.
     /// </summary>
     /// <param name="id"></param>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         XElement OrderItemRoot = XMLTools.LoadListFromXMLElement(OrderItemPath);
@@ -73,6 +76,8 @@ internal class DalOrderItem : IOrderItem
     /// Update object in xml file
     /// </summary>
     /// <param name="o"></param>
+    [MethodImpl(MethodImplOptions.Synchronized)]
+
     public void Update (OrderItem o)
     {
         Delete(o.ID);
@@ -87,6 +92,7 @@ internal class DalOrderItem : IOrderItem
     /// <param name="filter"></param>
     /// <returns></returns>
     /// <exception cref="NotExistException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public OrderItem GetByCondition(Func<OrderItem?, bool>? filter)
     {
         XElement? OrderItemRoot = XMLTools.LoadListFromXMLElement(OrderItemPath);
@@ -104,6 +110,7 @@ internal class DalOrderItem : IOrderItem
     /// </summary>
     /// <param name="filter"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter)
     {
         XElement? OrderItemRoot = XMLTools.LoadListFromXMLElement(OrderItemPath);
