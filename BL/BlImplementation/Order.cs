@@ -209,7 +209,13 @@ namespace BlImplementation
             var orders = Dal!.Order.GetAll(x => getStatus(x) != BO.Enums.OrderStatus.Order_Provided);
             if (orders == null) return null;
             orders!.OrderByDescending(x => x?.ShipDate ?? x?.OrderDate);
-            return orders!.First()?.ID;
+            try
+            {
+                return orders!.First()?.ID!;
+
+            }catch (InvalidOperationException) { }
+            return 0;  
+ ;          
         }
     }
 }

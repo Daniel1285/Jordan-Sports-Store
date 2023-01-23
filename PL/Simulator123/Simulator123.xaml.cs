@@ -143,8 +143,7 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
                 break;
             case MessageBoxResult.No:
                 e.Cancel= true; 
-                break;
-                
+                break;              
         }
     }
 
@@ -152,7 +151,7 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
     {
         Simulator.RegistrToStopEvent(stopSimulator);
         Simulator.RegistrToUpdateEvent(updateOrder);
-        Simulator.StartSimulator();
+        Simulator.StartSimulator();      
         stopWatch.Start();
 
         while(!worker.CancellationPending)
