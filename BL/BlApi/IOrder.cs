@@ -61,6 +61,13 @@ namespace BlApi
         /// <returns></returns>
         public int? OldestOrder();
 
+
+        /// <summary>
+        /// Delet order
+        /// </summary>
+        /// <param name="OrderId"></param>
+        public void DeleteOrder(int OrderId);
+
     }   
 
 }

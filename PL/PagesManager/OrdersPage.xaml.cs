@@ -33,8 +33,8 @@ public partial class OrdersPage : Page,INotifyPropertyChanged
         }
     }
     private BlApi.IBl? Bl = BlApi.Factory.Get();
-    private ObservableCollection<BO.OrderForList?> _myListOrders;
-    public ObservableCollection<BO.OrderForList?> myListOrders
+    private ObservableCollection<BO.OrderForList?>? _myListOrders;
+    public ObservableCollection<BO.OrderForList?>? myListOrders
     {
         get {return _myListOrders;}
         set
@@ -109,6 +109,20 @@ public partial class OrdersPage : Page,INotifyPropertyChanged
     {
         int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
         Bl?.Order.SupplyUpdateOrder(id);
+        if (OrderInformation.SelectedItem.ToString() == BO.Enums.OrderStatus.NONE.ToString())
+        {
+            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());
+        }
+        else
+            myListOrders = new ObservableCollection<BO.OrderForList?>(Bl?.Order.GetListByCondition(X => X?.Status.ToString() == OrderInformation.SelectedItem.ToString())!);
+    }
+
+    private void DeleteOrder_Click(object sender, RoutedEventArgs e)
+    {
+        int id = ((BO.OrderForList)OrdersListView.SelectedItem).ID;
+
+        Bl?.Order.DeleteOrder(id);
+       
         if (OrderInformation.SelectedItem.ToString() == BO.Enums.OrderStatus.NONE.ToString())
         {
             myListOrders = new ObservableCollection<BO.OrderForList?>(Bl!.Order.GetOrderLists());

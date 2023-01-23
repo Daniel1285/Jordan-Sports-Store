@@ -255,5 +255,25 @@ namespace BlImplementation
             return 0;
         }
         #endregion
+
+        #region Delete order
+        /// <summary>
+        /// Deleteing a Order from the array "MyOrder".
+        /// </summary>
+        /// <param name="id"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void DeleteOrder(int OrderId)
+        {
+            if (OrderId < 0) throw new BO.NotExistException("ID small than zero!");
+            
+            try
+            {
+                Dal?.Order.GetByCondition(x => x?.ID == OrderId);
+            }
+            catch (DO.NotExistException ex) { throw new BO.NotExistException("", ex); }
+            
+            Dal?.Order.Delete(OrderId);
+        }
+        #endregion
     }
 }

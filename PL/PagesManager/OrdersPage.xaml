@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions >
 
             <ComboBox Name="OrderInformation" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" ItemsSource="{Binding Categories}" VerticalAlignment="Stretch" SelectionChanged="OrderInformation_SelectionChanged" FontWeight="Bold" FontSize="12" SelectedIndex="3" Foreground="Black"/>
-            <Label Content="Help" Grid.Row="0" Grid.Column="0" Width="Auto" Height="30" ToolTip="Right click to update shiping pack" />
+            <Label Content="Help" Grid.Row="0" Grid.Column="0" Width="Auto" Height="30" ToolTip="Right click to update shiping pack or to delete order" />
 
         </Grid>
 
@@ -41,6 +41,8 @@
                 <ContextMenu x:Name="OrderDetails">
                     <MenuItem x:Name="updateToSent" Header="Order sent" Icon="{materialDesign:PackIcon Kind = AirplaneTakeoff}" Click="UpdateToSent_Click"/>
                     <MenuItem x:Name="updateToProvided" Header="Order provided" Icon="{materialDesign:PackIcon Kind= PackageVariantClosedCheck}" Click="UpdateToProvided_Click"/>
+                    <MenuItem x:Name="DeleteOrder" Header="Delete order" Icon="{materialDesign:PackIcon Kind= Delete}" Click="DeleteOrder_Click"/>
+                    
                 </ContextMenu>
             </ListView.ContextMenu>
 
