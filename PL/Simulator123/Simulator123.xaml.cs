@@ -107,13 +107,14 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
             OnPropertyChanged(nameof(EstimatedTimeInSec));
         }
     }
-    public int? Progress => (int)(((DateTime.Now - startTime)?.TotalSeconds / _estimatedTimeInSec ?? 1) * 100);
+    //public int? Progress => (int)(((DateTime.Now - startTime)?.TotalSeconds / _estimatedTimeInSec ?? 1) * 100);
+
 
     // ----------------------------> End PropertyChanged <------------------------------
 
     public Simulator123()
     {
-        ResultLabelMsg = "0 %";
+        //ResultLabelMsg = "0 %";
         TimerText = "00:00:00";
         InitializeComponent();
         stopWatch = new Stopwatch();
@@ -153,21 +154,26 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
         Simulator.RegistrToUpdateEvent(updateOrder);
         Simulator.StartSimulator();      
         stopWatch.Start();
-
+       
         while(!worker.CancellationPending)
         {
-            Thread.Sleep(1000);
-            worker.ReportProgress((int)Progress!);
+            for (int i = 1; i <= _estimatedTimeInSec; i++)
+            {
+                Thread.Sleep(1000);
+                worker.ReportProgress((int)(i * 100 / _estimatedTimeInSec)!);
+            }
+            
         }
     }
-
+    public int d { get; set; }
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
 
         TimerText = stopWatch.Elapsed.ToString();
         TimerText = TimerText.Substring(0, 8);
-        ResultLabelMsg = (Progress + "%");
-        OnPropertyChanged(nameof(Progress));
+        d = e.ProgressPercentage;
+        //ResultLabelMsg = (d + "%");
+        OnPropertyChanged(nameof(d));
 
         if (e.UserState != null)
         {
