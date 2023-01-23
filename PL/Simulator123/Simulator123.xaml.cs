@@ -97,7 +97,17 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
         }
     }
 
-    public int? Progress => (int)(((DateTime.Now - startTime)?.TotalSeconds / estimatedTime ?? 1) * 100);
+    private int? _estimatedTimeInSec;
+    public int? EstimatedTimeInSec
+    {
+        get { return _estimatedTimeInSec; }
+        set
+        {
+            _estimatedTimeInSec = value;
+            OnPropertyChanged(nameof(EstimatedTimeInSec));
+        }
+    }
+    public int? Progress => (int)(((DateTime.Now - startTime)?.TotalSeconds / _estimatedTimeInSec ?? 1) * 100);
 
     // ----------------------------> End PropertyChanged <------------------------------
 
@@ -113,7 +123,7 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
         worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 
         if (worker.IsBusy != true)
-            worker.RunWorkerAsync(8);
+            worker.RunWorkerAsync();
         worker.WorkerReportsProgress = true;
         worker.WorkerSupportsCancellation = true;
 
@@ -148,27 +158,30 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
         while(!worker.CancellationPending)
         {
             Thread.Sleep(1000);
-            worker.ReportProgress(0);
+            worker.ReportProgress((int)Progress!);
         }
     }
 
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
-        
-        TimerText = stopWatch.Elapsed.ToString();
-        TimerText = TimerText.Substring(0,8);
 
-        if(e.UserState != null)
+        TimerText = stopWatch.Elapsed.ToString();
+        TimerText = TimerText.Substring(0, 8);
+        ResultLabelMsg = (Progress + "%");
+        OnPropertyChanged(nameof(Progress));
+
+        if (e.UserState != null)
         {
             var arg = e.UserState as Tuple<BO.Order, int>;
             var now = DateTime.Now;
             startTime = now;
-            estimatedTime = now + new TimeSpan(0, 0, arg?.Item2 ?? 0);
+            EstimatedTimeInSec = arg?.Item2;
+            estimatedTime = now + new TimeSpan(0, 0, EstimatedTimeInSec ?? 0);
             OnPropertyChanged(nameof(StartTime));
             OnPropertyChanged(nameof(EstimatedTime));
             OrderID = arg!.Item1.ID;
             CurrentStatus = arg!.Item1.Status;
-            NextStatus = arg.Item1.Status == BO.Enums.OrderStatus.Order_Confirmed ? BO.Enums.OrderStatus.Order_Sent : BO.Enums.OrderStatus.Order_Provided; 
+            NextStatus = arg.Item1.Status == BO.Enums.OrderStatus.Order_Confirmed ? BO.Enums.OrderStatus.Order_Sent : BO.Enums.OrderStatus.Order_Provided;
         }
 
     }

@@ -22,7 +22,7 @@
         <TextBlock x:Name="timerTextBlock"  Text="{Binding TimerText}"  Grid.Row="0"
                    FontSize="54" TextAlignment="Center" Foreground="#FF37F10E"/>
         
-        <ProgressBar x:Name="resultProgressBar" Height="10" Value="25" Grid.Row="2" Width="200" Background="Black"  />
+        <ProgressBar x:Name="resultProgressBar" Height="10" Value="{Binding Progress, Mode=OneWay}" Grid.Row="2" Width="200" Background="Black"  />
         <Label x:Name="resultLabel"  Content="{Binding ResultLabelMsg}" Grid.Row="3" HorizontalAlignment="Center" FontSize="16" Foreground="White"/>
         <Button Content="Stop" Grid.Row="4" Width="200" Click="StopButton_Click" />
 
