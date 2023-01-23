@@ -42,13 +42,20 @@ public static class Simulator
     {
         _thread = new Thread(() =>
         {
-            while (beContinue)
+            while (beContinue && Bl!.Order.OldestOrder != null)
             {
                 var Order = Bl!.Order.GetOrder(Bl?.Order.OldestOrder() ?? throw new NullReferenceException());
                 var ProcessingTime = new Random().Next(3, 10);
                 var EstimaredTime = new Random().Next(ProcessingTime - 2, ProcessingTime + 2);
+
                 updateSimulator?.Invoke(null, new Tuple<BO.Order, int>(Order, EstimaredTime));
-                Thread.Sleep(ProcessingTime * 1000);
+
+                try
+                {
+                    Thread.Sleep(ProcessingTime * 1000);
+                }
+                catch (ThreadInterruptedException) {}
+ 
                 if (!beContinue) { break; }
                 if (Order.Status == BO.Enums.OrderStatus.Order_Confirmed)
                 {
@@ -70,6 +77,6 @@ public static class Simulator
     public static void StopSimulator()
     {
         beContinue = false;
-        _thread?.Interrupt();
+        _thread?.Interrupt();    
     }
 }

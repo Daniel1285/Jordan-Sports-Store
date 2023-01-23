@@ -27,8 +27,6 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
 {
     BackgroundWorker worker;
     private Stopwatch stopWatch;
-    //private bool isTimerRun;
-   // BackgroundWorker timerworker;
 
     // ----------------------------> PropertyChanged <------------------------------
 
@@ -70,51 +68,96 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
             OnPropertyChanged(nameof(NextStatus));
         }
     }
-    private string? currentTime;
-    public string? CurrentTime
-    {
-        get { return currentTime; }
-        set { currentTime = value; OnPropertyChanged(nameof(CurrentTime)); }
-    }
+
     private DateTime? startTime;
     public string? StartTime => startTime?.ToString("HH:mm:ss");
 
     private DateTime? estimatedTime;
     public string? EstimatedTime => estimatedTime?.ToString("HH:mm:ss");
 
+    private string? _resultLabelmsg;
+    public string? ResultLabelMsg
+    {
+        get { return _resultLabelmsg; }
+        set
+        {
+            _resultLabelmsg = value;
+            OnPropertyChanged(nameof(ResultLabelMsg));
+        }
+    }
+
+    private string? _timerText;
+    public string? TimerText
+    {
+        get { return _timerText; }
+        set
+        {
+            _timerText = value;
+            OnPropertyChanged(nameof(TimerText));
+        }
+    }
+
+    public int? Progress => (int)(((DateTime.Now - startTime)?.TotalSeconds / estimatedTime ?? 1) * 100);
+
     // ----------------------------> End PropertyChanged <------------------------------
 
     public Simulator123()
     {
+        ResultLabelMsg = "0 %";
+        TimerText = "00:00:00";
         InitializeComponent();
         stopWatch = new Stopwatch();
         worker = new BackgroundWorker();
         worker.DoWork += Worker_DoWork;
         worker.ProgressChanged += Worker_ProgressChanged;
         worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-        worker.RunWorkerAsync();
+
+        if (worker.IsBusy != true)
+            worker.RunWorkerAsync(8);
         worker.WorkerReportsProgress = true;
         worker.WorkerSupportsCancellation = true;
+
+
+        //Disables the option to close a window immediately.
+        this.Closing += new CancelEventHandler(MyWindow_Closing!);
     }
+
+
+    void MyWindow_Closing(object sender, CancelEventArgs e) // Disables the option to close a window immediately.
+    {
+        MessageBoxResult End = MessageBox.Show("Are you sure?", "ERROR", MessageBoxButton.YesNo, MessageBoxImage.Stop);
+        switch (End)
+        {
+            case MessageBoxResult.Yes:
+                worker.CancelAsync(); // Cancel the asynchronous operation.
+                break;
+            case MessageBoxResult.No:
+                e.Cancel= true; 
+                break;
+                
+        }
+    }
+
     private void Worker_DoWork(object? sender, DoWorkEventArgs e)
     {
         Simulator.RegistrToStopEvent(stopSimulator);
         Simulator.RegistrToUpdateEvent(updateOrder);
         Simulator.StartSimulator();
         stopWatch.Start();
+
         while(!worker.CancellationPending)
         {
             Thread.Sleep(1000);
             worker.ReportProgress(0);
         }
     }
-   // string timerText = stopWatch.Elapsed.ToString();
-    //    timerText = timerText.Substring(0, 8);
-    //    this.timerTextBlock.Text = timerText;
+
     private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
     {
-        currentTime = stopWatch.Elapsed.ToString();
-        currentTime = currentTime.Substring(0, 8);
+        
+        TimerText = stopWatch.Elapsed.ToString();
+        TimerText = TimerText.Substring(0,8);
+
         if(e.UserState != null)
         {
             var arg = e.UserState as Tuple<BO.Order, int>;
@@ -139,8 +182,9 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
         if (worker.WorkerSupportsCancellation == true)
         {
             stopWatch.Stop();
-            //isTimerRun = false;
             worker.CancelAsync(); // Cancel the asynchronous operation.
+            Simulator.StopSimulator();
+            ResultLabelMsg = "Canceled!";
         }
     }
     private void stopSimulator(object? sender,EventArgs e)
@@ -152,10 +196,6 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
         worker.ReportProgress(0,e);
     }
 
-    private void backToMainWindow_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
 
 
 
