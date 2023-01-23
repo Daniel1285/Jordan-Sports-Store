@@ -1,7 +1,9 @@
-﻿using System;
+﻿using PL.Simulator123;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,17 +17,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.Simulator;
+
+namespace PL.Simulator123;
 
 /// <summary>
 /// Interaction logic for Simulator.xaml
 /// </summary>
-public partial class Simulator : Window, INotifyPropertyChanged
+public partial class Simulator123 : Window, INotifyPropertyChanged
 {
     BackgroundWorker worker;
     private Stopwatch stopWatch;
-    private bool isTimerRun;
-    BackgroundWorker timerworker;
+    //private bool isTimerRun;
+   // BackgroundWorker timerworker;
 
     // ----------------------------> PropertyChanged <------------------------------
 
@@ -67,17 +70,92 @@ public partial class Simulator : Window, INotifyPropertyChanged
             OnPropertyChanged(nameof(NextStatus));
         }
     }
+    private string? currentTime;
+    public string? CurrentTime
+    {
+        get { return currentTime; }
+        set { currentTime = value; OnPropertyChanged(nameof(CurrentTime)); }
+    }
+    private DateTime? startTime;
+    public string? StartTime => startTime?.ToString("HH:mm:ss");
 
-
+    private DateTime? estimatedTime;
+    public string? EstimatedTime => estimatedTime?.ToString("HH:mm:ss");
 
     // ----------------------------> End PropertyChanged <------------------------------
 
-    public Simulator()
+    public Simulator123()
     {
-        InitializeComponent();  
+        InitializeComponent();
+        stopWatch = new Stopwatch();
+        worker = new BackgroundWorker();
+        worker.DoWork += Worker_DoWork;
+        worker.ProgressChanged += Worker_ProgressChanged;
+        worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+        worker.RunWorkerAsync();
+        worker.WorkerReportsProgress = true;
+        worker.WorkerSupportsCancellation = true;
+    }
+    private void Worker_DoWork(object? sender, DoWorkEventArgs e)
+    {
+        Simulator.RegistrToStopEvent(stopSimulator);
+        Simulator.RegistrToUpdateEvent(updateOrder);
+        Simulator.StartSimulator();
+        stopWatch.Start();
+        while(!worker.CancellationPending)
+        {
+            Thread.Sleep(1000);
+            worker.ReportProgress(0);
+        }
+    }
+   // string timerText = stopWatch.Elapsed.ToString();
+    //    timerText = timerText.Substring(0, 8);
+    //    this.timerTextBlock.Text = timerText;
+    private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
+    {
+        currentTime = stopWatch.Elapsed.ToString();
+        currentTime = currentTime.Substring(0, 8);
+        if(e.UserState != null)
+        {
+            var arg = e.UserState as Tuple<BO.Order, int>;
+            var now = DateTime.Now;
+            startTime = now;
+            estimatedTime = now + new TimeSpan(0, 0, arg?.Item2 ?? 0);
+            OnPropertyChanged(nameof(StartTime));
+            OnPropertyChanged(nameof(EstimatedTime));
+            OrderID = arg!.Item1.ID;
+            CurrentStatus = arg!.Item1.Status;
+            NextStatus = arg.Item1.Status == BO.Enums.OrderStatus.Order_Confirmed ? BO.Enums.OrderStatus.Order_Sent : BO.Enums.OrderStatus.Order_Provided; 
+        }
+
+    }
+    private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+    {
+        Simulator.UnRegistrToStopEvent(stopSimulator);
+        Simulator.UnRegistrToUpdateEvent(updateOrder);
+    }
+    private void StopButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (worker.WorkerSupportsCancellation == true)
+        {
+            stopWatch.Stop();
+            //isTimerRun = false;
+            worker.CancelAsync(); // Cancel the asynchronous operation.
+        }
+    }
+    private void stopSimulator(object? sender,EventArgs e)
+    {
+        worker.CancelAsync();
+    }
+    private void updateOrder(object? sender, Tuple<BO.Order,int> e )
+    {
+        worker.ReportProgress(0,e);
     }
 
+    private void backToMainWindow_Click(object sender, RoutedEventArgs e)
+    {
 
+    }
 
 
 

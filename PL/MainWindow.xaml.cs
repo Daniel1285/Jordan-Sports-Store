@@ -1,7 +1,7 @@
 ﻿
 using PL.PlCart;
 using PL.PlCart.TruckingOrder;
-using PL.Simulator;
+using PL.Simulator123;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -64,7 +64,7 @@ namespace PL
 
         private void Simulator_Click(object sender, RoutedEventArgs e)
         {
-            new Simulator.Simulator().Show();
+            new Simulator123.Simulator123().Show();
         }
     }
 }

@@ -206,35 +206,10 @@ namespace BlImplementation
 
         public int? OldestOrder()
         {
-            DateTime? time,time1;
-            DO.Order? temp = new DO.Order();
-            DO.Order? temp1 = new DO.Order();
-
-            foreach (var item in Dal!.Order.GetAll())
-            {
-                time = item?.OrderDate;
-                foreach (var item1 in Dal.Order.GetAll())
-                {
-                    if (time > item1?.OrderDate && item1?.DeliveryrDate == null && item1?.ShipDate == null)
-                    {
-                        time = item1?.OrderDate;
-                        temp = item1;
-                    }
-                } 
-            }
-            foreach (var item in Dal!.Order.GetAll())
-            {
-                time1 = item?.OrderDate;
-                foreach (var item1 in Dal.Order.GetAll())
-                {
-                    if (time1 > item1?.ShipDate && item1?.DeliveryrDate == null)
-                    {
-                        time1 = item1?.OrderDate;
-                        temp1 = item1;
-                    }
-                }
-            }
-            return (temp?.OrderDate > temp1?.ShipDate ? temp1?.ID : temp?.ID);
+            var orders = Dal!.Order.GetAll(x => getStatus(x) != BO.Enums.OrderStatus.Order_Provided);
+            if (orders == null) return null;
+            orders!.OrderByDescending(x => x?.ShipDate ?? x?.OrderDate);
+            return orders!.First()?.ID;
         }
     }
 }

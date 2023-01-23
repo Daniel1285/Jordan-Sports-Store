@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 
 
-namespace Simulator;
+//namespace Simulator;
 
 public static class Simulator
 {
@@ -30,7 +30,7 @@ public static class Simulator
     {
         updateSimulator += handler;
     }
-    public static void UnRegistrToStopEvent(EventHandler<Tuple<BO.Order, int>> handler)
+    public static void UnRegistrToUpdateEvent(EventHandler<Tuple<BO.Order, int>> handler)
     {
         if (updateSimulator!.GetInvocationList().Contains(handler))
         {
