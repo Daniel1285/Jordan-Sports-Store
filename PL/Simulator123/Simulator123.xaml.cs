@@ -28,8 +28,7 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
     BackgroundWorker worker;
     private Stopwatch stopWatch;
 
-    // ----------------------------> PropertyChanged <------------------------------
-
+    #region PropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged(string propertyName)
     {
@@ -107,10 +106,8 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
             OnPropertyChanged(nameof(EstimatedTimeInSec));
         }
     }
+    #endregion
     //public int? Progress => (int)(((DateTime.Now - startTime)?.TotalSeconds / _estimatedTimeInSec ?? 1) * 100);
-
-
-    // ----------------------------> End PropertyChanged <------------------------------
 
     public Simulator123()
     {
@@ -134,6 +131,11 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
     }
 
 
+    /// <summary>
+    /// Maks shur the cliant really wants close the window
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     void MyWindow_Closing(object sender, CancelEventArgs e) // Disables the option to close a window immediately.
     {
         MessageBoxResult End = MessageBox.Show("Are you sure?", "ERROR", MessageBoxButton.YesNo, MessageBoxImage.Stop);
@@ -157,12 +159,11 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
        
         while(!worker.CancellationPending)
         {
-            for (int i = 1; i <= _estimatedTimeInSec; i++)
+            for (int i = 0; i <= _estimatedTimeInSec; i++)
             {
                 Thread.Sleep(1000);
                 worker.ReportProgress((int)(i * 100 / _estimatedTimeInSec)!);
-            }
-            
+            }        
         }
     }
     public int d { get; set; }
@@ -172,7 +173,7 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
         TimerText = stopWatch.Elapsed.ToString();
         TimerText = TimerText.Substring(0, 8);
         d = e.ProgressPercentage;
-        //ResultLabelMsg = (d + "%");
+        ResultLabelMsg = (d + "%");
         OnPropertyChanged(nameof(d));
 
         if (e.UserState != null)
@@ -188,13 +189,19 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
             CurrentStatus = arg!.Item1.Status;
             NextStatus = arg.Item1.Status == BO.Enums.OrderStatus.Order_Confirmed ? BO.Enums.OrderStatus.Order_Sent : BO.Enums.OrderStatus.Order_Provided;
         }
-
     }
+
     private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
         Simulator.UnRegistrToStopEvent(stopSimulator);
         Simulator.UnRegistrToUpdateEvent(updateOrder);
     }
+
+    /// <summary>
+    /// Stop the simulator.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void StopButton_Click(object sender, RoutedEventArgs e)
     {
         if (worker.WorkerSupportsCancellation == true)
