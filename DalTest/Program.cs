@@ -35,11 +35,8 @@ internal class Program
                     choiceOrder();
                     break;
                 case 4:
-                    XMLTools.SaveListToXMLSerializer(testMain!.Product.GetAll().ToList(), "Product");
-                    XMLTools.SaveListToXMLSerializer(testMain.Order.GetAll().ToList(), "Order");
-                    XMLTools.SaveListToXMLSerializer(testMain.OrderItem.GetAll().ToList(), "OrderItem");
-                    XMLTools.SaveConfigXml("OrderID", testMain.Order.GetAll().Last()?.ID ?? 0);
-                    XMLTools.SaveConfigXml("OrderItemID", testMain.OrderItem.GetAll().Last()?.ID ?? 0);
+                    choiceInitialization();
+                    Console.WriteLine("Success");
                     break;
 
                 default:
@@ -445,6 +442,15 @@ internal class Program
 
         }
     }
+
+    //------------------------------------------------->>>>> End of start with Order <<<<<--------------------------------------------------
+    public static void choiceInitialization()
+    {
+        XMLTools.SaveListToXMLSerializer(testMain!.Product.GetAll().ToList(), "Product");
+        XMLTools.SaveListToXMLSerializer(testMain.Order.GetAll().ToList(), "Order");
+        XMLTools.SaveListToXMLSerializer(testMain.OrderItem.GetAll().ToList(), "OrderItem");
+        XMLTools.SaveConfigXml("OrderID", testMain.Order.GetAll().Last()?.ID ?? 0);
+        XMLTools.SaveConfigXml("OrderItemID", testMain.OrderItem.GetAll().Last()?.ID ?? 0);
+    }
 }
 
-//------------------------------------------------->>>>> End of start with Order <<<<<--------------------------------------------------

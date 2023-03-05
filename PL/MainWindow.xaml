@@ -13,12 +13,12 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="600" Width="1200" WindowStartupLocation="CenterScreen">
     <Grid Background="Black">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="310"/>
-            <ColumnDefinition Width="490"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="800"/>
         </Grid.ColumnDefinitions>
 
         <Border CornerRadius= "10 0 0 0">
@@ -30,9 +30,9 @@
         <Grid>
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Option" FontSize="60" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Text="Admin - screen for product settings and orders." FontSize="13" FontWeight="Black" HorizontalAlignment="Center"  Foreground="White" Opacity="0.8" Margin="0,10,0,0" />
-                <TextBlock Text="Client - Customer display screen for orders." FontSize="13"  Foreground="White" FontWeight="Black" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0"/>
-                <TextBlock Text="Trucking - Information about tracking the package." FontSize="13"  Foreground="White" FontWeight="Black" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0" />
+                <TextBlock Text="Admin - screen for product settings and orders." FontSize="17" FontWeight="Black" HorizontalAlignment="Center"  Foreground="White" Opacity="0.8" Margin="0,10,0,0" />
+                <TextBlock Text="Client - Customer display screen for orders." FontSize="17"  Foreground="White" FontWeight="Black" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0"/>
+                <TextBlock Text="Trucking - Information about tracking the package." FontSize="17"  Foreground="White" FontWeight="Black" HorizontalAlignment="Center" Opacity="0.8" Margin="0,10,0,0" />
             </StackPanel>
         </Grid>
 
@@ -44,29 +44,29 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <materialDesign:PackIcon Kind="AccountTie" Grid.Column="0" Grid.Row="0" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,120,0,0"/>
-                <materialDesign:PackIcon Kind="AccountDetails" Grid.Column="0" Grid.Row="1" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,185,0,0" />
-                <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="2" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,255,0,0"/>
+                <materialDesign:PackIcon Kind="AccountTie" Grid.Column="0" Grid.Row="0" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,196,0,0"/>
+                <materialDesign:PackIcon Kind="AccountDetails" Grid.Column="0" Grid.Row="1" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,262,0,0" />
+                <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="2" Width="50" Height="70" HorizontalAlignment="Right" Foreground="White" Margin="0,326,0,0"/>
 
-                <Button Content="Admin" HorizontalAlignment="Center"  Width="150" Height="45" Click="ManagerButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,0,0,100" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
+                <Button Content="Admin" HorizontalAlignment="Center"  Width="150" Height="45" Click="ManagerButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,0,200,100" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
 
-                <Button Content="Client" HorizontalAlignment="Center"  Width="150" Height="45" Click="ClientButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,30,0,0" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
+                <Button Content="Client" HorizontalAlignment="Center"  Width="150" Height="45" Click="ClientButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,30,200,0" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
 
-                <Button Content="Trackingorder" HorizontalAlignment="Center"  Width="Auto" Height="45" Click="TrackingButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,160,0,0" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
+                <Button Content="Trackingorder" HorizontalAlignment="Center"  Width="Auto" Height="45" Click="TrackingButton_Click" Grid.Column="1" FontWeight="Bold" FontSize="22" Margin="0,160,200,0" FontFamily="Palatino Linotype" Style="{StaticResource MaterialDesignRaisedButton}"  
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1" Background="#FF6627D8"/>
 
-                <Button Grid.Column="2" Margin="220,340,0,0" Background="White" Click="Simulator_Click" 
+                <Button Grid.Column="2" Margin="0,470,30,0" Height="60" Width="60" Background="White" HorizontalAlignment="Right" Click="Simulator_Click" 
                  Style="{StaticResource MaterialDesignIconForegroundButton}"
                  ToolTip="Simulator">
-                    <materialDesign:PackIcon Kind="Play" />
+                    <materialDesign:PackIcon Kind="Play" FontSize="200" Height="50" Width="40"/>
                 </Button>
 
             </Grid>

@@ -1,10 +1,7 @@
 ﻿
 using DalApi;
-using DO;
-using System.Security.Principal;
 
 namespace Dal;
-
 sealed internal class DalList : IDal
 {
     public static IDal Instance { get; } = new DalList();
@@ -16,9 +13,6 @@ sealed internal class DalList : IDal
         OrderItem = new DalOrderItem(); 
     }
     public IProduct Product { get; }
-
     public IOrder Order { get; } 
-
     public IOrderItem OrderItem { get; }
-
 }

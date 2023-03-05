@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PL.PlCart.TruckingOrder" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1200"
       
       Title="MainTrucking">
 
@@ -16,7 +16,7 @@
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="110"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -35,20 +35,20 @@
         <Button Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,0" Padding="5" Click="BackToLastWindowButton_Click" Width="100" Height="40" Background="#FF6931CC" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
         <Button x:Name="ViewOrderItemButton" Content="Order item view" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="0,5,20,5" Padding="5" Click="ViewOrderItem_Click" Width="Auto" Height="40" Background="#FF6931CC" Grid.ColumnSpan="2" VerticalAlignment="Top" Visibility="Hidden" IsDefault="True"/>
 
-        <materialDesign:Card Width="200" Padding="8" Grid.Column="2" Grid.Row="1" Height="100" Opacity="0.8"                          
+        <materialDesign:Card Width="200" Padding="8" Grid.Column="2" Grid.Row="1" Height="100" Opacity="0.8" HorizontalAlignment="Left"                      
              Background="{x:Null}" 
              Foreground="{x:Null}"
-             UniformCornerRadius="6" Margin="0,70,350,0" Grid.RowSpan="2">
-            <TextBlock x:Name="ResultTrucking" Text="{Binding strResult}" TextWrapping="Wrap" Height="Auto" FontWeight="Bold" FontSize="14" Foreground="White"/>
+             UniformCornerRadius="6" Margin="20,0,0,30" Grid.RowSpan="2">
+            <TextBlock x:Name="ResultTrucking" Text="{Binding strResult}" TextWrapping="Wrap" Height="Auto" FontWeight="Bold" FontSize="18" Foreground="White"/>
         </materialDesign:Card>
 
 
 
 
-        <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="1"  Width="50" Height="70" HorizontalAlignment="Right" Foreground="Black" Margin="0,80,20,0" />
-        <Label x:Name="IdLabel" Content="ID :" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="Auto" Height="31" VerticalAlignment="Center" FontWeight="Bold"  FontSize="14" Foreground="White"  Margin="0,10,20,130" />
-        <Label x:Name="resultLabel" Content="Result :" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="Auto" Height="31" VerticalAlignment="Center" FontWeight="Bold"  FontSize="14" Foreground="White"  Margin="0,10,0,30" />
-        <TextBox x:Name="truck" materialDesign:TransitionAssist.DisableTransitions="True" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2"  Width="100" Height="30" MaxLength="6" Foreground="White" BorderBrush="White" Text="000000" TextAlignment="Center"  Margin="0,0,50,130"/>
+        <materialDesign:PackIcon Kind="Truck" Grid.Column="0" Grid.Row="1"  Width="50" Height="70" HorizontalAlignment="Right" Foreground="Black" Margin="0,68,25,0" />
+        <Label x:Name="IdLabel" Content="ID :" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="Auto" Height="31" VerticalAlignment="Center" FontWeight="Bold"  FontSize="18" Foreground="White"  Margin="0,0,0,260" />
+        <Label x:Name="resultLabel" Content="Result :" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="Auto" Height="31" VerticalAlignment="Center" FontWeight="Bold"  FontSize="18" Foreground="White"  Margin="0,0,0,100" />
+        <TextBox x:Name="truck" FontSize="16" materialDesign:TransitionAssist.DisableTransitions="True" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2"  Width="100" Height="30" MaxLength="6" Foreground="White" BorderBrush="White" Text="000000" TextAlignment="Center"  Margin="0,0,50,256"/>
 
         <Frame x:Name="truckingFram" Grid.RowSpan="3" Grid.ColumnSpan="3" ContentRendered="myFrame_ContentRendered" />
     </Grid>

@@ -7,7 +7,7 @@
       
       xmlns:local="clr-namespace:PL.PagesManager" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1200"
       Title="Orders">
 
     <Grid x:Name="MainGrid_OrdersAdmin" Background="White">
@@ -20,11 +20,11 @@
          VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="400"/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox Name="OrderInformation" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" ItemsSource="{Binding Categories}" VerticalAlignment="Stretch" SelectionChanged="OrderInformation_SelectionChanged" FontWeight="Bold" FontSize="12" SelectedIndex="3" Foreground="Black"/>
+            <ComboBox Name="OrderInformation" Grid.Column="2" Grid.Row="0"  HorizontalContentAlignment="Center" ItemsSource="{Binding Categories}" VerticalAlignment="Center" SelectionChanged="OrderInformation_SelectionChanged" FontWeight="Bold" FontSize="12" SelectedIndex="3" Foreground="Black"/>
             <Label Content="Help" Grid.Row="0" Grid.Column="0" Width="Auto" Height="30" ToolTip="Right click to update shiping pack or to delete order" />
 
         </Grid>
@@ -49,11 +49,11 @@
             <ListView.View>
 
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= CustomerName}" Header="Customer Name" Width="175"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Status}" Header="Status" Width="175"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= AmountOfItems}" Header="Amount Of Items" Width="175"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= TotalPrice}" Header="Total Price" Width="175"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="150"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= CustomerName}" Header="Customer Name" Width="350"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Status}" Header="Status" Width="245"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= AmountOfItems}" Header="Amount Of Items" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= TotalPrice}" Header="Total Price" Width="215"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>

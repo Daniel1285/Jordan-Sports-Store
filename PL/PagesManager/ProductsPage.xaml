@@ -6,7 +6,7 @@
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
       xmlns:local="clr-namespace:PL.Converter" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1200"
       
       Title="ProductsPage">
     <Page.Resources>
@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions >
         </Grid>
 
-        <ComboBox Name="AttributeSelector" Width="200" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" ItemsSource="{Binding Categories}" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
+        <ComboBox Name="AttributeSelector" Width="200" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" ItemsSource="{Binding Categories}" HorizontalContentAlignment="Center" VerticalAlignment="Center" SelectionChanged="AttributeSelector_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
         <Label Content="Help" Grid.Row="0" Grid.Column="0" Width="200" Height="30" HorizontalAlignment="Left" ToolTip="Right click to delete product" />
 
         <ListView x:Name="ProductsListView" Grid.Row="1" ItemsSource="{Binding myListProduct}" MouseDoubleClick="doubleClick_Update"  FontWeight="Bold">
@@ -48,10 +48,10 @@
             <ListView.View>
 
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="150"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Name" Width="250"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="200"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="283"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Name" Width="350"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="283"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="260"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>

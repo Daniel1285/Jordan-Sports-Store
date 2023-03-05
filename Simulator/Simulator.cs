@@ -19,6 +19,7 @@ public static class Simulator
     {
         stopSimulator += handler;
     }
+
     public static void UnRegistrToStopEvent(EventHandler handler)
     {
         if(stopSimulator!.GetInvocationList().Contains(handler))
@@ -26,10 +27,12 @@ public static class Simulator
             stopSimulator -= handler;
         }
     }
+
     public static void RegistrToUpdateEvent(EventHandler<Tuple<BO.Order, int>> handler)
     {
         updateSimulator += handler;
     }
+
     public static void UnRegistrToUpdateEvent(EventHandler<Tuple<BO.Order, int>> handler)
     {
         if (updateSimulator!.GetInvocationList().Contains(handler))
@@ -72,11 +75,8 @@ public static class Simulator
                 catch (BO.NotExistException ex) { Console.WriteLine(ex); StopSimulator(); }
             }
             stopSimulator?.Invoke(null, EventArgs.Empty);
-
-
         });
-        _thread.Start();
-        
+        _thread.Start();    
     }
     public static void StopSimulator()
     {

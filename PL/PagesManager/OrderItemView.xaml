@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       
       
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1200"
       Title="OrderItemView">
 
     <Grid x:Name="MainGrid_OrderItemsAdmin" Background="White">
@@ -37,12 +37,12 @@
             <ListView.View>
 
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="Item ID" Width="60"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="240"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ProductID}" Header="Product ID" Width="125"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="125"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="125"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="125"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="Item ID" Width="155"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="350"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ProductID}" Header="Product ID" Width="175"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="160"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="160"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="160"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PL.PlCart" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1200"
       Title="MainCartViewPage">
 
     <Grid Background="White">
@@ -44,12 +44,12 @@
             <ListView.View>
 
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="240"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="price" Width="112.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="112.5"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount in cart" Width="125"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= InStock}" Header="In stoke" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= ID}" Header="ID" Width="170"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="350"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="price" Width="170"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Category}" Header="Category" Width="165"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount in cart" Width="160"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= InStock}" Header="In stoke" Width="160"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>
@@ -73,7 +73,7 @@
 
         <ComboBox x:Name="ProductInfromation" Width="200" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" ItemsSource ="{Binding Categories}"  HorizontalContentAlignment="Center"  SelectionChanged="ProductInfromation_SelectionChanged" FontWeight="Bold" SelectedIndex="5"/>
         <Button x:Name="backOfMCart" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToMainWindowButton_Click" Width="120" Height="30" Background="#FF6931CC"/>
-        <Button x:Name="buttonCart" Content="{materialDesign:PackIcon Kind = CartArrowDown, Size=19}" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,10,5" Padding="5" Click="GoToCartOrderitem_Click" Width="60" Height="30" Background="#FF6931CC"
+        <Button x:Name="buttonCart" Content="{materialDesign:PackIcon Kind = CartArrowDown, Size=19}" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,20,5" Padding="5" Click="GoToCartOrderitem_Click" Width="60" Height="30" Background="#FF6931CC"
                  Style="{StaticResource MaterialDesignRaisedButton}"   materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                  materialDesign:ButtonProgressAssist.Value="-1"/>

@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PL.PlProduct"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="ManagerDetails" Height="440" Width="800" WindowStartupLocation="CenterScreen">
+        Title="ManagerDetails" Height="600" Width="1200" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainGrid" >
         <Grid.RowDefinitions >
             <RowDefinition Height="55*"/>
@@ -32,23 +32,23 @@
         <!--<Button x:Name="BackToOrderList" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToOrderList_Click" Width="120" Height="32" Background="#FF6931CC" Visibility="Hidden"/>
         <Button x:Name="BackToOrderItem" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,5" Padding="5" Click="BackToOrderItem_Click" Width="120" Height="32" Background="#FF6931CC" Visibility="Hidden"/>-->
         
-        <GroupBox x:Name="productCard"  BorderThickness="0" Header="Product" FontSize="16" Grid.Row="1" Grid.Column="0" Width="225" Height="200" HorizontalAlignment="Left" Margin="16,0,0,50"
+        <GroupBox x:Name="productCard"  BorderThickness="0" Header="Product" FontSize="24" Grid.Row="1" Grid.Column="0" Width="350" Height="200" HorizontalAlignment="Left" Margin="16,0,0,50"
             Style="{StaticResource MaterialDesignGroupBox}">
             <TextBlock  
-                Text="Manager's product management:
-                   - Adding a product                
-                   - Product deletion               
-                   - Product editing"
+                Text="Manager's product management:          
+                     -> Adding a product                                     
+                     -> Product deletion                                       
+                     -> Product editing"
                 TextWrapping="Wrap" FontSize="14" />
         </GroupBox>
 
-        <GroupBox x:Name="ordersCard"  BorderThickness="0" Header="Order" FontSize="16" Grid.Row="1" Grid.Column="2" Width="225" Height="200" HorizontalAlignment="Right" Margin="0,0,16,50"
+        <GroupBox x:Name="ordersCard"  BorderThickness="0" Header="Order" FontSize="24" Grid.Row="1" Grid.Column="2" Width="350" Height="200" HorizontalAlignment="Right" Margin="0,0,16,50"
             Style="{StaticResource MaterialDesignGroupBox}">
             <TextBlock  
-                Text="Order management for a client : 
-                     - Item Type                                
-                     - Order creation date     
-                     - Arrival time etc... "
+                Text="Order management for a client :              
+                     -> Item Type                                                
+                     -> Order creation date                             
+                     -> Arrival time etc... "
                 TextWrapping="Wrap" FontSize="14" />
         </GroupBox>
 

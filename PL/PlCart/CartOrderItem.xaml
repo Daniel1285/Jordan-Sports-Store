@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PL.PlCart" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1200"
       Title="CartOrderItem">
 
     <Grid Background="White">
@@ -45,10 +45,10 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= ProductID}" Header="Product ID" Width="150"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="250"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="133"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="133"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="133"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Name}" Header="Product name" Width="350"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Price}" Header="Price" Width="225"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Amount}" Header="Amount" Width="225"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path= Totalprice}" Header="Total price" Width="220"/>
                     <GridView.ColumnHeaderContainerStyle>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="IsHitTestVisible" Value="False"/>
@@ -69,20 +69,29 @@
             <Label Content="Help" Grid.Row="1" Width="200" Height="25" HorizontalAlignment="Left" ToolTip="Right click for add remove product from cart / update amount product." />
         </Grid>
 
-        <Button x:Name="buttonConfrim" Content="Confrim order" Grid.Row="2" HorizontalAlignment="Right" Margin="5,5,10,5" Padding="5" Click="GoToConfrimOrder_Click" Width="Auto" Height="30" Background="#FF6931CC"
-                 Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                 materialDesign:ButtonProgressAssist.Value="-1"/>
-
-        <Button x:Name="BackToMainCartView_button" Content="Back" Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,8,5" Padding="5" Click="BackToMainCartView_Click" Width="90" Height="30" Background="#FF6931CC"/>
-
         <ComboBox  MinWidth="72" x:Name="NumForUpdate" Grid.Column="1" Grid.Row="0" Width="25" HorizontalAlignment="Center" Visibility="Hidden" 
             materialDesign:HintAssist.Hint="Update"
             ItemsSource="{Binding LongIntegerList}" SelectionChanged="UpdateAmunt_SelectedChanged">
         </ComboBox>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
 
-        <Label Content="Total price :" Grid.Row="2" FontSize="23" FontFamily="Aharoni" HorizontalAlignment="Center" Width="184" FontWeight="Bold" Foreground="#FF6931CC" VerticalAlignment="Center" />
-        <Label x:Name="TotalPrice" Content="{Binding TotalPriceCart}" Grid.Row="2" FontSize="23" FontWeight="Bold" FontFamily="Arial Black" HorizontalAlignment="Center"  Width="184" Height="Auto" Foreground="#FF6931CC" VerticalAlignment="Center" Margin="300,0,0,0"/>
+            <Button x:Name="BackToMainCartView_button" Grid.Column="0" Content="Back" HorizontalAlignment="Left" Margin="5,5,8,5" Padding="5" Click="BackToMainCartView_Click" Width="90" Height="30" Background="#FF6931CC"/>
+            <Button x:Name="buttonConfrim" Content="Confrim order" Grid.Column="3" HorizontalAlignment="Left" Margin="0,5,0,5" Padding="5" Click="GoToConfrimOrder_Click" Width="110" Height="30" Background="#FF6931CC"
+                 Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                 materialDesign:ButtonProgressAssist.Value="-1"/>
+            
+            <Label Content="Total price :" Grid.Column="1" FontSize="23" FontFamily="Aharoni" HorizontalAlignment="Left" Width="Auto" FontWeight="Bold" Foreground="#FF6931CC" VerticalAlignment="Center" />
+            <Label Content="₪"  Grid.Column="2"  FontSize="18" FontFamily="Aharoni" HorizontalAlignment="Left" Width="100" FontWeight="Bold" Foreground="#FF6931CC" VerticalAlignment="Center" Margin="0,8,0,0" />
+            <Label x:Name="TotalPrice" Grid.Column="1" Content="{Binding TotalPriceCart}" Grid.Row="2" FontSize="23" FontWeight="Bold" FontFamily="Arial Black" HorizontalAlignment="Center"  Width="Auto" Height="Auto" Foreground="#FF6931CC" VerticalAlignment="Center" Margin="150,0,0,0"/>
+        </Grid>
+
 
         <Frame x:Name="CartOrderItemFram" Grid.RowSpan="3"/>
     </Grid>

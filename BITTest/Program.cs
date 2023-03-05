@@ -1,10 +1,4 @@
-﻿
-using Dal;
-using DalApi;
-using BO;
-using System.Threading.Channels;
-using System.Security.Cryptography;
-using System;
+﻿using BO;
 
 namespace BITTest
 {

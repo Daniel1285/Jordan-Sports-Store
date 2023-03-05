@@ -173,7 +173,7 @@ public partial class Simulator123 : Window, INotifyPropertyChanged
         TimerText = stopWatch.Elapsed.ToString();
         TimerText = TimerText.Substring(0, 8);
         d = e.ProgressPercentage;
-        ResultLabelMsg = (d + "%");
+        //ResultLabelMsg = (d + "%");
         OnPropertyChanged(nameof(d));
 
         if (e.UserState != null)
