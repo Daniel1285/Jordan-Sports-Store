@@ -1,3 +1,5 @@
+# Jordan-Sports-Store
+
 The project deals with managing an information system for a store that offers products from different categories.
 The developed application has 2 aspects:
   •	A main interface managed by the store owners that allows adding and updating different products and managing orders.
