@@ -8,3 +8,4 @@ The developed application has 2 aspects:
 The project was developed according to a multi-level architecture, Use of design Patterns (Observer ,Design by Contract ,Factory Method ,Singleton).
 Basic architecture of a distributed application while implementing the template. Working with xml files. Work in a multi-process environment.
 The system will allow storage and access to the data of the various products sold in the store, and will also manage orders for the products.
+https://github.com/Daniel1285/Jordan-Sports-Store/assets/101573480/fec7a2e8-82da-476f-92f5-60d24f153660
